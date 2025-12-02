@@ -1,0 +1,41 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getDataTypes } from '../../../lib/data';
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const dataTypes = getDataTypes();
+---
+
+<Layout title={t('data.title')}>
+  <h1>{t('data.title')}</h1>
+
+  <p style="margin-bottom: 1.5rem; color: #666;">
+    {t('data.description')}
+  </p>
+
+  <div class="grid">
+    {dataTypes.map(type => (
+      <a href={getLocalizedPath(type.path, lang)} class="card" style="text-decoration: none; color: inherit;">
+        <h3>{type.name}</h3>
+        <p style="font-size: 2rem; font-weight: bold; color: #0066cc;">{type.count}</p>
+        <p style="color: #666;">{t('data.entries')}</p>
+      </a>
+    ))}
+  </div>
+
+  {dataTypes.length === 0 && (
+    <div class="card">
+      <p>{t('data.noData')}</p>
+    </div>
+  )}
+</Layout>
+
+<style>
+  a.card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+    transition: all 0.2s ease;
+  }
+</style>

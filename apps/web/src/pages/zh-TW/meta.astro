@@ -1,0 +1,67 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getRegions } from '../../lib/data';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const meta = getRegions();
+const regions = Object.entries(meta.regions);
+const categories = Object.entries(meta.drugCategories);
+---
+
+<Layout title={t('meta.title')}>
+  <h1>{t('meta.title')}</h1>
+
+  <p style="margin-bottom: 1.5rem; color: #666;">
+    {t('meta.description')}
+  </p>
+
+  <h2>{t('meta.regions')} ({regions.length})</h2>
+
+  <div class="grid">
+    {regions.map(([code, region]: [string, any]) => (
+      <div class="card">
+        <h3>{code} - {region.name}</h3>
+        {region.nameLocal !== region.name && (
+          <p style="color: #666; margin-bottom: 0.5rem;">{region.nameLocal}</p>
+        )}
+        <table style="font-size: 0.875rem;">
+          <tr>
+            <td><strong>Agency</strong></td>
+            <td>{region.regulatoryAgency}</td>
+          </tr>
+          <tr>
+            <td><strong>Full Name</strong></td>
+            <td style="font-size: 0.75rem;">{region.agencyFullName}</td>
+          </tr>
+          <tr>
+            <td><strong>Currency</strong></td>
+            <td>{region.currency}</td>
+          </tr>
+          {region.schedules?.length > 0 && (
+            <tr>
+              <td><strong>Schedules</strong></td>
+              <td style="font-size: 0.75rem;">{region.schedules.join(', ')}</td>
+            </tr>
+          )}
+        </table>
+      </div>
+    ))}
+  </div>
+
+  <h2>{t('meta.drugCategories')}</h2>
+
+  <div class="grid">
+    {categories.map(([category, drugs]: [string, string[]]) => (
+      <div class="card">
+        <h3 style="text-transform: capitalize;">{category}</h3>
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+          {drugs.map((drug: string) => (
+            <li>{drug}</li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</Layout>

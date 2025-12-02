@@ -1,0 +1,22 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getSchema } from '../../lib/data';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const schema = getSchema();
+---
+
+<Layout title={t('schema.title')}>
+  <h1>{t('schema.title')}</h1>
+
+  <p style="margin-bottom: 1.5rem; color: #666;">
+    {t('schema.description')}
+  </p>
+
+  <div class="card">
+    <h3>drug-schema.yaml</h3>
+    <pre><code>{schema.raw}</code></pre>
+  </div>
+</Layout>
