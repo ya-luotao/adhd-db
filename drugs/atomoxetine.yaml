@@ -1,0 +1,239 @@
+# Atomoxetine - First non-stimulant ADHD medication
+# Approved in US, China, EU, Japan
+
+id: "atomoxetine"
+
+brandNames:
+  US: ["Strattera"]
+  CN: ["择思达 (Strattera)"]
+  EU: ["Strattera", "Atomoxetine generics"]
+  JP: ["ストラテラ (Strattera)"]
+  UK: ["Strattera"]
+  AU: ["Strattera"]
+  CA: ["Strattera"]
+
+genericName: "atomoxetine hydrochloride"
+
+manufacturers:
+  - name: "Eli Lilly"
+    region: "US"
+    product: "Strattera"
+  - name: "礼来 (Eli Lilly China)"
+    region: "CN"
+    product: "择思达"
+  - name: "日本イーライリリー"
+    region: "JP"
+    product: "ストラテラ"
+
+# Classification
+drugClass: "non-stimulant"
+category: "SNRI (selective norepinephrine reuptake inhibitor)"
+controlledSubstance: false
+schedule:
+  US: "Not scheduled"
+  CN: "Not scheduled (prescription only)"
+  EU: "Not scheduled"
+  JP: "Not scheduled"
+  UK: "Not scheduled"
+
+# Mechanism
+activeIngredient: "atomoxetine hydrochloride"
+mechanismOfAction: "Selectively inhibits the presynaptic norepinephrine transporter, increasing norepinephrine levels in the prefrontal cortex. Unlike stimulants, does not significantly affect dopamine in the nucleus accumbens, resulting in lower abuse potential."
+neurotransmittersAffected:
+  - norepinephrine
+
+# Dosage & Forms
+forms:
+  - type: "capsule"
+    releaseType: "immediate"
+    brandName: "Strattera"
+    strengths: ["10mg", "18mg", "25mg", "40mg", "60mg", "80mg", "100mg"]
+    durationHours: 24
+    notes: "Once or twice daily dosing; do not open capsules"
+
+  - type: "liquid"
+    releaseType: "immediate"
+    brandName: "Strattera"
+    strengths: ["4mg/mL oral solution"]
+    durationHours: 24
+    notes: "Available in US and some markets for those who can't swallow capsules"
+
+# Efficacy
+onsetMinutes: null  # Not immediate effect
+peakEffectHours: 1-2  # Peak plasma concentration
+durationHours: 24
+
+# Side Effects
+sideEffects:
+  common:
+    - name: "nausea"
+      frequency: "20-30%"
+    - name: "decreased appetite"
+      frequency: "15-25%"
+    - name: "fatigue/somnolence"
+      frequency: "10-20%"
+    - name: "dry mouth"
+      frequency: "15-20%"
+    - name: "headache"
+      frequency: "15-20%"
+    - name: "abdominal pain"
+      frequency: "10-20%"
+    - name: "vomiting"
+      frequency: "10-15%"
+    - name: "constipation"
+      frequency: "10%"
+
+  uncommon:
+    - name: "dizziness"
+      frequency: "5-10%"
+    - name: "mood swings"
+      frequency: "5%"
+    - name: "insomnia"
+      frequency: "5%"
+    - name: "erectile dysfunction (adults)"
+      frequency: "5-10%"
+    - name: "urinary retention"
+      frequency: "5%"
+
+  serious:
+    - name: "suicidal ideation"
+      notes: "Black box warning; monitor closely, especially early in treatment"
+    - name: "hepatotoxicity"
+      notes: "Rare but serious; discontinue if jaundice or liver damage signs"
+    - name: "severe allergic reactions"
+      notes: "Angioedema, urticaria reported"
+    - name: "cardiovascular effects"
+      notes: "Increased heart rate and blood pressure"
+    - name: "priapism"
+      notes: "Rare; requires immediate medical attention"
+
+# Safety
+contraindications:
+  - "Hypersensitivity to atomoxetine"
+  - "MAO inhibitor use within 14 days"
+  - "Narrow-angle glaucoma"
+  - "Pheochromocytoma"
+  - "Severe cardiovascular disorders"
+
+drugInteractions:
+  - drug: "MAO inhibitors"
+    severity: "major"
+    effect: "Serious, potentially fatal reactions"
+  - drug: "CYP2D6 inhibitors (fluoxetine, paroxetine)"
+    severity: "moderate"
+    effect: "Increased atomoxetine levels"
+  - drug: "Albuterol (salbutamol)"
+    severity: "moderate"
+    effect: "Enhanced cardiovascular effects"
+  - drug: "Antihypertensives"
+    severity: "moderate"
+    effect: "May reduce effectiveness"
+
+blackBoxWarnings:
+  - "Increased risk of suicidal ideation in children and adolescents; monitor closely"
+
+pregnancyCategory: "C"
+foodInteractions: "Can be taken with or without food; food may reduce GI side effects"
+
+# Practical Information
+typicalDosing:
+  children:
+    startingDose: "0.5mg/kg/day for first week"
+    maxDose: "1.4mg/kg/day or 100mg/day (whichever is less)"
+    notes: "Increase to target of 1.2mg/kg/day after 1 week; full effect takes 4-6 weeks"
+  adults:
+    startingDose: "40mg/day for first week"
+    maxDose: "100mg/day"
+    notes: "Target dose 80mg/day; can be once daily or divided"
+
+costEstimate:
+  US:
+    brand: "$350-400/month"
+    generic: "$50-150/month"
+  CN:
+    brand: "¥400-800/month (择思达 - discontinued capsules)"
+    generic: "¥200-400/month (国产托莫西汀)"
+
+storageRequirements: "Room temperature (25°C), protect from moisture"
+
+# Approval & Availability
+approvals:
+  - region: "US"
+    agency: "FDA"
+    year: 2002
+    approvedAges: "6 years and older (children and adults)"
+    indications:
+      - "ADHD"
+    available: true
+    notes: "First non-stimulant approved for ADHD"
+
+  - region: "CN"
+    agency: "NMPA"
+    year: 2007
+    approvedAges: "6 years and older"
+    indications:
+      - "ADHD"
+    available: true
+    notes: "Brand capsules (择思达) discontinued Jan 2024; oral solution and domestic generics available"
+
+  - region: "EU"
+    agency: "EMA"
+    year: 2004
+    approvedAges: "6 years and older"
+    indications:
+      - "ADHD"
+    available: true
+    notes: "Approved for children and adults"
+
+  - region: "JP"
+    agency: "PMDA"
+    year: 2009
+    approvedAges: "6 years and older (children and adults)"
+    indications:
+      - "ADHD"
+    available: true
+    notes: "No registration requirement (unlike stimulants)"
+
+  - region: "UK"
+    agency: "MHRA"
+    year: 2004
+    approvedAges: "6 years and older"
+    indications:
+      - "ADHD"
+    available: true
+    notes: ""
+
+  - region: "AU"
+    agency: "TGA"
+    year: 2007
+    approvedAges: "6 years and older"
+    indications:
+      - "ADHD"
+    available: true
+    notes: ""
+
+  - region: "CA"
+    agency: "Health Canada"
+    year: 2004
+    approvedAges: "6 years and older"
+    indications:
+      - "ADHD"
+    available: true
+    notes: ""
+
+# Special Considerations
+specialConsiderations:
+  cardiacRisk: "Can increase heart rate and blood pressure; use caution in cardiovascular disease"
+  abuseRisk: "No abuse potential; not a controlled substance"
+  withdrawalNotes: "No withdrawal symptoms; can be stopped without tapering"
+  monitoringRequired: "Blood pressure, heart rate, liver function if symptoms; mood/suicidality in youth"
+
+# Metadata
+lastUpdated: 2025-12-02
+sources:
+  - "https://www.goodrx.com/conditions/adhd/non-stimulant-adhd-meds"
+  - "https://zhuanlan.zhihu.com/p/702636281"
+  - "https://www.gelonghui.com/p/713050"
+  - "https://h-navi.jp/column/article/35028853"
+
+notes: "First non-stimulant ADHD medication. Good option for those who can't tolerate stimulants or have substance abuse history. Takes 4-6 weeks for full effect (not immediate like stimulants). Eli Lilly discontinued capsule supply to China in Jan 2024 but domestic generics available."

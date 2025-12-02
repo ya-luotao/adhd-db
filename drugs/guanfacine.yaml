@@ -1,0 +1,232 @@
+# Guanfacine - Alpha-2 adrenergic agonist
+# Approved in US, EU, Japan; not available in China
+
+id: "guanfacine"
+
+brandNames:
+  US: ["Intuniv", "Tenex"]
+  CN: []
+  EU: ["Intuniv"]
+  JP: ["インチュニブ (Intuniv)"]
+  UK: ["Intuniv"]
+  AU: ["Intuniv"]
+  CA: ["Intuniv"]
+
+genericName: "guanfacine hydrochloride"
+
+manufacturers:
+  - name: "Takeda (formerly Shire)"
+    region: "US"
+    product: "Intuniv"
+  - name: "Shionogi"
+    region: "JP"
+    product: "インチュニブ"
+
+# Classification
+drugClass: "non-stimulant"
+category: "alpha-2 adrenergic agonist"
+controlledSubstance: false
+schedule:
+  US: "Not scheduled"
+  CN: "Not approved"
+  EU: "Not scheduled"
+  JP: "Not scheduled"
+  UK: "Not scheduled"
+
+# Mechanism
+activeIngredient: "guanfacine hydrochloride"
+mechanismOfAction: "Selective alpha-2A adrenergic receptor agonist. Stimulates receptors in the prefrontal cortex, strengthening working memory, reducing distractibility, and improving impulse control. Also has calming effect by reducing sympathetic outflow."
+neurotransmittersAffected:
+  - norepinephrine
+
+# Dosage & Forms
+forms:
+  - type: "tablet"
+    releaseType: "extended"
+    brandName: "Intuniv"
+    strengths: ["1mg", "2mg", "3mg", "4mg"]
+    durationHours: 24
+    notes: "Extended-release for ADHD; must swallow whole"
+
+  - type: "tablet"
+    releaseType: "immediate"
+    brandName: "Tenex"
+    strengths: ["1mg", "2mg"]
+    durationHours: 8-12
+    notes: "Immediate-release; originally for hypertension; not FDA-approved for ADHD"
+
+# Efficacy
+onsetMinutes: null  # Gradual effect over weeks
+peakEffectHours: 5
+durationHours: 24
+
+# Side Effects
+sideEffects:
+  common:
+    - name: "somnolence/fatigue"
+      frequency: "30-40%"
+    - name: "headache"
+      frequency: "20-25%"
+    - name: "dizziness"
+      frequency: "10-15%"
+    - name: "decreased appetite"
+      frequency: "10-15%"
+    - name: "abdominal pain"
+      frequency: "10%"
+    - name: "dry mouth"
+      frequency: "10%"
+    - name: "nausea"
+      frequency: "5-10%"
+    - name: "constipation"
+      frequency: "5%"
+
+  uncommon:
+    - name: "hypotension"
+      frequency: "5-10%"
+    - name: "bradycardia"
+      frequency: "5%"
+    - name: "irritability"
+      frequency: "5%"
+    - name: "insomnia"
+      frequency: "5%"
+
+  serious:
+    - name: "hypotension"
+      notes: "Can cause significant drops in blood pressure"
+    - name: "bradycardia"
+      notes: "May slow heart rate"
+    - name: "syncope"
+      notes: "Fainting due to blood pressure drop"
+    - name: "rebound hypertension"
+      notes: "If stopped abruptly; must taper"
+    - name: "sedation"
+      notes: "Can be severe, especially initially"
+
+# Safety
+contraindications:
+  - "Hypersensitivity to guanfacine"
+  - "Severe bradycardia"
+  - "Heart block"
+
+drugInteractions:
+  - drug: "CYP3A4 inhibitors (ketoconazole)"
+    severity: "moderate"
+    effect: "Increased guanfacine levels"
+  - drug: "CYP3A4 inducers (rifampin)"
+    severity: "moderate"
+    effect: "Decreased guanfacine levels"
+  - drug: "Antihypertensives"
+    severity: "moderate"
+    effect: "Additive hypotensive effect"
+  - drug: "CNS depressants"
+    severity: "moderate"
+    effect: "Enhanced sedation"
+  - drug: "Valproic acid"
+    severity: "moderate"
+    effect: "Increased guanfacine exposure"
+
+blackBoxWarnings: []
+
+pregnancyCategory: "B"
+foodInteractions: "Avoid high-fat meals (increases absorption); avoid grapefruit juice"
+
+# Practical Information
+typicalDosing:
+  children:
+    startingDose: "1mg once daily"
+    maxDose: "4mg/day (children 6-12) or 7mg/day (adolescents)"
+    notes: "Increase by 1mg weekly; take at same time daily (morning or evening)"
+  adults:
+    startingDose: "1mg once daily"
+    maxDose: "4mg/day (off-label for adults)"
+    notes: "Not FDA-approved for adult ADHD but commonly used"
+
+costEstimate:
+  US:
+    brand: "$300-400/month"
+    generic: "$50-100/month"
+  CN:
+    brand: "Not available"
+    generic: "Not available"
+
+storageRequirements: "Room temperature (25°C), protect from light and moisture"
+
+# Approval & Availability
+approvals:
+  - region: "US"
+    agency: "FDA"
+    year: 2009
+    approvedAges: "6-17 years"
+    indications:
+      - "ADHD"
+    available: true
+    notes: "Approved for children/adolescents; off-label for adults; can be used alone or with stimulants"
+
+  - region: "CN"
+    agency: "NMPA"
+    year: null
+    approvedAges: ""
+    indications: []
+    available: false
+    notes: "Not approved in China"
+
+  - region: "EU"
+    agency: "EMA"
+    year: 2015
+    approvedAges: "6-17 years"
+    indications:
+      - "ADHD"
+    available: true
+    notes: "First ADHD medication approved through EMA centralized procedure"
+
+  - region: "JP"
+    agency: "PMDA"
+    year: 2017
+    approvedAges: "6-17 years"
+    indications:
+      - "ADHD"
+    available: true
+    notes: "No registration requirement (unlike stimulants)"
+
+  - region: "UK"
+    agency: "MHRA"
+    year: 2016
+    approvedAges: "6-17 years"
+    indications:
+      - "ADHD"
+    available: true
+    notes: ""
+
+  - region: "AU"
+    agency: "TGA"
+    year: 2013
+    approvedAges: "6-17 years"
+    indications:
+      - "ADHD"
+    available: true
+    notes: ""
+
+  - region: "CA"
+    agency: "Health Canada"
+    year: 2013
+    approvedAges: "6-17 years"
+    indications:
+      - "ADHD"
+    available: true
+    notes: ""
+
+# Special Considerations
+specialConsiderations:
+  cardiacRisk: "Can lower blood pressure and heart rate; use caution with cardiac conditions"
+  abuseRisk: "No abuse potential; not a controlled substance"
+  withdrawalNotes: "MUST TAPER - stopping abruptly can cause rebound hypertension"
+  monitoringRequired: "Blood pressure, heart rate; especially when starting or changing dose"
+
+# Metadata
+lastUpdated: 2025-12-02
+sources:
+  - "https://www.goodrx.com/conditions/adhd/non-stimulant-adhd-meds"
+  - "https://www.ema.europa.eu/en/news/ema-recommends-approval-treatment-attention-deficit-hyperactivity-disorder"
+  - "https://h-navi.jp/column/article/35028853"
+
+notes: "Good option for hyperactivity/impulsivity symptoms or when stimulants cause anxiety. Particularly helpful for emotional dysregulation. Can be combined with stimulants. Must taper when discontinuing. Not approved for adult ADHD but commonly used off-label."

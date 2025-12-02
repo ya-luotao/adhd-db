@@ -1,0 +1,203 @@
+# Viloxazine - Newer non-stimulant (SNRI)
+# Currently US-only
+
+id: "viloxazine"
+
+brandNames:
+  US: ["Qelbree"]
+  CN: []
+  EU: []
+  JP: []
+  UK: []
+  AU: []
+  CA: []
+
+genericName: "viloxazine hydrochloride"
+
+manufacturers:
+  - name: "Supernus Pharmaceuticals"
+    region: "US"
+    product: "Qelbree"
+
+# Classification
+drugClass: "non-stimulant"
+category: "SNRI (selective norepinephrine reuptake inhibitor)"
+controlledSubstance: false
+schedule:
+  US: "Not scheduled"
+  CN: "Not approved"
+  EU: "Not approved"
+  JP: "Not approved"
+  UK: "Not approved"
+
+# Mechanism
+activeIngredient: "viloxazine hydrochloride"
+mechanismOfAction: "Selective norepinephrine reuptake inhibitor with additional serotonergic activity (5-HT2B receptor antagonism and 5-HT2C receptor modulation). Increases norepinephrine levels in the prefrontal cortex to improve attention and executive function."
+neurotransmittersAffected:
+  - norepinephrine
+  - serotonin
+
+# Dosage & Forms
+forms:
+  - type: "capsule"
+    releaseType: "extended"
+    brandName: "Qelbree"
+    strengths: ["100mg", "150mg", "200mg"]
+    durationHours: 24
+    notes: "Children 6-11: 100-400mg; can be opened and sprinkled on applesauce"
+
+  - type: "capsule"
+    releaseType: "extended"
+    brandName: "Qelbree"
+    strengths: ["200mg", "400mg", "600mg"]
+    durationHours: 24
+    notes: "Adolescents 12-17 and adults: 200-600mg"
+
+# Efficacy
+onsetMinutes: null  # Gradual onset
+peakEffectHours: 5
+durationHours: 24
+
+# Side Effects
+sideEffects:
+  common:
+    - name: "somnolence/fatigue"
+      frequency: "15-20%"
+    - name: "decreased appetite"
+      frequency: "10-15%"
+    - name: "nausea"
+      frequency: "10-15%"
+    - name: "headache"
+      frequency: "10%"
+    - name: "irritability"
+      frequency: "5-10%"
+    - name: "vomiting"
+      frequency: "5-10%"
+    - name: "insomnia"
+      frequency: "5%"
+
+  uncommon:
+    - name: "abdominal pain"
+      frequency: "5%"
+    - name: "tachycardia"
+      frequency: "<5%"
+    - name: "increased blood pressure"
+      frequency: "<5%"
+    - name: "weight loss"
+      frequency: "<5%"
+
+  serious:
+    - name: "suicidal ideation"
+      notes: "Black box warning; monitor closely, especially early in treatment"
+    - name: "activation of mania/hypomania"
+      notes: "Can trigger in susceptible patients"
+    - name: "serotonin syndrome"
+      notes: "When combined with serotonergic medications"
+    - name: "hypertensive crisis"
+      notes: "Avoid with MAOIs"
+
+# Safety
+contraindications:
+  - "Hypersensitivity to viloxazine"
+  - "MAO inhibitor use within 14 days"
+  - "Concomitant use of sensitive CYP1A2 substrates (e.g., tizanidine, alosetron)"
+
+drugInteractions:
+  - drug: "MAO inhibitors"
+    severity: "major"
+    effect: "Risk of serotonin syndrome and hypertensive crisis"
+  - drug: "CYP1A2 substrates (theophylline, duloxetine)"
+    severity: "major"
+    effect: "Significantly increases levels of CYP1A2 substrates"
+  - drug: "Serotonergic drugs"
+    severity: "moderate"
+    effect: "Increased serotonin syndrome risk"
+  - drug: "Seizure threshold-lowering drugs"
+    severity: "moderate"
+    effect: "May increase seizure risk"
+
+blackBoxWarnings:
+  - "Increased risk of suicidal thoughts and behavior in children, adolescents, and young adults"
+
+pregnancyCategory: "C"
+foodInteractions: "Can be taken with or without food"
+
+# Practical Information
+typicalDosing:
+  children:
+    startingDose: "100mg once daily in morning"
+    maxDose: "400mg/day (ages 6-11)"
+    notes: "May increase by 100mg weekly"
+  adults:
+    startingDose: "200mg once daily in morning"
+    maxDose: "600mg/day"
+    notes: "May increase by 200mg weekly"
+
+costEstimate:
+  US:
+    brand: "$350-450/month"
+    generic: "Not yet available"
+  CN:
+    brand: "Not available"
+    generic: "Not available"
+
+storageRequirements: "Room temperature (20-25°C)"
+
+# Approval & Availability
+approvals:
+  - region: "US"
+    agency: "FDA"
+    year: 2021
+    approvedAges: "6 years and older (children and adults)"
+    indications:
+      - "ADHD"
+    available: true
+    notes: "Children ages 6-11 approved April 2021; adults approved April 2022"
+
+  - region: "CN"
+    agency: "NMPA"
+    year: null
+    approvedAges: ""
+    indications: []
+    available: false
+    notes: "Not approved"
+
+  - region: "EU"
+    agency: "EMA"
+    year: null
+    approvedAges: ""
+    indications: []
+    available: false
+    notes: "Not approved (was previously marketed for depression in EU in 1970s-1980s)"
+
+  - region: "JP"
+    agency: "PMDA"
+    year: null
+    approvedAges: ""
+    indications: []
+    available: false
+    notes: "Not approved"
+
+  - region: "UK"
+    agency: "MHRA"
+    year: null
+    approvedAges: ""
+    indications: []
+    available: false
+    notes: "Not approved"
+
+# Special Considerations
+specialConsiderations:
+  cardiacRisk: "Can increase heart rate and blood pressure; monitor"
+  abuseRisk: "No abuse potential; not a controlled substance"
+  withdrawalNotes: "No significant withdrawal; can be stopped without tapering"
+  monitoringRequired: "Monitor for suicidality, especially early; blood pressure; heart rate"
+
+# Metadata
+lastUpdated: 2025-12-02
+sources:
+  - "https://www.goodrx.com/conditions/adhd/non-stimulant-adhd-meds"
+  - "https://www.additudemag.com/adhd-medications-list-chart-stimulants-nonstimulants/"
+  - "https://medx.it.com/what-are-the-new-adhd-medications-in-2025-an-overview-of-treatments-and-innovations"
+
+notes: "Newest non-stimulant option (2021). Structurally different from atomoxetine despite similar mechanism. Was previously used for depression in Europe (1970s-1980s) but withdrawn. Repurposed and FDA-approved for ADHD. Currently only available in US."

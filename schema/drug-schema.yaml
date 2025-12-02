@@ -1,0 +1,182 @@
+# ADHD Drug Schema Template
+# Copy this template when adding a new drug
+# All fields are optional unless marked [required]
+
+# ============================================
+# BASIC INFORMATION
+# ============================================
+
+id: ""                        # [required] unique identifier, e.g., "methylphenidate-er-concerta"
+
+brandNames:                   # brand names by region
+  US: []                      # e.g., ["Concerta", "Ritalin LA"]
+  CN: []                      # e.g., ["专注达"]
+  EU: []
+  JP: []
+  OTHER: []
+
+genericName: ""               # [required] e.g., "methylphenidate hydrochloride"
+
+manufacturers:                # list of manufacturers
+  - name: ""
+    region: ""                # US, CN, EU, etc.
+
+# ============================================
+# CLASSIFICATION
+# ============================================
+
+drugClass: ""                 # stimulant | non-stimulant
+
+category: ""                  # e.g., "methylphenidate", "amphetamine", "SNRI", "alpha-2 agonist"
+
+controlledSubstance: false    # true | false
+
+schedule:                     # controlled substance schedule by region
+  US: ""                      # e.g., "Schedule II"
+  CN: ""                      # e.g., "第一类精神药品" (Class I Psychotropic)
+  EU: ""
+
+# ============================================
+# MECHANISM OF ACTION
+# ============================================
+
+activeIngredient: ""          # e.g., "methylphenidate hydrochloride"
+
+mechanismOfAction: ""         # brief description of how it works
+
+neurotransmittersAffected:    # list of affected neurotransmitters
+  - dopamine
+  - norepinephrine
+  # - serotonin
+
+# ============================================
+# DOSAGE & FORMS
+# ============================================
+
+forms:                        # available dosage forms
+  - type: ""                  # tablet | capsule | liquid | patch | chewable | ODT
+    releaseType: ""           # immediate | extended | mixed (e.g., Adderall XR)
+    brandName: ""             # specific brand for this form
+    strengths:                # available strengths
+      - "10mg"
+      - "20mg"
+    durationHours: 0          # typical duration for this form
+    notes: ""                 # e.g., "can be opened and sprinkled"
+
+# ============================================
+# EFFICACY & TIMING
+# ============================================
+
+onsetMinutes: 0               # time to start feeling effects (range: use average)
+
+peakEffectHours: 0            # time to peak effect
+
+durationHours: 0              # total duration of effect (for main form)
+
+# ============================================
+# SIDE EFFECTS
+# ============================================
+
+sideEffects:
+  common:                     # >10% occurrence
+    - name: ""                # e.g., "decreased appetite"
+      frequency: ""           # e.g., "20-30%"
+    - name: ""
+      frequency: ""
+
+  uncommon:                   # 1-10% occurrence
+    - name: ""
+      frequency: ""
+
+  serious:                    # rare but clinically important
+    - name: ""
+      notes: ""               # additional context
+
+# ============================================
+# SAFETY & CONTRAINDICATIONS
+# ============================================
+
+contraindications:            # conditions where drug should NOT be used
+  - ""                        # e.g., "MAO inhibitor use within 14 days"
+  - ""                        # e.g., "glaucoma"
+
+drugInteractions:             # significant drug interactions
+  - drug: ""
+    severity: ""              # major | moderate | minor
+    effect: ""                # what happens
+
+blackBoxWarnings:             # FDA black box warnings
+  - ""
+
+pregnancyCategory: ""         # e.g., "C" (FDA) or description
+
+foodInteractions: ""          # e.g., "avoid acidic foods/drinks"
+
+# ============================================
+# PRACTICAL INFORMATION
+# ============================================
+
+typicalDosing:
+  children:
+    startingDose: ""          # e.g., "5mg once daily"
+    maxDose: ""               # e.g., "60mg/day"
+    notes: ""
+  adults:
+    startingDose: ""
+    maxDose: ""
+    notes: ""
+
+costEstimate:                 # approximate monthly cost
+  US:
+    brand: ""                 # e.g., "$300-400"
+    generic: ""               # e.g., "$30-50"
+  CN:
+    brand: ""
+    generic: ""
+
+storageRequirements: ""       # e.g., "room temperature, protect from moisture"
+
+# ============================================
+# APPROVAL & AVAILABILITY
+# ============================================
+
+approvals:
+  - region: "US"
+    agency: "FDA"
+    year: null                # approval year, e.g., 2000
+    approvedAges: ""          # e.g., "6 years and older"
+    indications:              # approved uses
+      - "ADHD"
+      # - "Narcolepsy"
+    available: true           # currently available in market?
+    notes: ""
+
+  - region: "CN"
+    agency: "NMPA"
+    year: null
+    approvedAges: ""
+    indications:
+      - "ADHD"
+    available: false
+    notes: ""
+
+# ============================================
+# SPECIAL CONSIDERATIONS
+# ============================================
+
+specialConsiderations:
+  cardiacRisk: ""             # notes about cardiovascular risks
+  abuseRisk: ""               # abuse/dependence potential
+  withdrawalNotes: ""         # discontinuation considerations
+  monitoringRequired: ""      # required monitoring (labs, vitals, etc.)
+
+# ============================================
+# METADATA
+# ============================================
+
+lastUpdated: null             # YYYY-MM-DD format
+
+sources:                      # reference URLs or citations
+  - ""
+
+notes: ""                     # additional notes or comments

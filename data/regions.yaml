@@ -1,0 +1,99 @@
+# Region Definitions for ADHD Drug Database
+# Use these codes consistently across all drug files
+
+regions:
+  US:
+    name: "United States"
+    nameLocal: "United States"
+    regulatoryAgency: "FDA"
+    agencyFullName: "Food and Drug Administration"
+    controlledSubstanceSystem: "DEA Schedule"
+    schedules:
+      - "Schedule I"
+      - "Schedule II"
+      - "Schedule III"
+      - "Schedule IV"
+      - "Schedule V"
+    currency: "USD"
+
+  CN:
+    name: "China"
+    nameLocal: "中国"
+    regulatoryAgency: "NMPA"
+    agencyFullName: "National Medical Products Administration (国家药品监督管理局)"
+    controlledSubstanceSystem: "精神药品分类"
+    schedules:
+      - "第一类精神药品"    # Class I Psychotropic
+      - "第二类精神药品"    # Class II Psychotropic
+    currency: "CNY"
+
+  EU:
+    name: "European Union"
+    nameLocal: "European Union"
+    regulatoryAgency: "EMA"
+    agencyFullName: "European Medicines Agency"
+    controlledSubstanceSystem: "Varies by member state"
+    schedules: []
+    currency: "EUR"
+
+  UK:
+    name: "United Kingdom"
+    nameLocal: "United Kingdom"
+    regulatoryAgency: "MHRA"
+    agencyFullName: "Medicines and Healthcare products Regulatory Agency"
+    controlledSubstanceSystem: "Misuse of Drugs Act"
+    schedules:
+      - "Class A"
+      - "Class B"
+      - "Class C"
+    currency: "GBP"
+
+  JP:
+    name: "Japan"
+    nameLocal: "日本"
+    regulatoryAgency: "PMDA"
+    agencyFullName: "Pharmaceuticals and Medical Devices Agency (医薬品医療機器総合機構)"
+    controlledSubstanceSystem: "覚醒剤取締法 / 麻薬及び向精神薬取締法"
+    schedules: []
+    currency: "JPY"
+
+  AU:
+    name: "Australia"
+    nameLocal: "Australia"
+    regulatoryAgency: "TGA"
+    agencyFullName: "Therapeutic Goods Administration"
+    controlledSubstanceSystem: "Standard for Uniform Scheduling of Medicines"
+    schedules:
+      - "Schedule 2"
+      - "Schedule 3"
+      - "Schedule 4"
+      - "Schedule 8"
+    currency: "AUD"
+
+  CA:
+    name: "Canada"
+    nameLocal: "Canada"
+    regulatoryAgency: "Health Canada"
+    agencyFullName: "Health Canada"
+    controlledSubstanceSystem: "Controlled Drugs and Substances Act"
+    schedules:
+      - "Schedule I"
+      - "Schedule II"
+      - "Schedule III"
+      - "Schedule IV"
+    currency: "CAD"
+
+# Common ADHD Drug Categories for reference
+drugCategories:
+  stimulants:
+    - methylphenidate
+    - amphetamine
+    - lisdexamfetamine
+    - dexmethylphenidate
+
+  non-stimulants:
+    - atomoxetine          # SNRI
+    - guanfacine           # alpha-2 agonist
+    - clonidine            # alpha-2 agonist
+    - viloxazine           # SNRI
+    - bupropion            # NDRI (off-label)

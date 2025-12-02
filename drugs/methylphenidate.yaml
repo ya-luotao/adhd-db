@@ -1,0 +1,296 @@
+# Methylphenidate - Most widely used ADHD medication globally
+# Approved in US, China, EU, Japan, and many other countries
+
+id: "methylphenidate"
+
+brandNames:
+  US: ["Concerta", "Ritalin", "Ritalin LA", "Metadate CD", "Metadate ER", "Methylin", "Quillivant XR", "Quillichew ER", "Jornay PM", "Aptensio XR", "Cotempla XR-ODT", "Daytrana"]
+  CN: ["专注达 (Concerta)"]
+  EU: ["Concerta", "Ritalin", "Equasym", "Medikinet", "Rubifen", "Tuzulby"]
+  JP: ["コンサータ (Concerta)", "リタリン (Ritalin)"]
+  UK: ["Concerta XL", "Ritalin", "Equasym XL", "Medikinet XL", "Xaggitin XL"]
+  AU: ["Concerta", "Ritalin", "Ritalin LA"]
+  CA: ["Concerta", "Ritalin", "Biphentin"]
+
+genericName: "methylphenidate hydrochloride"
+
+manufacturers:
+  - name: "Janssen (Johnson & Johnson)"
+    region: "US"
+    product: "Concerta"
+  - name: "Novartis"
+    region: "US"
+    product: "Ritalin"
+  - name: "西安杨森 (Janssen China)"
+    region: "CN"
+    product: "专注达"
+  - name: "Shionogi"
+    region: "JP"
+    product: "コンサータ"
+
+# Classification
+drugClass: "stimulant"
+category: "methylphenidate"
+controlledSubstance: true
+schedule:
+  US: "Schedule II"
+  CN: "第一类精神药品 (Class I Psychotropic)"
+  EU: "Varies by country"
+  JP: "第一種向精神薬"
+  UK: "Class B, Schedule 2"
+
+# Mechanism
+activeIngredient: "methylphenidate hydrochloride"
+mechanismOfAction: "Blocks reuptake of dopamine and norepinephrine, increasing their concentration in the synaptic cleft. Primarily affects the prefrontal cortex to improve attention and executive function."
+neurotransmittersAffected:
+  - dopamine
+  - norepinephrine
+
+# Dosage & Forms
+forms:
+  - type: "tablet"
+    releaseType: "immediate"
+    brandName: "Ritalin"
+    strengths: ["5mg", "10mg", "20mg"]
+    durationHours: 3-4
+    notes: "Usually taken 2-3 times daily"
+
+  - type: "tablet"
+    releaseType: "extended"
+    brandName: "Concerta"
+    strengths: ["18mg", "27mg", "36mg", "54mg"]
+    durationHours: 10-12
+    notes: "OROS technology, once daily dosing"
+
+  - type: "capsule"
+    releaseType: "extended"
+    brandName: "Ritalin LA"
+    strengths: ["10mg", "20mg", "30mg", "40mg"]
+    durationHours: 8-10
+    notes: "Can be opened and sprinkled on food"
+
+  - type: "capsule"
+    releaseType: "extended"
+    brandName: "Metadate CD"
+    strengths: ["10mg", "20mg", "30mg", "40mg", "50mg", "60mg"]
+    durationHours: 8
+    notes: "30% immediate release, 70% extended release"
+
+  - type: "patch"
+    releaseType: "extended"
+    brandName: "Daytrana"
+    strengths: ["10mg/9hr", "15mg/9hr", "20mg/9hr", "30mg/9hr"]
+    durationHours: 9-12
+    notes: "Transdermal patch, wear for 9 hours"
+
+  - type: "liquid"
+    releaseType: "extended"
+    brandName: "Quillivant XR"
+    strengths: ["25mg/5mL"]
+    durationHours: 12
+    notes: "Liquid suspension for those who can't swallow pills"
+
+  - type: "capsule"
+    releaseType: "extended"
+    brandName: "Jornay PM"
+    strengths: ["20mg", "40mg", "60mg", "80mg", "100mg"]
+    durationHours: 12
+    notes: "Evening dosing, works by morning"
+
+  - type: "chewable"
+    releaseType: "extended"
+    brandName: "Quillichew ER"
+    strengths: ["20mg", "30mg", "40mg"]
+    durationHours: 8
+    notes: "Cherry-flavored chewable tablet"
+
+  - type: "ODT"
+    releaseType: "extended"
+    brandName: "Cotempla XR-ODT"
+    strengths: ["8.6mg", "17.3mg", "25.9mg"]
+    durationHours: 12
+    notes: "Orally disintegrating tablet"
+
+# Efficacy
+onsetMinutes: 30-60
+peakEffectHours: 2
+durationHours: 4-12  # depends on formulation
+
+# Side Effects
+sideEffects:
+  common:
+    - name: "decreased appetite"
+      frequency: "25-40%"
+    - name: "insomnia"
+      frequency: "20-30%"
+    - name: "headache"
+      frequency: "15-25%"
+    - name: "stomach ache"
+      frequency: "10-20%"
+    - name: "irritability"
+      frequency: "10-15%"
+    - name: "weight loss"
+      frequency: "10-15%"
+
+  uncommon:
+    - name: "increased heart rate"
+      frequency: "5-10%"
+    - name: "increased blood pressure"
+      frequency: "5-10%"
+    - name: "anxiety"
+      frequency: "5-8%"
+    - name: "dizziness"
+      frequency: "5%"
+    - name: "nausea"
+      frequency: "5%"
+
+  serious:
+    - name: "cardiovascular events"
+      notes: "Rare; increased risk in those with pre-existing heart conditions"
+    - name: "psychiatric symptoms"
+      notes: "May exacerbate psychosis or mania in susceptible individuals"
+    - name: "growth suppression"
+      notes: "May slow growth in children; effect usually temporary"
+    - name: "priapism"
+      notes: "Rare but serious; requires immediate medical attention"
+    - name: "peripheral vasculopathy"
+      notes: "Raynaud's phenomenon reported"
+
+# Safety
+contraindications:
+  - "Hypersensitivity to methylphenidate"
+  - "MAO inhibitor use within 14 days"
+  - "Glaucoma"
+  - "Severe anxiety, tension, or agitation"
+  - "Motor tics or family history of Tourette's syndrome"
+  - "Pheochromocytoma"
+
+drugInteractions:
+  - drug: "MAO inhibitors"
+    severity: "major"
+    effect: "Hypertensive crisis risk"
+  - drug: "Antihypertensives"
+    severity: "moderate"
+    effect: "May reduce effectiveness of blood pressure medications"
+  - drug: "Anticoagulants (warfarin)"
+    severity: "moderate"
+    effect: "May increase anticoagulant effect"
+  - drug: "Seizure medications"
+    severity: "moderate"
+    effect: "May affect seizure threshold"
+  - drug: "SSRIs"
+    severity: "minor"
+    effect: "May increase serotonergic effects"
+
+blackBoxWarnings:
+  - "High potential for abuse and dependence"
+  - "Sudden death reported in patients with pre-existing structural cardiac abnormalities"
+
+pregnancyCategory: "C"
+foodInteractions: "Avoid high-fat meals with some formulations (may affect absorption); acidic foods/drinks may reduce absorption"
+
+# Practical Information
+typicalDosing:
+  children:
+    startingDose: "5mg twice daily (IR) or 18mg once daily (ER)"
+    maxDose: "60mg/day (or 2mg/kg/day)"
+    notes: "Start low, titrate weekly"
+  adults:
+    startingDose: "10mg twice daily (IR) or 18-36mg once daily (ER)"
+    maxDose: "72mg/day (Concerta) or 60mg/day (other ER)"
+    notes: "May need higher doses than children"
+
+costEstimate:
+  US:
+    brand: "$300-500/month"
+    generic: "$30-80/month"
+  CN:
+    brand: "¥300-600/month (专注达)"
+    generic: "Limited availability"
+
+storageRequirements: "Room temperature (20-25°C), protect from moisture and light"
+
+# Approval & Availability
+approvals:
+  - region: "US"
+    agency: "FDA"
+    year: 1955
+    approvedAges: "6 years and older"
+    indications:
+      - "ADHD"
+      - "Narcolepsy"
+    available: true
+    notes: "Original Ritalin; Concerta approved 2000"
+
+  - region: "CN"
+    agency: "NMPA"
+    year: 2005
+    approvedAges: "6 years and older"
+    indications:
+      - "ADHD"
+    available: true
+    notes: "Only extended-release (专注达) widely available; supply shortages reported 2024-2025"
+
+  - region: "EU"
+    agency: "EMA"
+    year: 1954
+    approvedAges: "6-17 years (varies by country for adults)"
+    indications:
+      - "ADHD"
+    available: true
+    notes: "Adult approval varies by EU member state; Tuzulby approved Feb 2025"
+
+  - region: "JP"
+    agency: "PMDA"
+    year: 2007
+    approvedAges: "6 years and older"
+    indications:
+      - "ADHD"
+    available: true
+    notes: "Requires registration in ADHD Proper Distribution Management System since 2019"
+
+  - region: "UK"
+    agency: "MHRA"
+    year: 1955
+    approvedAges: "6 years and older"
+    indications:
+      - "ADHD"
+    available: true
+    notes: ""
+
+  - region: "AU"
+    agency: "TGA"
+    year: 1966
+    approvedAges: "6 years and older"
+    indications:
+      - "ADHD"
+      - "Narcolepsy"
+    available: true
+    notes: ""
+
+  - region: "CA"
+    agency: "Health Canada"
+    year: 1979
+    approvedAges: "6 years and older"
+    indications:
+      - "ADHD"
+      - "Narcolepsy"
+    available: true
+    notes: ""
+
+# Special Considerations
+specialConsiderations:
+  cardiacRisk: "Cardiovascular evaluation recommended before starting; caution in patients with heart conditions"
+  abuseRisk: "Schedule II controlled substance; high abuse potential, especially IR formulations"
+  withdrawalNotes: "No significant physical withdrawal; may experience fatigue and depression when stopping"
+  monitoringRequired: "Height, weight, blood pressure, heart rate; periodic cardiovascular assessment"
+
+# Metadata
+lastUpdated: 2025-12-02
+sources:
+  - "https://chadd.org/about-adhd/adhd-medications-approved-by-the-us-fda/"
+  - "https://www.ema.europa.eu/en/medicines/human/referrals/methylphenidate"
+  - "https://zhuanlan.zhihu.com/p/699401044"
+  - "https://h-navi.jp/column/article/35028853"
+
+notes: "Most widely prescribed ADHD medication globally. Multiple formulations available to suit different needs. China experiencing supply shortages as of 2024-2025."

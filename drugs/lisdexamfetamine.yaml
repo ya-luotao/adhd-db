@@ -1,0 +1,246 @@
+# Lisdexamfetamine - Prodrug of dextroamphetamine
+# Approved in US, EU, Japan (children only), UK, Australia, Canada
+
+id: "lisdexamfetamine"
+
+brandNames:
+  US: ["Vyvanse"]
+  CN: []
+  EU: ["Elvanse"]
+  JP: ["ビバンセ (Vyvanse)"]
+  UK: ["Elvanse", "Elvanse Adult"]
+  AU: ["Vyvanse"]
+  CA: ["Vyvanse"]
+
+genericName: "lisdexamfetamine dimesylate"
+
+manufacturers:
+  - name: "Takeda (formerly Shire)"
+    region: "US"
+    product: "Vyvanse"
+  - name: "Takeda"
+    region: "EU"
+    product: "Elvanse"
+  - name: "Shionogi"
+    region: "JP"
+    product: "ビバンセ"
+
+# Classification
+drugClass: "stimulant"
+category: "amphetamine"
+controlledSubstance: true
+schedule:
+  US: "Schedule II"
+  CN: "Not approved"
+  EU: "Varies by country (typically Schedule II equivalent)"
+  JP: "第一種向精神薬"
+  UK: "Class B, Schedule 2"
+
+# Mechanism
+activeIngredient: "lisdexamfetamine dimesylate (prodrug of dextroamphetamine)"
+mechanismOfAction: "Prodrug that is converted to dextroamphetamine in the body. Increases release of dopamine and norepinephrine from nerve terminals and inhibits their reuptake. The prodrug design provides smoother onset and longer duration, with lower abuse potential than immediate-release amphetamines."
+neurotransmittersAffected:
+  - dopamine
+  - norepinephrine
+
+# Dosage & Forms
+forms:
+  - type: "capsule"
+    releaseType: "extended"
+    brandName: "Vyvanse"
+    strengths: ["10mg", "20mg", "30mg", "40mg", "50mg", "60mg", "70mg"]
+    durationHours: 10-14
+    notes: "Can be opened and dissolved in water; prodrug provides smooth release"
+
+  - type: "chewable"
+    releaseType: "extended"
+    brandName: "Vyvanse"
+    strengths: ["10mg", "20mg", "30mg", "40mg", "50mg", "60mg"]
+    durationHours: 10-14
+    notes: "Chewable tablet formulation"
+
+# Efficacy
+onsetMinutes: 60-90
+peakEffectHours: 3.5
+durationHours: 10-14
+
+# Side Effects
+sideEffects:
+  common:
+    - name: "decreased appetite"
+      frequency: "30-40%"
+    - name: "insomnia"
+      frequency: "20-30%"
+    - name: "dry mouth"
+      frequency: "15-25%"
+    - name: "headache"
+      frequency: "10-20%"
+    - name: "irritability"
+      frequency: "10-15%"
+    - name: "weight loss"
+      frequency: "10-15%"
+    - name: "upper abdominal pain"
+      frequency: "10-15%"
+
+  uncommon:
+    - name: "increased heart rate"
+      frequency: "5-10%"
+    - name: "anxiety"
+      frequency: "5-10%"
+    - name: "dizziness"
+      frequency: "5%"
+    - name: "nausea"
+      frequency: "5%"
+    - name: "vomiting"
+      frequency: "5%"
+
+  serious:
+    - name: "cardiovascular events"
+      notes: "Rare; monitor in patients with heart conditions"
+    - name: "psychiatric symptoms"
+      notes: "May cause or worsen psychosis, mania, aggression"
+    - name: "serotonin syndrome"
+      notes: "When combined with serotonergic drugs"
+    - name: "peripheral vasculopathy"
+      notes: "Raynaud's phenomenon"
+    - name: "growth suppression"
+      notes: "May affect height and weight in children"
+
+# Safety
+contraindications:
+  - "Hypersensitivity to amphetamines"
+  - "MAO inhibitor use within 14 days"
+  - "Advanced arteriosclerosis"
+  - "Symptomatic cardiovascular disease"
+  - "Moderate to severe hypertension"
+  - "Hyperthyroidism"
+  - "Glaucoma"
+  - "Agitated states"
+  - "History of drug abuse"
+
+drugInteractions:
+  - drug: "MAO inhibitors"
+    severity: "major"
+    effect: "Hypertensive crisis risk"
+  - drug: "Serotonergic drugs"
+    severity: "major"
+    effect: "Serotonin syndrome risk"
+  - drug: "Acidifying agents"
+    severity: "moderate"
+    effect: "Decrease amphetamine absorption"
+  - drug: "Alkalinizing agents"
+    severity: "moderate"
+    effect: "Increase amphetamine absorption"
+  - drug: "Antihypertensives"
+    severity: "moderate"
+    effect: "May reduce effectiveness"
+
+blackBoxWarnings:
+  - "High potential for abuse and dependence"
+  - "CNS stimulants may cause sudden death and serious cardiovascular adverse events"
+
+pregnancyCategory: "C"
+foodInteractions: "Can be taken with or without food; avoid vitamin C and acidic foods/drinks close to dosing"
+
+# Practical Information
+typicalDosing:
+  children:
+    startingDose: "30mg once daily in the morning"
+    maxDose: "70mg/day"
+    notes: "Titrate in 10-20mg increments weekly"
+  adults:
+    startingDose: "30mg once daily in the morning"
+    maxDose: "70mg/day"
+    notes: "Same dosing as children"
+
+costEstimate:
+  US:
+    brand: "$350-450/month"
+    generic: "$30-100/month (available since 2023)"
+  CN:
+    brand: "Not available"
+    generic: "Not available"
+
+storageRequirements: "Room temperature (20-25°C), protect from light"
+
+# Approval & Availability
+approvals:
+  - region: "US"
+    agency: "FDA"
+    year: 2007
+    approvedAges: "6 years and older"
+    indications:
+      - "ADHD"
+      - "Binge eating disorder"
+    available: true
+    notes: "Generic available since August 2023"
+
+  - region: "CN"
+    agency: "NMPA"
+    year: null
+    approvedAges: ""
+    indications: []
+    available: false
+    notes: "Not approved in China"
+
+  - region: "EU"
+    agency: "EMA"
+    year: 2013
+    approvedAges: "6 years and older (children); adults in some countries"
+    indications:
+      - "ADHD"
+    available: true
+    notes: "Adult approval varies by EU member state (UK, Denmark, Sweden approved for adults)"
+
+  - region: "JP"
+    agency: "PMDA"
+    year: 2019
+    approvedAges: "6-17 years only"
+    indications:
+      - "ADHD"
+    available: true
+    notes: "Children only; requires registration in ADHD Proper Distribution Management System; sales started December 2019"
+
+  - region: "UK"
+    agency: "MHRA"
+    year: 2013
+    approvedAges: "6 years and older (children and adults)"
+    indications:
+      - "ADHD"
+    available: true
+    notes: "Elvanse Adult approved for adult ADHD"
+
+  - region: "AU"
+    agency: "TGA"
+    year: 2014
+    approvedAges: "6 years and older"
+    indications:
+      - "ADHD"
+    available: true
+    notes: ""
+
+  - region: "CA"
+    agency: "Health Canada"
+    year: 2010
+    approvedAges: "6 years and older"
+    indications:
+      - "ADHD"
+    available: true
+    notes: ""
+
+# Special Considerations
+specialConsiderations:
+  cardiacRisk: "Screen for cardiac disease before treatment; avoid in patients with structural cardiac abnormalities"
+  abuseRisk: "Prodrug design reduces abuse potential compared to immediate-release amphetamines, but still Schedule II"
+  withdrawalNotes: "Fatigue and depression may occur upon discontinuation; no severe physical withdrawal"
+  monitoringRequired: "Height, weight, blood pressure, heart rate, psychiatric symptoms"
+
+# Metadata
+lastUpdated: 2025-12-02
+sources:
+  - "https://pharmacyportal.eu/elvanse-europe/"
+  - "https://en.wikipedia.org/wiki/Lisdexamfetamine"
+  - "https://h-navi.jp/column/article/35027521"
+  - "https://www.additudemag.com/adhd-medications-list-chart-stimulants-nonstimulants/"
+
+notes: "Prodrug design provides smoother, longer-lasting effect with lower abuse potential than traditional amphetamines. Not available in China. Japan only approves for children (6-17). Generic became available in US in 2023."

@@ -1,0 +1,217 @@
+# Clonidine - Alpha-2 adrenergic agonist
+# FDA-approved for ADHD (Kapvay); limited ADHD-specific approval elsewhere
+
+id: "clonidine"
+
+brandNames:
+  US: ["Kapvay", "Catapres"]
+  CN: []
+  EU: ["Catapres"]
+  JP: []
+  UK: ["Catapres"]
+  AU: ["Catapres"]
+  CA: ["Catapres"]
+
+genericName: "clonidine hydrochloride"
+
+manufacturers:
+  - name: "Concordia Pharmaceuticals"
+    region: "US"
+    product: "Kapvay"
+  - name: "Boehringer Ingelheim"
+    region: "US"
+    product: "Catapres"
+
+# Classification
+drugClass: "non-stimulant"
+category: "alpha-2 adrenergic agonist"
+controlledSubstance: false
+schedule:
+  US: "Not scheduled"
+  CN: "Not approved for ADHD"
+  EU: "Not scheduled (not ADHD indication)"
+  JP: "Not approved for ADHD"
+  UK: "Not scheduled"
+
+# Mechanism
+activeIngredient: "clonidine hydrochloride"
+mechanismOfAction: "Alpha-2 adrenergic receptor agonist. Stimulates presynaptic alpha-2 receptors in the brain, reducing sympathetic outflow and norepinephrine release. In ADHD, thought to improve prefrontal cortex function, reduce hyperactivity, and improve impulse control."
+neurotransmittersAffected:
+  - norepinephrine
+
+# Dosage & Forms
+forms:
+  - type: "tablet"
+    releaseType: "extended"
+    brandName: "Kapvay"
+    strengths: ["0.1mg", "0.2mg"]
+    durationHours: 12
+    notes: "FDA-approved for ADHD; twice daily dosing"
+
+  - type: "tablet"
+    releaseType: "immediate"
+    brandName: "Catapres"
+    strengths: ["0.1mg", "0.2mg", "0.3mg"]
+    durationHours: 6-8
+    notes: "Approved for hypertension; used off-label for ADHD"
+
+  - type: "patch"
+    releaseType: "extended"
+    brandName: "Catapres-TTS"
+    strengths: ["0.1mg/day", "0.2mg/day", "0.3mg/day"]
+    durationHours: 168  # 7 days
+    notes: "Transdermal patch; change weekly; off-label for ADHD"
+
+# Efficacy
+onsetMinutes: null  # Gradual effect
+peakEffectHours: 2-4
+durationHours: 6-12
+
+# Side Effects
+sideEffects:
+  common:
+    - name: "somnolence/drowsiness"
+      frequency: "30-40%"
+    - name: "fatigue"
+      frequency: "20-30%"
+    - name: "headache"
+      frequency: "15-20%"
+    - name: "dry mouth"
+      frequency: "10-20%"
+    - name: "dizziness"
+      frequency: "10-15%"
+    - name: "irritability"
+      frequency: "10%"
+    - name: "upper respiratory infection"
+      frequency: "10%"
+
+  uncommon:
+    - name: "hypotension"
+      frequency: "5-10%"
+    - name: "bradycardia"
+      frequency: "5%"
+    - name: "constipation"
+      frequency: "5%"
+    - name: "nausea"
+      frequency: "5%"
+    - name: "skin reactions (patch)"
+      frequency: "5-15%"
+
+  serious:
+    - name: "hypotension"
+      notes: "Significant drops in blood pressure possible"
+    - name: "bradycardia"
+      notes: "Can slow heart rate significantly"
+    - name: "rebound hypertension"
+      notes: "Severe if stopped abruptly; MUST taper"
+    - name: "sedation"
+      notes: "Can be profound, especially early in treatment"
+    - name: "AV block"
+      notes: "Rare cardiac conduction abnormalities"
+
+# Safety
+contraindications:
+  - "Hypersensitivity to clonidine"
+  - "Severe bradyarrhythmia"
+  - "Patch: skin irritation at application site"
+
+drugInteractions:
+  - drug: "Beta-blockers"
+    severity: "major"
+    effect: "Enhanced bradycardia, rebound hypertension risk if clonidine stopped"
+  - drug: "Tricyclic antidepressants"
+    severity: "moderate"
+    effect: "May reduce clonidine effectiveness"
+  - drug: "CNS depressants"
+    severity: "moderate"
+    effect: "Enhanced sedation"
+  - drug: "Antihypertensives"
+    severity: "moderate"
+    effect: "Additive hypotensive effect"
+  - drug: "Digoxin"
+    severity: "moderate"
+    effect: "Enhanced AV block risk"
+
+blackBoxWarnings: []
+
+pregnancyCategory: "C"
+foodInteractions: "Can be taken with or without food"
+
+# Practical Information
+typicalDosing:
+  children:
+    startingDose: "0.1mg at bedtime"
+    maxDose: "0.4mg/day (divided twice daily)"
+    notes: "Increase by 0.1mg weekly; Kapvay is twice daily (morning and bedtime)"
+  adults:
+    startingDose: "0.1mg twice daily"
+    maxDose: "0.4mg/day"
+    notes: "Off-label for adult ADHD"
+
+costEstimate:
+  US:
+    brand: "$200-300/month (Kapvay)"
+    generic: "$20-50/month"
+  CN:
+    brand: "Not available for ADHD"
+    generic: "Not available for ADHD"
+
+storageRequirements: "Room temperature (25°C), protect from light"
+
+# Approval & Availability
+approvals:
+  - region: "US"
+    agency: "FDA"
+    year: 2010
+    approvedAges: "6-17 years"
+    indications:
+      - "ADHD"
+    available: true
+    notes: "Kapvay (ER) approved for ADHD; can be used alone or with stimulants"
+
+  - region: "CN"
+    agency: "NMPA"
+    year: null
+    approvedAges: ""
+    indications: []
+    available: false
+    notes: "Not approved for ADHD"
+
+  - region: "EU"
+    agency: "EMA"
+    year: null
+    approvedAges: ""
+    indications: []
+    available: false
+    notes: "Not specifically approved for ADHD; used off-label"
+
+  - region: "JP"
+    agency: "PMDA"
+    year: null
+    approvedAges: ""
+    indications: []
+    available: false
+    notes: "Not approved for ADHD"
+
+  - region: "UK"
+    agency: "MHRA"
+    year: null
+    approvedAges: ""
+    indications: []
+    available: false
+    notes: "Not specifically approved for ADHD; sometimes used off-label"
+
+# Special Considerations
+specialConsiderations:
+  cardiacRisk: "Significant cardiovascular effects; monitor BP and HR closely"
+  abuseRisk: "No abuse potential; not a controlled substance"
+  withdrawalNotes: "CRITICAL: Must taper slowly. Abrupt discontinuation can cause severe rebound hypertension, agitation, and other serious effects"
+  monitoringRequired: "Blood pressure and heart rate at each visit; ECG if cardiac concerns"
+
+# Metadata
+lastUpdated: 2025-12-02
+sources:
+  - "https://www.goodrx.com/conditions/adhd/non-stimulant-adhd-meds"
+  - "https://www.additudemag.com/adhd-medications-list-chart-stimulants-nonstimulants/"
+
+notes: "Less selective than guanfacine; more sedating. Only FDA-approved for ADHD in US (Kapvay). Helpful for hyperactivity, impulsivity, and sleep issues. Often used as adjunct to stimulants. CRITICAL: Never stop abruptly due to rebound hypertension risk."

@@ -1,0 +1,236 @@
+# Mixed Amphetamine Salts (Adderall)
+# Primarily US market; illegal in Japan; limited availability elsewhere
+
+id: "amphetamine-mixed-salts"
+
+brandNames:
+  US: ["Adderall", "Adderall XR", "Mydayis"]
+  CN: []
+  EU: []
+  JP: []
+  UK: []
+  AU: []
+  CA: ["Adderall XR"]
+
+genericName: "mixed amphetamine salts (amphetamine/dextroamphetamine)"
+
+manufacturers:
+  - name: "Teva Pharmaceuticals"
+    region: "US"
+    product: "Adderall/Adderall XR"
+  - name: "Takeda (formerly Shire)"
+    region: "US"
+    product: "Mydayis"
+
+# Classification
+drugClass: "stimulant"
+category: "amphetamine"
+controlledSubstance: true
+schedule:
+  US: "Schedule II"
+  CN: "Illegal/Not approved"
+  EU: "Varies; generally not available"
+  JP: "Illegal (覚醒剤取締法)"
+  UK: "Class B, Schedule 2 (rarely prescribed)"
+
+# Mechanism
+activeIngredient: "mixed amphetamine salts (75% dextroamphetamine, 25% levoamphetamine)"
+mechanismOfAction: "Increases release of dopamine and norepinephrine from nerve terminals; blocks reuptake of these neurotransmitters. The combination of amphetamine salts provides both rapid onset and extended duration."
+neurotransmittersAffected:
+  - dopamine
+  - norepinephrine
+  - trace amounts of serotonin
+
+# Dosage & Forms
+forms:
+  - type: "tablet"
+    releaseType: "immediate"
+    brandName: "Adderall"
+    strengths: ["5mg", "7.5mg", "10mg", "12.5mg", "15mg", "20mg", "30mg"]
+    durationHours: 4-6
+    notes: "Usually taken 2-3 times daily"
+
+  - type: "capsule"
+    releaseType: "extended"
+    brandName: "Adderall XR"
+    strengths: ["5mg", "10mg", "15mg", "20mg", "25mg", "30mg"]
+    durationHours: 10-12
+    notes: "Once daily; can be opened and sprinkled on food"
+
+  - type: "capsule"
+    releaseType: "extended"
+    brandName: "Mydayis"
+    strengths: ["12.5mg", "25mg", "37.5mg", "50mg"]
+    durationHours: 16
+    notes: "Triple-bead formulation for 16-hour coverage"
+
+# Efficacy
+onsetMinutes: 30-60
+peakEffectHours: 3
+durationHours: 4-6  # IR; 10-16 for XR
+
+# Side Effects
+sideEffects:
+  common:
+    - name: "decreased appetite"
+      frequency: "25-35%"
+    - name: "insomnia"
+      frequency: "20-30%"
+    - name: "dry mouth"
+      frequency: "15-25%"
+    - name: "weight loss"
+      frequency: "10-20%"
+    - name: "headache"
+      frequency: "10-15%"
+    - name: "stomach pain"
+      frequency: "10-15%"
+    - name: "anxiety/nervousness"
+      frequency: "10%"
+
+  uncommon:
+    - name: "tachycardia"
+      frequency: "5-10%"
+    - name: "mood swings"
+      frequency: "5-10%"
+    - name: "dizziness"
+      frequency: "5%"
+    - name: "restlessness"
+      frequency: "5%"
+
+  serious:
+    - name: "cardiovascular events"
+      notes: "Sudden death, stroke, myocardial infarction reported"
+    - name: "psychiatric symptoms"
+      notes: "New or worsening psychosis, mania, aggression"
+    - name: "seizures"
+      notes: "May lower seizure threshold"
+    - name: "peripheral vasculopathy"
+      notes: "Raynaud's phenomenon"
+    - name: "serotonin syndrome"
+      notes: "With concurrent serotonergic drugs"
+
+# Safety
+contraindications:
+  - "Hypersensitivity to amphetamines"
+  - "MAO inhibitor use within 14 days"
+  - "Advanced arteriosclerosis"
+  - "Symptomatic cardiovascular disease"
+  - "Moderate to severe hypertension"
+  - "Hyperthyroidism"
+  - "Glaucoma"
+  - "Agitated states"
+  - "History of drug abuse"
+
+drugInteractions:
+  - drug: "MAO inhibitors"
+    severity: "major"
+    effect: "Hypertensive crisis"
+  - drug: "Serotonergic drugs"
+    severity: "major"
+    effect: "Serotonin syndrome risk"
+  - drug: "Acidifying agents (vitamin C)"
+    severity: "moderate"
+    effect: "Decrease amphetamine levels"
+  - drug: "Alkalinizing agents"
+    severity: "moderate"
+    effect: "Increase amphetamine levels"
+  - drug: "Tricyclic antidepressants"
+    severity: "moderate"
+    effect: "Enhanced TCA effects"
+
+blackBoxWarnings:
+  - "High potential for abuse and dependence"
+  - "Sudden death and serious cardiovascular adverse events"
+
+pregnancyCategory: "C"
+foodInteractions: "Avoid vitamin C, citrus, acidic foods within 1 hour of dosing (reduces absorption)"
+
+# Practical Information
+typicalDosing:
+  children:
+    startingDose: "5mg once or twice daily (IR) or 10mg once daily (XR)"
+    maxDose: "30mg/day (children 6-12) or 40mg/day (adolescents)"
+    notes: "Start low, increase by 5-10mg weekly"
+  adults:
+    startingDose: "5-10mg twice daily (IR) or 20mg once daily (XR)"
+    maxDose: "40mg/day (IR) or 60mg/day (XR)"
+    notes: "Higher doses may be needed for adults"
+
+costEstimate:
+  US:
+    brand: "$350-450/month"
+    generic: "$30-80/month"
+  CN:
+    brand: "Not available"
+    generic: "Not available"
+
+storageRequirements: "Room temperature (20-25°C), protect from light and moisture"
+
+# Approval & Availability
+approvals:
+  - region: "US"
+    agency: "FDA"
+    year: 1996
+    approvedAges: "3 years and older (IR); 6 years and older (XR)"
+    indications:
+      - "ADHD"
+      - "Narcolepsy (IR only)"
+    available: true
+    notes: "Adderall XR approved 2001; Mydayis approved 2017"
+
+  - region: "CN"
+    agency: "NMPA"
+    year: null
+    approvedAges: ""
+    indications: []
+    available: false
+    notes: "Not approved; amphetamines are controlled substances"
+
+  - region: "EU"
+    agency: "EMA"
+    year: null
+    approvedAges: ""
+    indications: []
+    available: false
+    notes: "Not approved in most EU countries; some exceptions"
+
+  - region: "JP"
+    agency: "PMDA"
+    year: null
+    approvedAges: ""
+    indications: []
+    available: false
+    notes: "Illegal in Japan under Stimulants Control Act (覚醒剤取締法)"
+
+  - region: "UK"
+    agency: "MHRA"
+    year: null
+    approvedAges: ""
+    indications: []
+    available: false
+    notes: "Rarely prescribed; dexamphetamine preferred"
+
+  - region: "CA"
+    agency: "Health Canada"
+    year: 2004
+    approvedAges: "6 years and older"
+    indications:
+      - "ADHD"
+    available: true
+    notes: "Adderall XR only; IR not available"
+
+# Special Considerations
+specialConsiderations:
+  cardiacRisk: "Higher cardiovascular risk than some alternatives; screen before starting"
+  abuseRisk: "High abuse potential; one of the most commonly misused ADHD medications"
+  withdrawalNotes: "Crash, fatigue, depression on discontinuation; no severe physical withdrawal"
+  monitoringRequired: "Height, weight, blood pressure, heart rate, psychiatric symptoms"
+
+# Metadata
+lastUpdated: 2025-12-02
+sources:
+  - "https://www.additudemag.com/adhd-medications-list-chart-stimulants-nonstimulants/"
+  - "https://interacnetwork.com/navigating-stimulant-therapy-for-adult-adhd-in-japan-regulations-and-considerations/"
+  - "https://www.fda.gov/consumers/consumer-updates/treating-and-dealing-adhd"
+
+notes: "Primarily a US medication. Illegal in Japan. Not available in most of Europe. Often associated with college student misuse. Significant supply shortages in US during 2022-2023."
