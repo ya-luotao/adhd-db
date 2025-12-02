@@ -22,26 +22,26 @@ const la = (value: any) => getLocalizedArray(value, lang);
 ---
 
 <Layout title={l(drug.genericName)}>
-  <nav style="margin-bottom: 1rem;">
+  <nav class="back-nav">
     <a href={getLocalizedPath('/data/drugs', lang)}>&larr; {t('drugs.backToList')}</a>
   </nav>
 
   <h1>{l(drug.genericName)}</h1>
 
-  <div style="margin-bottom: 1rem;">
+  <div class="drug-tags">
     <span class={`tag ${drug.drugClass}`}>{l(drug.drugClassLabel) || drug.drugClass}</span>
-    <span class="tag" style="background: #f3f4f6;">{l(drug.categoryLabel) || drug.category}</span>
+    <span class="tag tag-category">{l(drug.categoryLabel) || drug.category}</span>
     {drug.controlledSubstance && (
-      <span class="tag" style="background: #fef3c7; color: #92400e;">{t('common.controlled')}</span>
+      <span class="tag tag-controlled">{t('common.controlled')}</span>
     )}
   </div>
 
-  <div class="grid" style="margin-bottom: 2rem;">
+  <div class="grid info-grid">
     <div class="card">
       <h3>{t('drugs.brandNames')}</h3>
       {Object.entries(drug.brandNames || {}).map(([region, brands]: [string, any]) => (
         brands?.length > 0 && (
-          <div style="margin-bottom: 0.5rem;">
+          <div class="brand-region">
             <strong>{region}:</strong> {brands.join(', ')}
           </div>
         )
@@ -50,11 +50,11 @@ const la = (value: any) => getLocalizedArray(value, lang);
 
     <div class="card">
       <h3>{t('drugs.mechanism')}</h3>
-      <p style="font-size: 0.875rem; line-height: 1.6;">
+      <p class="mechanism-text">
         {l(drug.mechanismOfAction)}
       </p>
       {drug.neurotransmittersAffected && (
-        <div style="margin-top: 0.5rem;">
+        <div class="neurotransmitters">
           <strong>{t('drugs.affects')}:</strong> {drug.neurotransmittersAffected.join(', ')}
         </div>
       )}
@@ -63,34 +63,56 @@ const la = (value: any) => getLocalizedArray(value, lang);
 
   <h2>{t('drugs.approvals')}</h2>
 
-  <table>
-    <thead>
-      <tr>
-        <th>{t('table.region')}</th>
-        <th>{t('table.agency')}</th>
-        <th>{t('table.year')}</th>
-        <th>{t('table.ages')}</th>
-        <th>{t('table.available')}</th>
-        <th>{t('table.notes')}</th>
-      </tr>
-    </thead>
-    <tbody>
-      {drug.approvals?.map((approval: any) => (
+  <div class="table-wrapper">
+    <table>
+      <thead>
         <tr>
-          <td><strong>{approval.region}</strong></td>
-          <td>{approval.agency}</td>
-          <td>{approval.year || '-'}</td>
-          <td>{l(approval.approvedAges) || '-'}</td>
-          <td>
-            <span class={`tag ${approval.available ? 'available' : 'unavailable'}`}>
-              {approval.available ? t('common.yes') : t('common.no')}
-            </span>
-          </td>
-          <td style="font-size: 0.75rem; max-width: 200px;">{l(approval.notes) || '-'}</td>
+          <th>{t('table.region')}</th>
+          <th>{t('table.agency')}</th>
+          <th>{t('table.year')}</th>
+          <th>{t('table.ages')}</th>
+          <th>{t('table.available')}</th>
+          <th>{t('table.notes')}</th>
         </tr>
-      ))}
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        {drug.approvals?.map((approval: any) => (
+          <tr>
+            <td><strong>{approval.region}</strong></td>
+            <td>{approval.agency}</td>
+            <td>{approval.year || '-'}</td>
+            <td>{l(approval.approvedAges) || '-'}</td>
+            <td>
+              <span class={`tag ${approval.available ? 'available' : 'unavailable'}`}>
+                {approval.available ? t('common.yes') : t('common.no')}
+              </span>
+            </td>
+            <td class="notes-cell">{l(approval.notes) || '-'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Mobile-friendly approval cards (shown on small screens) -->
+  <div class="approval-cards">
+    {drug.approvals?.map((approval: any) => (
+      <div class="card approval-card">
+        <div class="approval-header">
+          <strong class="approval-region">{approval.region}</strong>
+          <span class={`tag ${approval.available ? 'available' : 'unavailable'}`}>
+            {approval.available ? t('common.yes') : t('common.no')}
+          </span>
+        </div>
+        <div class="approval-details">
+          <p><strong>{t('table.agency')}:</strong> {approval.agency}</p>
+          <p><strong>{t('table.year')}:</strong> {approval.year || '-'}</p>
+          <p><strong>{t('table.ages')}:</strong> {l(approval.approvedAges) || '-'}</p>
+          {l(approval.notes) && <p class="approval-notes"><strong>{t('table.notes')}:</strong> {l(approval.notes)}</p>}
+        </div>
+      </div>
+    ))}
+  </div>
 
   {drug.forms && drug.forms.length > 0 && (
     <>
@@ -102,7 +124,7 @@ const la = (value: any) => getLocalizedArray(value, lang);
             <p><strong>{t('common.type')}:</strong> {l(form.typeLabel) || form.type} ({l(form.releaseTypeLabel) || form.releaseType})</p>
             <p><strong>{t('common.strengths')}:</strong> {form.strengths?.join(', ')}</p>
             <p><strong>{t('common.duration')}:</strong> {form.durationHours} {t('common.hours')}</p>
-            {form.notes && <p style="font-size: 0.875rem; color: #666; margin-top: 0.5rem;">{l(form.notes)}</p>}
+            {form.notes && <p class="form-notes">{l(form.notes)}</p>}
           </div>
         ))}
       </div>
@@ -116,21 +138,21 @@ const la = (value: any) => getLocalizedArray(value, lang);
         {drug.sideEffects.common && (
           <div class="card">
             <h3>{t('drugs.common')}</h3>
-            <ul style="margin-left: 1.5rem;">
+            <ul class="side-effects-list">
               {drug.sideEffects.common.map((se: any) => (
-                <li>{l(se.name)} <span style="color: #666;">({se.frequency})</span></li>
+                <li>{l(se.name)} <span class="frequency">({se.frequency})</span></li>
               ))}
             </ul>
           </div>
         )}
         {drug.sideEffects.serious && (
-          <div class="card" style="border-left: 4px solid #ef4444;">
+          <div class="card card-serious">
             <h3>{t('drugs.serious')}</h3>
-            <ul style="margin-left: 1.5rem;">
+            <ul class="side-effects-list">
               {drug.sideEffects.serious.map((se: any) => (
                 <li>
                   <strong>{l(se.name)}</strong>
-                  {se.notes && <span style="color: #666; display: block; font-size: 0.875rem;">{l(se.notes)}</span>}
+                  {se.notes && <span class="side-effect-notes">{l(se.notes)}</span>}
                 </li>
               ))}
             </ul>
@@ -141,10 +163,151 @@ const la = (value: any) => getLocalizedArray(value, lang);
   )}
 
   <h2>{t('drugs.rawYaml')}</h2>
-  <details>
-    <summary style="cursor: pointer; padding: 0.5rem; background: #f3f4f6; border-radius: 4px;">
+  <details class="raw-yaml">
+    <summary>
       {t('drugs.showRaw')}
     </summary>
-    <pre style="margin-top: 1rem;"><code>{rawYaml}</code></pre>
+    <pre><code>{rawYaml}</code></pre>
   </details>
 </Layout>
+
+<style>
+  .back-nav {
+    margin-bottom: var(--space-4);
+  }
+
+  .drug-tags {
+    margin-bottom: var(--space-4);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .tag-category {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-secondary);
+  }
+
+  .tag-controlled {
+    background: var(--color-warning-light);
+    color: var(--color-warning-700);
+  }
+
+  .info-grid {
+    margin-bottom: var(--space-8);
+  }
+
+  .brand-region {
+    margin-bottom: var(--space-2);
+  }
+
+  .mechanism-text {
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+  }
+
+  .neurotransmitters {
+    margin-top: var(--space-2);
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: var(--space-4) 0;
+  }
+
+  .notes-cell {
+    font-size: var(--text-xs);
+    max-width: 200px;
+  }
+
+  /* Mobile approval cards - hidden by default */
+  .approval-cards {
+    display: none;
+  }
+
+  .approval-card {
+    padding: var(--space-4);
+  }
+
+  .approval-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-3);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .approval-region {
+    font-size: var(--text-lg);
+  }
+
+  .approval-details p {
+    margin-bottom: var(--space-1);
+    font-size: var(--text-sm);
+  }
+
+  .approval-notes {
+    margin-top: var(--space-2);
+    color: var(--color-text-tertiary);
+  }
+
+  .form-notes {
+    font-size: var(--text-sm);
+    color: var(--color-text-tertiary);
+    margin-top: var(--space-2);
+  }
+
+  .side-effects-list {
+    margin-left: var(--space-6);
+  }
+
+  .side-effects-list li {
+    margin-bottom: var(--space-2);
+  }
+
+  .frequency {
+    color: var(--color-text-tertiary);
+  }
+
+  .side-effect-notes {
+    color: var(--color-text-tertiary);
+    display: block;
+    font-size: var(--text-sm);
+    margin-top: var(--space-1);
+  }
+
+  .card-serious {
+    border-left: 4px solid var(--color-danger);
+  }
+
+  .raw-yaml summary {
+    cursor: pointer;
+    padding: var(--space-3);
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-md);
+    font-weight: var(--font-medium);
+  }
+
+  .raw-yaml pre {
+    margin-top: var(--space-4);
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 639px) {
+    .table-wrapper {
+      display: none;
+    }
+
+    .approval-cards {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .drug-tags .tag {
+      margin-bottom: var(--space-1);
+    }
+  }
+</style>

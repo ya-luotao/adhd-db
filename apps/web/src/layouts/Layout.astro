@@ -19,6 +19,14 @@ const alternates = getAlternateLinks(Astro.url.pathname, lang);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SJNPNV5QVR"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SJNPNV5QVR');
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -498,4 +506,142 @@ const alternates = getAlternateLinks(Astro.url.pathname, lang);
 
   .mt-0 { margin-top: 0; }
   .mb-0 { margin-bottom: 0; }
+
+  /* ============================================
+   * RESPONSIVE - MOBILE FIRST
+   * ============================================ */
+
+  /* Mobile: < 640px */
+  @media (max-width: 639px) {
+    body {
+      padding: var(--space-3);
+    }
+
+    h1 {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-4);
+    }
+
+    h2 {
+      font-size: var(--text-xl);
+      margin: var(--space-6) 0 var(--space-3);
+    }
+
+    h3 {
+      font-size: var(--text-lg);
+    }
+
+    /* Navigation stacks vertically on mobile */
+    nav {
+      flex-direction: column;
+      gap: var(--space-3);
+      padding: var(--space-3) 0;
+    }
+
+    .nav-links {
+      width: 100%;
+      justify-content: center;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      font-size: var(--text-sm);
+    }
+
+    .lang-switcher {
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* Cards get less padding on mobile */
+    .card {
+      padding: var(--space-4);
+    }
+
+    /* Grid becomes single column */
+    .grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+
+    /* Tables become scrollable */
+    table {
+      display: block;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    th, td {
+      padding: var(--space-2) var(--space-3);
+      white-space: nowrap;
+    }
+
+    /* Smaller disclaimer text */
+    .disclaimer {
+      font-size: var(--text-xs);
+      padding: var(--space-2) var(--space-3);
+    }
+
+    /* Footer adjustments */
+    footer {
+      margin-top: var(--space-10);
+      padding: var(--space-4) 0;
+    }
+
+    /* Code blocks */
+    pre {
+      padding: var(--space-3);
+      font-size: var(--text-xs);
+      border-radius: var(--radius-md);
+    }
+
+    /* Tags wrap better */
+    .tag {
+      margin-bottom: var(--space-1);
+    }
+  }
+
+  /* Tablet: 640px - 1023px */
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Touch-friendly targets */
+  @media (pointer: coarse) {
+    .nav-links a {
+      padding: var(--space-3) var(--space-1);
+    }
+
+    .lang-switcher a {
+      padding: var(--space-2) var(--space-4);
+    }
+
+    .btn {
+      padding: var(--space-3) var(--space-5);
+      min-height: 44px;
+    }
+
+    input[type="text"],
+    input[type="search"],
+    input[type="email"],
+    select {
+      padding: var(--space-3);
+      min-height: 44px;
+    }
+  }
+
+  /* Ensure images don't overflow */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Better text wrapping */
+  p, li, td {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
 </style>
