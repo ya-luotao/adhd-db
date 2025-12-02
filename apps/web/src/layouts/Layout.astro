@@ -47,6 +47,7 @@ const alternates = getAlternateLinks(Astro.url.pathname, lang);
           <a href={getLocalizedPath('/schema', lang)}>{t('nav.schema')}</a>
           <a href={getLocalizedPath('/meta', lang)}>{t('nav.meta')}</a>
           <a href={getLocalizedPath('/data', lang)}>{t('nav.data')}</a>
+          <a href={getLocalizedPath('/tools/region-checker', lang)}>{t('nav.tools')}</a>
         </div>
         <div class="lang-switcher">
           {alternates.map(({ lang: l, path }) => (

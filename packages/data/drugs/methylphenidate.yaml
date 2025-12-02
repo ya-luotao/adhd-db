@@ -478,6 +478,207 @@ specialConsiderations:
     zh: "身高、体重、血压、心率；定期心血管评估"
     ja: "身長、体重、血圧、心拍数；定期的な心血管評価"
 
+# Travel Rules
+travelRules:
+  generalAdvice:
+    en: "Methylphenidate is available in most countries but is a controlled substance everywhere. Carry proper documentation when traveling internationally."
+    zh: "哌甲酯在大多数国家可用，但在所有国家都是管制药物。国际旅行时请携带适当文件。"
+    ja: "メチルフェニデートはほとんどの国で入手可能ですが、どこでも規制物質です。海外旅行時は適切な書類を携帯してください。"
+
+  requiredDocumentation:
+    - type: "prescription"
+      typeLabel:
+        en: "Valid prescription"
+        zh: "有效处方"
+        ja: "有効な処方箋"
+      notes:
+        en: "Original prescription in original packaging"
+        zh: "原始处方和原包装"
+        ja: "元の処方箋と元のパッケージ"
+    - type: "medical_letter"
+      typeLabel:
+        en: "Doctor's letter"
+        zh: "医生证明信"
+        ja: "医師の診断書"
+      notes:
+        en: "Recommended for longer trips"
+        zh: "长途旅行建议携带"
+        ja: "長期旅行の場合は推奨"
+
+  maxPersonalSupply:
+    default: "90 days"
+    byRegion:
+      JP: "30 days"
+      EU: "30 days"
+      UK: "3 months"
+      AU: "3 months"
+
+  crossBorderRules:
+    - fromRegion: "US"
+      toRegion: "JP"
+      status: "requires_permit"
+      statusLabel:
+        en: "Requires Import Permit"
+        zh: "需要进口许可"
+        ja: "輸入許可が必要"
+      requirements:
+        en:
+          - "Apply to Japanese Narcotics Control Department"
+          - "Obtain Yakkan Shoumei (import certificate)"
+          - "Maximum 30-day supply"
+        zh:
+          - "向日本麻药取缔部门申请"
+          - "获得药监证明（Yakkan Shoumei）"
+          - "最多30天用量"
+        ja:
+          - "麻薬取締部への申請"
+          - "薬監証明の取得"
+          - "最大30日分"
+      maxSupply: "30 days"
+      notes:
+        en: "Methylphenidate is legal in Japan but requires advance permission. Apply 2+ weeks before travel."
+        zh: "哌甲酯在日本合法，但需要提前许可。请在旅行前2周以上申请。"
+        ja: "メチルフェニデートは日本で合法ですが、事前の許可が必要です。旅行の2週間以上前に申請してください。"
+      sources:
+        - "https://www.ncd.mhlw.go.jp/en/application.html"
+
+    - fromRegion: "US"
+      toRegion: "CN"
+      status: "restricted"
+      statusLabel:
+        en: "Restricted"
+        zh: "受限"
+        ja: "制限あり"
+      requirements:
+        en:
+          - "Carry original prescription"
+          - "Doctor's letter explaining medical necessity"
+          - "Keep in original packaging"
+          - "Declare at customs if asked"
+        zh:
+          - "携带原始处方"
+          - "医生证明信说明医疗必要性"
+          - "保持原包装"
+          - "如被询问在海关申报"
+        ja:
+          - "元の処方箋を携帯"
+          - "医学的必要性を説明する医師の手紙"
+          - "元のパッケージを維持"
+          - "求められた場合は税関で申告"
+      maxSupply: "30 days"
+      notes:
+        en: "Methylphenidate is a Class I psychotropic substance in China. Personal use amounts may be allowed with proper documentation, but regulations are strict."
+        zh: "哌甲酯在中国属于第一类精神药品。携带适当文件的个人使用量可能被允许，但规定严格。"
+        ja: "メチルフェニデートは中国で第一類精神薬品です。適切な書類があれば個人使用量は許可される場合がありますが、規制は厳格です。"
+      sources:
+        - "http://www.nhc.gov.cn/"
+
+    - fromRegion: "US"
+      toRegion: "EU"
+      status: "restricted"
+      statusLabel:
+        en: "Restricted - Schengen Certificate"
+        zh: "受限 - 需申根证明"
+        ja: "制限あり - シェンゲン証明書"
+      requirements:
+        en:
+          - "Obtain Schengen certificate from your health authority"
+          - "Certificate valid for 30 days"
+          - "Carry original prescription"
+        zh:
+          - "从您的卫生部门获取申根证明"
+          - "证明有效期30天"
+          - "携带原始处方"
+        ja:
+          - "保健当局からシェンゲン証明書を取得"
+          - "証明書の有効期間は30日"
+          - "元の処方箋を携帯"
+      maxSupply: "30 days"
+      notes:
+        en: "Schengen countries require a standardized medical certificate for controlled substances. Non-Schengen EU countries may have different requirements."
+        zh: "申根国家对管制药物需要标准化医疗证明。非申根欧盟国家可能有不同要求。"
+        ja: "シェンゲン加盟国では規制物質に対して標準化された医療証明書が必要です。非シェンゲンEU諸国には異なる要件がある場合があります。"
+      sources:
+        - "https://www.emcdda.europa.eu/"
+
+    - fromRegion: "US"
+      toRegion: "UK"
+      status: "allowed"
+      statusLabel:
+        en: "Allowed with Documentation"
+        zh: "凭文件允许"
+        ja: "書類があれば許可"
+      requirements:
+        en:
+          - "Carry prescription in original packaging"
+          - "Letter from prescribing doctor recommended"
+        zh:
+          - "携带原包装处方药"
+          - "建议携带开药医生的证明信"
+        ja:
+          - "処方箋を元のパッケージで携帯"
+          - "処方医の手紙を推奨"
+      maxSupply: "3 months"
+      notes:
+        en: "UK allows personal import of controlled medicines. No special permit needed for personal use amounts."
+        zh: "英国允许个人进口管制药物。个人使用量无需特别许可。"
+        ja: "英国は規制薬の個人輸入を許可しています。個人使用量であれば特別な許可は不要です。"
+      sources:
+        - "https://www.gov.uk/travelling-controlled-drugs"
+
+    - fromRegion: "US"
+      toRegion: "AU"
+      status: "restricted"
+      statusLabel:
+        en: "Restricted - Declaration Required"
+        zh: "受限 - 需要申报"
+        ja: "制限あり - 申告が必要"
+      requirements:
+        en:
+          - "Declare medication at customs"
+          - "Carry prescription and doctor's letter"
+          - "Maximum 3 months supply"
+        zh:
+          - "在海关申报药物"
+          - "携带处方和医生证明信"
+          - "最多3个月用量"
+        ja:
+          - "税関で薬物を申告"
+          - "処方箋と医師の手紙を携帯"
+          - "最大3ヶ月分"
+      maxSupply: "3 months"
+      notes:
+        en: "Australia classifies methylphenidate as Schedule 8. Must be declared at customs."
+        zh: "澳大利亚将哌甲酯列为Schedule 8药物。必须在海关申报。"
+        ja: "オーストラリアではメチルフェニデートはSchedule 8に分類されています。税関での申告が必要です。"
+      sources:
+        - "https://www.tga.gov.au/entering-australia"
+
+    - fromRegion: "US"
+      toRegion: "CA"
+      status: "allowed"
+      statusLabel:
+        en: "Allowed with Prescription"
+        zh: "凭处方允许"
+        ja: "処方箋があれば許可"
+      requirements:
+        en:
+          - "Carry medication in original labeled container"
+          - "Bring copy of prescription"
+        zh:
+          - "携带原标签容器中的药物"
+          - "携带处方副本"
+        ja:
+          - "元のラベル付き容器で薬を携帯"
+          - "処方箋のコピーを持参"
+      maxSupply: "90 days"
+      notes:
+        en: "Straightforward crossing for personal use with proper documentation."
+        zh: "携带适当文件的个人使用量过境较为简单。"
+        ja: "適切な書類があれば、個人使用での国境通過は簡単です。"
+      sources:
+        - "https://www.cbsa-asfc.gc.ca/"
+
 # Metadata
 lastUpdated: 2025-12-02
 

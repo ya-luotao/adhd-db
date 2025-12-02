@@ -111,6 +111,36 @@ export interface DrugApproval {
   notes?: string | LocalizedField;
 }
 
+// Travel rules types
+export type TravelStatus = 'allowed' | 'restricted' | 'prohibited' | 'requires_permit';
+
+export interface TravelDocumentation {
+  type: string;
+  typeLabel?: LocalizedField;
+  notes?: LocalizedField;
+}
+
+export interface CrossBorderRule {
+  fromRegion: string;
+  toRegion: string;
+  status: TravelStatus;
+  statusLabel?: LocalizedField;
+  requirements?: LocalizedArrayField;
+  maxSupply?: string | null;
+  notes?: LocalizedField;
+  sources?: string[];
+}
+
+export interface TravelRules {
+  generalAdvice?: LocalizedField;
+  requiredDocumentation?: TravelDocumentation[];
+  maxPersonalSupply?: {
+    default: string;
+    byRegion?: Record<string, string>;
+  };
+  crossBorderRules?: CrossBorderRule[];
+}
+
 export interface Drug {
   id: string;
   genericName: string | LocalizedField;
@@ -151,6 +181,7 @@ export interface Drug {
     withdrawalNotes?: string | LocalizedField;
     monitoringRequired?: string | LocalizedField;
   };
+  travelRules?: TravelRules;
   lastUpdated?: string;
   sources?: string[];
   notes?: string | LocalizedField;
@@ -195,4 +226,63 @@ export function getDataTypes(): { name: string; count: number; path: string }[] 
   }
 
   return types;
+}
+
+// Travel rules helpers
+export function getCrossBorderRule(
+  drug: Drug,
+  fromRegion: string,
+  toRegion: string
+): CrossBorderRule | undefined {
+  return drug.travelRules?.crossBorderRules?.find(
+    rule => rule.fromRegion === fromRegion && rule.toRegion === toRegion
+  );
+}
+
+export interface InferredTravelStatus {
+  status: TravelStatus;
+  inferred: boolean;
+  reason?: string;
+}
+
+export function inferTravelStatus(
+  drug: Drug,
+  fromRegion: string,
+  toRegion: string
+): InferredTravelStatus {
+  // Check for explicit rule first
+  const explicitRule = getCrossBorderRule(drug, fromRegion, toRegion);
+  if (explicitRule) {
+    return { status: explicitRule.status, inferred: false };
+  }
+
+  // Check destination approval
+  const destApproval = drug.approvals?.find(a => a.region === toRegion);
+  const destAvailable = destApproval?.available ?? false;
+  const isControlled = drug.controlledSubstance;
+
+  // Apply category-based rules for amphetamines
+  if (drug.category === 'amphetamine') {
+    if (toRegion === 'CN') {
+      return { status: 'prohibited', inferred: true, reason: 'amphetamine_prohibited_cn' };
+    }
+    if (toRegion === 'JP') {
+      return { status: 'requires_permit', inferred: true, reason: 'amphetamine_requires_permit_jp' };
+    }
+  }
+
+  // Controlled substance rules
+  if (isControlled) {
+    if (!destAvailable) {
+      return { status: 'restricted', inferred: true, reason: 'controlled_not_approved' };
+    }
+    return { status: 'restricted', inferred: true, reason: 'controlled_substance' };
+  }
+
+  // Default for non-controlled
+  return { status: 'allowed', inferred: true, reason: 'non_controlled' };
+}
+
+export function getAvailableRegions(drug: Drug): string[] {
+  return drug.approvals?.filter(a => a.available).map(a => a.region) || [];
 }

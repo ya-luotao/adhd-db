@@ -9,6 +9,7 @@ A comprehensive database of ADHD medications with multi-region regulatory data a
 - Multi-region drug approval data (US, CN, EU, JP, UK, AU, CA)
 - Localized content in English, Chinese, and Japanese
 - Structured YAML schema for drug entries
+- **Region-to-region travel legality checker** - Check if carrying medication across borders is legal
 - Static site built with Astro, deployed to Cloudflare Pages
 
 ## Project Structure
