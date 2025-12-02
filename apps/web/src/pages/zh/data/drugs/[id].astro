@@ -1,7 +1,7 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
-import { getDrugs, getDrugRaw } from '../../../lib/data';
-import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../../i18n/utils';
+import Layout from '../../../../layouts/Layout.astro';
+import { getDrugs, getDrugRaw } from '../../../../lib/data';
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../../../i18n/utils';
 
 export function getStaticPaths() {
   const drugs = getDrugs();

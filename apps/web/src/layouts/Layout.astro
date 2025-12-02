@@ -1,27 +1,45 @@
 ---
+import { languages, type Lang } from '../i18n/translations';
+import { getLangFromUrl, useTranslations, getLocalizedPath, getAlternateLinks } from '../i18n/utils';
+
 interface Props {
   title: string;
 }
 
 const { title } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const alternates = getAlternateLinks(Astro.url.pathname, lang);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title} | ADHD Database</title>
+    {alternates.map(({ lang: l, path }) => (
+      <link rel="alternate" hreflang={l} href={path} />
+    ))}
   </head>
   <body>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/schema">Schema</a>
-      <a href="/meta">Meta</a>
-      <a href="/data">Data</a>
-    </nav>
+    <header>
+      <nav>
+        <div class="nav-links">
+          <a href={getLocalizedPath('/', lang)}>{t('nav.home')}</a>
+          <a href={getLocalizedPath('/schema', lang)}>{t('nav.schema')}</a>
+          <a href={getLocalizedPath('/meta', lang)}>{t('nav.meta')}</a>
+          <a href={getLocalizedPath('/data', lang)}>{t('nav.data')}</a>
+        </div>
+        <div class="lang-switcher">
+          {alternates.map(({ lang: l, path }) => (
+            <a href={path} class:list={[{ active: l === lang }]}>{languages[l]}</a>
+          ))}
+        </div>
+      </nav>
+    </header>
     <main>
       <slot />
     </main>
@@ -47,22 +65,53 @@ const { title } = Astro.props;
     padding: 1rem;
   }
 
-  nav {
-    display: flex;
-    gap: 1.5rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid #ddd;
+  header {
     margin-bottom: 2rem;
   }
 
-  nav a {
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .nav-links a {
     color: #0066cc;
     text-decoration: none;
     font-weight: 500;
   }
 
-  nav a:hover {
+  .nav-links a:hover {
     text-decoration: underline;
+  }
+
+  .lang-switcher {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .lang-switcher a {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #666;
+    font-size: 0.875rem;
+  }
+
+  .lang-switcher a:hover {
+    background: #e5e7eb;
+  }
+
+  .lang-switcher a.active {
+    background: #0066cc;
+    color: white;
   }
 
   main {
