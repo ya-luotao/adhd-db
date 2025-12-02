@@ -86,6 +86,9 @@ export const translations = {
     'common.duration': 'Duration',
     'common.hours': 'hours',
     'common.controlled': 'controlled',
+
+    // Disclaimer
+    'disclaimer': 'For informational purposes only. Not medical advice. Consult a healthcare professional.',
   },
 
   zh: {
@@ -165,6 +168,9 @@ export const translations = {
     'common.duration': '持续时间',
     'common.hours': '小时',
     'common.controlled': '管制药品',
+
+    // Disclaimer
+    'disclaimer': '仅供参考，非医疗建议。请咨询医疗专业人员。',
   },
 
   ja: {
@@ -244,5 +250,8 @@ export const translations = {
     'common.duration': '持続時間',
     'common.hours': '時間',
     'common.controlled': '規制薬物',
+
+    // Disclaimer
+    'disclaimer': '情報提供のみを目的としています。医療アドバイスではありません。医療専門家にご相談ください。',
   },
 } as const;
