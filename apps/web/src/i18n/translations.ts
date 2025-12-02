@@ -34,6 +34,8 @@ export const translations = {
     'home.allDrugs': 'All Drugs',
     'home.entries': 'entries across',
     'home.types': 'types',
+    'home.toolsPromo': 'Check medication travel rules between countries with our',
+    'home.toolsPromoLink': 'Region Checker Tool',
 
     // Table headers
     'table.drug': 'Drug',
@@ -163,6 +165,8 @@ export const translations = {
     'home.allDrugs': '所有药物',
     'home.entries': '条目，跨越',
     'home.types': '个类型',
+    'home.toolsPromo': '使用我们的工具查询不同国家间的药物携带规定',
+    'home.toolsPromoLink': '地区检查工具',
 
     // Table headers
     'table.drug': '药物',
@@ -292,6 +296,8 @@ export const translations = {
     'home.allDrugs': 'すべての薬物',
     'home.entries': 'エントリ、',
     'home.types': 'タイプ',
+    'home.toolsPromo': '各国間の薬物携帯ルールを確認できます',
+    'home.toolsPromoLink': '地域チェッカーツール',
 
     // Table headers
     'table.drug': '薬物',

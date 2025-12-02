@@ -20,6 +20,10 @@ const nonStimulants = drugs.filter(d => d.drugClass === 'non-stimulant');
     {t('home.description')}
   </p>
 
+  <div class="tools-promo">
+    {t('home.toolsPromo')} <a href={getLocalizedPath('/tools/region-checker', lang)}>{t('home.toolsPromoLink')}</a>
+  </div>
+
   <div class="grid">
     <div class="card">
       <h3>{t('home.schema.title')}</h3>
@@ -120,10 +124,24 @@ const nonStimulants = drugs.filter(d => d.drugClass === 'non-stimulant');
 
 <style>
   .page-description {
-    margin-bottom: var(--space-8);
+    margin-bottom: var(--space-4);
     color: var(--color-text-tertiary);
     font-size: var(--text-lg);
     line-height: var(--leading-relaxed);
+  }
+
+  .tools-promo {
+    margin-bottom: var(--space-8);
+    padding: var(--space-4);
+    background: var(--color-surface-secondary);
+    border-radius: var(--radius-lg);
+    border-left: 4px solid var(--color-primary);
+    font-size: var(--text-base);
+  }
+
+  .tools-promo a {
+    color: var(--color-primary);
+    font-weight: var(--font-semibold);
   }
 
   .stat-card {
