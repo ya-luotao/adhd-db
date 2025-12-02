@@ -5,7 +5,8 @@
   "description": "ADHD database with multi-region data",
   "scripts": {
     "lint": "pnpm -r lint",
-    "build": "pnpm -r build"
+    "build": "pnpm -r build",
+    "deploy": "pnpm --filter @adhd-db/web deploy"
   },
   "keywords": [
     "adhd",
