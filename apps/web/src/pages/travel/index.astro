@@ -1,0 +1,440 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getDrugs, getRegions, getLocalizedValue, type Drug } from '../../lib/data';
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../i18n/utils';
+// Prerender at build time (required for Cloudflare Workers)
+export const prerender = true;
+
+
+const drugs = getDrugs();
+const regionsData = getRegions();
+const regionCodes = Object.keys(regionsData.regions);
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const l = (value: any) => getLocalizedValue(value, lang);
+
+// Group drugs by class
+const stimulants = drugs.filter((d: Drug) => d.drugClass === 'stimulant');
+const nonStimulants = drugs.filter((d: Drug) => d.drugClass === 'non-stimulant');
+
+// Popular routes (commonly searched)
+const popularRoutes = [
+  { drug: 'methylphenidate', from: 'US', to: 'EU' },
+  { drug: 'methylphenidate', from: 'US', to: 'JP' },
+  { drug: 'lisdexamfetamine', from: 'US', to: 'UK' },
+  { drug: 'lisdexamfetamine', from: 'US', to: 'JP' },
+  { drug: 'atomoxetine', from: 'US', to: 'CN' },
+  { drug: 'methylphenidate', from: 'UK', to: 'EU' },
+];
+
+// Get drug name by id
+function getDrugName(drugId: string): string {
+  const drug = drugs.find((d: Drug) => d.id === drugId);
+  return drug ? l(drug.genericName) : drugId;
+}
+
+// Get region name
+function getRegionName(code: string): string {
+  return regionsData.regions[code]?.name || code;
+}
+
+const pageTitle = t('travelPage.index.title');
+const metaDescription = t('travelPage.index.description');
+---
+
+<Layout title={pageTitle} description={metaDescription}>
+  <header class="page-header">
+    <h1>{t('travelPage.index.title')}</h1>
+    <p class="description">{t('travelPage.index.description')}</p>
+  </header>
+
+  <!-- Quick Tool Link -->
+  <div class="tool-promo">
+    <a href={getLocalizedPath('/tools/region-checker', lang)} class="promo-link">
+      🔍 {t('tools.regionChecker.title')} →
+    </a>
+  </div>
+
+  <!-- Popular Routes -->
+  <section class="section">
+    <h2>{t('travelPage.index.byRoute')}</h2>
+    <div class="routes-grid">
+      {popularRoutes.map(route => (
+        <a
+          href={getLocalizedPath(`/travel/${route.drug}-from-${route.from.toLowerCase()}-to-${route.to.toLowerCase()}`, lang)}
+          class="route-card"
+        >
+          <span class="drug-name">{getDrugName(route.drug)}</span>
+          <span class="route-path">{getRegionName(route.from)} → {getRegionName(route.to)}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Browse by Drug -->
+  <section class="section">
+    <h2>{t('travelPage.index.byDrug')}</h2>
+
+    <h3 class="subsection-title">{t('drugs.stimulants')}</h3>
+    <div class="drugs-grid">
+      {stimulants.map((drug: Drug) => (
+        <div class="drug-card">
+          <h4>{l(drug.genericName)}</h4>
+          {drug.controlledSubstance && (
+            <span class="tag tag-controlled">{t('common.controlled')}</span>
+          )}
+          <div class="drug-routes">
+            {regionCodes.slice(0, 4).map(from => (
+              <div class="route-group">
+                <span class="from-label">{t('travel.from')} {from}:</span>
+                <div class="to-links">
+                  {regionCodes.filter(to => to !== from).slice(0, 3).map(to => (
+                    <a
+                      href={getLocalizedPath(`/travel/${drug.id}-from-${from.toLowerCase()}-to-${to.toLowerCase()}`, lang)}
+                      class="to-link"
+                    >
+                      {to}
+                    </a>
+                  ))}
+                  <span class="more">...</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <h3 class="subsection-title">{t('drugs.nonStimulants')}</h3>
+    <div class="drugs-grid">
+      {nonStimulants.map((drug: Drug) => (
+        <div class="drug-card">
+          <h4>{l(drug.genericName)}</h4>
+          {drug.controlledSubstance && (
+            <span class="tag tag-controlled">{t('common.controlled')}</span>
+          )}
+          <div class="drug-routes">
+            {regionCodes.slice(0, 4).map(from => (
+              <div class="route-group">
+                <span class="from-label">{t('travel.from')} {from}:</span>
+                <div class="to-links">
+                  {regionCodes.filter(to => to !== from).slice(0, 3).map(to => (
+                    <a
+                      href={getLocalizedPath(`/travel/${drug.id}-from-${from.toLowerCase()}-to-${to.toLowerCase()}`, lang)}
+                      class="to-link"
+                    >
+                      {to}
+                    </a>
+                  ))}
+                  <span class="more">...</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- All Routes Table -->
+  <section class="section">
+    <h2>{t('travelPage.index.allRoutes')}</h2>
+    <div class="all-routes">
+      {drugs.map((drug: Drug) => (
+        <details class="drug-routes-accordion">
+          <summary>
+            <span class="drug-name">{l(drug.genericName)}</span>
+            <span class="route-count">{regionCodes.length * (regionCodes.length - 1)} routes</span>
+          </summary>
+          <div class="routes-table-wrapper">
+            <table class="routes-table">
+              <thead>
+                <tr>
+                  <th>{t('travel.from')} / {t('travel.to')}</th>
+                  {regionCodes.map(to => (
+                    <th>{to}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {regionCodes.map(from => (
+                  <tr>
+                    <th>{from}</th>
+                    {regionCodes.map(to => (
+                      <td>
+                        {from !== to ? (
+                          <a
+                            href={getLocalizedPath(`/travel/${drug.id}-from-${from.toLowerCase()}-to-${to.toLowerCase()}`, lang)}
+                            class="cell-link"
+                          >
+                            →
+                          </a>
+                        ) : (
+                          <span class="cell-disabled">-</span>
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Disclaimer -->
+  <div class="disclaimer-box">
+    <p>{t('travelPage.disclaimer')}</p>
+  </div>
+</Layout>
+
+<style>
+  .page-header {
+    margin-bottom: var(--space-8);
+  }
+
+  .page-header h1 {
+    margin-bottom: var(--space-2);
+  }
+
+  .description {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    max-width: 800px;
+  }
+
+  .tool-promo {
+    margin-bottom: var(--space-8);
+  }
+
+  .promo-link {
+    display: inline-block;
+    padding: var(--space-3) var(--space-6);
+    background: var(--color-primary);
+    color: white;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-weight: var(--font-medium);
+  }
+
+  .promo-link:hover {
+    opacity: 0.9;
+  }
+
+  .section {
+    margin-bottom: var(--space-10);
+  }
+
+  .section h2 {
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-2);
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .subsection-title {
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-3);
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+  }
+
+  .routes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .route-card {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-4);
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--color-text);
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .route-card:hover {
+    background: var(--color-bg-tertiary);
+    transform: translateY(-2px);
+  }
+
+  .route-card .drug-name {
+    font-weight: var(--font-semibold);
+    margin-bottom: var(--space-1);
+  }
+
+  .route-card .route-path {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .drugs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .drug-card {
+    padding: var(--space-4);
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-md);
+  }
+
+  .drug-card h4 {
+    margin: 0 0 var(--space-2);
+  }
+
+  .tag {
+    display: inline-block;
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-xs);
+    font-weight: var(--font-medium);
+    margin-bottom: var(--space-2);
+  }
+
+  .tag-controlled {
+    background: var(--color-warning-light, #fff3cd);
+    color: var(--color-warning-700, #856404);
+  }
+
+  .drug-routes {
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+  }
+
+  .route-group {
+    margin-bottom: var(--space-2);
+  }
+
+  .from-label {
+    color: var(--color-text-tertiary);
+    margin-right: var(--space-2);
+  }
+
+  .to-links {
+    display: inline;
+  }
+
+  .to-link {
+    margin-right: var(--space-2);
+    padding: var(--space-1) var(--space-2);
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--color-primary);
+    font-size: var(--text-xs);
+  }
+
+  .to-link:hover {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .more {
+    color: var(--color-text-tertiary);
+    font-size: var(--text-xs);
+  }
+
+  .all-routes {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .drug-routes-accordion {
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .drug-routes-accordion summary {
+    padding: var(--space-4);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .drug-routes-accordion summary:hover {
+    background: var(--color-bg-tertiary);
+  }
+
+  .drug-routes-accordion .drug-name {
+    font-weight: var(--font-semibold);
+  }
+
+  .drug-routes-accordion .route-count {
+    font-size: var(--text-sm);
+    color: var(--color-text-tertiary);
+  }
+
+  .routes-table-wrapper {
+    overflow-x: auto;
+    padding: var(--space-4);
+    padding-top: 0;
+  }
+
+  .routes-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+  }
+
+  .routes-table th,
+  .routes-table td {
+    padding: var(--space-2);
+    text-align: center;
+    border: 1px solid var(--color-border);
+  }
+
+  .routes-table th {
+    background: var(--color-bg-tertiary);
+    font-weight: var(--font-medium);
+  }
+
+  .cell-link {
+    display: inline-block;
+    padding: var(--space-1) var(--space-2);
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .cell-link:hover {
+    background: var(--color-primary);
+    color: white;
+    border-radius: var(--radius-sm);
+  }
+
+  .cell-disabled {
+    color: var(--color-text-tertiary);
+  }
+
+  .disclaimer-box {
+    padding: var(--space-4);
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .disclaimer-box p {
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .routes-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .drugs-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -5,7 +5,10 @@ import type { Lang } from '../i18n/translations';
 import { defaultLang } from '../i18n/translations';
 
 // Resolve paths relative to the monorepo root
-const rootDir = path.resolve(import.meta.dirname, '../../../../');
+// Use process.cwd() for build-time resolution (works with Cloudflare adapter prerendering)
+const rootDir = process.cwd().includes('/apps/web')
+  ? path.resolve(process.cwd(), '../..')
+  : process.cwd();
 
 export function getSchemaPath() {
   return path.join(rootDir, 'packages/schema');
