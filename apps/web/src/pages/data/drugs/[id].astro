@@ -3,6 +3,9 @@ import Layout from '../../../layouts/Layout.astro';
 import { getDrugs, getDrugRaw, getLocalizedValue, getLocalizedArray, type TravelStatus } from '../../../lib/data';
 import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../../i18n/utils';
 
+// Prerender all routes at build time (required for Cloudflare Workers)
+export const prerender = true;
+
 export function getStaticPaths() {
   const drugs = getDrugs();
   return drugs.map(drug => ({

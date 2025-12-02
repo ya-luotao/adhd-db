@@ -2,6 +2,9 @@
 import Layout from '../../layouts/Layout.astro';
 import { getDrugs, getDataTypes, getLocalizedValue } from '../../lib/data';
 import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../i18n/utils';
+// Prerender at build time (required for Cloudflare Workers)
+export const prerender = true;
+
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
