@@ -2,7 +2,7 @@
   "name": "adhd-db",
   "private": true,
   "version": "0.0.1",
-  "description": "ADHD drug database with multi-region approval data",
+  "description": "ADHD database with multi-region data",
   "scripts": {
     "lint": "pnpm -r lint",
     "build": "pnpm -r build"
