@@ -46,6 +46,13 @@ const alternates = getAlternateLinks(Astro.url.pathname, lang);
     <main>
       <slot />
     </main>
+    <footer>
+      <p>
+        {t('footer.maintainedBy')} <a href="https://yaluotao.me" target="_blank" rel="noopener">yaluotao</a>
+        &nbsp;·&nbsp;
+        {t('footer.contributions')} <a href="https://github.com/ya-luotao/adhd-db" target="_blank" rel="noopener">GitHub</a>
+      </p>
+    </footer>
   </body>
 </html>
 
@@ -77,6 +84,19 @@ const alternates = getAlternateLinks(Astro.url.pathname, lang);
     font-size: 0.875rem;
     color: #92400e;
     text-align: center;
+  }
+
+  footer {
+    margin-top: 3rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid #ddd;
+    text-align: center;
+    font-size: 0.875rem;
+    color: #666;
+  }
+
+  footer a {
+    color: #0066cc;
   }
 
   header {

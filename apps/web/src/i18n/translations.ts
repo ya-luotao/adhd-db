@@ -89,6 +89,10 @@ export const translations = {
 
     // Disclaimer
     'disclaimer': 'For informational purposes only. Not medical advice. Consult a healthcare professional.',
+
+    // Footer
+    'footer.maintainedBy': 'Maintained by',
+    'footer.contributions': 'Contributions welcome on',
   },
 
   zh: {
@@ -171,6 +175,10 @@ export const translations = {
 
     // Disclaimer
     'disclaimer': '仅供参考，非医疗建议。请咨询医疗专业人员。',
+
+    // Footer
+    'footer.maintainedBy': '维护者',
+    'footer.contributions': '欢迎贡献',
   },
 
   ja: {
@@ -253,5 +261,9 @@ export const translations = {
 
     // Disclaimer
     'disclaimer': '情報提供のみを目的としています。医療アドバイスではありません。医療専門家にご相談ください。',
+
+    // Footer
+    'footer.maintainedBy': '管理者',
+    'footer.contributions': '貢献歓迎',
   },
 } as const;
