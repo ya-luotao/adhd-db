@@ -1,0 +1,143 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getDrugs, getDrugRaw } from '../../../lib/data';
+
+export function getStaticPaths() {
+  const drugs = getDrugs();
+  return drugs.map(drug => ({
+    params: { id: drug.id },
+    props: { drug },
+  }));
+}
+
+const { drug } = Astro.props;
+const rawYaml = getDrugRaw(drug.id);
+---
+
+<Layout title={drug.genericName}>
+  <nav style="margin-bottom: 1rem;">
+    <a href="/data/drugs">&larr; Back to Drugs</a>
+  </nav>
+
+  <h1>{drug.genericName}</h1>
+
+  <div style="margin-bottom: 1rem;">
+    <span class={`tag ${drug.drugClass}`}>{drug.drugClass}</span>
+    <span class="tag" style="background: #f3f4f6;">{drug.category}</span>
+    {drug.controlledSubstance && (
+      <span class="tag" style="background: #fef3c7; color: #92400e;">controlled</span>
+    )}
+  </div>
+
+  <div class="grid" style="margin-bottom: 2rem;">
+    <div class="card">
+      <h3>Brand Names</h3>
+      {Object.entries(drug.brandNames || {}).map(([region, brands]: [string, any]) => (
+        brands?.length > 0 && (
+          <div style="margin-bottom: 0.5rem;">
+            <strong>{region}:</strong> {brands.join(', ')}
+          </div>
+        )
+      ))}
+    </div>
+
+    <div class="card">
+      <h3>Mechanism</h3>
+      <p style="font-size: 0.875rem; line-height: 1.6;">
+        {drug.mechanismOfAction}
+      </p>
+      {drug.neurotransmittersAffected && (
+        <div style="margin-top: 0.5rem;">
+          <strong>Affects:</strong> {drug.neurotransmittersAffected.join(', ')}
+        </div>
+      )}
+    </div>
+  </div>
+
+  <h2>Approvals by Region</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Region</th>
+        <th>Agency</th>
+        <th>Year</th>
+        <th>Ages</th>
+        <th>Available</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      {drug.approvals?.map((approval: any) => (
+        <tr>
+          <td><strong>{approval.region}</strong></td>
+          <td>{approval.agency}</td>
+          <td>{approval.year || '-'}</td>
+          <td>{approval.approvedAges || '-'}</td>
+          <td>
+            <span class={`tag ${approval.available ? 'available' : 'unavailable'}`}>
+              {approval.available ? 'Yes' : 'No'}
+            </span>
+          </td>
+          <td style="font-size: 0.75rem; max-width: 200px;">{approval.notes || '-'}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+
+  {drug.forms && drug.forms.length > 0 && (
+    <>
+      <h2>Dosage Forms</h2>
+      <div class="grid">
+        {drug.forms.map((form: any) => (
+          <div class="card">
+            <h3>{form.brandName || form.type}</h3>
+            <p><strong>Type:</strong> {form.type} ({form.releaseType})</p>
+            <p><strong>Strengths:</strong> {form.strengths?.join(', ')}</p>
+            <p><strong>Duration:</strong> {form.durationHours} hours</p>
+            {form.notes && <p style="font-size: 0.875rem; color: #666; margin-top: 0.5rem;">{form.notes}</p>}
+          </div>
+        ))}
+      </div>
+    </>
+  )}
+
+  {drug.sideEffects && (
+    <>
+      <h2>Side Effects</h2>
+      <div class="grid">
+        {drug.sideEffects.common && (
+          <div class="card">
+            <h3>Common (&gt;10%)</h3>
+            <ul style="margin-left: 1.5rem;">
+              {drug.sideEffects.common.map((se: any) => (
+                <li>{se.name} <span style="color: #666;">({se.frequency})</span></li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {drug.sideEffects.serious && (
+          <div class="card" style="border-left: 4px solid #ef4444;">
+            <h3>Serious</h3>
+            <ul style="margin-left: 1.5rem;">
+              {drug.sideEffects.serious.map((se: any) => (
+                <li>
+                  <strong>{se.name}</strong>
+                  {se.notes && <span style="color: #666; display: block; font-size: 0.875rem;">{se.notes}</span>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </>
+  )}
+
+  <h2>Raw YAML</h2>
+  <details>
+    <summary style="cursor: pointer; padding: 0.5rem; background: #f3f4f6; border-radius: 4px;">
+      Show raw YAML data
+    </summary>
+    <pre style="margin-top: 1rem;"><code>{rawYaml}</code></pre>
+  </details>
+</Layout>

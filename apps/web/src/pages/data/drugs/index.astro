@@ -1,0 +1,85 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getDrugs } from '../../../lib/data';
+
+const drugs = getDrugs();
+const stimulants = drugs.filter(d => d.drugClass === 'stimulant');
+const nonStimulants = drugs.filter(d => d.drugClass === 'non-stimulant');
+---
+
+<Layout title="Drugs">
+  <h1>Drugs</h1>
+
+  <p style="margin-bottom: 1.5rem; color: #666;">
+    {drugs.length} ADHD medications in the database.
+  </p>
+
+  <h2>Stimulants ({stimulants.length})</h2>
+
+  <div class="grid">
+    {stimulants.map(drug => {
+      const usApproval = drug.approvals?.find(a => a.region === 'US');
+      const cnApproval = drug.approvals?.find(a => a.region === 'CN');
+      return (
+        <a href={`/data/drugs/${drug.id}`} class="card drug-card">
+          <h3>{drug.genericName}</h3>
+          <p style="color: #666; font-size: 0.875rem; margin-bottom: 0.5rem;">
+            {drug.category}
+          </p>
+          <div>
+            <span class="tag stimulant">stimulant</span>
+            {usApproval?.available && <span class="tag available">US</span>}
+            {cnApproval?.available && <span class="tag available">CN</span>}
+          </div>
+          <div style="margin-top: 0.75rem; font-size: 0.875rem;">
+            <strong>Brands:</strong> {Object.values(drug.brandNames || {}).flat().slice(0, 3).join(', ')}
+            {Object.values(drug.brandNames || {}).flat().length > 3 && '...'}
+          </div>
+        </a>
+      );
+    })}
+  </div>
+
+  <h2>Non-Stimulants ({nonStimulants.length})</h2>
+
+  <div class="grid">
+    {nonStimulants.map(drug => {
+      const usApproval = drug.approvals?.find(a => a.region === 'US');
+      const cnApproval = drug.approvals?.find(a => a.region === 'CN');
+      return (
+        <a href={`/data/drugs/${drug.id}`} class="card drug-card">
+          <h3>{drug.genericName}</h3>
+          <p style="color: #666; font-size: 0.875rem; margin-bottom: 0.5rem;">
+            {drug.category}
+          </p>
+          <div>
+            <span class="tag non-stimulant">non-stimulant</span>
+            {usApproval?.available && <span class="tag available">US</span>}
+            {cnApproval?.available && <span class="tag available">CN</span>}
+          </div>
+          <div style="margin-top: 0.75rem; font-size: 0.875rem;">
+            <strong>Brands:</strong> {Object.values(drug.brandNames || {}).flat().slice(0, 3).join(', ')}
+            {Object.values(drug.brandNames || {}).flat().length > 3 && '...'}
+          </div>
+        </a>
+      );
+    })}
+  </div>
+</Layout>
+
+<style>
+  a.drug-card {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  a.drug-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+    transition: all 0.2s ease;
+  }
+
+  a.drug-card h3 {
+    color: #0066cc;
+  }
+</style>

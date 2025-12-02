@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getSchema } from '../lib/data';
+
+const schema = getSchema();
+---
+
+<Layout title="Schema">
+  <h1>Drug Schema</h1>
+
+  <p style="margin-bottom: 1.5rem; color: #666;">
+    YAML template for adding new drug entries to the database.
+    Copy this template and fill in the fields.
+  </p>
+
+  <div class="card">
+    <h3>drug-schema.yaml</h3>
+    <pre><code>{schema.raw}</code></pre>
+  </div>
+</Layout>

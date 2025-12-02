@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getDataTypes } from '../../lib/data';
+
+const dataTypes = getDataTypes();
+---
+
+<Layout title="Data">
+  <h1>Data</h1>
+
+  <p style="margin-bottom: 1.5rem; color: #666;">
+    Browse all data in the ADHD database.
+  </p>
+
+  <div class="grid">
+    {dataTypes.map(type => (
+      <a href={type.path} class="card" style="text-decoration: none; color: inherit;">
+        <h3>{type.name}</h3>
+        <p style="font-size: 2rem; font-weight: bold; color: #0066cc;">{type.count}</p>
+        <p style="color: #666;">entries</p>
+      </a>
+    ))}
+  </div>
+
+  {dataTypes.length === 0 && (
+    <div class="card">
+      <p>No data available yet.</p>
+    </div>
+  )}
+</Layout>
+
+<style>
+  a.card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+    transition: all 0.2s ease;
+  }
+</style>

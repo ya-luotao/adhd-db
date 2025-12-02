@@ -1,0 +1,19 @@
+{
+  "name": "@adhd-db/web",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@adhd-db/data": "workspace:*",
+    "@adhd-db/meta": "workspace:*",
+    "@adhd-db/schema": "workspace:*",
+    "astro": "^5.16.3",
+    "yaml": "^2.6.0"
+  }
+}

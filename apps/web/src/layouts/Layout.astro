@@ -1,0 +1,172 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} | ADHD-DB</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/schema">Schema</a>
+      <a href="/meta">Meta</a>
+      <a href="/data">Data</a>
+    </nav>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: #f5f5f5;
+    color: #333;
+  }
+
+  body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
+  nav {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 2rem;
+  }
+
+  nav a {
+    color: #0066cc;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  nav a:hover {
+    text-decoration: underline;
+  }
+
+  main {
+    min-height: calc(100vh - 100px);
+  }
+
+  h1 {
+    margin-bottom: 1.5rem;
+    color: #111;
+  }
+
+  h2 {
+    margin: 1.5rem 0 1rem;
+    color: #222;
+  }
+
+  h3 {
+    margin: 1rem 0 0.5rem;
+    color: #333;
+  }
+
+  a {
+    color: #0066cc;
+  }
+
+  pre {
+    background: #1e1e1e;
+    color: #d4d4d4;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  code {
+    font-family: 'SF Mono', Menlo, monospace;
+  }
+
+  .card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+
+  .card h3 {
+    margin-top: 0;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-right: 0.5rem;
+  }
+
+  .tag.stimulant {
+    background: #fee2e2;
+    color: #991b1b;
+  }
+
+  .tag.non-stimulant {
+    background: #dbeafe;
+    color: #1e40af;
+  }
+
+  .tag.available {
+    background: #d1fae5;
+    color: #065f46;
+  }
+
+  .tag.unavailable {
+    background: #f3f4f6;
+    color: #6b7280;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+  }
+
+  th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  th {
+    background: #f9fafb;
+    font-weight: 600;
+  }
+
+  tr:hover {
+    background: #f9fafb;
+  }
+</style>

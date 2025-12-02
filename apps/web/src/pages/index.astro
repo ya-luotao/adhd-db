@@ -1,0 +1,91 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getDrugs, getDataTypes } from '../lib/data';
+
+const drugs = getDrugs();
+const dataTypes = getDataTypes();
+const stimulants = drugs.filter(d => d.drugClass === 'stimulant');
+const nonStimulants = drugs.filter(d => d.drugClass === 'non-stimulant');
+---
+
+<Layout title="Home">
+  <h1>ADHD Drug Database</h1>
+
+  <p style="margin-bottom: 2rem; color: #666;">
+    A comprehensive database of ADHD medications with multi-region approval data.
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Schema</h3>
+      <p>YAML schema template for drug entries</p>
+      <a href="/schema">View Schema &rarr;</a>
+    </div>
+
+    <div class="card">
+      <h3>Meta</h3>
+      <p>Region definitions and drug categories</p>
+      <a href="/meta">View Meta &rarr;</a>
+    </div>
+
+    <div class="card">
+      <h3>Data</h3>
+      <p>{dataTypes.reduce((acc, t) => acc + t.count, 0)} entries across {dataTypes.length} types</p>
+      <a href="/data">Browse Data &rarr;</a>
+    </div>
+  </div>
+
+  <h2>Quick Stats</h2>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Total Drugs</h3>
+      <p style="font-size: 2rem; font-weight: bold;">{drugs.length}</p>
+    </div>
+    <div class="card">
+      <h3>Stimulants</h3>
+      <p style="font-size: 2rem; font-weight: bold; color: #991b1b;">{stimulants.length}</p>
+    </div>
+    <div class="card">
+      <h3>Non-Stimulants</h3>
+      <p style="font-size: 2rem; font-weight: bold; color: #1e40af;">{nonStimulants.length}</p>
+    </div>
+  </div>
+
+  <h2>All Drugs</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Drug</th>
+        <th>Class</th>
+        <th>US</th>
+        <th>CN</th>
+        <th>EU</th>
+        <th>JP</th>
+      </tr>
+    </thead>
+    <tbody>
+      {drugs.map(drug => {
+        const getAvailability = (region: string) => {
+          const approval = drug.approvals?.find(a => a.region === region);
+          return approval?.available ? '✓' : '✗';
+        };
+        return (
+          <tr>
+            <td>
+              <a href={`/data/drugs/${drug.id}`}>{drug.genericName}</a>
+            </td>
+            <td>
+              <span class={`tag ${drug.drugClass}`}>{drug.drugClass}</span>
+            </td>
+            <td>{getAvailability('US')}</td>
+            <td>{getAvailability('CN')}</td>
+            <td>{getAvailability('EU')}</td>
+            <td>{getAvailability('JP')}</td>
+          </tr>
+        );
+      })}
+    </tbody>
+  </table>
+</Layout>
