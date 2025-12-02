@@ -1,13 +1,14 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { getDrugs } from '../../../lib/data';
+import { getDrugs, getLocalizedValue } from '../../../lib/data';
 import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const drugs = getDrugs();
-const stimulants = drugs.filter(d => d.drugClass === 'stimulant');
-const nonStimulants = drugs.filter(d => d.drugClass === 'non-stimulant');
+
+// Get all unique regions from approvals
+const allRegions = [...new Set(drugs.flatMap(d => d.approvals?.map(a => a.region) || []))].sort();
 ---
 
 <Layout title={t('drugs.title')}>
@@ -17,60 +18,116 @@ const nonStimulants = drugs.filter(d => d.drugClass === 'non-stimulant');
     {drugs.length} {t('drugs.description')}
   </p>
 
-  <h2>{t('drugs.stimulants')} ({stimulants.length})</h2>
+  <div class="filters">
+    <input
+      type="text"
+      id="search"
+      placeholder={t('filter.search')}
+      class="search-input"
+    />
+    <div class="filter-group">
+      <label>{t('filter.class')}:</label>
+      <select id="class-filter">
+        <option value="all">{t('filter.all')}</option>
+        <option value="stimulant">{t('drugs.stimulants')}</option>
+        <option value="non-stimulant">{t('drugs.nonStimulants')}</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>{t('filter.region')}:</label>
+      <select id="region-filter">
+        <option value="all">{t('filter.all')}</option>
+        {allRegions.map(region => (
+          <option value={region}>{region}</option>
+        ))}
+      </select>
+    </div>
+  </div>
 
-  <div class="grid">
-    {stimulants.map(drug => {
-      const usApproval = drug.approvals?.find(a => a.region === 'US');
-      const cnApproval = drug.approvals?.find(a => a.region === 'CN');
+  <div class="grid" id="drug-list">
+    {drugs.map(drug => {
+      const regions = drug.approvals?.filter(a => a.available).map(a => a.region) || [];
+      const genericName = getLocalizedValue(drug.genericName, lang);
+      const brandNames = Object.values(drug.brandNames || {}).flat();
       return (
-        <a href={getLocalizedPath(`/data/drugs/${drug.id}`, lang)} class="card drug-card">
-          <h3>{drug.genericName}</h3>
+        <a
+          href={getLocalizedPath(`/data/drugs/${drug.id}`, lang)}
+          class="card drug-card"
+          data-class={drug.drugClass}
+          data-regions={regions.join(',')}
+          data-name={genericName.toLowerCase()}
+          data-brands={brandNames.join(',').toLowerCase()}
+        >
+          <h3>{genericName}</h3>
           <p style="color: #666; font-size: 0.875rem; margin-bottom: 0.5rem;">
             {drug.category}
           </p>
           <div>
-            <span class="tag stimulant">{t('home.stimulants')}</span>
-            {usApproval?.available && <span class="tag available">US</span>}
-            {cnApproval?.available && <span class="tag available">CN</span>}
+            <span class={`tag ${drug.drugClass}`}>
+              {drug.drugClass === 'stimulant' ? t('home.stimulants') : t('home.nonStimulants')}
+            </span>
+            {regions.slice(0, 4).map(region => (
+              <span class="tag available">{region}</span>
+            ))}
+            {regions.length > 4 && <span class="tag available">+{regions.length - 4}</span>}
           </div>
           <div style="margin-top: 0.75rem; font-size: 0.875rem;">
-            <strong>{t('drugs.brandNames')}:</strong> {Object.values(drug.brandNames || {}).flat().slice(0, 3).join(', ')}
-            {Object.values(drug.brandNames || {}).flat().length > 3 && '...'}
+            <strong>{t('drugs.brandNames')}:</strong> {brandNames.slice(0, 3).join(', ')}
+            {brandNames.length > 3 && '...'}
           </div>
         </a>
       );
     })}
   </div>
 
-  <h2>{t('drugs.nonStimulants')} ({nonStimulants.length})</h2>
-
-  <div class="grid">
-    {nonStimulants.map(drug => {
-      const usApproval = drug.approvals?.find(a => a.region === 'US');
-      const cnApproval = drug.approvals?.find(a => a.region === 'CN');
-      return (
-        <a href={getLocalizedPath(`/data/drugs/${drug.id}`, lang)} class="card drug-card">
-          <h3>{drug.genericName}</h3>
-          <p style="color: #666; font-size: 0.875rem; margin-bottom: 0.5rem;">
-            {drug.category}
-          </p>
-          <div>
-            <span class="tag non-stimulant">{t('home.nonStimulants')}</span>
-            {usApproval?.available && <span class="tag available">US</span>}
-            {cnApproval?.available && <span class="tag available">CN</span>}
-          </div>
-          <div style="margin-top: 0.75rem; font-size: 0.875rem;">
-            <strong>{t('drugs.brandNames')}:</strong> {Object.values(drug.brandNames || {}).flat().slice(0, 3).join(', ')}
-            {Object.values(drug.brandNames || {}).flat().length > 3 && '...'}
-          </div>
-        </a>
-      );
-    })}
-  </div>
+  <p id="no-results" style="display: none; text-align: center; color: #666; padding: 2rem;">
+    {t('data.noData')}
+  </p>
 </Layout>
 
 <style>
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+  }
+
+  .search-input {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+
+  .search-input:focus {
+    outline: none;
+    border-color: #0066cc;
+    box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2);
+  }
+
+  .filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .filter-group label {
+    font-size: 0.875rem;
+    color: #666;
+  }
+
+  .filter-group select {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    background: white;
+  }
+
   a.drug-card {
     text-decoration: none;
     color: inherit;
@@ -85,4 +142,53 @@ const nonStimulants = drugs.filter(d => d.drugClass === 'non-stimulant');
   a.drug-card h3 {
     color: #0066cc;
   }
+
+  a.drug-card.hidden {
+    display: none;
+  }
 </style>
+
+<script>
+  const searchInput = document.getElementById('search') as HTMLInputElement;
+  const classFilter = document.getElementById('class-filter') as HTMLSelectElement;
+  const regionFilter = document.getElementById('region-filter') as HTMLSelectElement;
+  const drugList = document.getElementById('drug-list');
+  const noResults = document.getElementById('no-results');
+
+  function filterDrugs() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const selectedClass = classFilter.value;
+    const selectedRegion = regionFilter.value;
+
+    const cards = drugList?.querySelectorAll('.drug-card') || [];
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const drugClass = card.getAttribute('data-class') || '';
+      const regions = card.getAttribute('data-regions') || '';
+      const name = card.getAttribute('data-name') || '';
+      const brands = card.getAttribute('data-brands') || '';
+
+      const matchesSearch = !searchTerm ||
+        name.includes(searchTerm) ||
+        brands.includes(searchTerm);
+      const matchesClass = selectedClass === 'all' || drugClass === selectedClass;
+      const matchesRegion = selectedRegion === 'all' || regions.includes(selectedRegion);
+
+      if (matchesSearch && matchesClass && matchesRegion) {
+        card.classList.remove('hidden');
+        visibleCount++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    if (noResults) {
+      noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+  }
+
+  searchInput?.addEventListener('input', filterDrugs);
+  classFilter?.addEventListener('change', filterDrugs);
+  regionFilter?.addEventListener('change', filterDrugs);
+</script>

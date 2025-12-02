@@ -93,6 +93,12 @@ export const translations = {
     // Footer
     'footer.maintainedBy': 'Maintained by',
     'footer.contributions': 'Contributions welcome on',
+
+    // Filters
+    'filter.all': 'All',
+    'filter.class': 'Class',
+    'filter.region': 'Region',
+    'filter.search': 'Search drugs...',
   },
 
   zh: {
@@ -179,6 +185,12 @@ export const translations = {
     // Footer
     'footer.maintainedBy': '维护者',
     'footer.contributions': '欢迎贡献',
+
+    // Filters
+    'filter.all': '全部',
+    'filter.class': '分类',
+    'filter.region': '地区',
+    'filter.search': '搜索药物...',
   },
 
   ja: {
@@ -265,5 +277,11 @@ export const translations = {
     // Footer
     'footer.maintainedBy': '管理者',
     'footer.contributions': '貢献歓迎',
+
+    // Filters
+    'filter.all': 'すべて',
+    'filter.class': '分類',
+    'filter.region': '地域',
+    'filter.search': '薬物を検索...',
   },
 } as const;
