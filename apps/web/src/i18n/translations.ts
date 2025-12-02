@@ -79,6 +79,7 @@ export const translations = {
     'drugs.serious': 'Serious',
     'drugs.rawYaml': 'Raw YAML',
     'drugs.showRaw': 'Show raw YAML data',
+    'drugs.editOnGithub': 'Edit on GitHub to contribute',
 
     // Common
     'common.yes': 'Yes',
@@ -210,6 +211,7 @@ export const translations = {
     'drugs.serious': '严重',
     'drugs.rawYaml': '原始 YAML',
     'drugs.showRaw': '显示原始 YAML 数据',
+    'drugs.editOnGithub': '在 GitHub 上编辑以贡献',
 
     // Common
     'common.yes': '是',
@@ -341,6 +343,7 @@ export const translations = {
     'drugs.serious': '重篤',
     'drugs.rawYaml': '生の YAML',
     'drugs.showRaw': '生の YAML データを表示',
+    'drugs.editOnGithub': 'GitHub で編集して貢献',
 
     // Common
     'common.yes': 'はい',
