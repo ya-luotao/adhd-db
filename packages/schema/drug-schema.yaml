@@ -1,21 +1,34 @@
 # ADHD Drug Schema Template
 # Copy this template when adding a new drug
 # All fields are optional unless marked [required]
+#
+# LOCALIZATION:
+# Fields that support multiple languages use this format:
+#   fieldName:
+#     en: "English text"
+#     zh: "中文文本"
+#     ja: "日本語テキスト"
+# Or for simple cases, just use the base field (defaults to English)
 
 # ============================================
 # BASIC INFORMATION
 # ============================================
 
-id: ""                        # [required] unique identifier, e.g., "methylphenidate-er-concerta"
+id: ""                        # [required] unique identifier, e.g., "methylphenidate"
 
 brandNames:                   # brand names by region
   US: []                      # e.g., ["Concerta", "Ritalin LA"]
   CN: []                      # e.g., ["专注达"]
   EU: []
   JP: []
-  OTHER: []
+  UK: []
+  AU: []
+  CA: []
 
-genericName: ""               # [required] e.g., "methylphenidate hydrochloride"
+genericName:                  # [required] localized generic name
+  en: ""                      # e.g., "methylphenidate hydrochloride"
+  zh: ""                      # e.g., "盐酸哌甲酯"
+  ja: ""                      # e.g., "塩酸メチルフェニデート"
 
 manufacturers:                # list of manufacturers
   - name: ""
@@ -27,27 +40,43 @@ manufacturers:                # list of manufacturers
 
 drugClass: ""                 # stimulant | non-stimulant
 
-category: ""                  # e.g., "methylphenidate", "amphetamine", "SNRI", "alpha-2 agonist"
+drugClassLabel:               # localized label for drug class
+  en: ""                      # e.g., "stimulant"
+  zh: ""                      # e.g., "兴奋剂"
+  ja: ""                      # e.g., "中枢刺激薬"
+
+category: ""                  # e.g., "methylphenidate", "amphetamine", "SNRI"
+
+categoryLabel:                # localized category label
+  en: ""
+  zh: ""
+  ja: ""
 
 controlledSubstance: false    # true | false
 
 schedule:                     # controlled substance schedule by region
   US: ""                      # e.g., "Schedule II"
-  CN: ""                      # e.g., "第一类精神药品" (Class I Psychotropic)
+  CN: ""                      # e.g., "第一类精神药品"
   EU: ""
+  JP: ""
 
 # ============================================
 # MECHANISM OF ACTION
 # ============================================
 
-activeIngredient: ""          # e.g., "methylphenidate hydrochloride"
+activeIngredient:             # localized active ingredient name
+  en: ""
+  zh: ""
+  ja: ""
 
-mechanismOfAction: ""         # brief description of how it works
+mechanismOfAction:            # localized description of how it works
+  en: ""
+  zh: ""
+  ja: ""
 
 neurotransmittersAffected:    # list of affected neurotransmitters
   - dopamine
   - norepinephrine
-  # - serotonin
 
 # ============================================
 # DOSAGE & FORMS
@@ -55,23 +84,30 @@ neurotransmittersAffected:    # list of affected neurotransmitters
 
 forms:                        # available dosage forms
   - type: ""                  # tablet | capsule | liquid | patch | chewable | ODT
-    releaseType: ""           # immediate | extended | mixed (e.g., Adderall XR)
-    brandName: ""             # specific brand for this form
-    strengths:                # available strengths
-      - "10mg"
-      - "20mg"
-    durationHours: 0          # typical duration for this form
-    notes: ""                 # e.g., "can be opened and sprinkled"
+    typeLabel:                # localized type label
+      en: ""
+      zh: ""
+      ja: ""
+    releaseType: ""           # immediate | extended | mixed
+    releaseTypeLabel:
+      en: ""
+      zh: ""
+      ja: ""
+    brandName: ""
+    strengths: []
+    durationHours: 0
+    notes:                    # localized notes
+      en: ""
+      zh: ""
+      ja: ""
 
 # ============================================
 # EFFICACY & TIMING
 # ============================================
 
-onsetMinutes: 0               # time to start feeling effects (range: use average)
-
-peakEffectHours: 0            # time to peak effect
-
-durationHours: 0              # total duration of effect (for main form)
+onsetMinutes: 0
+peakEffectHours: 0
+durationHours: 0
 
 # ============================================
 # SIDE EFFECTS
@@ -79,38 +115,60 @@ durationHours: 0              # total duration of effect (for main form)
 
 sideEffects:
   common:                     # >10% occurrence
-    - name: ""                # e.g., "decreased appetite"
-      frequency: ""           # e.g., "20-30%"
-    - name: ""
+    - name:
+        en: ""
+        zh: ""
+        ja: ""
       frequency: ""
 
   uncommon:                   # 1-10% occurrence
-    - name: ""
+    - name:
+        en: ""
+        zh: ""
+        ja: ""
       frequency: ""
 
   serious:                    # rare but clinically important
-    - name: ""
-      notes: ""               # additional context
+    - name:
+        en: ""
+        zh: ""
+        ja: ""
+      notes:
+        en: ""
+        zh: ""
+        ja: ""
 
 # ============================================
 # SAFETY & CONTRAINDICATIONS
 # ============================================
 
-contraindications:            # conditions where drug should NOT be used
-  - ""                        # e.g., "MAO inhibitor use within 14 days"
-  - ""                        # e.g., "glaucoma"
+contraindications:            # localized list
+  en: []
+  zh: []
+  ja: []
 
-drugInteractions:             # significant drug interactions
-  - drug: ""
+drugInteractions:
+  - drug:
+      en: ""
+      zh: ""
+      ja: ""
     severity: ""              # major | moderate | minor
-    effect: ""                # what happens
+    effect:
+      en: ""
+      zh: ""
+      ja: ""
 
-blackBoxWarnings:             # FDA black box warnings
-  - ""
+blackBoxWarnings:
+  en: []
+  zh: []
+  ja: []
 
-pregnancyCategory: ""         # e.g., "C" (FDA) or description
+pregnancyCategory: ""
 
-foodInteractions: ""          # e.g., "avoid acidic foods/drinks"
+foodInteractions:
+  en: ""
+  zh: ""
+  ja: ""
 
 # ============================================
 # PRACTICAL INFORMATION
@@ -118,23 +176,32 @@ foodInteractions: ""          # e.g., "avoid acidic foods/drinks"
 
 typicalDosing:
   children:
-    startingDose: ""          # e.g., "5mg once daily"
-    maxDose: ""               # e.g., "60mg/day"
-    notes: ""
+    startingDose: ""
+    maxDose: ""
+    notes:
+      en: ""
+      zh: ""
+      ja: ""
   adults:
     startingDose: ""
     maxDose: ""
-    notes: ""
+    notes:
+      en: ""
+      zh: ""
+      ja: ""
 
-costEstimate:                 # approximate monthly cost
+costEstimate:
   US:
-    brand: ""                 # e.g., "$300-400"
-    generic: ""               # e.g., "$30-50"
+    brand: ""
+    generic: ""
   CN:
     brand: ""
     generic: ""
 
-storageRequirements: ""       # e.g., "room temperature, protect from moisture"
+storageRequirements:
+  en: ""
+  zh: ""
+  ja: ""
 
 # ============================================
 # APPROVAL & AVAILABILITY
@@ -143,40 +210,53 @@ storageRequirements: ""       # e.g., "room temperature, protect from moisture"
 approvals:
   - region: "US"
     agency: "FDA"
-    year: null                # approval year, e.g., 2000
-    approvedAges: ""          # e.g., "6 years and older"
-    indications:              # approved uses
-      - "ADHD"
-      # - "Narcolepsy"
-    available: true           # currently available in market?
-    notes: ""
-
-  - region: "CN"
-    agency: "NMPA"
     year: null
-    approvedAges: ""
+    approvedAges:
+      en: ""
+      zh: ""
+      ja: ""
     indications:
-      - "ADHD"
-    available: false
-    notes: ""
+      en: []
+      zh: []
+      ja: []
+    available: true
+    notes:
+      en: ""
+      zh: ""
+      ja: ""
 
 # ============================================
 # SPECIAL CONSIDERATIONS
 # ============================================
 
 specialConsiderations:
-  cardiacRisk: ""             # notes about cardiovascular risks
-  abuseRisk: ""               # abuse/dependence potential
-  withdrawalNotes: ""         # discontinuation considerations
-  monitoringRequired: ""      # required monitoring (labs, vitals, etc.)
+  cardiacRisk:
+    en: ""
+    zh: ""
+    ja: ""
+  abuseRisk:
+    en: ""
+    zh: ""
+    ja: ""
+  withdrawalNotes:
+    en: ""
+    zh: ""
+    ja: ""
+  monitoringRequired:
+    en: ""
+    zh: ""
+    ja: ""
 
 # ============================================
 # METADATA
 # ============================================
 
-lastUpdated: null             # YYYY-MM-DD format
+lastUpdated: null
 
-sources:                      # reference URLs or citations
+sources:
   - ""
 
-notes: ""                     # additional notes or comments
+notes:
+  en: ""
+  zh: ""
+  ja: ""

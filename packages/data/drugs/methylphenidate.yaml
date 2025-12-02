@@ -12,7 +12,10 @@ brandNames:
   AU: ["Concerta", "Ritalin", "Ritalin LA"]
   CA: ["Concerta", "Ritalin", "Biphentin"]
 
-genericName: "methylphenidate hydrochloride"
+genericName:
+  en: "methylphenidate hydrochloride"
+  zh: "盐酸哌甲酯"
+  ja: "塩酸メチルフェニデート"
 
 manufacturers:
   - name: "Janssen (Johnson & Johnson)"
@@ -24,24 +27,45 @@ manufacturers:
   - name: "西安杨森 (Janssen China)"
     region: "CN"
     product: "专注达"
-  - name: "Shionogi"
+  - name: "ヤンセンファーマ"
     region: "JP"
     product: "コンサータ"
 
 # Classification
 drugClass: "stimulant"
+
+drugClassLabel:
+  en: "Stimulant"
+  zh: "兴奋剂"
+  ja: "中枢刺激薬"
+
 category: "methylphenidate"
+
+categoryLabel:
+  en: "Methylphenidate"
+  zh: "哌甲酯类"
+  ja: "メチルフェニデート系"
+
 controlledSubstance: true
+
 schedule:
   US: "Schedule II"
-  CN: "第一类精神药品 (Class I Psychotropic)"
+  CN: "第一类精神药品"
   EU: "Varies by country"
   JP: "第一種向精神薬"
   UK: "Class B, Schedule 2"
 
 # Mechanism
-activeIngredient: "methylphenidate hydrochloride"
-mechanismOfAction: "Blocks reuptake of dopamine and norepinephrine, increasing their concentration in the synaptic cleft. Primarily affects the prefrontal cortex to improve attention and executive function."
+activeIngredient:
+  en: "methylphenidate hydrochloride"
+  zh: "盐酸哌甲酯"
+  ja: "塩酸メチルフェニデート"
+
+mechanismOfAction:
+  en: "Blocks reuptake of dopamine and norepinephrine, increasing their concentration in the synaptic cleft. Primarily affects the prefrontal cortex to improve attention and executive function."
+  zh: "阻断多巴胺和去甲肾上腺素的再摄取，增加突触间隙中这些神经递质的浓度。主要作用于前额叶皮层，改善注意力和执行功能。"
+  ja: "ドーパミンとノルエピネフリンの再取り込みを阻害し、シナプス間隙でのこれらの濃度を増加させます。主に前頭前皮質に作用し、注意力と実行機能を改善します。"
+
 neurotransmittersAffected:
   - dopamine
   - norepinephrine
@@ -49,248 +73,421 @@ neurotransmittersAffected:
 # Dosage & Forms
 forms:
   - type: "tablet"
+    typeLabel:
+      en: "Tablet"
+      zh: "片剂"
+      ja: "錠剤"
     releaseType: "immediate"
+    releaseTypeLabel:
+      en: "Immediate Release"
+      zh: "速释"
+      ja: "即放性"
     brandName: "Ritalin"
     strengths: ["5mg", "10mg", "20mg"]
-    durationHours: 3-4
-    notes: "Usually taken 2-3 times daily"
+    durationHours: 4
+    notes:
+      en: "Usually taken 2-3 times daily"
+      zh: "通常每日服用2-3次"
+      ja: "通常1日2〜3回服用"
 
   - type: "tablet"
+    typeLabel:
+      en: "Tablet"
+      zh: "片剂"
+      ja: "錠剤"
     releaseType: "extended"
+    releaseTypeLabel:
+      en: "Extended Release"
+      zh: "缓释"
+      ja: "徐放性"
     brandName: "Concerta"
     strengths: ["18mg", "27mg", "36mg", "54mg"]
-    durationHours: 10-12
-    notes: "OROS technology, once daily dosing"
+    durationHours: 12
+    notes:
+      en: "OROS technology, once daily dosing"
+      zh: "OROS技术，每日一次给药"
+      ja: "OROS技術、1日1回投与"
 
   - type: "capsule"
+    typeLabel:
+      en: "Capsule"
+      zh: "胶囊"
+      ja: "カプセル"
     releaseType: "extended"
+    releaseTypeLabel:
+      en: "Extended Release"
+      zh: "缓释"
+      ja: "徐放性"
     brandName: "Ritalin LA"
     strengths: ["10mg", "20mg", "30mg", "40mg"]
-    durationHours: 8-10
-    notes: "Can be opened and sprinkled on food"
-
-  - type: "capsule"
-    releaseType: "extended"
-    brandName: "Metadate CD"
-    strengths: ["10mg", "20mg", "30mg", "40mg", "50mg", "60mg"]
     durationHours: 8
-    notes: "30% immediate release, 70% extended release"
+    notes:
+      en: "Can be opened and sprinkled on food"
+      zh: "可打开撒在食物上服用"
+      ja: "カプセルを開けて食べ物にふりかけることができます"
 
   - type: "patch"
+    typeLabel:
+      en: "Transdermal Patch"
+      zh: "透皮贴剂"
+      ja: "経皮パッチ"
     releaseType: "extended"
+    releaseTypeLabel:
+      en: "Extended Release"
+      zh: "缓释"
+      ja: "徐放性"
     brandName: "Daytrana"
     strengths: ["10mg/9hr", "15mg/9hr", "20mg/9hr", "30mg/9hr"]
-    durationHours: 9-12
-    notes: "Transdermal patch, wear for 9 hours"
+    durationHours: 12
+    notes:
+      en: "Transdermal patch, wear for 9 hours"
+      zh: "透皮贴剂，佩戴9小时"
+      ja: "経皮パッチ、9時間装着"
 
   - type: "liquid"
+    typeLabel:
+      en: "Liquid Suspension"
+      zh: "口服液"
+      ja: "液剤"
     releaseType: "extended"
+    releaseTypeLabel:
+      en: "Extended Release"
+      zh: "缓释"
+      ja: "徐放性"
     brandName: "Quillivant XR"
     strengths: ["25mg/5mL"]
     durationHours: 12
-    notes: "Liquid suspension for those who can't swallow pills"
-
-  - type: "capsule"
-    releaseType: "extended"
-    brandName: "Jornay PM"
-    strengths: ["20mg", "40mg", "60mg", "80mg", "100mg"]
-    durationHours: 12
-    notes: "Evening dosing, works by morning"
-
-  - type: "chewable"
-    releaseType: "extended"
-    brandName: "Quillichew ER"
-    strengths: ["20mg", "30mg", "40mg"]
-    durationHours: 8
-    notes: "Cherry-flavored chewable tablet"
-
-  - type: "ODT"
-    releaseType: "extended"
-    brandName: "Cotempla XR-ODT"
-    strengths: ["8.6mg", "17.3mg", "25.9mg"]
-    durationHours: 12
-    notes: "Orally disintegrating tablet"
+    notes:
+      en: "Liquid suspension for those who can't swallow pills"
+      zh: "适用于不能吞服药片者"
+      ja: "錠剤を飲み込めない方のための液体懸濁液"
 
 # Efficacy
-onsetMinutes: 30-60
+onsetMinutes: 30
 peakEffectHours: 2
-durationHours: 4-12  # depends on formulation
+durationHours: 12
 
 # Side Effects
 sideEffects:
   common:
-    - name: "decreased appetite"
+    - name:
+        en: "decreased appetite"
+        zh: "食欲下降"
+        ja: "食欲減退"
       frequency: "25-40%"
-    - name: "insomnia"
+    - name:
+        en: "insomnia"
+        zh: "失眠"
+        ja: "不眠"
       frequency: "20-30%"
-    - name: "headache"
+    - name:
+        en: "headache"
+        zh: "头痛"
+        ja: "頭痛"
       frequency: "15-25%"
-    - name: "stomach ache"
+    - name:
+        en: "stomach ache"
+        zh: "胃痛"
+        ja: "腹痛"
       frequency: "10-20%"
-    - name: "irritability"
+    - name:
+        en: "irritability"
+        zh: "易怒"
+        ja: "易刺激性"
       frequency: "10-15%"
-    - name: "weight loss"
+    - name:
+        en: "weight loss"
+        zh: "体重减轻"
+        ja: "体重減少"
       frequency: "10-15%"
 
   uncommon:
-    - name: "increased heart rate"
+    - name:
+        en: "increased heart rate"
+        zh: "心率加快"
+        ja: "心拍数増加"
       frequency: "5-10%"
-    - name: "increased blood pressure"
+    - name:
+        en: "increased blood pressure"
+        zh: "血压升高"
+        ja: "血圧上昇"
       frequency: "5-10%"
-    - name: "anxiety"
+    - name:
+        en: "anxiety"
+        zh: "焦虑"
+        ja: "不安"
       frequency: "5-8%"
-    - name: "dizziness"
-      frequency: "5%"
-    - name: "nausea"
+    - name:
+        en: "dizziness"
+        zh: "头晕"
+        ja: "めまい"
       frequency: "5%"
 
   serious:
-    - name: "cardiovascular events"
-      notes: "Rare; increased risk in those with pre-existing heart conditions"
-    - name: "psychiatric symptoms"
-      notes: "May exacerbate psychosis or mania in susceptible individuals"
-    - name: "growth suppression"
-      notes: "May slow growth in children; effect usually temporary"
-    - name: "priapism"
-      notes: "Rare but serious; requires immediate medical attention"
-    - name: "peripheral vasculopathy"
-      notes: "Raynaud's phenomenon reported"
+    - name:
+        en: "cardiovascular events"
+        zh: "心血管事件"
+        ja: "心血管イベント"
+      notes:
+        en: "Rare; increased risk in those with pre-existing heart conditions"
+        zh: "罕见；既往有心脏病者风险增加"
+        ja: "まれ；既存の心臓疾患がある場合リスク増加"
+    - name:
+        en: "psychiatric symptoms"
+        zh: "精神症状"
+        ja: "精神症状"
+      notes:
+        en: "May exacerbate psychosis or mania in susceptible individuals"
+        zh: "可能加重易感个体的精神病或躁狂症状"
+        ja: "感受性の高い人では精神病や躁病を悪化させる可能性"
+    - name:
+        en: "growth suppression"
+        zh: "生长抑制"
+        ja: "成長抑制"
+      notes:
+        en: "May slow growth in children; effect usually temporary"
+        zh: "可能减缓儿童生长；通常是暂时的"
+        ja: "小児の成長を遅らせる可能性；通常一時的"
 
 # Safety
 contraindications:
-  - "Hypersensitivity to methylphenidate"
-  - "MAO inhibitor use within 14 days"
-  - "Glaucoma"
-  - "Severe anxiety, tension, or agitation"
-  - "Motor tics or family history of Tourette's syndrome"
-  - "Pheochromocytoma"
+  en:
+    - "Hypersensitivity to methylphenidate"
+    - "MAO inhibitor use within 14 days"
+    - "Glaucoma"
+    - "Severe anxiety, tension, or agitation"
+    - "Motor tics or family history of Tourette's syndrome"
+  zh:
+    - "对哌甲酯过敏"
+    - "14天内使用过MAO抑制剂"
+    - "青光眼"
+    - "严重焦虑、紧张或激动"
+    - "运动性抽动或有图雷特综合征家族史"
+  ja:
+    - "メチルフェニデートに対する過敏症"
+    - "14日以内のMAO阻害剤使用"
+    - "緑内障"
+    - "重度の不安、緊張、または興奮"
+    - "運動性チックまたはトゥレット症候群の家族歴"
 
 drugInteractions:
-  - drug: "MAO inhibitors"
+  - drug:
+      en: "MAO inhibitors"
+      zh: "MAO抑制剂"
+      ja: "MAO阻害剤"
     severity: "major"
-    effect: "Hypertensive crisis risk"
-  - drug: "Antihypertensives"
+    effect:
+      en: "Hypertensive crisis risk"
+      zh: "高血压危象风险"
+      ja: "高血圧クリーゼのリスク"
+  - drug:
+      en: "Antihypertensives"
+      zh: "降压药"
+      ja: "降圧薬"
     severity: "moderate"
-    effect: "May reduce effectiveness of blood pressure medications"
-  - drug: "Anticoagulants (warfarin)"
-    severity: "moderate"
-    effect: "May increase anticoagulant effect"
-  - drug: "Seizure medications"
-    severity: "moderate"
-    effect: "May affect seizure threshold"
-  - drug: "SSRIs"
-    severity: "minor"
-    effect: "May increase serotonergic effects"
+    effect:
+      en: "May reduce effectiveness of blood pressure medications"
+      zh: "可能降低降压药的疗效"
+      ja: "降圧薬の効果を低下させる可能性"
 
 blackBoxWarnings:
-  - "High potential for abuse and dependence"
-  - "Sudden death reported in patients with pre-existing structural cardiac abnormalities"
+  en:
+    - "High potential for abuse and dependence"
+    - "Sudden death reported in patients with pre-existing structural cardiac abnormalities"
+  zh:
+    - "高度滥用和依赖风险"
+    - "既往有心脏结构异常的患者中有猝死报告"
+  ja:
+    - "乱用および依存の可能性が高い"
+    - "既存の心臓構造異常のある患者で突然死が報告されている"
 
 pregnancyCategory: "C"
-foodInteractions: "Avoid high-fat meals with some formulations (may affect absorption); acidic foods/drinks may reduce absorption"
+
+foodInteractions:
+  en: "Avoid high-fat meals with some formulations; acidic foods/drinks may reduce absorption"
+  zh: "某些制剂应避免与高脂肪餐同服；酸性食物/饮料可能降低吸收"
+  ja: "一部の製剤では高脂肪食を避ける；酸性の食品/飲料は吸収を低下させる可能性"
 
 # Practical Information
 typicalDosing:
   children:
-    startingDose: "5mg twice daily (IR) or 18mg once daily (ER)"
-    maxDose: "60mg/day (or 2mg/kg/day)"
-    notes: "Start low, titrate weekly"
+    startingDose: "5mg BID (IR) / 18mg QD (ER)"
+    maxDose: "60mg/day"
+    notes:
+      en: "Start low, titrate weekly"
+      zh: "从低剂量开始，每周调整"
+      ja: "低用量から開始し、毎週調整"
   adults:
-    startingDose: "10mg twice daily (IR) or 18-36mg once daily (ER)"
-    maxDose: "72mg/day (Concerta) or 60mg/day (other ER)"
-    notes: "May need higher doses than children"
+    startingDose: "10mg BID (IR) / 18-36mg QD (ER)"
+    maxDose: "72mg/day"
+    notes:
+      en: "May need higher doses than children"
+      zh: "可能需要比儿童更高的剂量"
+      ja: "小児より高用量が必要な場合がある"
 
 costEstimate:
   US:
     brand: "$300-500/month"
     generic: "$30-80/month"
   CN:
-    brand: "¥300-600/month (专注达)"
-    generic: "Limited availability"
+    brand: "¥300-600/month"
+    generic: "Limited"
 
-storageRequirements: "Room temperature (20-25°C), protect from moisture and light"
+storageRequirements:
+  en: "Room temperature (20-25°C), protect from moisture and light"
+  zh: "室温保存（20-25°C），避免潮湿和光照"
+  ja: "室温（20-25°C）で保存、湿気と光を避ける"
 
 # Approval & Availability
 approvals:
   - region: "US"
     agency: "FDA"
     year: 1955
-    approvedAges: "6 years and older"
+    approvedAges:
+      en: "6 years and older"
+      zh: "6岁及以上"
+      ja: "6歳以上"
     indications:
-      - "ADHD"
-      - "Narcolepsy"
+      en: ["ADHD", "Narcolepsy"]
+      zh: ["注意缺陷多动障碍", "发作性睡病"]
+      ja: ["ADHD", "ナルコレプシー"]
     available: true
-    notes: "Original Ritalin; Concerta approved 2000"
+    notes:
+      en: "Original Ritalin; Concerta approved 2000"
+      zh: "利他林原研药；专注达2000年获批"
+      ja: "オリジナルのリタリン；コンサータは2000年承認"
 
   - region: "CN"
     agency: "NMPA"
     year: 2005
-    approvedAges: "6 years and older"
+    approvedAges:
+      en: "6 years and older"
+      zh: "6岁及以上"
+      ja: "6歳以上"
     indications:
-      - "ADHD"
+      en: ["ADHD"]
+      zh: ["注意缺陷多动障碍"]
+      ja: ["ADHD"]
     available: true
-    notes: "Only extended-release (专注达) widely available; supply shortages reported 2024-2025"
+    notes:
+      en: "Only extended-release available; supply shortages reported 2024-2025"
+      zh: "仅有缓释制剂；2024-2025年报告供应短缺"
+      ja: "徐放製剤のみ利用可能；2024-2025年に供給不足が報告"
 
   - region: "EU"
     agency: "EMA"
     year: 1954
-    approvedAges: "6-17 years (varies by country for adults)"
+    approvedAges:
+      en: "6-17 years (varies by country for adults)"
+      zh: "6-17岁（成人因国家而异）"
+      ja: "6〜17歳（成人は国によって異なる）"
     indications:
-      - "ADHD"
+      en: ["ADHD"]
+      zh: ["注意缺陷多动障碍"]
+      ja: ["ADHD"]
     available: true
-    notes: "Adult approval varies by EU member state; Tuzulby approved Feb 2025"
+    notes:
+      en: "Adult approval varies by EU member state"
+      zh: "成人适应症因欧盟成员国而异"
+      ja: "成人への承認はEU加盟国によって異なる"
 
   - region: "JP"
     agency: "PMDA"
     year: 2007
-    approvedAges: "6 years and older"
+    approvedAges:
+      en: "6 years and older"
+      zh: "6岁及以上"
+      ja: "6歳以上"
     indications:
-      - "ADHD"
+      en: ["ADHD"]
+      zh: ["注意缺陷多动障碍"]
+      ja: ["ADHD"]
     available: true
-    notes: "Requires registration in ADHD Proper Distribution Management System since 2019"
+    notes:
+      en: "Requires registration in ADHD Proper Distribution Management System since 2019"
+      zh: "自2019年起需在ADHD适当流通管理系统注册"
+      ja: "2019年以降、ADHD適正流通管理システムへの登録が必要"
 
   - region: "UK"
     agency: "MHRA"
     year: 1955
-    approvedAges: "6 years and older"
+    approvedAges:
+      en: "6 years and older"
+      zh: "6岁及以上"
+      ja: "6歳以上"
     indications:
-      - "ADHD"
+      en: ["ADHD"]
+      zh: ["注意缺陷多动障碍"]
+      ja: ["ADHD"]
     available: true
-    notes: ""
+    notes:
+      en: ""
+      zh: ""
+      ja: ""
 
   - region: "AU"
     agency: "TGA"
     year: 1966
-    approvedAges: "6 years and older"
+    approvedAges:
+      en: "6 years and older"
+      zh: "6岁及以上"
+      ja: "6歳以上"
     indications:
-      - "ADHD"
-      - "Narcolepsy"
+      en: ["ADHD", "Narcolepsy"]
+      zh: ["注意缺陷多动障碍", "发作性睡病"]
+      ja: ["ADHD", "ナルコレプシー"]
     available: true
-    notes: ""
+    notes:
+      en: ""
+      zh: ""
+      ja: ""
 
   - region: "CA"
     agency: "Health Canada"
     year: 1979
-    approvedAges: "6 years and older"
+    approvedAges:
+      en: "6 years and older"
+      zh: "6岁及以上"
+      ja: "6歳以上"
     indications:
-      - "ADHD"
-      - "Narcolepsy"
+      en: ["ADHD", "Narcolepsy"]
+      zh: ["注意缺陷多动障碍", "发作性睡病"]
+      ja: ["ADHD", "ナルコレプシー"]
     available: true
-    notes: ""
+    notes:
+      en: ""
+      zh: ""
+      ja: ""
 
 # Special Considerations
 specialConsiderations:
-  cardiacRisk: "Cardiovascular evaluation recommended before starting; caution in patients with heart conditions"
-  abuseRisk: "Schedule II controlled substance; high abuse potential, especially IR formulations"
-  withdrawalNotes: "No significant physical withdrawal; may experience fatigue and depression when stopping"
-  monitoringRequired: "Height, weight, blood pressure, heart rate; periodic cardiovascular assessment"
+  cardiacRisk:
+    en: "Cardiovascular evaluation recommended before starting; caution in patients with heart conditions"
+    zh: "开始治疗前建议进行心血管评估；有心脏病患者需谨慎"
+    ja: "開始前に心血管評価を推奨；心臓疾患のある患者には注意"
+  abuseRisk:
+    en: "Schedule II controlled substance; high abuse potential, especially IR formulations"
+    zh: "二类管制药物；滥用风险高，尤其是速释制剂"
+    ja: "スケジュールII規制物質；特に即放性製剤で乱用の可能性が高い"
+  withdrawalNotes:
+    en: "No significant physical withdrawal; may experience fatigue and depression when stopping"
+    zh: "无明显身体戒断症状；停药时可能出现疲劳和抑郁"
+    ja: "重大な身体的離脱症状はない；中止時に疲労やうつを経験する可能性"
+  monitoringRequired:
+    en: "Height, weight, blood pressure, heart rate; periodic cardiovascular assessment"
+    zh: "身高、体重、血压、心率；定期心血管评估"
+    ja: "身長、体重、血圧、心拍数；定期的な心血管評価"
 
 # Metadata
 lastUpdated: 2025-12-02
+
 sources:
   - "https://chadd.org/about-adhd/adhd-medications-approved-by-the-us-fda/"
   - "https://www.ema.europa.eu/en/medicines/human/referrals/methylphenidate"
   - "https://zhuanlan.zhihu.com/p/699401044"
   - "https://h-navi.jp/column/article/35028853"
 
-notes: "Most widely prescribed ADHD medication globally. Multiple formulations available to suit different needs. China experiencing supply shortages as of 2024-2025."
+notes:
+  en: "Most widely prescribed ADHD medication globally. Multiple formulations available to suit different needs. China experiencing supply shortages as of 2024-2025."
+  zh: "全球处方量最大的ADHD药物。有多种制剂可供选择以满足不同需求。中国2024-2025年出现供应短缺。"
+  ja: "世界で最も広く処方されているADHD薬。さまざまなニーズに対応する複数の製剤があります。中国では2024-2025年に供給不足が発生。"

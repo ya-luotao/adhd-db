@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { getDrugs, getDrugRaw } from '../../../lib/data';
+import { getDrugs, getDrugRaw, getLocalizedValue, getLocalizedArray } from '../../../lib/data';
 import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../../i18n/utils';
 
 export function getStaticPaths() {
@@ -15,18 +15,22 @@ const { drug } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const rawYaml = getDrugRaw(drug.id);
+
+// Helper to get localized drug field
+const l = (value: any) => getLocalizedValue(value, lang);
+const la = (value: any) => getLocalizedArray(value, lang);
 ---
 
-<Layout title={drug.genericName}>
+<Layout title={l(drug.genericName)}>
   <nav style="margin-bottom: 1rem;">
     <a href={getLocalizedPath('/data/drugs', lang)}>&larr; {t('drugs.backToList')}</a>
   </nav>
 
-  <h1>{drug.genericName}</h1>
+  <h1>{l(drug.genericName)}</h1>
 
   <div style="margin-bottom: 1rem;">
-    <span class={`tag ${drug.drugClass}`}>{drug.drugClass}</span>
-    <span class="tag" style="background: #f3f4f6;">{drug.category}</span>
+    <span class={`tag ${drug.drugClass}`}>{l(drug.drugClassLabel) || drug.drugClass}</span>
+    <span class="tag" style="background: #f3f4f6;">{l(drug.categoryLabel) || drug.category}</span>
     {drug.controlledSubstance && (
       <span class="tag" style="background: #fef3c7; color: #92400e;">{t('common.controlled')}</span>
     )}
@@ -47,7 +51,7 @@ const rawYaml = getDrugRaw(drug.id);
     <div class="card">
       <h3>{t('drugs.mechanism')}</h3>
       <p style="font-size: 0.875rem; line-height: 1.6;">
-        {drug.mechanismOfAction}
+        {l(drug.mechanismOfAction)}
       </p>
       {drug.neurotransmittersAffected && (
         <div style="margin-top: 0.5rem;">
@@ -76,13 +80,13 @@ const rawYaml = getDrugRaw(drug.id);
           <td><strong>{approval.region}</strong></td>
           <td>{approval.agency}</td>
           <td>{approval.year || '-'}</td>
-          <td>{approval.approvedAges || '-'}</td>
+          <td>{l(approval.approvedAges) || '-'}</td>
           <td>
             <span class={`tag ${approval.available ? 'available' : 'unavailable'}`}>
               {approval.available ? t('common.yes') : t('common.no')}
             </span>
           </td>
-          <td style="font-size: 0.75rem; max-width: 200px;">{approval.notes || '-'}</td>
+          <td style="font-size: 0.75rem; max-width: 200px;">{l(approval.notes) || '-'}</td>
         </tr>
       ))}
     </tbody>
@@ -94,11 +98,11 @@ const rawYaml = getDrugRaw(drug.id);
       <div class="grid">
         {drug.forms.map((form: any) => (
           <div class="card">
-            <h3>{form.brandName || form.type}</h3>
-            <p><strong>{t('common.type')}:</strong> {form.type} ({form.releaseType})</p>
+            <h3>{form.brandName || l(form.typeLabel) || form.type}</h3>
+            <p><strong>{t('common.type')}:</strong> {l(form.typeLabel) || form.type} ({l(form.releaseTypeLabel) || form.releaseType})</p>
             <p><strong>{t('common.strengths')}:</strong> {form.strengths?.join(', ')}</p>
             <p><strong>{t('common.duration')}:</strong> {form.durationHours} {t('common.hours')}</p>
-            {form.notes && <p style="font-size: 0.875rem; color: #666; margin-top: 0.5rem;">{form.notes}</p>}
+            {form.notes && <p style="font-size: 0.875rem; color: #666; margin-top: 0.5rem;">{l(form.notes)}</p>}
           </div>
         ))}
       </div>
@@ -114,7 +118,7 @@ const rawYaml = getDrugRaw(drug.id);
             <h3>{t('drugs.common')}</h3>
             <ul style="margin-left: 1.5rem;">
               {drug.sideEffects.common.map((se: any) => (
-                <li>{se.name} <span style="color: #666;">({se.frequency})</span></li>
+                <li>{l(se.name)} <span style="color: #666;">({se.frequency})</span></li>
               ))}
             </ul>
           </div>
@@ -125,8 +129,8 @@ const rawYaml = getDrugRaw(drug.id);
             <ul style="margin-left: 1.5rem;">
               {drug.sideEffects.serious.map((se: any) => (
                 <li>
-                  <strong>{se.name}</strong>
-                  {se.notes && <span style="color: #666; display: block; font-size: 0.875rem;">{se.notes}</span>}
+                  <strong>{l(se.name)}</strong>
+                  {se.notes && <span style="color: #666; display: block; font-size: 0.875rem;">{l(se.notes)}</span>}
                 </li>
               ))}
             </ul>

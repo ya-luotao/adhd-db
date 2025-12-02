@@ -1,10 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getDrugs, getDataTypes } from '../../lib/data';
+import { getDrugs, getDataTypes, getLocalizedValue } from '../../lib/data';
 import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const l = (value: any) => getLocalizedValue(value, lang);
 
 const drugs = getDrugs();
 const dataTypes = getDataTypes();
@@ -78,10 +79,10 @@ const nonStimulants = drugs.filter(d => d.drugClass === 'non-stimulant');
         return (
           <tr>
             <td>
-              <a href={getLocalizedPath(`/data/drugs/${drug.id}`, lang)}>{drug.genericName}</a>
+              <a href={getLocalizedPath(`/data/drugs/${drug.id}`, lang)}>{l(drug.genericName)}</a>
             </td>
             <td>
-              <span class={`tag ${drug.drugClass}`}>{drug.drugClass}</span>
+              <span class={`tag ${drug.drugClass}`}>{l(drug.drugClassLabel) || drug.drugClass}</span>
             </td>
             <td>{getAvailability('US')}</td>
             <td>{getAvailability('CN')}</td>

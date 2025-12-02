@@ -1,6 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { parse } from 'yaml';
+import type { Lang } from '../i18n/translations';
+import { defaultLang } from '../i18n/translations';
 
 // Resolve paths relative to the monorepo root
 const rootDir = path.resolve(import.meta.dirname, '../../../../');
@@ -31,6 +33,23 @@ export function listYamlFiles(dir: string): string[] {
   return fs.readdirSync(dir).filter(f => f.endsWith('.yaml') || f.endsWith('.yml'));
 }
 
+// Localization helper - gets localized value from field
+// Supports both old format (string) and new format ({ en, zh, ja })
+export type LocalizedString = string | { en?: string; zh?: string; ja?: string };
+export type LocalizedArray = string[] | { en?: string[]; zh?: string[]; ja?: string[] };
+
+export function getLocalizedValue(value: LocalizedString | undefined, lang: Lang): string {
+  if (value === undefined || value === null) return '';
+  if (typeof value === 'string') return value;
+  return value[lang] || value[defaultLang] || value.en || '';
+}
+
+export function getLocalizedArray(value: LocalizedArray | undefined, lang: Lang): string[] {
+  if (value === undefined || value === null) return [];
+  if (Array.isArray(value)) return value;
+  return value[lang] || value[defaultLang] || value.en || [];
+}
+
 // Schema
 export function getSchema() {
   const schemaPath = path.join(getSchemaPath(), 'drug-schema.yaml');
@@ -47,18 +66,94 @@ export function getRegions() {
 }
 
 // Data - Drugs
+export interface LocalizedField {
+  en?: string;
+  zh?: string;
+  ja?: string;
+}
+
+export interface LocalizedArrayField {
+  en?: string[];
+  zh?: string[];
+  ja?: string[];
+}
+
+export interface DrugForm {
+  type: string;
+  typeLabel?: LocalizedField;
+  releaseType: string;
+  releaseTypeLabel?: LocalizedField;
+  brandName?: string;
+  strengths?: string[];
+  durationHours?: number;
+  notes?: string | LocalizedField;
+}
+
+export interface SideEffect {
+  name: string | LocalizedField;
+  frequency?: string;
+  notes?: string | LocalizedField;
+}
+
+export interface DrugInteraction {
+  drug: string | LocalizedField;
+  severity: string;
+  effect: string | LocalizedField;
+}
+
+export interface DrugApproval {
+  region: string;
+  agency: string;
+  year?: number;
+  approvedAges?: string | LocalizedField;
+  indications?: string[] | LocalizedArrayField;
+  available: boolean;
+  notes?: string | LocalizedField;
+}
+
 export interface Drug {
   id: string;
-  genericName: string;
+  genericName: string | LocalizedField;
   brandNames: Record<string, string[]>;
   drugClass: string;
+  drugClassLabel?: LocalizedField;
   category: string;
-  approvals: Array<{
-    region: string;
-    available: boolean;
-    year?: number;
-    approvedAges?: string;
-  }>;
+  categoryLabel?: LocalizedField;
+  controlledSubstance?: boolean;
+  schedule?: Record<string, string>;
+  activeIngredient?: string | LocalizedField;
+  mechanismOfAction?: string | LocalizedField;
+  neurotransmittersAffected?: string[];
+  forms?: DrugForm[];
+  onsetMinutes?: number;
+  peakEffectHours?: number;
+  durationHours?: number;
+  sideEffects?: {
+    common?: SideEffect[];
+    uncommon?: SideEffect[];
+    serious?: SideEffect[];
+  };
+  contraindications?: string[] | LocalizedArrayField;
+  drugInteractions?: DrugInteraction[];
+  blackBoxWarnings?: string[] | LocalizedArrayField;
+  pregnancyCategory?: string;
+  foodInteractions?: string | LocalizedField;
+  typicalDosing?: {
+    children?: { startingDose?: string; maxDose?: string; notes?: string | LocalizedField };
+    adults?: { startingDose?: string; maxDose?: string; notes?: string | LocalizedField };
+  };
+  costEstimate?: Record<string, { brand?: string; generic?: string }>;
+  storageRequirements?: string | LocalizedField;
+  approvals?: DrugApproval[];
+  specialConsiderations?: {
+    cardiacRisk?: string | LocalizedField;
+    abuseRisk?: string | LocalizedField;
+    withdrawalNotes?: string | LocalizedField;
+    monitoringRequired?: string | LocalizedField;
+  };
+  lastUpdated?: string;
+  sources?: string[];
+  notes?: string | LocalizedField;
   [key: string]: unknown;
 }
 
