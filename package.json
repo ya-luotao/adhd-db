@@ -4,9 +4,10 @@
   "version": "0.0.1",
   "description": "ADHD database with multi-region data",
   "scripts": {
+    "dev": "pnpm --filter @adhd-db/web dev",
     "lint": "pnpm -r lint",
     "build": "pnpm -r build",
-    "deploy": "pnpm --filter @adhd-db/web deploy"
+    "deploy": "pnpm --filter @adhd-db/web run deploy"
   },
   "keywords": [
     "adhd",

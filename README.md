@@ -28,13 +28,13 @@ adhd-db/
 pnpm install
 
 # Run dev server
-pnpm --filter @adhd-db/web dev
+pnpm run dev
 
 # Build all packages
 pnpm build
 
 # Deploy to Cloudflare Pages
-pnpm deploy
+pnpm run deploy
 ```
 
 ## Adding a New Drug

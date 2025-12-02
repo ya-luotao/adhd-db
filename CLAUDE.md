@@ -12,13 +12,16 @@ pnpm install
 pnpm build
 
 # Run web app in dev mode
-pnpm --filter @adhd-db/web dev
+pnpm run dev
 
 # Build web app only
 pnpm --filter @adhd-db/web build
 
 # Preview built web app
 pnpm --filter @adhd-db/web preview
+
+# Deploy to Cloudflare Pages
+pnpm run deploy
 ```
 
 ## Architecture
