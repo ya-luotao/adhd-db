@@ -34,19 +34,27 @@ export function listYamlFiles(dir: string): string[] {
 }
 
 // Localization helper - gets localized value from field
-// Supports both old format (string) and new format ({ en, zh, ja })
-export type LocalizedString = string | { en?: string; zh?: string; ja?: string };
-export type LocalizedArray = string[] | { en?: string[]; zh?: string[]; ja?: string[] };
+// Supports both old format (string) and new format ({ en, zh, 'zh-TW', ja })
+export type LocalizedString = string | { en?: string; zh?: string; 'zh-TW'?: string; ja?: string };
+export type LocalizedArray = string[] | { en?: string[]; zh?: string[]; 'zh-TW'?: string[]; ja?: string[] };
 
 export function getLocalizedValue(value: LocalizedString | undefined, lang: Lang): string {
   if (value === undefined || value === null) return '';
   if (typeof value === 'string') return value;
+  // For zh-TW, fall back to zh (Simplified Chinese) if Traditional Chinese is not available
+  if (lang === 'zh-TW' && !value['zh-TW'] && value.zh) {
+    return value.zh;
+  }
   return value[lang] || value[defaultLang] || value.en || '';
 }
 
 export function getLocalizedArray(value: LocalizedArray | undefined, lang: Lang): string[] {
   if (value === undefined || value === null) return [];
   if (Array.isArray(value)) return value;
+  // For zh-TW, fall back to zh (Simplified Chinese) if Traditional Chinese is not available
+  if (lang === 'zh-TW' && !value['zh-TW'] && value.zh) {
+    return value.zh;
+  }
   return value[lang] || value[defaultLang] || value.en || [];
 }
 
@@ -69,12 +77,14 @@ export function getRegions() {
 export interface LocalizedField {
   en?: string;
   zh?: string;
+  'zh-TW'?: string;
   ja?: string;
 }
 
 export interface LocalizedArrayField {
   en?: string[];
   zh?: string[];
+  'zh-TW'?: string[];
   ja?: string[];
 }
 

@@ -1,0 +1,257 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import { getDrugs, getLocalizedValue } from '../../../../lib/data';
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const drugs = getDrugs();
+
+// Get all unique regions from approvals
+const allRegions = [...new Set(drugs.flatMap(d => d.approvals?.map(a => a.region) || []))].sort();
+---
+
+<Layout title={t('drugs.title')}>
+  <h1>{t('drugs.title')}</h1>
+
+  <p class="page-description">
+    {drugs.length} {t('drugs.description')}
+  </p>
+
+  <div class="filters">
+    <input
+      type="text"
+      id="search"
+      placeholder={t('filter.search')}
+      class="search-input"
+    />
+    <div class="filter-group">
+      <label>{t('filter.class')}:</label>
+      <select id="class-filter">
+        <option value="all">{t('filter.all')}</option>
+        <option value="stimulant">{t('drugs.stimulants')}</option>
+        <option value="non-stimulant">{t('drugs.nonStimulants')}</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>{t('filter.region')}:</label>
+      <select id="region-filter">
+        <option value="all">{t('filter.all')}</option>
+        {allRegions.map(region => (
+          <option value={region}>{region}</option>
+        ))}
+      </select>
+    </div>
+  </div>
+
+  <div class="grid" id="drug-list">
+    {drugs.map(drug => {
+      const regions = drug.approvals?.filter(a => a.available).map(a => a.region) || [];
+      const genericName = getLocalizedValue(drug.genericName, lang);
+      const brandNames = Object.values(drug.brandNames || {}).flat();
+      return (
+        <a
+          href={getLocalizedPath(`/data/drugs/${drug.id}`, lang)}
+          class="card drug-card"
+          data-class={drug.drugClass}
+          data-regions={regions.join(',')}
+          data-name={genericName.toLowerCase()}
+          data-brands={brandNames.join(',').toLowerCase()}
+        >
+          <h3>{genericName}</h3>
+          <p class="drug-category">
+            {drug.category}
+          </p>
+          <div>
+            <span class={`tag ${drug.drugClass}`}>
+              {drug.drugClass === 'stimulant' ? t('home.stimulants') : t('home.nonStimulants')}
+            </span>
+            {regions.slice(0, 4).map(region => (
+              <span class="tag available">{region}</span>
+            ))}
+            {regions.length > 4 && <span class="tag available">+{regions.length - 4}</span>}
+          </div>
+          <div class="brand-names">
+            <strong>{t('drugs.brandNames')}:</strong> {brandNames.slice(0, 3).join(', ')}
+            {brandNames.length > 3 && '...'}
+          </div>
+        </a>
+      );
+    })}
+  </div>
+
+  <p id="no-results" class="no-results">
+    {t('data.noData')}
+  </p>
+</Layout>
+
+<style>
+  .page-description {
+    margin-bottom: var(--space-6);
+    color: var(--color-text-tertiary);
+  }
+
+  .drug-category {
+    color: var(--color-text-tertiary);
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-2);
+  }
+
+  .brand-names {
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .no-results {
+    display: none;
+    text-align: center;
+    color: var(--color-text-tertiary);
+    padding: var(--space-8);
+  }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+    align-items: center;
+  }
+
+  .search-input {
+    flex: 1;
+    min-width: 200px;
+    padding: var(--space-2-5) var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: var(--text-base);
+    background: var(--color-bg-primary);
+  }
+
+  .search-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-focus);
+  }
+
+  .filter-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .filter-group label {
+    font-size: var(--text-sm);
+    color: var(--color-text-tertiary);
+    font-weight: var(--font-medium);
+  }
+
+  .filter-group select {
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+  }
+
+  .filter-group select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-focus);
+  }
+
+  a.drug-card {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  a.drug-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+    transition: all var(--transition-base);
+  }
+
+  a.drug-card h3 {
+    color: var(--color-primary);
+  }
+
+  a.drug-card.hidden {
+    display: none;
+  }
+
+  /* Mobile responsive filters */
+  @media (max-width: 639px) {
+    .filters {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .search-input {
+      width: 100%;
+      min-width: unset;
+    }
+
+    .filter-group {
+      width: 100%;
+    }
+
+    .filter-group label {
+      min-width: 60px;
+    }
+
+    .filter-group select {
+      flex: 1;
+    }
+
+    /* Stack tags on mobile */
+    a.drug-card .tag {
+      margin-bottom: var(--space-1);
+    }
+  }
+</style>
+
+<script>
+  const searchInput = document.getElementById('search') as HTMLInputElement;
+  const classFilter = document.getElementById('class-filter') as HTMLSelectElement;
+  const regionFilter = document.getElementById('region-filter') as HTMLSelectElement;
+  const drugList = document.getElementById('drug-list');
+  const noResults = document.getElementById('no-results');
+
+  function filterDrugs() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const selectedClass = classFilter.value;
+    const selectedRegion = regionFilter.value;
+
+    const cards = drugList?.querySelectorAll('.drug-card') || [];
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const drugClass = card.getAttribute('data-class') || '';
+      const regions = card.getAttribute('data-regions') || '';
+      const name = card.getAttribute('data-name') || '';
+      const brands = card.getAttribute('data-brands') || '';
+
+      const matchesSearch = !searchTerm ||
+        name.includes(searchTerm) ||
+        brands.includes(searchTerm);
+      const matchesClass = selectedClass === 'all' || drugClass === selectedClass;
+      const matchesRegion = selectedRegion === 'all' || regions.includes(selectedRegion);
+
+      if (matchesSearch && matchesClass && matchesRegion) {
+        card.classList.remove('hidden');
+        visibleCount++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    if (noResults) {
+      noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+  }
+
+  searchInput?.addEventListener('input', filterDrugs);
+  classFilter?.addEventListener('change', filterDrugs);
+  regionFilter?.addEventListener('change', filterDrugs);
+</script>

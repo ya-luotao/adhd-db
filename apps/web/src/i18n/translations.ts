@@ -1,6 +1,7 @@
 export const languages = {
   en: 'English',
-  zh: '中文',
+  zh: '简体中文',
+  'zh-TW': '繁體中文',
   ja: '日本語',
 } as const;
 
@@ -271,6 +272,138 @@ export const translations = {
     'tools.regionChecker.results.schedule': '目的地管制级别',
     'tools.regionChecker.disclaimer.title': '免责声明',
     'tools.regionChecker.disclaimer.text': '此信息仅供参考，可能不是最新的。携带药物出国旅行前，请务必向官方政府来源核实旅行要求，并咨询您的医疗保健提供者。',
+  },
+
+  'zh-TW': {
+    // Navigation
+    'nav.home': '首頁',
+    'nav.schema': '結構',
+    'nav.meta': '元數據',
+    'nav.data': '數據',
+
+    // Home page
+    'home.title': 'ADHD 資料庫',
+    'home.description': '一個全面的 ADHD 相關資訊資料庫，包含多地區數據。',
+    'home.schema.title': '結構',
+    'home.schema.desc': '藥物條目的 YAML 結構範本',
+    'home.schema.link': '查看結構',
+    'home.meta.title': '元數據',
+    'home.meta.desc': '地區定義和藥物分類',
+    'home.meta.link': '查看元數據',
+    'home.data.title': '數據',
+    'home.data.link': '瀏覽數據',
+    'home.stats': '統計概覽',
+    'home.totalDrugs': '藥物總數',
+    'home.stimulants': '興奮劑類',
+    'home.nonStimulants': '非興奮劑類',
+    'home.allDrugs': '所有藥物',
+    'home.entries': '條目，跨越',
+    'home.types': '個類型',
+    'home.toolsPromo': '使用我們的工具查詢不同國家間的藥物攜帶規定',
+    'home.toolsPromoLink': '地區檢查工具',
+
+    // Table headers
+    'table.drug': '藥物',
+    'table.class': '分類',
+    'table.region': '地區',
+    'table.agency': '機構',
+    'table.year': '年份',
+    'table.ages': '年齡',
+    'table.available': '可用',
+    'table.notes': '備註',
+
+    // Schema page
+    'schema.title': '藥物結構',
+    'schema.description': '用於添加新藥物條目的 YAML 範本。複製此範本並填寫欄位。',
+
+    // Meta page
+    'meta.title': '元數據',
+    'meta.description': '資料庫中使用的地區定義和藥物分類。',
+    'meta.regions': '地區',
+    'meta.drugCategories': '藥物分類',
+
+    // Data page
+    'data.title': '數據',
+    'data.description': '瀏覽 ADHD 資料庫中的所有數據。',
+    'data.entries': '條目',
+    'data.noData': '暫無數據。',
+
+    // Drugs page
+    'drugs.title': '藥物',
+    'drugs.description': '資料庫中的 ADHD 藥物。',
+    'drugs.stimulants': '興奮劑類',
+    'drugs.nonStimulants': '非興奮劑類',
+    'drugs.backToList': '返回藥物列表',
+    'drugs.brandNames': '品牌名稱',
+    'drugs.mechanism': '作用機制',
+    'drugs.affects': '影響',
+    'drugs.approvals': '各地區批准情況',
+    'drugs.forms': '劑型',
+    'drugs.sideEffects': '副作用',
+    'drugs.common': '常見 (>10%)',
+    'drugs.serious': '嚴重',
+    'drugs.rawYaml': '原始 YAML',
+    'drugs.showRaw': '顯示原始 YAML 數據',
+    'drugs.editOnGithub': '在 GitHub 上編輯以貢獻',
+
+    // Common
+    'common.yes': '是',
+    'common.no': '否',
+    'common.type': '類型',
+    'common.strengths': '規格',
+    'common.duration': '持續時間',
+    'common.hours': '小時',
+    'common.controlled': '管制藥品',
+
+    // Disclaimer
+    'disclaimer': '僅供參考，非醫療建議。請諮詢醫療專業人員。',
+
+    // Footer
+    'footer.maintainedBy': '維護者',
+    'footer.contributions': '歡迎貢獻',
+
+    // Filters
+    'filter.all': '全部',
+    'filter.class': '分類',
+    'filter.region': '地區',
+    'filter.search': '搜尋藥物...',
+
+    // Travel info
+    'travel.title': '旅行資訊',
+    'travel.generalAdvice': '旅行建議',
+    'travel.requiredDocs': '所需文件',
+    'travel.specificRules': '特定地區規則',
+    'travel.maxSupply': '最大攜帶量',
+    'travel.useChecker': '使用地區檢查工具',
+    'travel.status.allowed': '允許',
+    'travel.status.restricted': '受限',
+    'travel.status.prohibited': '禁止',
+    'travel.status.requires_permit': '需要進口許可',
+    'travel.from': '從',
+    'travel.to': '到',
+    'travel.requirements': '要求',
+    'travel.sources': '來源',
+    'travel.inferred': '此狀態根據一般規則推斷。請與官方來源核實。',
+
+    // Region checker tool
+    'nav.tools': '工具',
+    'tools.regionChecker.title': '地區間合法性檢查',
+    'tools.regionChecker.description': '檢查不同國家/地區之間的藥物旅行規則和可用性。',
+    'tools.regionChecker.selectDrug': '選擇藥物',
+    'tools.regionChecker.chooseDrug': '選擇藥物...',
+    'tools.regionChecker.fromRegion': '出發地',
+    'tools.regionChecker.toRegion': '目的地',
+    'tools.regionChecker.chooseRegion': '選擇地區...',
+    'tools.regionChecker.check': '檢查合法性',
+    'tools.regionChecker.results.title': '結果',
+    'tools.regionChecker.results.travelStatus': '旅行狀態',
+    'tools.regionChecker.results.availability': '可用性',
+    'tools.regionChecker.results.availableInDest': '目的地可用',
+    'tools.regionChecker.results.notAvailableInDest': '目的地不可用',
+    'tools.regionChecker.results.brandNames': '目的地品牌名',
+    'tools.regionChecker.results.schedule': '目的地管制級別',
+    'tools.regionChecker.disclaimer.title': '免責聲明',
+    'tools.regionChecker.disclaimer.text': '此資訊僅供參考，可能不是最新的。攜帶藥物出國旅行前，請務必向官方政府來源核實旅行要求，並諮詢您的醫療保健提供者。',
   },
 
   ja: {

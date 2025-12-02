@@ -1,0 +1,413 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import { getDrugs, getDrugRaw, getLocalizedValue, getLocalizedArray, type TravelStatus } from '../../../../lib/data';
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../../../i18n/utils';
+
+export function getStaticPaths() {
+  const drugs = getDrugs();
+  return drugs.map(drug => ({
+    params: { id: drug.id },
+    props: { drug },
+  }));
+}
+
+const { drug } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const rawYaml = getDrugRaw(drug.id);
+
+// Helper to get localized drug field
+const l = (value: any) => getLocalizedValue(value, lang);
+const la = (value: any) => getLocalizedArray(value, lang);
+
+// Travel status colors
+const statusColors: Record<TravelStatus, string> = {
+  allowed: 'var(--color-success)',
+  restricted: 'var(--color-warning)',
+  requires_permit: 'var(--color-warning)',
+  prohibited: 'var(--color-danger)',
+};
+---
+
+<Layout title={l(drug.genericName)}>
+  <nav class="back-nav">
+    <a href={getLocalizedPath('/data/drugs', lang)}>&larr; {t('drugs.backToList')}</a>
+  </nav>
+
+  <h1>{l(drug.genericName)}</h1>
+
+  <div class="drug-tags">
+    <span class={`tag ${drug.drugClass}`}>{l(drug.drugClassLabel) || drug.drugClass}</span>
+    <span class="tag tag-category">{l(drug.categoryLabel) || drug.category}</span>
+    {drug.controlledSubstance && (
+      <span class="tag tag-controlled">{t('common.controlled')}</span>
+    )}
+  </div>
+
+  <div class="grid info-grid">
+    <div class="card">
+      <h3>{t('drugs.brandNames')}</h3>
+      {Object.entries(drug.brandNames || {}).map(([region, brands]: [string, any]) => (
+        brands?.length > 0 && (
+          <div class="brand-region">
+            <strong>{region}:</strong> {brands.join(', ')}
+          </div>
+        )
+      ))}
+    </div>
+
+    <div class="card">
+      <h3>{t('drugs.mechanism')}</h3>
+      <p class="mechanism-text">
+        {l(drug.mechanismOfAction)}
+      </p>
+      {drug.neurotransmittersAffected && (
+        <div class="neurotransmitters">
+          <strong>{t('drugs.affects')}:</strong> {drug.neurotransmittersAffected.join(', ')}
+        </div>
+      )}
+    </div>
+  </div>
+
+  <h2>{t('drugs.approvals')}</h2>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>{t('table.region')}</th>
+          <th>{t('table.agency')}</th>
+          <th>{t('table.year')}</th>
+          <th>{t('table.ages')}</th>
+          <th>{t('table.available')}</th>
+          <th>{t('table.notes')}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {drug.approvals?.map((approval: any) => (
+          <tr>
+            <td><strong>{approval.region}</strong></td>
+            <td>{approval.agency}</td>
+            <td>{approval.year || '-'}</td>
+            <td>{l(approval.approvedAges) || '-'}</td>
+            <td>
+              <span class={`tag ${approval.available ? 'available' : 'unavailable'}`}>
+                {approval.available ? t('common.yes') : t('common.no')}
+              </span>
+            </td>
+            <td class="notes-cell">{l(approval.notes) || '-'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Mobile-friendly approval cards (shown on small screens) -->
+  <div class="approval-cards">
+    {drug.approvals?.map((approval: any) => (
+      <div class="card approval-card">
+        <div class="approval-header">
+          <strong class="approval-region">{approval.region}</strong>
+          <span class={`tag ${approval.available ? 'available' : 'unavailable'}`}>
+            {approval.available ? t('common.yes') : t('common.no')}
+          </span>
+        </div>
+        <div class="approval-details">
+          <p><strong>{t('table.agency')}:</strong> {approval.agency}</p>
+          <p><strong>{t('table.year')}:</strong> {approval.year || '-'}</p>
+          <p><strong>{t('table.ages')}:</strong> {l(approval.approvedAges) || '-'}</p>
+          {l(approval.notes) && <p class="approval-notes"><strong>{t('table.notes')}:</strong> {l(approval.notes)}</p>}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  {drug.travelRules && (
+    <>
+      <h2>{t('travel.title')}</h2>
+      {drug.travelRules.generalAdvice && (
+        <div class="card travel-advice"><p>{l(drug.travelRules.generalAdvice)}</p></div>
+      )}
+      {drug.travelRules.requiredDocumentation && drug.travelRules.requiredDocumentation.length > 0 && (
+        <div class="card">
+          <h3>{t('travel.requiredDocs')}</h3>
+          <ul class="doc-list">
+            {drug.travelRules.requiredDocumentation.map((doc: any) => (
+              <li><strong>{l(doc.typeLabel)}</strong>{doc.notes && <span class="doc-notes"> - {l(doc.notes)}</span>}</li>
+            ))}
+          </ul>
+          {drug.travelRules.maxPersonalSupply && (
+            <p class="max-supply"><strong>{t('travel.maxSupply')}:</strong> {drug.travelRules.maxPersonalSupply.default}</p>
+          )}
+        </div>
+      )}
+      {drug.travelRules.crossBorderRules && drug.travelRules.crossBorderRules.length > 0 && (
+        <>
+          <h3>{t('travel.specificRules')}</h3>
+          <div class="travel-rules-grid">
+            {drug.travelRules.crossBorderRules.map((rule: any) => (
+              <div class="card travel-rule-card" style={`border-left: 4px solid ${statusColors[rule.status as TravelStatus]}`}>
+                <div class="travel-route">
+                  <span class="region-tag">{rule.fromRegion}</span>
+                  <span class="arrow">&rarr;</span>
+                  <span class="region-tag">{rule.toRegion}</span>
+                </div>
+                <div class="travel-status" style={`color: ${statusColors[rule.status as TravelStatus]}`}>
+                  {l(rule.statusLabel) || t(`travel.status.${rule.status}`)}
+                </div>
+                {rule.maxSupply && (<div class="travel-max-supply"><strong>{t('travel.maxSupply')}:</strong> {rule.maxSupply}</div>)}
+                {la(rule.requirements).length > 0 && (
+                  <div class="travel-requirements">
+                    <strong>{t('travel.requirements')}:</strong>
+                    <ul>{la(rule.requirements).map((req: string) => (<li>{req}</li>))}</ul>
+                  </div>
+                )}
+                {rule.notes && (<p class="travel-notes">{l(rule.notes)}</p>)}
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+      <div class="travel-checker-link">
+        <a href={getLocalizedPath('/tools/region-checker', lang)} class="btn btn-primary">{t('travel.useChecker')}</a>
+      </div>
+    </>
+  )}
+
+  {drug.forms && drug.forms.length > 0 && (
+    <>
+      <h2>{t('drugs.forms')}</h2>
+      <div class="grid">
+        {drug.forms.map((form: any) => (
+          <div class="card">
+            <h3>{form.brandName || l(form.typeLabel) || form.type}</h3>
+            <p><strong>{t('common.type')}:</strong> {l(form.typeLabel) || form.type} ({l(form.releaseTypeLabel) || form.releaseType})</p>
+            <p><strong>{t('common.strengths')}:</strong> {form.strengths?.join(', ')}</p>
+            <p><strong>{t('common.duration')}:</strong> {form.durationHours} {t('common.hours')}</p>
+            {form.notes && <p class="form-notes">{l(form.notes)}</p>}
+          </div>
+        ))}
+      </div>
+    </>
+  )}
+
+  {drug.sideEffects && (
+    <>
+      <h2>{t('drugs.sideEffects')}</h2>
+      <div class="grid">
+        {drug.sideEffects.common && (
+          <div class="card">
+            <h3>{t('drugs.common')}</h3>
+            <ul class="side-effects-list">
+              {drug.sideEffects.common.map((se: any) => (
+                <li>{l(se.name)} <span class="frequency">({se.frequency})</span></li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {drug.sideEffects.serious && (
+          <div class="card card-serious">
+            <h3>{t('drugs.serious')}</h3>
+            <ul class="side-effects-list">
+              {drug.sideEffects.serious.map((se: any) => (
+                <li>
+                  <strong>{l(se.name)}</strong>
+                  {se.notes && <span class="side-effect-notes">{l(se.notes)}</span>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </>
+  )}
+
+  <h2>{t('drugs.rawYaml')}</h2>
+  <details class="raw-yaml">
+    <summary>
+      {t('drugs.showRaw')}
+    </summary>
+    <pre><code>{rawYaml}</code></pre>
+    <p class="contribute-link">
+      <a href={`https://github.com/ya-luotao/adhd-db/edit/main/packages/data/drugs/${drug.id}.yaml`} target="_blank" rel="noopener">
+        {t('drugs.editOnGithub')} &rarr;
+      </a>
+    </p>
+  </details>
+</Layout>
+
+<style>
+  .back-nav {
+    margin-bottom: var(--space-4);
+  }
+
+  .drug-tags {
+    margin-bottom: var(--space-4);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .tag-category {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-secondary);
+  }
+
+  .tag-controlled {
+    background: var(--color-warning-light);
+    color: var(--color-warning-700);
+  }
+
+  .info-grid {
+    margin-bottom: var(--space-8);
+  }
+
+  .brand-region {
+    margin-bottom: var(--space-2);
+  }
+
+  .mechanism-text {
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+  }
+
+  .neurotransmitters {
+    margin-top: var(--space-2);
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: var(--space-4) 0;
+  }
+
+  .notes-cell {
+    font-size: var(--text-xs);
+    max-width: 200px;
+  }
+
+  /* Mobile approval cards - hidden by default */
+  .approval-cards {
+    display: none;
+  }
+
+  .approval-card {
+    padding: var(--space-4);
+  }
+
+  .approval-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-3);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .approval-region {
+    font-size: var(--text-lg);
+  }
+
+  .approval-details p {
+    margin-bottom: var(--space-1);
+    font-size: var(--text-sm);
+  }
+
+  .approval-notes {
+    margin-top: var(--space-2);
+    color: var(--color-text-tertiary);
+  }
+
+  .form-notes {
+    font-size: var(--text-sm);
+    color: var(--color-text-tertiary);
+    margin-top: var(--space-2);
+  }
+
+  .side-effects-list {
+    margin-left: var(--space-6);
+  }
+
+  .side-effects-list li {
+    margin-bottom: var(--space-2);
+  }
+
+  .frequency {
+    color: var(--color-text-tertiary);
+  }
+
+  .side-effect-notes {
+    color: var(--color-text-tertiary);
+    display: block;
+    font-size: var(--text-sm);
+    margin-top: var(--space-1);
+  }
+
+  .card-serious {
+    border-left: 4px solid var(--color-danger);
+  }
+
+  .raw-yaml summary {
+    cursor: pointer;
+    padding: var(--space-3);
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-md);
+    font-weight: var(--font-medium);
+  }
+
+  .raw-yaml pre {
+    margin-top: var(--space-4);
+  }
+
+  .contribute-link {
+    margin-top: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+    font-size: var(--text-sm);
+  }
+
+  .contribute-link a {
+    color: var(--color-primary);
+    font-weight: var(--font-medium);
+  }
+
+  /* Travel info styles */
+  .travel-advice { background: var(--color-bg-tertiary); margin-bottom: var(--space-4); }
+  .travel-advice p { margin: 0; line-height: var(--leading-relaxed); }
+  .doc-list { margin-left: var(--space-6); margin-bottom: var(--space-4); }
+  .doc-list li { margin-bottom: var(--space-2); }
+  .doc-notes { color: var(--color-text-tertiary); }
+  .max-supply { margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--color-border); }
+  .travel-rules-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--space-4); margin-bottom: var(--space-4); }
+  .travel-rule-card { padding: var(--space-4); }
+  .travel-route { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-3); }
+  .region-tag { background: var(--color-bg-tertiary); padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm); font-weight: var(--font-medium); }
+  .arrow { color: var(--color-text-tertiary); }
+  .travel-status { font-weight: var(--font-semibold); margin-bottom: var(--space-2); }
+  .travel-max-supply { font-size: var(--text-sm); margin-bottom: var(--space-2); }
+  .travel-requirements { font-size: var(--text-sm); margin-bottom: var(--space-2); }
+  .travel-requirements ul { margin-left: var(--space-4); margin-top: var(--space-1); }
+  .travel-requirements li { margin-bottom: var(--space-1); }
+  .travel-notes { font-size: var(--text-sm); color: var(--color-text-secondary); margin-top: var(--space-2); padding-top: var(--space-2); border-top: 1px solid var(--color-border); }
+  .travel-checker-link { margin-top: var(--space-6); margin-bottom: var(--space-6); }
+  .btn { display: inline-block; padding: var(--space-2) var(--space-4); border-radius: var(--radius-md); text-decoration: none; font-weight: var(--font-medium); }
+  .btn-primary { background: var(--color-primary); color: white; }
+  .btn-primary:hover { background: var(--color-primary-600); }
+
+  /* Mobile responsive */
+  @media (max-width: 639px) {
+    .table-wrapper {
+      display: none;
+    }
+
+    .approval-cards {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .drug-tags .tag {
+      margin-bottom: var(--space-1);
+    }
+  }
+</style>
