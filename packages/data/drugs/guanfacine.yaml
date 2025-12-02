@@ -12,7 +12,10 @@ brandNames:
   AU: ["Intuniv"]
   CA: ["Intuniv"]
 
-genericName: "guanfacine hydrochloride"
+genericName:
+  en: "guanfacine hydrochloride"
+  zh: "盐酸胍法辛"
+  ja: "グアンファシン塩酸塩"
 
 manufacturers:
   - name: "Takeda (formerly Shire)"
@@ -24,7 +27,18 @@ manufacturers:
 
 # Classification
 drugClass: "non-stimulant"
+
+drugClassLabel:
+  en: "Non-Stimulant"
+  zh: "非兴奋剂"
+  ja: "非中枢刺激薬"
+
 category: "alpha-2 adrenergic agonist"
+
+categoryLabel:
+  en: "Alpha-2 Adrenergic Agonist"
+  zh: "α-2肾上腺素能激动剂"
+  ja: "α2アドレナリン受容体作動薬"
 controlledSubstance: false
 schedule:
   US: "Not scheduled"
@@ -34,26 +48,55 @@ schedule:
   UK: "Not scheduled"
 
 # Mechanism
-activeIngredient: "guanfacine hydrochloride"
-mechanismOfAction: "Selective alpha-2A adrenergic receptor agonist. Stimulates receptors in the prefrontal cortex, strengthening working memory, reducing distractibility, and improving impulse control. Also has calming effect by reducing sympathetic outflow."
+activeIngredient:
+  en: "guanfacine hydrochloride"
+  zh: "盐酸胍法辛"
+  ja: "グアンファシン塩酸塩"
+
+mechanismOfAction:
+  en: "Selective alpha-2A adrenergic receptor agonist. Stimulates receptors in the prefrontal cortex, strengthening working memory, reducing distractibility, and improving impulse control. Also has calming effect by reducing sympathetic outflow."
+  zh: "选择性α-2A肾上腺素能受体激动剂。刺激前额叶皮层的受体，增强工作记忆，减少分心，改善冲动控制。还通过减少交感神经传出而具有镇静作用。"
+  ja: "選択的α2Aアドレナリン受容体作動薬。前頭前皮質の受容体を刺激し、ワーキングメモリを強化し、気が散りやすさを軽減し、衝動制御を改善します。また、交感神経出力を減少させることで鎮静効果もあります。"
 neurotransmittersAffected:
   - norepinephrine
 
 # Dosage & Forms
 forms:
   - type: "tablet"
+    typeLabel:
+      en: "Tablet"
+      zh: "片剂"
+      ja: "錠剤"
     releaseType: "extended"
+    releaseTypeLabel:
+      en: "Extended Release"
+      zh: "缓释"
+      ja: "徐放性"
     brandName: "Intuniv"
     strengths: ["1mg", "2mg", "3mg", "4mg"]
     durationHours: 24
-    notes: "Extended-release for ADHD; must swallow whole"
+    notes:
+      en: "Extended-release for ADHD; must swallow whole"
+      zh: "ADHD缓释制剂；需整片吞服"
+      ja: "ADHD用徐放製剤；そのまま飲み込む必要あり"
 
   - type: "tablet"
+    typeLabel:
+      en: "Tablet"
+      zh: "片剂"
+      ja: "錠剤"
     releaseType: "immediate"
+    releaseTypeLabel:
+      en: "Immediate Release"
+      zh: "速释"
+      ja: "即放性"
     brandName: "Tenex"
     strengths: ["1mg", "2mg"]
     durationHours: 8-12
-    notes: "Immediate-release; originally for hypertension; not FDA-approved for ADHD"
+    notes:
+      en: "Immediate-release; originally for hypertension; not FDA-approved for ADHD"
+      zh: "速释制剂；最初用于高血压；未获FDA批准用于ADHD"
+      ja: "即放性製剤；元々は高血圧用；ADHDにはFDA未承認"
 
 # Efficacy
 onsetMinutes: null  # Gradual effect over weeks
@@ -63,83 +106,201 @@ durationHours: 24
 # Side Effects
 sideEffects:
   common:
-    - name: "somnolence/fatigue"
+    - name:
+        en: "somnolence/fatigue"
+        zh: "嗜睡/疲劳"
+        ja: "傾眠/疲労"
       frequency: "30-40%"
-    - name: "headache"
+    - name:
+        en: "headache"
+        zh: "头痛"
+        ja: "頭痛"
       frequency: "20-25%"
-    - name: "dizziness"
+    - name:
+        en: "dizziness"
+        zh: "头晕"
+        ja: "めまい"
       frequency: "10-15%"
-    - name: "decreased appetite"
+    - name:
+        en: "decreased appetite"
+        zh: "食欲下降"
+        ja: "食欲減退"
       frequency: "10-15%"
-    - name: "abdominal pain"
+    - name:
+        en: "abdominal pain"
+        zh: "腹痛"
+        ja: "腹痛"
       frequency: "10%"
-    - name: "dry mouth"
+    - name:
+        en: "dry mouth"
+        zh: "口干"
+        ja: "口渇"
       frequency: "10%"
-    - name: "nausea"
+    - name:
+        en: "nausea"
+        zh: "恶心"
+        ja: "悪心"
       frequency: "5-10%"
-    - name: "constipation"
+    - name:
+        en: "constipation"
+        zh: "便秘"
+        ja: "便秘"
       frequency: "5%"
 
   uncommon:
-    - name: "hypotension"
+    - name:
+        en: "hypotension"
+        zh: "低血压"
+        ja: "低血圧"
       frequency: "5-10%"
-    - name: "bradycardia"
+    - name:
+        en: "bradycardia"
+        zh: "心动过缓"
+        ja: "徐脈"
       frequency: "5%"
-    - name: "irritability"
+    - name:
+        en: "irritability"
+        zh: "易怒"
+        ja: "易刺激性"
       frequency: "5%"
-    - name: "insomnia"
+    - name:
+        en: "insomnia"
+        zh: "失眠"
+        ja: "不眠"
       frequency: "5%"
 
   serious:
-    - name: "hypotension"
-      notes: "Can cause significant drops in blood pressure"
-    - name: "bradycardia"
-      notes: "May slow heart rate"
-    - name: "syncope"
-      notes: "Fainting due to blood pressure drop"
-    - name: "rebound hypertension"
-      notes: "If stopped abruptly; must taper"
-    - name: "sedation"
-      notes: "Can be severe, especially initially"
+    - name:
+        en: "hypotension"
+        zh: "低血压"
+        ja: "低血圧"
+      notes:
+        en: "Can cause significant drops in blood pressure"
+        zh: "可导致血压明显下降"
+        ja: "血圧の著しい低下を引き起こす可能性"
+    - name:
+        en: "bradycardia"
+        zh: "心动过缓"
+        ja: "徐脈"
+      notes:
+        en: "May slow heart rate"
+        zh: "可能减慢心率"
+        ja: "心拍数を低下させる可能性"
+    - name:
+        en: "syncope"
+        zh: "晕厥"
+        ja: "失神"
+      notes:
+        en: "Fainting due to blood pressure drop"
+        zh: "因血压下降导致昏厥"
+        ja: "血圧低下による失神"
+    - name:
+        en: "rebound hypertension"
+        zh: "反跳性高血压"
+        ja: "リバウンド高血圧"
+      notes:
+        en: "If stopped abruptly; must taper"
+        zh: "突然停药时发生；需逐渐减量"
+        ja: "急に中止した場合；漸減が必要"
+    - name:
+        en: "sedation"
+        zh: "镇静"
+        ja: "鎮静"
+      notes:
+        en: "Can be severe, especially initially"
+        zh: "可能很严重，尤其是在初期"
+        ja: "特に初期は重度になる可能性"
 
 # Safety
 contraindications:
-  - "Hypersensitivity to guanfacine"
-  - "Severe bradycardia"
-  - "Heart block"
+  en:
+    - "Hypersensitivity to guanfacine"
+    - "Severe bradycardia"
+    - "Heart block"
+  zh:
+    - "对胍法辛过敏"
+    - "严重心动过缓"
+    - "心脏传导阻滞"
+  ja:
+    - "グアンファシンに対する過敏症"
+    - "重度の徐脈"
+    - "心ブロック"
 
 drugInteractions:
-  - drug: "CYP3A4 inhibitors (ketoconazole)"
+  - drug:
+      en: "CYP3A4 inhibitors (ketoconazole)"
+      zh: "CYP3A4抑制剂（酮康唑）"
+      ja: "CYP3A4阻害剤（ケトコナゾール）"
     severity: "moderate"
-    effect: "Increased guanfacine levels"
-  - drug: "CYP3A4 inducers (rifampin)"
+    effect:
+      en: "Increased guanfacine levels"
+      zh: "胍法辛血药浓度升高"
+      ja: "グアンファシン濃度の上昇"
+  - drug:
+      en: "CYP3A4 inducers (rifampin)"
+      zh: "CYP3A4诱导剂（利福平）"
+      ja: "CYP3A4誘導剤（リファンピン）"
     severity: "moderate"
-    effect: "Decreased guanfacine levels"
-  - drug: "Antihypertensives"
+    effect:
+      en: "Decreased guanfacine levels"
+      zh: "胍法辛血药浓度降低"
+      ja: "グアンファシン濃度の低下"
+  - drug:
+      en: "Antihypertensives"
+      zh: "降压药"
+      ja: "降圧薬"
     severity: "moderate"
-    effect: "Additive hypotensive effect"
-  - drug: "CNS depressants"
+    effect:
+      en: "Additive hypotensive effect"
+      zh: "降压作用叠加"
+      ja: "降圧作用の相加"
+  - drug:
+      en: "CNS depressants"
+      zh: "中枢神经抑制剂"
+      ja: "中枢神経抑制剤"
     severity: "moderate"
-    effect: "Enhanced sedation"
-  - drug: "Valproic acid"
+    effect:
+      en: "Enhanced sedation"
+      zh: "镇静作用增强"
+      ja: "鎮静作用の増強"
+  - drug:
+      en: "Valproic acid"
+      zh: "丙戊酸"
+      ja: "バルプロ酸"
     severity: "moderate"
-    effect: "Increased guanfacine exposure"
+    effect:
+      en: "Increased guanfacine exposure"
+      zh: "胍法辛暴露量增加"
+      ja: "グアンファシン曝露量の増加"
 
-blackBoxWarnings: []
+blackBoxWarnings:
+  en: []
+  zh: []
+  ja: []
 
 pregnancyCategory: "B"
-foodInteractions: "Avoid high-fat meals (increases absorption); avoid grapefruit juice"
+
+foodInteractions:
+  en: "Avoid high-fat meals (increases absorption); avoid grapefruit juice"
+  zh: "避免高脂肪餐（增加吸收）；避免葡萄柚汁"
+  ja: "高脂肪食を避ける（吸収が増加）；グレープフルーツジュースを避ける"
 
 # Practical Information
 typicalDosing:
   children:
     startingDose: "1mg once daily"
     maxDose: "4mg/day (children 6-12) or 7mg/day (adolescents)"
-    notes: "Increase by 1mg weekly; take at same time daily (morning or evening)"
+    notes:
+      en: "Increase by 1mg weekly; take at same time daily (morning or evening)"
+      zh: "每周增加1mg；每天同一时间服用（早上或晚上）"
+      ja: "毎週1mgずつ増量；毎日同じ時間に服用（朝または夕方）"
   adults:
     startingDose: "1mg once daily"
     maxDose: "4mg/day (off-label for adults)"
-    notes: "Not FDA-approved for adult ADHD but commonly used"
+    notes:
+      en: "Not FDA-approved for adult ADHD but commonly used"
+      zh: "未获FDA批准用于成人ADHD但常用"
+      ja: "成人ADHDにはFDA未承認だが一般的に使用される"
 
 costEstimate:
   US:
@@ -149,84 +310,160 @@ costEstimate:
     brand: "Not available"
     generic: "Not available"
 
-storageRequirements: "Room temperature (25°C), protect from light and moisture"
+storageRequirements:
+  en: "Room temperature (25°C), protect from light and moisture"
+  zh: "室温保存（25°C），避光避湿"
+  ja: "室温（25°C）で保存、光と湿気を避ける"
 
 # Approval & Availability
 approvals:
   - region: "US"
     agency: "FDA"
     year: 2009
-    approvedAges: "6-17 years"
+    approvedAges:
+      en: "6-17 years"
+      zh: "6-17岁"
+      ja: "6〜17歳"
     indications:
-      - "ADHD"
+      en: ["ADHD"]
+      zh: ["注意缺陷多动障碍"]
+      ja: ["ADHD"]
     available: true
-    notes: "Approved for children/adolescents; off-label for adults; can be used alone or with stimulants"
+    notes:
+      en: "Approved for children/adolescents; off-label for adults; can be used alone or with stimulants"
+      zh: "批准用于儿童/青少年；成人为超说明书使用；可单独使用或与兴奋剂联用"
+      ja: "小児/青年に承認；成人は適応外使用；単独または刺激薬との併用が可能"
 
   - region: "CN"
     agency: "NMPA"
     year: null
-    approvedAges: ""
-    indications: []
+    approvedAges:
+      en: ""
+      zh: ""
+      ja: ""
+    indications:
+      en: []
+      zh: []
+      ja: []
     available: false
-    notes: "Not approved in China"
+    notes:
+      en: "Not approved in China"
+      zh: "中国未批准"
+      ja: "中国では未承認"
 
   - region: "EU"
     agency: "EMA"
     year: 2015
-    approvedAges: "6-17 years"
+    approvedAges:
+      en: "6-17 years"
+      zh: "6-17岁"
+      ja: "6〜17歳"
     indications:
-      - "ADHD"
+      en: ["ADHD"]
+      zh: ["注意缺陷多动障碍"]
+      ja: ["ADHD"]
     available: true
-    notes: "First ADHD medication approved through EMA centralized procedure"
+    notes:
+      en: "First ADHD medication approved through EMA centralized procedure"
+      zh: "首个通过EMA集中审批程序批准的ADHD药物"
+      ja: "EMA集中審査手続きを通じて承認された最初のADHD薬"
 
   - region: "JP"
     agency: "PMDA"
     year: 2017
-    approvedAges: "6-17 years"
+    approvedAges:
+      en: "6-17 years"
+      zh: "6-17岁"
+      ja: "6〜17歳"
     indications:
-      - "ADHD"
+      en: ["ADHD"]
+      zh: ["注意缺陷多动障碍"]
+      ja: ["ADHD"]
     available: true
-    notes: "No registration requirement (unlike stimulants)"
+    notes:
+      en: "No registration requirement (unlike stimulants)"
+      zh: "无需登记（与兴奋剂不同）"
+      ja: "登録要件なし（刺激薬とは異なる）"
 
   - region: "UK"
     agency: "MHRA"
     year: 2016
-    approvedAges: "6-17 years"
+    approvedAges:
+      en: "6-17 years"
+      zh: "6-17岁"
+      ja: "6〜17歳"
     indications:
-      - "ADHD"
+      en: ["ADHD"]
+      zh: ["注意缺陷多动障碍"]
+      ja: ["ADHD"]
     available: true
-    notes: ""
+    notes:
+      en: ""
+      zh: ""
+      ja: ""
 
   - region: "AU"
     agency: "TGA"
     year: 2013
-    approvedAges: "6-17 years"
+    approvedAges:
+      en: "6-17 years"
+      zh: "6-17岁"
+      ja: "6〜17歳"
     indications:
-      - "ADHD"
+      en: ["ADHD"]
+      zh: ["注意缺陷多动障碍"]
+      ja: ["ADHD"]
     available: true
-    notes: ""
+    notes:
+      en: ""
+      zh: ""
+      ja: ""
 
   - region: "CA"
     agency: "Health Canada"
     year: 2013
-    approvedAges: "6-17 years"
+    approvedAges:
+      en: "6-17 years"
+      zh: "6-17岁"
+      ja: "6〜17歳"
     indications:
-      - "ADHD"
+      en: ["ADHD"]
+      zh: ["注意缺陷多动障碍"]
+      ja: ["ADHD"]
     available: true
-    notes: ""
+    notes:
+      en: ""
+      zh: ""
+      ja: ""
 
 # Special Considerations
 specialConsiderations:
-  cardiacRisk: "Can lower blood pressure and heart rate; use caution with cardiac conditions"
-  abuseRisk: "No abuse potential; not a controlled substance"
-  withdrawalNotes: "MUST TAPER - stopping abruptly can cause rebound hypertension"
-  monitoringRequired: "Blood pressure, heart rate; especially when starting or changing dose"
+  cardiacRisk:
+    en: "Can lower blood pressure and heart rate; use caution with cardiac conditions"
+    zh: "可降低血压和心率；有心脏病者需谨慎"
+    ja: "血圧と心拍数を低下させる可能性；心臓疾患には注意"
+  abuseRisk:
+    en: "No abuse potential; not a controlled substance"
+    zh: "无滥用风险；非管制药物"
+    ja: "乱用の可能性なし；規制物質ではない"
+  withdrawalNotes:
+    en: "MUST TAPER - stopping abruptly can cause rebound hypertension"
+    zh: "必须逐渐减量 - 突然停药可导致反跳性高血压"
+    ja: "必ず漸減すること - 急な中止はリバウンド高血圧を引き起こす可能性"
+  monitoringRequired:
+    en: "Blood pressure, heart rate; especially when starting or changing dose"
+    zh: "血压、心率；尤其是开始用药或调整剂量时"
+    ja: "血圧、心拍数；特に開始時または用量変更時"
 
 # Metadata
 lastUpdated: 2025-12-02
+
 sources:
   - "https://www.goodrx.com/conditions/adhd/non-stimulant-adhd-meds"
   - "https://www.ema.europa.eu/en/news/ema-recommends-approval-treatment-attention-deficit-hyperactivity-disorder"
   - "https://h-navi.jp/column/article/35028853"
 
-notes: "Good option for hyperactivity/impulsivity symptoms or when stimulants cause anxiety. Particularly helpful for emotional dysregulation. Can be combined with stimulants. Must taper when discontinuing. Not approved for adult ADHD but commonly used off-label."
+notes:
+  en: "Good option for hyperactivity/impulsivity symptoms or when stimulants cause anxiety. Particularly helpful for emotional dysregulation. Can be combined with stimulants. Must taper when discontinuing. Not approved for adult ADHD but commonly used off-label."
+  zh: "适用于多动/冲动症状或兴奋剂引起焦虑时。对情绪失调特别有帮助。可与兴奋剂联用。停药时必须逐渐减量。未批准用于成人ADHD但常用于超说明书使用。"
+  ja: "多動性/衝動性の症状、または刺激薬が不安を引き起こす場合に良い選択肢。感情調節障害に特に有用。刺激薬と併用可能。中止時は漸減が必要。成人ADHDには未承認だが適応外使用が一般的。"

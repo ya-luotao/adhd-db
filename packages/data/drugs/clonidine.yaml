@@ -12,7 +12,10 @@ brandNames:
   AU: ["Catapres"]
   CA: ["Catapres"]
 
-genericName: "clonidine hydrochloride"
+genericName:
+  en: "clonidine hydrochloride"
+  zh: "盐酸可乐定"
+  ja: "クロニジン塩酸塩"
 
 manufacturers:
   - name: "Concordia Pharmaceuticals"
@@ -24,7 +27,18 @@ manufacturers:
 
 # Classification
 drugClass: "non-stimulant"
+
+drugClassLabel:
+  en: "Non-Stimulant"
+  zh: "非兴奋剂"
+  ja: "非中枢刺激薬"
+
 category: "alpha-2 adrenergic agonist"
+
+categoryLabel:
+  en: "Alpha-2 Adrenergic Agonist"
+  zh: "α-2肾上腺素能激动剂"
+  ja: "α2アドレナリン受容体作動薬"
 controlledSubstance: false
 schedule:
   US: "Not scheduled"
@@ -34,33 +48,73 @@ schedule:
   UK: "Not scheduled"
 
 # Mechanism
-activeIngredient: "clonidine hydrochloride"
-mechanismOfAction: "Alpha-2 adrenergic receptor agonist. Stimulates presynaptic alpha-2 receptors in the brain, reducing sympathetic outflow and norepinephrine release. In ADHD, thought to improve prefrontal cortex function, reduce hyperactivity, and improve impulse control."
+activeIngredient:
+  en: "clonidine hydrochloride"
+  zh: "盐酸可乐定"
+  ja: "クロニジン塩酸塩"
+
+mechanismOfAction:
+  en: "Alpha-2 adrenergic receptor agonist. Stimulates presynaptic alpha-2 receptors in the brain, reducing sympathetic outflow and norepinephrine release. In ADHD, thought to improve prefrontal cortex function, reduce hyperactivity, and improve impulse control."
+  zh: "α-2肾上腺素能受体激动剂。刺激脑内突触前α-2受体，减少交感神经传出和去甲肾上腺素释放。在ADHD中，被认为可改善前额叶皮层功能，减少多动，改善冲动控制。"
+  ja: "α2アドレナリン受容体作動薬。脳内のシナプス前α2受容体を刺激し、交感神経出力とノルエピネフリン放出を減少させます。ADHDでは、前頭前皮質機能を改善し、多動性を軽減し、衝動制御を改善すると考えられています。"
 neurotransmittersAffected:
   - norepinephrine
 
 # Dosage & Forms
 forms:
   - type: "tablet"
+    typeLabel:
+      en: "Tablet"
+      zh: "片剂"
+      ja: "錠剤"
     releaseType: "extended"
+    releaseTypeLabel:
+      en: "Extended Release"
+      zh: "缓释"
+      ja: "徐放性"
     brandName: "Kapvay"
     strengths: ["0.1mg", "0.2mg"]
     durationHours: 12
-    notes: "FDA-approved for ADHD; twice daily dosing"
+    notes:
+      en: "FDA-approved for ADHD; twice daily dosing"
+      zh: "FDA批准用于ADHD；每日两次给药"
+      ja: "ADHDにFDA承認；1日2回投与"
 
   - type: "tablet"
+    typeLabel:
+      en: "Tablet"
+      zh: "片剂"
+      ja: "錠剤"
     releaseType: "immediate"
+    releaseTypeLabel:
+      en: "Immediate Release"
+      zh: "速释"
+      ja: "即放性"
     brandName: "Catapres"
     strengths: ["0.1mg", "0.2mg", "0.3mg"]
     durationHours: 6-8
-    notes: "Approved for hypertension; used off-label for ADHD"
+    notes:
+      en: "Approved for hypertension; used off-label for ADHD"
+      zh: "批准用于高血压；用于ADHD为超说明书使用"
+      ja: "高血圧に承認；ADHDには適応外使用"
 
   - type: "patch"
+    typeLabel:
+      en: "Transdermal Patch"
+      zh: "透皮贴剂"
+      ja: "経皮パッチ"
     releaseType: "extended"
+    releaseTypeLabel:
+      en: "Extended Release"
+      zh: "缓释"
+      ja: "徐放性"
     brandName: "Catapres-TTS"
     strengths: ["0.1mg/day", "0.2mg/day", "0.3mg/day"]
     durationHours: 168  # 7 days
-    notes: "Transdermal patch; change weekly; off-label for ADHD"
+    notes:
+      en: "Transdermal patch; change weekly; off-label for ADHD"
+      zh: "透皮贴剂；每周更换；用于ADHD为超说明书使用"
+      ja: "経皮パッチ；毎週交換；ADHDには適応外使用"
 
 # Efficacy
 onsetMinutes: null  # Gradual effect
@@ -70,83 +124,201 @@ durationHours: 6-12
 # Side Effects
 sideEffects:
   common:
-    - name: "somnolence/drowsiness"
+    - name:
+        en: "somnolence/drowsiness"
+        zh: "嗜睡/困倦"
+        ja: "傾眠/眠気"
       frequency: "30-40%"
-    - name: "fatigue"
+    - name:
+        en: "fatigue"
+        zh: "疲劳"
+        ja: "疲労"
       frequency: "20-30%"
-    - name: "headache"
+    - name:
+        en: "headache"
+        zh: "头痛"
+        ja: "頭痛"
       frequency: "15-20%"
-    - name: "dry mouth"
+    - name:
+        en: "dry mouth"
+        zh: "口干"
+        ja: "口渇"
       frequency: "10-20%"
-    - name: "dizziness"
+    - name:
+        en: "dizziness"
+        zh: "头晕"
+        ja: "めまい"
       frequency: "10-15%"
-    - name: "irritability"
+    - name:
+        en: "irritability"
+        zh: "易怒"
+        ja: "易刺激性"
       frequency: "10%"
-    - name: "upper respiratory infection"
+    - name:
+        en: "upper respiratory infection"
+        zh: "上呼吸道感染"
+        ja: "上気道感染"
       frequency: "10%"
 
   uncommon:
-    - name: "hypotension"
+    - name:
+        en: "hypotension"
+        zh: "低血压"
+        ja: "低血圧"
       frequency: "5-10%"
-    - name: "bradycardia"
+    - name:
+        en: "bradycardia"
+        zh: "心动过缓"
+        ja: "徐脈"
       frequency: "5%"
-    - name: "constipation"
+    - name:
+        en: "constipation"
+        zh: "便秘"
+        ja: "便秘"
       frequency: "5%"
-    - name: "nausea"
+    - name:
+        en: "nausea"
+        zh: "恶心"
+        ja: "悪心"
       frequency: "5%"
-    - name: "skin reactions (patch)"
+    - name:
+        en: "skin reactions (patch)"
+        zh: "皮肤反应（贴剂）"
+        ja: "皮膚反応（パッチ）"
       frequency: "5-15%"
 
   serious:
-    - name: "hypotension"
-      notes: "Significant drops in blood pressure possible"
-    - name: "bradycardia"
-      notes: "Can slow heart rate significantly"
-    - name: "rebound hypertension"
-      notes: "Severe if stopped abruptly; MUST taper"
-    - name: "sedation"
-      notes: "Can be profound, especially early in treatment"
-    - name: "AV block"
-      notes: "Rare cardiac conduction abnormalities"
+    - name:
+        en: "hypotension"
+        zh: "低血压"
+        ja: "低血圧"
+      notes:
+        en: "Significant drops in blood pressure possible"
+        zh: "可能出现明显血压下降"
+        ja: "血圧の著しい低下の可能性"
+    - name:
+        en: "bradycardia"
+        zh: "心动过缓"
+        ja: "徐脈"
+      notes:
+        en: "Can slow heart rate significantly"
+        zh: "可能显著减慢心率"
+        ja: "心拍数を著しく低下させる可能性"
+    - name:
+        en: "rebound hypertension"
+        zh: "反跳性高血压"
+        ja: "リバウンド高血圧"
+      notes:
+        en: "Severe if stopped abruptly; MUST taper"
+        zh: "突然停药时严重；必须逐渐减量"
+        ja: "急に中止すると重度；必ず漸減すること"
+    - name:
+        en: "sedation"
+        zh: "镇静"
+        ja: "鎮静"
+      notes:
+        en: "Can be profound, especially early in treatment"
+        zh: "可能很严重，尤其是治疗初期"
+        ja: "特に治療初期は重度になる可能性"
+    - name:
+        en: "AV block"
+        zh: "房室传导阻滞"
+        ja: "房室ブロック"
+      notes:
+        en: "Rare cardiac conduction abnormalities"
+        zh: "罕见的心脏传导异常"
+        ja: "まれな心臓伝導異常"
 
 # Safety
 contraindications:
-  - "Hypersensitivity to clonidine"
-  - "Severe bradyarrhythmia"
-  - "Patch: skin irritation at application site"
+  en:
+    - "Hypersensitivity to clonidine"
+    - "Severe bradyarrhythmia"
+    - "Patch: skin irritation at application site"
+  zh:
+    - "对可乐定过敏"
+    - "严重缓慢性心律失常"
+    - "贴剂：贴敷部位皮肤刺激"
+  ja:
+    - "クロニジンに対する過敏症"
+    - "重度の徐脈性不整脈"
+    - "パッチ：貼付部位の皮膚刺激"
 
 drugInteractions:
-  - drug: "Beta-blockers"
+  - drug:
+      en: "Beta-blockers"
+      zh: "β受体阻滞剂"
+      ja: "β遮断薬"
     severity: "major"
-    effect: "Enhanced bradycardia, rebound hypertension risk if clonidine stopped"
-  - drug: "Tricyclic antidepressants"
+    effect:
+      en: "Enhanced bradycardia, rebound hypertension risk if clonidine stopped"
+      zh: "心动过缓增强，停用可乐定时有反跳性高血压风险"
+      ja: "徐脈の増強、クロニジン中止時のリバウンド高血圧リスク"
+  - drug:
+      en: "Tricyclic antidepressants"
+      zh: "三环类抗抑郁药"
+      ja: "三環系抗うつ薬"
     severity: "moderate"
-    effect: "May reduce clonidine effectiveness"
-  - drug: "CNS depressants"
+    effect:
+      en: "May reduce clonidine effectiveness"
+      zh: "可能降低可乐定疗效"
+      ja: "クロニジンの効果を低下させる可能性"
+  - drug:
+      en: "CNS depressants"
+      zh: "中枢神经抑制剂"
+      ja: "中枢神経抑制剤"
     severity: "moderate"
-    effect: "Enhanced sedation"
-  - drug: "Antihypertensives"
+    effect:
+      en: "Enhanced sedation"
+      zh: "镇静作用增强"
+      ja: "鎮静作用の増強"
+  - drug:
+      en: "Antihypertensives"
+      zh: "降压药"
+      ja: "降圧薬"
     severity: "moderate"
-    effect: "Additive hypotensive effect"
-  - drug: "Digoxin"
+    effect:
+      en: "Additive hypotensive effect"
+      zh: "降压作用叠加"
+      ja: "降圧作用の相加"
+  - drug:
+      en: "Digoxin"
+      zh: "地高辛"
+      ja: "ジゴキシン"
     severity: "moderate"
-    effect: "Enhanced AV block risk"
+    effect:
+      en: "Enhanced AV block risk"
+      zh: "房室传导阻滞风险增加"
+      ja: "房室ブロックリスクの増加"
 
-blackBoxWarnings: []
+blackBoxWarnings:
+  en: []
+  zh: []
+  ja: []
 
 pregnancyCategory: "C"
-foodInteractions: "Can be taken with or without food"
+
+foodInteractions:
+  en: "Can be taken with or without food"
+  zh: "可随餐或空腹服用"
+  ja: "食事の有無にかかわらず服用可能"
 
 # Practical Information
 typicalDosing:
   children:
     startingDose: "0.1mg at bedtime"
     maxDose: "0.4mg/day (divided twice daily)"
-    notes: "Increase by 0.1mg weekly; Kapvay is twice daily (morning and bedtime)"
+    notes:
+      en: "Increase by 0.1mg weekly; Kapvay is twice daily (morning and bedtime)"
+      zh: "每周增加0.1mg；Kapvay为每日两次（早晨和睡前）"
+      ja: "毎週0.1mgずつ増量；Kapvayは1日2回（朝と就寝時）"
   adults:
     startingDose: "0.1mg twice daily"
     maxDose: "0.4mg/day"
-    notes: "Off-label for adult ADHD"
+    notes:
+      en: "Off-label for adult ADHD"
+      zh: "用于成人ADHD为超说明书使用"
+      ja: "成人ADHDには適応外使用"
 
 costEstimate:
   US:
@@ -156,62 +328,125 @@ costEstimate:
     brand: "Not available for ADHD"
     generic: "Not available for ADHD"
 
-storageRequirements: "Room temperature (25°C), protect from light"
+storageRequirements:
+  en: "Room temperature (25°C), protect from light"
+  zh: "室温保存（25°C），避光"
+  ja: "室温（25°C）で保存、光を避ける"
 
 # Approval & Availability
 approvals:
   - region: "US"
     agency: "FDA"
     year: 2010
-    approvedAges: "6-17 years"
+    approvedAges:
+      en: "6-17 years"
+      zh: "6-17岁"
+      ja: "6〜17歳"
     indications:
-      - "ADHD"
+      en: ["ADHD"]
+      zh: ["注意缺陷多动障碍"]
+      ja: ["ADHD"]
     available: true
-    notes: "Kapvay (ER) approved for ADHD; can be used alone or with stimulants"
+    notes:
+      en: "Kapvay (ER) approved for ADHD; can be used alone or with stimulants"
+      zh: "Kapvay（缓释）批准用于ADHD；可单独使用或与兴奋剂联用"
+      ja: "Kapvay（徐放）がADHDに承認；単独または刺激薬との併用が可能"
 
   - region: "CN"
     agency: "NMPA"
     year: null
-    approvedAges: ""
-    indications: []
+    approvedAges:
+      en: ""
+      zh: ""
+      ja: ""
+    indications:
+      en: []
+      zh: []
+      ja: []
     available: false
-    notes: "Not approved for ADHD"
+    notes:
+      en: "Not approved for ADHD"
+      zh: "未批准用于ADHD"
+      ja: "ADHDには未承認"
 
   - region: "EU"
     agency: "EMA"
     year: null
-    approvedAges: ""
-    indications: []
+    approvedAges:
+      en: ""
+      zh: ""
+      ja: ""
+    indications:
+      en: []
+      zh: []
+      ja: []
     available: false
-    notes: "Not specifically approved for ADHD; used off-label"
+    notes:
+      en: "Not specifically approved for ADHD; used off-label"
+      zh: "未专门批准用于ADHD；为超说明书使用"
+      ja: "ADHDに特定の承認なし；適応外使用"
 
   - region: "JP"
     agency: "PMDA"
     year: null
-    approvedAges: ""
-    indications: []
+    approvedAges:
+      en: ""
+      zh: ""
+      ja: ""
+    indications:
+      en: []
+      zh: []
+      ja: []
     available: false
-    notes: "Not approved for ADHD"
+    notes:
+      en: "Not approved for ADHD"
+      zh: "未批准用于ADHD"
+      ja: "ADHDには未承認"
 
   - region: "UK"
     agency: "MHRA"
     year: null
-    approvedAges: ""
-    indications: []
+    approvedAges:
+      en: ""
+      zh: ""
+      ja: ""
+    indications:
+      en: []
+      zh: []
+      ja: []
     available: false
-    notes: "Not specifically approved for ADHD; sometimes used off-label"
+    notes:
+      en: "Not specifically approved for ADHD; sometimes used off-label"
+      zh: "未专门批准用于ADHD；有时超说明书使用"
+      ja: "ADHDに特定の承認なし；適応外使用されることがある"
 
 # Special Considerations
 specialConsiderations:
-  cardiacRisk: "Significant cardiovascular effects; monitor BP and HR closely"
-  abuseRisk: "No abuse potential; not a controlled substance"
-  withdrawalNotes: "CRITICAL: Must taper slowly. Abrupt discontinuation can cause severe rebound hypertension, agitation, and other serious effects"
-  monitoringRequired: "Blood pressure and heart rate at each visit; ECG if cardiac concerns"
+  cardiacRisk:
+    en: "Significant cardiovascular effects; monitor BP and HR closely"
+    zh: "心血管影响显著；需密切监测血压和心率"
+    ja: "心血管への影響が大きい；血圧と心拍数を注意深くモニタリング"
+  abuseRisk:
+    en: "No abuse potential; not a controlled substance"
+    zh: "无滥用风险；非管制药物"
+    ja: "乱用の可能性なし；規制物質ではない"
+  withdrawalNotes:
+    en: "CRITICAL: Must taper slowly. Abrupt discontinuation can cause severe rebound hypertension, agitation, and other serious effects"
+    zh: "重要：必须缓慢减量。突然停药可导致严重的反跳性高血压、激动和其他严重后果"
+    ja: "重要：必ずゆっくりと漸減すること。急な中止は重度のリバウンド高血圧、興奮、その他の重篤な影響を引き起こす可能性"
+  monitoringRequired:
+    en: "Blood pressure and heart rate at each visit; ECG if cardiac concerns"
+    zh: "每次就诊时监测血压和心率；如有心脏问题需做心电图"
+    ja: "毎回の診察時に血圧と心拍数；心臓に懸念がある場合はECG"
 
 # Metadata
 lastUpdated: 2025-12-02
+
 sources:
   - "https://www.goodrx.com/conditions/adhd/non-stimulant-adhd-meds"
   - "https://www.additudemag.com/adhd-medications-list-chart-stimulants-nonstimulants/"
 
-notes: "Less selective than guanfacine; more sedating. Only FDA-approved for ADHD in US (Kapvay). Helpful for hyperactivity, impulsivity, and sleep issues. Often used as adjunct to stimulants. CRITICAL: Never stop abruptly due to rebound hypertension risk."
+notes:
+  en: "Less selective than guanfacine; more sedating. Only FDA-approved for ADHD in US (Kapvay). Helpful for hyperactivity, impulsivity, and sleep issues. Often used as adjunct to stimulants. CRITICAL: Never stop abruptly due to rebound hypertension risk."
+  zh: "选择性低于胍法辛；镇静作用更强。在美国仅Kapvay获FDA批准用于ADHD。对多动、冲动和睡眠问题有帮助。常作为兴奋剂的辅助用药。重要：由于反跳性高血压风险，切勿突然停药。"
+  ja: "グアンファシンより選択性が低い；鎮静作用が強い。米国ではKapvayのみがADHDにFDA承認。多動性、衝動性、睡眠の問題に有用。刺激薬の補助としてよく使用される。重要：リバウンド高血圧リスクのため、急な中止は禁忌。"

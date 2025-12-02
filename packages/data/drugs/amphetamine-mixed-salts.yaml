@@ -12,7 +12,10 @@ brandNames:
   AU: []
   CA: ["Adderall XR"]
 
-genericName: "mixed amphetamine salts (amphetamine/dextroamphetamine)"
+genericName:
+  en: "mixed amphetamine salts (amphetamine/dextroamphetamine)"
+  zh: "混合苯丙胺盐（苯丙胺/右旋苯丙胺）"
+  ja: "混合アンフェタミン塩（アンフェタミン/デキストロアンフェタミン）"
 
 manufacturers:
   - name: "Teva Pharmaceuticals"
@@ -24,7 +27,18 @@ manufacturers:
 
 # Classification
 drugClass: "stimulant"
+
+drugClassLabel:
+  en: "Stimulant"
+  zh: "兴奋剂"
+  ja: "中枢刺激薬"
+
 category: "amphetamine"
+
+categoryLabel:
+  en: "Amphetamine"
+  zh: "苯丙胺类"
+  ja: "アンフェタミン系"
 controlledSubstance: true
 schedule:
   US: "Schedule II"
@@ -34,8 +48,15 @@ schedule:
   UK: "Class B, Schedule 2 (rarely prescribed)"
 
 # Mechanism
-activeIngredient: "mixed amphetamine salts (75% dextroamphetamine, 25% levoamphetamine)"
-mechanismOfAction: "Increases release of dopamine and norepinephrine from nerve terminals; blocks reuptake of these neurotransmitters. The combination of amphetamine salts provides both rapid onset and extended duration."
+activeIngredient:
+  en: "mixed amphetamine salts (75% dextroamphetamine, 25% levoamphetamine)"
+  zh: "混合苯丙胺盐（75%右旋苯丙胺，25%左旋苯丙胺）"
+  ja: "混合アンフェタミン塩（75%デキストロアンフェタミン、25%レボアンフェタミン）"
+
+mechanismOfAction:
+  en: "Increases release of dopamine and norepinephrine from nerve terminals; blocks reuptake of these neurotransmitters. The combination of amphetamine salts provides both rapid onset and extended duration."
+  zh: "增加神经末梢多巴胺和去甲肾上腺素的释放；阻断这些神经递质的再摄取。混合苯丙胺盐的组合提供快速起效和持久作用。"
+  ja: "神経末端からのドーパミンとノルエピネフリンの放出を増加させ、これらの神経伝達物質の再取り込みを阻害します。アンフェタミン塩の組み合わせにより、迅速な効果発現と持続的な作用を提供します。"
 neurotransmittersAffected:
   - dopamine
   - norepinephrine
@@ -44,25 +65,58 @@ neurotransmittersAffected:
 # Dosage & Forms
 forms:
   - type: "tablet"
+    typeLabel:
+      en: "Tablet"
+      zh: "片剂"
+      ja: "錠剤"
     releaseType: "immediate"
+    releaseTypeLabel:
+      en: "Immediate Release"
+      zh: "速释"
+      ja: "即放性"
     brandName: "Adderall"
     strengths: ["5mg", "7.5mg", "10mg", "12.5mg", "15mg", "20mg", "30mg"]
     durationHours: 4-6
-    notes: "Usually taken 2-3 times daily"
+    notes:
+      en: "Usually taken 2-3 times daily"
+      zh: "通常每日服用2-3次"
+      ja: "通常1日2〜3回服用"
 
   - type: "capsule"
+    typeLabel:
+      en: "Capsule"
+      zh: "胶囊"
+      ja: "カプセル"
     releaseType: "extended"
+    releaseTypeLabel:
+      en: "Extended Release"
+      zh: "缓释"
+      ja: "徐放性"
     brandName: "Adderall XR"
     strengths: ["5mg", "10mg", "15mg", "20mg", "25mg", "30mg"]
     durationHours: 10-12
-    notes: "Once daily; can be opened and sprinkled on food"
+    notes:
+      en: "Once daily; can be opened and sprinkled on food"
+      zh: "每日一次；可打开撒在食物上"
+      ja: "1日1回；カプセルを開けて食べ物にふりかけることができます"
 
   - type: "capsule"
+    typeLabel:
+      en: "Capsule"
+      zh: "胶囊"
+      ja: "カプセル"
     releaseType: "extended"
+    releaseTypeLabel:
+      en: "Extended Release"
+      zh: "缓释"
+      ja: "徐放性"
     brandName: "Mydayis"
     strengths: ["12.5mg", "25mg", "37.5mg", "50mg"]
     durationHours: 16
-    notes: "Triple-bead formulation for 16-hour coverage"
+    notes:
+      en: "Triple-bead formulation for 16-hour coverage"
+      zh: "三层微珠制剂，提供16小时覆盖"
+      ja: "16時間カバーのためのトリプルビーズ製剤"
 
 # Efficacy
 onsetMinutes: 30-60
@@ -72,89 +126,220 @@ durationHours: 4-6  # IR; 10-16 for XR
 # Side Effects
 sideEffects:
   common:
-    - name: "decreased appetite"
+    - name:
+        en: "decreased appetite"
+        zh: "食欲下降"
+        ja: "食欲減退"
       frequency: "25-35%"
-    - name: "insomnia"
+    - name:
+        en: "insomnia"
+        zh: "失眠"
+        ja: "不眠"
       frequency: "20-30%"
-    - name: "dry mouth"
+    - name:
+        en: "dry mouth"
+        zh: "口干"
+        ja: "口渇"
       frequency: "15-25%"
-    - name: "weight loss"
+    - name:
+        en: "weight loss"
+        zh: "体重减轻"
+        ja: "体重減少"
       frequency: "10-20%"
-    - name: "headache"
+    - name:
+        en: "headache"
+        zh: "头痛"
+        ja: "頭痛"
       frequency: "10-15%"
-    - name: "stomach pain"
+    - name:
+        en: "stomach pain"
+        zh: "胃痛"
+        ja: "胃痛"
       frequency: "10-15%"
-    - name: "anxiety/nervousness"
+    - name:
+        en: "anxiety/nervousness"
+        zh: "焦虑/紧张"
+        ja: "不安/緊張"
       frequency: "10%"
 
   uncommon:
-    - name: "tachycardia"
+    - name:
+        en: "tachycardia"
+        zh: "心动过速"
+        ja: "頻脈"
       frequency: "5-10%"
-    - name: "mood swings"
+    - name:
+        en: "mood swings"
+        zh: "情绪波动"
+        ja: "気分変動"
       frequency: "5-10%"
-    - name: "dizziness"
+    - name:
+        en: "dizziness"
+        zh: "头晕"
+        ja: "めまい"
       frequency: "5%"
-    - name: "restlessness"
+    - name:
+        en: "restlessness"
+        zh: "烦躁不安"
+        ja: "落ち着きのなさ"
       frequency: "5%"
 
   serious:
-    - name: "cardiovascular events"
-      notes: "Sudden death, stroke, myocardial infarction reported"
-    - name: "psychiatric symptoms"
-      notes: "New or worsening psychosis, mania, aggression"
-    - name: "seizures"
-      notes: "May lower seizure threshold"
-    - name: "peripheral vasculopathy"
-      notes: "Raynaud's phenomenon"
-    - name: "serotonin syndrome"
-      notes: "With concurrent serotonergic drugs"
+    - name:
+        en: "cardiovascular events"
+        zh: "心血管事件"
+        ja: "心血管イベント"
+      notes:
+        en: "Sudden death, stroke, myocardial infarction reported"
+        zh: "有猝死、中风、心肌梗死报告"
+        ja: "突然死、脳卒中、心筋梗塞の報告あり"
+    - name:
+        en: "psychiatric symptoms"
+        zh: "精神症状"
+        ja: "精神症状"
+      notes:
+        en: "New or worsening psychosis, mania, aggression"
+        zh: "新发或加重的精神病、躁狂、攻击性"
+        ja: "新規または悪化する精神病、躁病、攻撃性"
+    - name:
+        en: "seizures"
+        zh: "癫痫发作"
+        ja: "発作"
+      notes:
+        en: "May lower seizure threshold"
+        zh: "可能降低癫痫阈值"
+        ja: "発作閾値を下げる可能性"
+    - name:
+        en: "peripheral vasculopathy"
+        zh: "外周血管病变"
+        ja: "末梢血管障害"
+      notes:
+        en: "Raynaud's phenomenon"
+        zh: "雷诺现象"
+        ja: "レイノー現象"
+    - name:
+        en: "serotonin syndrome"
+        zh: "血清素综合征"
+        ja: "セロトニン症候群"
+      notes:
+        en: "With concurrent serotonergic drugs"
+        zh: "与血清素能药物联用时"
+        ja: "セロトニン作動薬との併用時"
 
 # Safety
 contraindications:
-  - "Hypersensitivity to amphetamines"
-  - "MAO inhibitor use within 14 days"
-  - "Advanced arteriosclerosis"
-  - "Symptomatic cardiovascular disease"
-  - "Moderate to severe hypertension"
-  - "Hyperthyroidism"
-  - "Glaucoma"
-  - "Agitated states"
-  - "History of drug abuse"
+  en:
+    - "Hypersensitivity to amphetamines"
+    - "MAO inhibitor use within 14 days"
+    - "Advanced arteriosclerosis"
+    - "Symptomatic cardiovascular disease"
+    - "Moderate to severe hypertension"
+    - "Hyperthyroidism"
+    - "Glaucoma"
+    - "Agitated states"
+    - "History of drug abuse"
+  zh:
+    - "对苯丙胺类过敏"
+    - "14天内使用过MAO抑制剂"
+    - "晚期动脉硬化"
+    - "有症状的心血管疾病"
+    - "中度至重度高血压"
+    - "甲状腺功能亢进"
+    - "青光眼"
+    - "激动状态"
+    - "药物滥用史"
+  ja:
+    - "アンフェタミン類に対する過敏症"
+    - "14日以内のMAO阻害剤使用"
+    - "進行性動脈硬化"
+    - "症候性心血管疾患"
+    - "中等度から重度の高血圧"
+    - "甲状腺機能亢進症"
+    - "緑内障"
+    - "興奮状態"
+    - "薬物乱用歴"
 
 drugInteractions:
-  - drug: "MAO inhibitors"
+  - drug:
+      en: "MAO inhibitors"
+      zh: "MAO抑制剂"
+      ja: "MAO阻害剤"
     severity: "major"
-    effect: "Hypertensive crisis"
-  - drug: "Serotonergic drugs"
+    effect:
+      en: "Hypertensive crisis"
+      zh: "高血压危象"
+      ja: "高血圧クリーゼ"
+  - drug:
+      en: "Serotonergic drugs"
+      zh: "血清素能药物"
+      ja: "セロトニン作動薬"
     severity: "major"
-    effect: "Serotonin syndrome risk"
-  - drug: "Acidifying agents (vitamin C)"
+    effect:
+      en: "Serotonin syndrome risk"
+      zh: "血清素综合征风险"
+      ja: "セロトニン症候群のリスク"
+  - drug:
+      en: "Acidifying agents (vitamin C)"
+      zh: "酸化剂（维生素C）"
+      ja: "酸性化剤（ビタミンC）"
     severity: "moderate"
-    effect: "Decrease amphetamine levels"
-  - drug: "Alkalinizing agents"
+    effect:
+      en: "Decrease amphetamine levels"
+      zh: "降低苯丙胺血药浓度"
+      ja: "アンフェタミン濃度の低下"
+  - drug:
+      en: "Alkalinizing agents"
+      zh: "碱化剂"
+      ja: "アルカリ化剤"
     severity: "moderate"
-    effect: "Increase amphetamine levels"
-  - drug: "Tricyclic antidepressants"
+    effect:
+      en: "Increase amphetamine levels"
+      zh: "增加苯丙胺血药浓度"
+      ja: "アンフェタミン濃度の上昇"
+  - drug:
+      en: "Tricyclic antidepressants"
+      zh: "三环类抗抑郁药"
+      ja: "三環系抗うつ薬"
     severity: "moderate"
-    effect: "Enhanced TCA effects"
+    effect:
+      en: "Enhanced TCA effects"
+      zh: "三环类抗抑郁药作用增强"
+      ja: "TCA作用の増強"
 
 blackBoxWarnings:
-  - "High potential for abuse and dependence"
-  - "Sudden death and serious cardiovascular adverse events"
+  en:
+    - "High potential for abuse and dependence"
+    - "Sudden death and serious cardiovascular adverse events"
+  zh:
+    - "高度滥用和依赖风险"
+    - "猝死和严重心血管不良事件"
+  ja:
+    - "乱用および依存の可能性が高い"
+    - "突然死および重篤な心血管有害事象"
 
 pregnancyCategory: "C"
-foodInteractions: "Avoid vitamin C, citrus, acidic foods within 1 hour of dosing (reduces absorption)"
+
+foodInteractions:
+  en: "Avoid vitamin C, citrus, acidic foods within 1 hour of dosing (reduces absorption)"
+  zh: "服药前后1小时内避免维生素C、柑橘类、酸性食物（降低吸收）"
+  ja: "服用前後1時間以内はビタミンC、柑橘類、酸性食品を避ける（吸収低下）"
 
 # Practical Information
 typicalDosing:
   children:
     startingDose: "5mg once or twice daily (IR) or 10mg once daily (XR)"
     maxDose: "30mg/day (children 6-12) or 40mg/day (adolescents)"
-    notes: "Start low, increase by 5-10mg weekly"
+    notes:
+      en: "Start low, increase by 5-10mg weekly"
+      zh: "从低剂量开始，每周增加5-10mg"
+      ja: "低用量から開始し、毎週5〜10mg増量"
   adults:
     startingDose: "5-10mg twice daily (IR) or 20mg once daily (XR)"
     maxDose: "40mg/day (IR) or 60mg/day (XR)"
-    notes: "Higher doses may be needed for adults"
+    notes:
+      en: "Higher doses may be needed for adults"
+      zh: "成人可能需要更高剂量"
+      ja: "成人は高用量が必要な場合がある"
 
 costEstimate:
   US:
@@ -164,73 +349,143 @@ costEstimate:
     brand: "Not available"
     generic: "Not available"
 
-storageRequirements: "Room temperature (20-25°C), protect from light and moisture"
+storageRequirements:
+  en: "Room temperature (20-25°C), protect from light and moisture"
+  zh: "室温保存（20-25°C），避光避湿"
+  ja: "室温（20-25°C）で保存、光と湿気を避ける"
 
 # Approval & Availability
 approvals:
   - region: "US"
     agency: "FDA"
     year: 1996
-    approvedAges: "3 years and older (IR); 6 years and older (XR)"
+    approvedAges:
+      en: "3 years and older (IR); 6 years and older (XR)"
+      zh: "3岁及以上（速释）；6岁及以上（缓释）"
+      ja: "3歳以上（IR）；6歳以上（XR）"
     indications:
-      - "ADHD"
-      - "Narcolepsy (IR only)"
+      en: ["ADHD", "Narcolepsy (IR only)"]
+      zh: ["注意缺陷多动障碍", "发作性睡病（仅速释）"]
+      ja: ["ADHD", "ナルコレプシー（IRのみ）"]
     available: true
-    notes: "Adderall XR approved 2001; Mydayis approved 2017"
+    notes:
+      en: "Adderall XR approved 2001; Mydayis approved 2017"
+      zh: "Adderall XR于2001年获批；Mydayis于2017年获批"
+      ja: "Adderall XRは2001年承認；Mydayisは2017年承認"
 
   - region: "CN"
     agency: "NMPA"
     year: null
-    approvedAges: ""
-    indications: []
+    approvedAges:
+      en: ""
+      zh: ""
+      ja: ""
+    indications:
+      en: []
+      zh: []
+      ja: []
     available: false
-    notes: "Not approved; amphetamines are controlled substances"
+    notes:
+      en: "Not approved; amphetamines are controlled substances"
+      zh: "未批准；苯丙胺类为管制物质"
+      ja: "未承認；アンフェタミン類は規制物質"
 
   - region: "EU"
     agency: "EMA"
     year: null
-    approvedAges: ""
-    indications: []
+    approvedAges:
+      en: ""
+      zh: ""
+      ja: ""
+    indications:
+      en: []
+      zh: []
+      ja: []
     available: false
-    notes: "Not approved in most EU countries; some exceptions"
+    notes:
+      en: "Not approved in most EU countries; some exceptions"
+      zh: "大多数欧盟国家未批准；少数例外"
+      ja: "ほとんどのEU諸国で未承認；一部例外あり"
 
   - region: "JP"
     agency: "PMDA"
     year: null
-    approvedAges: ""
-    indications: []
+    approvedAges:
+      en: ""
+      zh: ""
+      ja: ""
+    indications:
+      en: []
+      zh: []
+      ja: []
     available: false
-    notes: "Illegal in Japan under Stimulants Control Act (覚醒剤取締法)"
+    notes:
+      en: "Illegal in Japan under Stimulants Control Act (覚醒剤取締法)"
+      zh: "在日本根据《兴奋剂取缔法》（覚醒剤取締法）为非法"
+      ja: "覚醒剤取締法により日本では違法"
 
   - region: "UK"
     agency: "MHRA"
     year: null
-    approvedAges: ""
-    indications: []
+    approvedAges:
+      en: ""
+      zh: ""
+      ja: ""
+    indications:
+      en: []
+      zh: []
+      ja: []
     available: false
-    notes: "Rarely prescribed; dexamphetamine preferred"
+    notes:
+      en: "Rarely prescribed; dexamphetamine preferred"
+      zh: "很少处方；首选右旋苯丙胺"
+      ja: "処方されることは稀；デキストロアンフェタミンが優先"
 
   - region: "CA"
     agency: "Health Canada"
     year: 2004
-    approvedAges: "6 years and older"
+    approvedAges:
+      en: "6 years and older"
+      zh: "6岁及以上"
+      ja: "6歳以上"
     indications:
-      - "ADHD"
+      en: ["ADHD"]
+      zh: ["注意缺陷多动障碍"]
+      ja: ["ADHD"]
     available: true
-    notes: "Adderall XR only; IR not available"
+    notes:
+      en: "Adderall XR only; IR not available"
+      zh: "仅有Adderall XR；速释制剂不可用"
+      ja: "Adderall XRのみ；IRは利用不可"
 
 # Special Considerations
 specialConsiderations:
-  cardiacRisk: "Higher cardiovascular risk than some alternatives; screen before starting"
-  abuseRisk: "High abuse potential; one of the most commonly misused ADHD medications"
-  withdrawalNotes: "Crash, fatigue, depression on discontinuation; no severe physical withdrawal"
-  monitoringRequired: "Height, weight, blood pressure, heart rate, psychiatric symptoms"
+  cardiacRisk:
+    en: "Higher cardiovascular risk than some alternatives; screen before starting"
+    zh: "心血管风险高于部分替代药物；开始前需筛查"
+    ja: "一部の代替薬より心血管リスクが高い；開始前にスクリーニングが必要"
+  abuseRisk:
+    en: "High abuse potential; one of the most commonly misused ADHD medications"
+    zh: "高滥用风险；是最常被滥用的ADHD药物之一"
+    ja: "乱用の可能性が高い；最も一般的に乱用されるADHD薬の一つ"
+  withdrawalNotes:
+    en: "Crash, fatigue, depression on discontinuation; no severe physical withdrawal"
+    zh: "停药时出现崩溃感、疲劳、抑郁；无严重身体戒断症状"
+    ja: "中止時にクラッシュ、疲労、うつが発生；重度の身体的離脱症状はない"
+  monitoringRequired:
+    en: "Height, weight, blood pressure, heart rate, psychiatric symptoms"
+    zh: "身高、体重、血压、心率、精神症状"
+    ja: "身長、体重、血圧、心拍数、精神症状"
 
 # Metadata
 lastUpdated: 2025-12-02
+
 sources:
   - "https://www.additudemag.com/adhd-medications-list-chart-stimulants-nonstimulants/"
   - "https://interacnetwork.com/navigating-stimulant-therapy-for-adult-adhd-in-japan-regulations-and-considerations/"
   - "https://www.fda.gov/consumers/consumer-updates/treating-and-dealing-adhd"
 
-notes: "Primarily a US medication. Illegal in Japan. Not available in most of Europe. Often associated with college student misuse. Significant supply shortages in US during 2022-2023."
+notes:
+  en: "Primarily a US medication. Illegal in Japan. Not available in most of Europe. Often associated with college student misuse. Significant supply shortages in US during 2022-2023."
+  zh: "主要是美国药物。在日本为非法。欧洲大部分地区不可用。常与大学生滥用相关。2022-2023年美国出现严重供应短缺。"
+  ja: "主に米国の薬。日本では違法。ヨーロッパのほとんどの地域で利用不可。大学生の乱用と関連することが多い。2022-2023年に米国で深刻な供給不足が発生。"
