@@ -400,6 +400,109 @@ specialConsiderations:
     zh: "监测自杀倾向（尤其是初期）；血压；心率"
     ja: "自殺傾向のモニタリング（特に初期）；血圧；心拍数"
 
+# Travel Rules
+travelRules:
+  generalAdvice:
+    en: "Viloxazine is NOT a controlled substance. However, it is currently ONLY approved in the US, so availability abroad is very limited. Plan accordingly for longer trips."
+    zh: "维洛沙嗪不是管制药物。但目前仅在美国获批，国外供应非常有限。长途旅行请提前规划。"
+    ja: "ビロキサジンは規制物質ではありません。ただし、現在は米国でのみ承認されているため、海外での入手可能性は非常に限られています。長期旅行の場合は事前に計画してください。"
+
+  requiredDocumentation:
+    - type: "prescription"
+      typeLabel:
+        en: "Valid prescription"
+        zh: "有效处方"
+        ja: "有効な処方箋"
+      notes:
+        en: "Carry prescription as viloxazine is not recognized in most countries"
+        zh: "携带处方，因为维洛沙嗪在大多数国家不被认可"
+        ja: "ビロキサジンはほとんどの国で認知されていないため、処方箋を携帯"
+    - type: "medical_letter"
+      typeLabel:
+        en: "Doctor's letter"
+        zh: "医生证明信"
+        ja: "医師の診断書"
+      notes:
+        en: "Explaining the medication since it's US-only"
+        zh: "说明药物用途，因为仅在美国上市"
+        ja: "米国のみで利用可能な薬であることを説明"
+
+  maxPersonalSupply:
+    default: "90 days"
+
+  crossBorderRules:
+    - fromRegion: "US"
+      toRegion: "JP"
+      status: "restricted"
+      statusLabel:
+        en: "Restricted - Not Available Locally"
+        zh: "受限 - 当地不可用"
+        ja: "制限あり - 現地で入手不可"
+      requirements:
+        en:
+          - "Carry prescription and doctor's letter"
+          - "Keep in original packaging"
+          - "Bring sufficient supply"
+        zh:
+          - "携带处方和医生证明信"
+          - "保持原包装"
+          - "携带充足的供应量"
+        ja:
+          - "処方箋と医師の手紙を携帯"
+          - "元のパッケージを維持"
+          - "十分な量を持参"
+      maxSupply: "90 days"
+      notes:
+        en: "Viloxazine is NOT approved in Japan. You can bring personal supply but cannot obtain refills. Consider this for longer stays."
+        zh: "维洛沙嗪在日本未获批准。可以携带个人使用量，但无法补充。长期停留请考虑此问题。"
+        ja: "ビロキサジンは日本では未承認です。個人使用分は持ち込めますが、補充はできません。長期滞在の場合はご注意ください。"
+
+    - fromRegion: "US"
+      toRegion: "CN"
+      status: "restricted"
+      statusLabel:
+        en: "Restricted - Not Available Locally"
+        zh: "受限 - 当地不可用"
+        ja: "制限あり - 現地で入手不可"
+      requirements:
+        en:
+          - "Carry prescription and doctor's letter"
+          - "Keep in original packaging"
+        zh:
+          - "携带处方和医生证明信"
+          - "保持原包装"
+        ja:
+          - "処方箋と医師の手紙を携帯"
+          - "元のパッケージを維持"
+      maxSupply: "90 days"
+      notes:
+        en: "Viloxazine is NOT approved in China. Personal import for personal use may be allowed with documentation."
+        zh: "维洛沙嗪在中国未获批准。携带文件的个人使用进口可能被允许。"
+        ja: "ビロキサジンは中国では未承認です。書類があれば個人使用の輸入は許可される場合があります。"
+
+    - fromRegion: "US"
+      toRegion: "EU"
+      status: "restricted"
+      statusLabel:
+        en: "Restricted - Not Available Locally"
+        zh: "受限 - 当地不可用"
+        ja: "制限あり - 現地で入手不可"
+      requirements:
+        en:
+          - "Carry prescription and doctor's letter"
+          - "Keep in original packaging"
+        zh:
+          - "携带处方和医生证明信"
+          - "保持原包装"
+        ja:
+          - "処方箋と医師の手紙を携帯"
+          - "元のパッケージを維持"
+      maxSupply: "90 days"
+      notes:
+        en: "Viloxazine is NOT approved in EU. Was previously marketed for depression in 1970s-80s but withdrawn. Personal supply for travel should be allowed."
+        zh: "维洛沙嗪在欧盟未获批准。20世纪70-80年代曾作为抗抑郁药销售但已撤市。旅行携带个人使用量应该被允许。"
+        ja: "ビロキサジンはEUでは未承認です。1970〜80年代にうつ病薬として販売されていましたが撤退。旅行用の個人使用分は許可されるはずです。"
+
 # Metadata
 lastUpdated: 2025-12-02
 

@@ -455,6 +455,94 @@ specialConsiderations:
     zh: "血压、心率；尤其是开始用药或调整剂量时"
     ja: "血圧、心拍数；特に開始時または用量変更時"
 
+# Travel Rules
+travelRules:
+  generalAdvice:
+    en: "Guanfacine is NOT a controlled substance, making travel straightforward. However, it's not available in all countries (notably China). Carry prescription documentation."
+    zh: "胍法辛不是管制药物，旅行较为简单。但并非所有国家都有供应（特别是中国）。请携带处方文件。"
+    ja: "グアンファシンは規制物質ではないため、旅行は簡単です。ただし、すべての国で入手できるわけではありません（特に中国）。処方書類を携帯してください。"
+
+  requiredDocumentation:
+    - type: "prescription"
+      typeLabel:
+        en: "Valid prescription"
+        zh: "有效处方"
+        ja: "有効な処方箋"
+      notes:
+        en: "Recommended for longer trips"
+        zh: "长途旅行建议携带"
+        ja: "長期旅行の場合は推奨"
+
+  maxPersonalSupply:
+    default: "90 days"
+
+  crossBorderRules:
+    - fromRegion: "US"
+      toRegion: "JP"
+      status: "allowed"
+      statusLabel:
+        en: "Allowed"
+        zh: "允许"
+        ja: "許可"
+      requirements:
+        en:
+          - "Carry prescription copy"
+          - "Keep in original packaging"
+        zh:
+          - "携带处方副本"
+          - "保持原包装"
+        ja:
+          - "処方箋のコピーを携帯"
+          - "元のパッケージを維持"
+      maxSupply: "90 days"
+      notes:
+        en: "Guanfacine is approved in Japan and is not a controlled substance. No special permit required."
+        zh: "胍法辛在日本已获批且不是管制药物。无需特别许可。"
+        ja: "グアンファシンは日本で承認されており、規制物質ではありません。特別な許可は不要です。"
+
+    - fromRegion: "US"
+      toRegion: "CN"
+      status: "restricted"
+      statusLabel:
+        en: "Restricted - Not Available"
+        zh: "受限 - 不可用"
+        ja: "制限あり - 入手不可"
+      requirements:
+        en:
+          - "Carry prescription and doctor's letter"
+          - "Keep in original packaging"
+        zh:
+          - "携带处方和医生证明信"
+          - "保持原包装"
+        ja:
+          - "処方箋と医師の手紙を携帯"
+          - "元のパッケージを維持"
+      maxSupply: "90 days"
+      notes:
+        en: "Guanfacine is NOT approved in China. You may bring personal supply but cannot obtain refills locally."
+        zh: "胍法辛在中国未获批准。可以携带个人使用量，但无法在当地补充。"
+        ja: "グアンファシンは中国では未承認です。個人使用分は持ち込めますが、現地での補充はできません。"
+
+    - fromRegion: "US"
+      toRegion: "EU"
+      status: "allowed"
+      statusLabel:
+        en: "Allowed"
+        zh: "允许"
+        ja: "許可"
+      requirements:
+        en:
+          - "Carry prescription copy"
+        zh:
+          - "携带处方副本"
+        ja:
+          - "処方箋のコピーを携帯"
+      maxSupply: "90 days"
+      notes:
+        en: "Guanfacine is approved in EU. No special import requirements."
+        zh: "胍法辛在欧盟已获批。无特殊进口要求。"
+        ja: "グアンファシンはEUで承認されています。特別な輸入要件はありません。"
+
 # Metadata
 lastUpdated: 2025-12-02
 

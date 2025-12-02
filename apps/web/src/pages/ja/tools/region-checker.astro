@@ -1,0 +1,218 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getDrugs, getRegions, getLocalizedValue, type TravelStatus } from '../../../lib/data';
+import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const drugs = getDrugs();
+const { regions } = getRegions();
+const regionCodes = Object.keys(regions);
+
+// Prepare data for client-side filtering
+const drugsData = JSON.stringify(drugs.map(drug => ({
+  id: drug.id,
+  genericName: getLocalizedValue(drug.genericName, lang),
+  controlledSubstance: drug.controlledSubstance,
+  category: drug.category,
+  schedule: drug.schedule,
+  brandNames: drug.brandNames,
+  approvals: drug.approvals?.map(a => ({
+    region: a.region,
+    available: a.available,
+  })),
+  travelRules: drug.travelRules ? {
+    crossBorderRules: drug.travelRules.crossBorderRules?.map(rule => ({
+      fromRegion: rule.fromRegion,
+      toRegion: rule.toRegion,
+      status: rule.status,
+      statusLabel: getLocalizedValue(rule.statusLabel, lang),
+      requirements: rule.requirements ? (Array.isArray(rule.requirements) ? rule.requirements : (rule.requirements as any)[lang] || (rule.requirements as any).en || []) : [],
+      maxSupply: rule.maxSupply,
+      notes: getLocalizedValue(rule.notes, lang),
+    })),
+  } : null,
+})));
+
+const regionsData = JSON.stringify(regions);
+
+const statusColors: Record<TravelStatus, string> = {
+  allowed: '#22c55e',
+  restricted: '#f59e0b',
+  requires_permit: '#f59e0b',
+  prohibited: '#ef4444',
+};
+---
+
+<Layout title={t('tools.regionChecker.title')}>
+  <h1>{t('tools.regionChecker.title')}</h1>
+  <p class="description">{t('tools.regionChecker.description')}</p>
+
+  <div class="checker-form">
+    <div class="form-group">
+      <label for="drug-select">{t('tools.regionChecker.selectDrug')}</label>
+      <select id="drug-select">
+        <option value="">{t('tools.regionChecker.chooseDrug')}</option>
+        {drugs.map(drug => (
+          <option value={drug.id}>{getLocalizedValue(drug.genericName, lang)}</option>
+        ))}
+      </select>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="from-region">{t('tools.regionChecker.fromRegion')}</label>
+        <select id="from-region">
+          <option value="">{t('tools.regionChecker.chooseRegion')}</option>
+          {regionCodes.map(code => (
+            <option value={code}>{code} - {(regions as any)[code].name}</option>
+          ))}
+        </select>
+      </div>
+
+      <div class="arrow-container">
+        <span class="arrow">&rarr;</span>
+      </div>
+
+      <div class="form-group">
+        <label for="to-region">{t('tools.regionChecker.toRegion')}</label>
+        <select id="to-region">
+          <option value="">{t('tools.regionChecker.chooseRegion')}</option>
+          {regionCodes.map(code => (
+            <option value={code}>{code} - {(regions as any)[code].name}</option>
+          ))}
+        </select>
+      </div>
+    </div>
+
+    <button id="check-btn" class="btn btn-primary">{t('tools.regionChecker.check')}</button>
+  </div>
+
+  <div id="results" class="results hidden">
+    <h2>{t('tools.regionChecker.results.title')}</h2>
+    <div id="results-content"></div>
+  </div>
+
+  <div class="disclaimer">
+    <strong>{t('tools.regionChecker.disclaimer.title')}</strong>
+    <p>{t('tools.regionChecker.disclaimer.text')}</p>
+  </div>
+</Layout>
+
+<script define:vars={{ drugsData, regionsData, statusColors, lang }}>
+  const drugs = JSON.parse(drugsData);
+  const regions = JSON.parse(regionsData);
+
+  const drugSelect = document.getElementById('drug-select');
+  const fromRegion = document.getElementById('from-region');
+  const toRegion = document.getElementById('to-region');
+  const checkBtn = document.getElementById('check-btn');
+  const results = document.getElementById('results');
+  const resultsContent = document.getElementById('results-content');
+
+  const statusLabels = {
+    en: { allowed: 'Allowed', restricted: 'Restricted', prohibited: 'Prohibited', requires_permit: 'Requires Import Permit' },
+    zh: { allowed: '允许', restricted: '受限', prohibited: '禁止', requires_permit: '需要进口许可' },
+    ja: { allowed: '許可', restricted: '制限あり', prohibited: '禁止', requires_permit: '輸入許可が必要' },
+  };
+
+  const labels = {
+    en: { travelStatus: 'Travel Status', availability: 'Availability', availableInDest: 'Available in destination', notAvailableInDest: 'Not available in destination', brandNames: 'Brand Names in Destination', schedule: 'Schedule in Destination', requirements: 'Requirements', maxSupply: 'Maximum Supply', notes: 'Notes', inferred: 'This status is inferred from general rules. Verify with official sources.' },
+    zh: { travelStatus: '旅行状态', availability: '可用性', availableInDest: '目的地可用', notAvailableInDest: '目的地不可用', brandNames: '目的地品牌名', schedule: '目的地管制级别', requirements: '要求', maxSupply: '最大携带量', notes: '备注', inferred: '此状态根据一般规则推断。请与官方来源核实。' },
+    ja: { travelStatus: '旅行ステータス', availability: '入手可能性', availableInDest: '目的地で入手可能', notAvailableInDest: '目的地で入手不可', brandNames: '目的地での商品名', schedule: '目的地での規制区分', requirements: '要件', maxSupply: '最大携帯量', notes: '備考', inferred: 'このステータスは一般的なルールから推定されています。公式情報源でご確認ください。' },
+  };
+
+  const currentLabels = labels[lang] || labels.en;
+  const currentStatusLabels = statusLabels[lang] || statusLabels.en;
+
+  checkBtn.addEventListener('click', () => {
+    const drugId = drugSelect.value;
+    const from = fromRegion.value;
+    const to = toRegion.value;
+
+    if (!drugId || !from || !to) { alert('薬物と両方の地域を選択してください'); return; }
+
+    const drug = drugs.find(d => d.id === drugId);
+    if (!drug) return;
+
+    let rule = null;
+    let isInferred = true;
+
+    if (drug.travelRules?.crossBorderRules) {
+      rule = drug.travelRules.crossBorderRules.find(r => r.fromRegion === from && r.toRegion === to);
+      if (rule) isInferred = false;
+    }
+
+    let status = 'allowed';
+    let statusLabel = currentStatusLabels.allowed;
+
+    if (rule) {
+      status = rule.status;
+      statusLabel = rule.statusLabel || currentStatusLabels[rule.status];
+    } else {
+      const destApproval = drug.approvals?.find(a => a.region === to);
+      const destAvailable = destApproval?.available ?? false;
+      if (drug.category === 'amphetamine') {
+        if (to === 'CN') { status = 'prohibited'; statusLabel = currentStatusLabels.prohibited; }
+        else if (to === 'JP') { status = 'requires_permit'; statusLabel = currentStatusLabels.requires_permit; }
+      } else if (drug.controlledSubstance) {
+        status = 'restricted'; statusLabel = currentStatusLabels.restricted;
+      }
+    }
+
+    const destApproval = drug.approvals?.find(a => a.region === to);
+    const destAvailable = destApproval?.available ?? false;
+    const destBrands = drug.brandNames?.[to] || [];
+    const destSchedule = drug.schedule?.[to] || '-';
+    const statusColor = statusColors[status];
+
+    let html = `<div class="result-card" style="border-left: 4px solid ${statusColor}">
+      <div class="result-header"><span class="drug-name">${drug.genericName}</span><span class="route">${from} &rarr; ${to}</span></div>
+      <div class="result-status" style="color: ${statusColor}"><strong>${currentLabels.travelStatus}:</strong> ${statusLabel}</div>
+      ${isInferred ? `<div class="inferred-note">${currentLabels.inferred}</div>` : ''}
+      <div class="result-availability"><strong>${currentLabels.availability}:</strong> <span class="${destAvailable ? 'available' : 'unavailable'}">${destAvailable ? currentLabels.availableInDest : currentLabels.notAvailableInDest}</span></div>
+      ${destBrands.length > 0 ? `<div class="result-brands"><strong>${currentLabels.brandNames}:</strong> ${destBrands.join(', ')}</div>` : ''}
+      <div class="result-schedule"><strong>${currentLabels.schedule}:</strong> ${destSchedule}</div>`;
+
+    if (rule) {
+      if (rule.requirements?.length > 0) html += `<div class="result-requirements"><strong>${currentLabels.requirements}:</strong><ul>${rule.requirements.map(r => `<li>${r}</li>`).join('')}</ul></div>`;
+      if (rule.maxSupply) html += `<div class="result-max-supply"><strong>${currentLabels.maxSupply}:</strong> ${rule.maxSupply}</div>`;
+      if (rule.notes) html += `<div class="result-notes"><strong>${currentLabels.notes}:</strong> ${rule.notes}</div>`;
+    }
+    html += '</div>';
+    resultsContent.innerHTML = html;
+    results.classList.remove('hidden');
+  });
+</script>
+
+<style>
+  .description { color: var(--color-text-secondary); margin-bottom: var(--space-6); }
+  .checker-form { background: var(--color-bg-secondary); border-radius: var(--radius-lg); padding: var(--space-6); margin-bottom: var(--space-6); }
+  .form-group { margin-bottom: var(--space-4); }
+  .form-group label { display: block; font-weight: var(--font-medium); margin-bottom: var(--space-2); }
+  .form-group select { width: 100%; padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-bg); font-size: var(--text-base); }
+  .form-row { display: flex; gap: var(--space-4); align-items: flex-end; flex-wrap: wrap; }
+  .form-row .form-group { flex: 1; min-width: 200px; }
+  .arrow-container { display: flex; align-items: center; padding-bottom: var(--space-4); }
+  .arrow { font-size: var(--text-2xl); color: var(--color-text-tertiary); }
+  .btn { display: inline-block; padding: var(--space-3) var(--space-6); border-radius: var(--radius-md); font-weight: var(--font-medium); cursor: pointer; border: none; font-size: var(--text-base); }
+  .btn-primary { background: var(--color-primary); color: white; }
+  .btn-primary:hover { background: var(--color-primary-600); }
+  .results { margin-bottom: var(--space-6); }
+  .hidden { display: none; }
+  .result-card { background: var(--color-bg-secondary); border-radius: var(--radius-lg); padding: var(--space-6); }
+  .result-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4); padding-bottom: var(--space-4); border-bottom: 1px solid var(--color-border); }
+  .drug-name { font-size: var(--text-xl); font-weight: var(--font-semibold); }
+  .route { background: var(--color-bg-tertiary); padding: var(--space-2) var(--space-3); border-radius: var(--radius-md); font-weight: var(--font-medium); }
+  .result-status { font-size: var(--text-lg); margin-bottom: var(--space-3); }
+  .inferred-note { background: var(--color-warning-light); color: var(--color-warning-700); padding: var(--space-2) var(--space-3); border-radius: var(--radius-md); font-size: var(--text-sm); margin-bottom: var(--space-3); }
+  .result-availability, .result-brands, .result-schedule, .result-requirements, .result-max-supply, .result-notes { margin-bottom: var(--space-2); }
+  .result-requirements ul { margin-left: var(--space-6); margin-top: var(--space-2); }
+  .result-requirements li { margin-bottom: var(--space-1); }
+  .available { color: var(--color-success); }
+  .unavailable { color: var(--color-danger); }
+  .disclaimer { background: var(--color-bg-tertiary); border-radius: var(--radius-lg); padding: var(--space-4); font-size: var(--text-sm); color: var(--color-text-secondary); }
+  .disclaimer strong { display: block; margin-bottom: var(--space-2); }
+  .disclaimer p { margin: 0; }
+  @media (max-width: 639px) { .form-row { flex-direction: column; } .arrow-container { display: none; } .result-header { flex-direction: column; gap: var(--space-2); text-align: center; } }
+</style>

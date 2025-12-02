@@ -483,6 +483,190 @@ specialConsiderations:
     zh: "身高、体重、血压、心率、精神症状"
     ja: "身長、体重、血圧、心拍数、精神症状"
 
+# Travel Rules
+travelRules:
+  generalAdvice:
+    en: "As an amphetamine-class stimulant, lisdexamfetamine faces strict international restrictions. Always check destination country requirements before traveling."
+    zh: "作为苯丙胺类兴奋剂，赖右苯丙胺在国际旅行中面临严格限制。旅行前务必确认目的地国家的要求。"
+    ja: "アンフェタミン系刺激薬として、リスデキサンフェタミンは国際的に厳しい制限があります。旅行前に目的地の国の要件を必ず確認してください。"
+
+  requiredDocumentation:
+    - type: "prescription"
+      typeLabel:
+        en: "Valid prescription"
+        zh: "有效处方"
+        ja: "有効な処方箋"
+      notes:
+        en: "Original prescription in original packaging"
+        zh: "原始处方和原包装"
+        ja: "元の処方箋と元のパッケージ"
+    - type: "medical_letter"
+      typeLabel:
+        en: "Doctor's letter"
+        zh: "医生证明信"
+        ja: "医師の診断書"
+      notes:
+        en: "Stating medical necessity and dosage"
+        zh: "说明医疗必要性和剂量"
+        ja: "医学的必要性と用量を記載"
+
+  maxPersonalSupply:
+    default: "90 days"
+    byRegion:
+      JP: "30 days"
+      UK: "3 months"
+      AU: "3 months"
+
+  crossBorderRules:
+    - fromRegion: "US"
+      toRegion: "JP"
+      status: "requires_permit"
+      statusLabel:
+        en: "Requires Import Permit"
+        zh: "需要进口许可"
+        ja: "輸入許可が必要"
+      requirements:
+        en:
+          - "Apply to Japanese Narcotics Control Department 2+ weeks before travel"
+          - "Carry Yakkan Shoumei (import certificate)"
+          - "Maximum 30-day supply"
+        zh:
+          - "旅行前2周以上向日本麻药取缔部门申请"
+          - "携带药监证明（Yakkan Shoumei）"
+          - "最多30天用量"
+        ja:
+          - "旅行の2週間以上前に麻薬取締部への申請が必要"
+          - "薬監証明の携帯"
+          - "最大30日分"
+      maxSupply: "30 days"
+      notes:
+        en: "Lisdexamfetamine requires a Yakkan Shoumei import permit for Japan. Apply through the Japanese embassy or directly to the Narcotics Control Department."
+        zh: "赖右苯丙胺进入日本需要药监证明。通过日本大使馆或直接向麻药取缔部门申请。"
+        ja: "リスデキサンフェタミンを日本に持ち込むには薬監証明が必要です。日本大使館または麻薬取締部に直接申請してください。"
+      sources:
+        - "https://www.ncd.mhlw.go.jp/en/application.html"
+
+    - fromRegion: "US"
+      toRegion: "CN"
+      status: "prohibited"
+      statusLabel:
+        en: "Prohibited"
+        zh: "禁止"
+        ja: "禁止"
+      requirements:
+        en: []
+        zh: []
+        ja: []
+      notes:
+        en: "Amphetamines are strictly illegal in China. Do NOT attempt to bring this medication into China under any circumstances. Severe legal penalties apply."
+        zh: "苯丙胺类药物在中国属于严格违禁物品。任何情况下都不要试图将此药物带入中国。将面临严厉的法律处罚。"
+        ja: "アンフェタミン類は中国で厳格に違法です。いかなる状況下でもこの薬を中国に持ち込まないでください。厳しい法的処罰が科されます。"
+      sources:
+        - "https://www.china-embassy.org/eng/"
+
+    - fromRegion: "US"
+      toRegion: "UK"
+      status: "allowed"
+      statusLabel:
+        en: "Allowed with Documentation"
+        zh: "凭文件允许"
+        ja: "書類があれば許可"
+      requirements:
+        en:
+          - "Carry prescription in original packaging"
+          - "Letter from prescribing doctor recommended"
+        zh:
+          - "携带原包装处方药"
+          - "建议携带开药医生的证明信"
+        ja:
+          - "処方箋を元のパッケージで携帯"
+          - "処方医の手紙を推奨"
+      maxSupply: "3 months"
+      notes:
+        en: "UK allows personal import of controlled medicines with valid prescription."
+        zh: "英国允许携带个人使用的管制药物入境，需有效处方。"
+        ja: "英国は有効な処方箋があれば規制薬の個人輸入を許可しています。"
+      sources:
+        - "https://www.gov.uk/travelling-controlled-drugs"
+
+    - fromRegion: "US"
+      toRegion: "EU"
+      status: "restricted"
+      statusLabel:
+        en: "Restricted - Varies by Country"
+        zh: "受限 - 因国家而异"
+        ja: "制限あり - 国によって異なる"
+      requirements:
+        en:
+          - "Schengen countries: Carry Schengen certificate for controlled medicines"
+          - "Non-Schengen: Check individual country requirements"
+        zh:
+          - "申根国家：携带管制药品申根证明"
+          - "非申根国家：查询各国具体要求"
+        ja:
+          - "シェンゲン加盟国：規制薬のシェンゲン証明書を携帯"
+          - "非シェンゲン：各国の要件を確認"
+      maxSupply: "30 days"
+      notes:
+        en: "EU Schengen countries require a standardized certificate. Check with your destination country's embassy."
+        zh: "欧盟申根国家需要标准化证明。请向目的地国家大使馆查询。"
+        ja: "EUシェンゲン加盟国は標準化された証明書が必要です。目的地の大使館に確認してください。"
+      sources:
+        - "https://www.emcdda.europa.eu/"
+
+    - fromRegion: "US"
+      toRegion: "AU"
+      status: "restricted"
+      statusLabel:
+        en: "Restricted - Declaration Required"
+        zh: "受限 - 需要申报"
+        ja: "制限あり - 申告が必要"
+      requirements:
+        en:
+          - "Declare medication at customs"
+          - "Carry prescription and doctor's letter"
+          - "Maximum 3 months supply"
+        zh:
+          - "在海关申报药物"
+          - "携带处方和医生证明信"
+          - "最多3个月用量"
+        ja:
+          - "税関で薬物を申告"
+          - "処方箋と医師の手紙を携帯"
+          - "最大3ヶ月分"
+      maxSupply: "3 months"
+      notes:
+        en: "Australia requires declaration of Schedule 8 medications. Bring supporting documentation."
+        zh: "澳大利亚要求申报Schedule 8药物。请携带证明文件。"
+        ja: "オーストラリアはSchedule 8の薬物の申告が必要です。証明書類を携帯してください。"
+      sources:
+        - "https://www.tga.gov.au/entering-australia"
+
+    - fromRegion: "US"
+      toRegion: "CA"
+      status: "allowed"
+      statusLabel:
+        en: "Allowed with Prescription"
+        zh: "凭处方允许"
+        ja: "処方箋があれば許可"
+      requirements:
+        en:
+          - "Carry medication in original labeled container"
+          - "Bring copy of prescription"
+        zh:
+          - "携带原标签容器中的药物"
+          - "携带处方副本"
+        ja:
+          - "元のラベル付き容器で薬を携帯"
+          - "処方箋のコピーを持参"
+      maxSupply: "90 days"
+      notes:
+        en: "Canada-US border crossing is generally straightforward with proper documentation."
+        zh: "携带适当文件过加美边境通常较为简单。"
+        ja: "適切な書類があれば、カナダ-米国国境の通過は一般的に簡単です。"
+      sources:
+        - "https://www.cbsa-asfc.gc.ca/"
+
 # Metadata
 lastUpdated: 2025-12-02
 
