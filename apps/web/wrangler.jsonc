@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "adhd-db",
+  "compatibility_date": "2024-12-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Cloudflare Workers configuration for Astro
+  "main": "./dist/_worker.js/index.js",
+
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS"
+  }
+}
