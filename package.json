@@ -1,0 +1,16 @@
+{
+  "name": "adhd-db",
+  "private": true,
+  "version": "0.0.1",
+  "description": "ADHD drug database with multi-region approval data",
+  "scripts": {
+    "lint": "pnpm -r lint",
+    "build": "pnpm -r build"
+  },
+  "keywords": [
+    "adhd",
+    "medication",
+    "database"
+  ],
+  "license": "MIT"
+}

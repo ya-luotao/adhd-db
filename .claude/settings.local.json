@@ -3,7 +3,8 @@
     "allow": [
       "WebSearch",
       "Bash(git add:*)",
-      "Bash(git commit -m \"$(cat <<''EOF''\nInitial commit: ADHD drug database structure\n\n- Add YAML schema template for drug entries\n- Add region definitions (US, CN, EU, JP, UK, AU, CA)\n- Add 7 drug entries with multi-region approval data:\n  - Stimulants: methylphenidate, lisdexamfetamine, amphetamine\n  - Non-stimulants: atomoxetine, guanfacine, clonidine, viloxazine\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+      "Bash(git commit -m \"$(cat <<''EOF''\nInitial commit: ADHD drug database structure\n\n- Add YAML schema template for drug entries\n- Add region definitions (US, CN, EU, JP, UK, AU, CA)\n- Add 7 drug entries with multi-region approval data:\n  - Stimulants: methylphenidate, lisdexamfetamine, amphetamine\n  - Non-stimulants: atomoxetine, guanfacine, clonidine, viloxazine\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []

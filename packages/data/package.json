@@ -1,0 +1,18 @@
+{
+  "name": "@adhd-db/data",
+  "version": "0.0.1",
+  "description": "ADHD drug data entries with multi-region approval information",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "drugs/*.yaml",
+    "*.json"
+  ],
+  "keywords": [
+    "adhd",
+    "drugs",
+    "medication",
+    "data"
+  ],
+  "license": "MIT"
+}

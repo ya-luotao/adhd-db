@@ -1,0 +1,17 @@
+{
+  "name": "@adhd-db/schema",
+  "version": "0.0.1",
+  "description": "YAML schema templates for ADHD drug database",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "*.yaml",
+    "*.json"
+  ],
+  "keywords": [
+    "adhd",
+    "schema",
+    "yaml"
+  ],
+  "license": "MIT"
+}

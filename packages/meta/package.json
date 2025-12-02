@@ -1,0 +1,17 @@
+{
+  "name": "@adhd-db/meta",
+  "version": "0.0.1",
+  "description": "Metadata definitions for ADHD drug database (regions, categories, etc.)",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "*.yaml",
+    "*.json"
+  ],
+  "keywords": [
+    "adhd",
+    "metadata",
+    "regions"
+  ],
+  "license": "MIT"
+}
