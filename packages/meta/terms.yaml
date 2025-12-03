@@ -1,0 +1,210 @@
+# Glossary Terms for ADHD Drug Database
+# Each term has: id, name (i18n), description (i18n), wikiUrl
+
+terms:
+  # Neurotransmitters
+  dopamine:
+    name:
+      en: "Dopamine"
+      zh: "多巴胺"
+      ja: "ドーパミン"
+    description:
+      en: "A neurotransmitter that plays a key role in reward, motivation, and attention. ADHD medications often work by increasing dopamine levels in the brain."
+      zh: "一种神经递质，在奖励、动机和注意力方面起着关键作用。ADHD药物通常通过增加大脑中的多巴胺水平来发挥作用。"
+      ja: "報酬、動機付け、注意力に重要な役割を果たす神経伝達物質。ADHD治療薬は脳内のドーパミン濃度を高めることで作用することが多い。"
+    wikiUrl: "https://en.wikipedia.org/wiki/Dopamine"
+
+  norepinephrine:
+    name:
+      en: "Norepinephrine"
+      zh: "去甲肾上腺素"
+      ja: "ノルエピネフリン"
+    description:
+      en: "A neurotransmitter involved in attention, alertness, and the fight-or-flight response. Many ADHD medications increase norepinephrine activity."
+      zh: "一种参与注意力、警觉性和战斗或逃跑反应的神经递质。许多ADHD药物会增加去甲肾上腺素的活性。"
+      ja: "注意力、覚醒、闘争・逃走反応に関与する神経伝達物質。多くのADHD治療薬はノルエピネフリンの活性を高める。"
+    wikiUrl: "https://en.wikipedia.org/wiki/Norepinephrine"
+
+  serotonin:
+    name:
+      en: "Serotonin"
+      zh: "血清素"
+      ja: "セロトニン"
+    description:
+      en: "A neurotransmitter that regulates mood, sleep, and appetite. Some ADHD medications may also affect serotonin levels."
+      zh: "一种调节情绪、睡眠和食欲的神经递质。一些ADHD药物也可能影响血清素水平。"
+      ja: "気分、睡眠、食欲を調節する神経伝達物質。一部のADHD治療薬はセロトニン濃度にも影響を与える可能性がある。"
+    wikiUrl: "https://en.wikipedia.org/wiki/Serotonin"
+
+  # Drug Classes
+  stimulant:
+    name:
+      en: "Stimulant"
+      zh: "兴奋剂"
+      ja: "刺激薬"
+    description:
+      en: "A class of drugs that increase activity in the central nervous system. Stimulants are the first-line treatment for ADHD and work by increasing dopamine and norepinephrine."
+      zh: "一类增加中枢神经系统活动的药物。兴奋剂是ADHD的一线治疗药物，通过增加多巴胺和去甲肾上腺素来发挥作用。"
+      ja: "中枢神経系の活動を高める薬物のクラス。刺激薬はADHDの第一選択薬であり、ドーパミンとノルエピネフリンを増加させることで作用する。"
+    wikiUrl: "https://en.wikipedia.org/wiki/Stimulant"
+
+  non-stimulant:
+    name:
+      en: "Non-Stimulant"
+      zh: "非兴奋剂"
+      ja: "非刺激薬"
+    description:
+      en: "ADHD medications that work through mechanisms other than increasing stimulation. Often used when stimulants are ineffective or cause side effects."
+      zh: "通过兴奋剂以外的机制发挥作用的ADHD药物。通常在兴奋剂无效或引起副作用时使用。"
+      ja: "刺激以外のメカニズムで作用するADHD治療薬。刺激薬が効果的でない場合や副作用がある場合によく使用される。"
+    wikiUrl: "https://en.wikipedia.org/wiki/Norepinephrine_reuptake_inhibitor"
+
+  # Mechanisms
+  reuptake-inhibitor:
+    name:
+      en: "Reuptake Inhibitor"
+      zh: "再摄取抑制剂"
+      ja: "再取り込み阻害薬"
+    description:
+      en: "A type of drug that blocks the reabsorption of neurotransmitters, increasing their concentration in the brain. Many ADHD medications are reuptake inhibitors."
+      zh: "一种阻断神经递质重吸收的药物，增加其在大脑中的浓度。许多ADHD药物都是再摄取抑制剂。"
+      ja: "神経伝達物質の再吸収を阻害し、脳内濃度を高める薬物の一種。多くのADHD治療薬は再取り込み阻害薬である。"
+    wikiUrl: "https://en.wikipedia.org/wiki/Reuptake_inhibitor"
+
+  prodrug:
+    name:
+      en: "Prodrug"
+      zh: "前药"
+      ja: "プロドラッグ"
+    description:
+      en: "A medication that is inactive until metabolized in the body. Lisdexamfetamine is a prodrug that converts to dextroamphetamine."
+      zh: "一种在体内代谢前处于非活性状态的药物。赖氨酸安非他命是一种转化为右旋安非他命的前药。"
+      ja: "体内で代謝されるまで不活性な薬物。リスデキサンフェタミンはデキストロアンフェタミンに変換されるプロドラッグである。"
+    wikiUrl: "https://en.wikipedia.org/wiki/Prodrug"
+
+  # Formulations
+  extended-release:
+    name:
+      en: "Extended Release"
+      zh: "缓释"
+      ja: "徐放性"
+    description:
+      en: "A formulation designed to release medication slowly over time, providing longer-lasting effects and reducing the need for multiple daily doses."
+      zh: "一种设计为随时间缓慢释放药物的配方，提供更持久的效果，减少每日多次给药的需要。"
+      ja: "薬を時間をかけてゆっくり放出するように設計された製剤で、より長い効果を提供し、1日複数回の服用の必要性を減らす。"
+    wikiUrl: "https://en.wikipedia.org/wiki/Extended-release_dosage_form"
+
+  immediate-release:
+    name:
+      en: "Immediate Release"
+      zh: "速释"
+      ja: "即放性"
+    description:
+      en: "A formulation that releases medication quickly after ingestion, providing rapid onset but shorter duration of effect."
+      zh: "一种在服用后快速释放药物的配方，起效快但持续时间较短。"
+      ja: "服用後すぐに薬を放出する製剤で、作用発現は速いが持続時間は短い。"
+    wikiUrl: "https://en.wikipedia.org/wiki/Immediate-release"
+
+  # Regulatory
+  controlled-substance:
+    name:
+      en: "Controlled Substance"
+      zh: "管制药品"
+      ja: "規制物質"
+    description:
+      en: "A drug regulated by law due to potential for abuse or dependence. Most stimulant ADHD medications are controlled substances requiring special prescriptions."
+      zh: "因可能被滥用或产生依赖而受法律监管的药物。大多数兴奋剂类ADHD药物都是需要特殊处方的管制药品。"
+      ja: "乱用や依存の可能性があるため法律で規制されている薬物。ほとんどの刺激薬系ADHD治療薬は特別な処方箋が必要な規制物質である。"
+    wikiUrl: "https://en.wikipedia.org/wiki/Controlled_substance"
+
+  schedule-ii:
+    name:
+      en: "Schedule II"
+      zh: "二类管制药"
+      ja: "スケジュールII"
+    description:
+      en: "In the US, drugs with high potential for abuse but accepted medical use. Includes amphetamines and methylphenidate. Prescriptions cannot be refilled."
+      zh: "在美国，指有高度滥用潜力但有公认医疗用途的药物。包括安非他命和哌甲酯。处方不能续配。"
+      ja: "米国では、乱用の可能性は高いが医療用途が認められている薬物。アンフェタミンやメチルフェニデートが含まれる。処方箋の再調剤はできない。"
+    wikiUrl: "https://en.wikipedia.org/wiki/Schedule_II_controlled_substance"
+
+  # Conditions
+  adhd:
+    name:
+      en: "ADHD"
+      zh: "注意缺陷多动障碍"
+      ja: "ADHD"
+    description:
+      en: "Attention Deficit Hyperactivity Disorder - a neurodevelopmental condition characterized by inattention, hyperactivity, and impulsivity."
+      zh: "注意缺陷多动障碍 - 一种以注意力不集中、多动和冲动为特征的神经发育障碍。"
+      ja: "注意欠如・多動症 - 不注意、多動性、衝動性を特徴とする神経発達障害。"
+    wikiUrl: "https://en.wikipedia.org/wiki/Attention_deficit_hyperactivity_disorder"
+
+  # Pharmacology
+  half-life:
+    name:
+      en: "Half-life"
+      zh: "半衰期"
+      ja: "半減期"
+    description:
+      en: "The time it takes for the concentration of a drug in the body to reduce by half. Affects dosing frequency and duration of effect."
+      zh: "药物在体内浓度减半所需的时间。影响给药频率和作用持续时间。"
+      ja: "体内の薬物濃度が半分に減少するのにかかる時間。投与頻度と作用持続時間に影響する。"
+    wikiUrl: "https://en.wikipedia.org/wiki/Biological_half-life"
+
+  bioavailability:
+    name:
+      en: "Bioavailability"
+      zh: "生物利用度"
+      ja: "生物学的利用能"
+    description:
+      en: "The proportion of a drug that enters circulation and is able to have an active effect. Affected by route of administration and metabolism."
+      zh: "进入循环系统并能产生活性作用的药物比例。受给药途径和代谢影响。"
+      ja: "循環系に入り活性効果を発揮できる薬物の割合。投与経路と代謝の影響を受ける。"
+    wikiUrl: "https://en.wikipedia.org/wiki/Bioavailability"
+
+  # Side Effects
+  tachycardia:
+    name:
+      en: "Tachycardia"
+      zh: "心动过速"
+      ja: "頻脈"
+    description:
+      en: "An abnormally rapid heart rate, typically over 100 beats per minute. A potential side effect of stimulant medications."
+      zh: "心率异常加快，通常超过每分钟100次。是兴奋剂药物的潜在副作用。"
+      ja: "心拍数が異常に速くなること、通常は毎分100回以上。刺激薬の潜在的な副作用。"
+    wikiUrl: "https://en.wikipedia.org/wiki/Tachycardia"
+
+  insomnia:
+    name:
+      en: "Insomnia"
+      zh: "失眠"
+      ja: "不眠症"
+    description:
+      en: "Difficulty falling or staying asleep. Common side effect of stimulant ADHD medications, especially if taken late in the day."
+      zh: "难以入睡或保持睡眠。兴奋剂类ADHD药物的常见副作用，尤其是在一天中较晚时间服用时。"
+      ja: "入眠困難または睡眠維持困難。刺激薬系ADHD治療薬の一般的な副作用で、特に遅い時間に服用した場合に起こりやすい。"
+    wikiUrl: "https://en.wikipedia.org/wiki/Insomnia"
+
+  appetite-suppression:
+    name:
+      en: "Appetite Suppression"
+      zh: "食欲抑制"
+      ja: "食欲抑制"
+    description:
+      en: "Reduced desire to eat, a common side effect of stimulant medications. May lead to weight loss, especially in children."
+      zh: "进食欲望降低，是兴奋剂药物的常见副作用。可能导致体重减轻，尤其是在儿童中。"
+      ja: "食欲の低下、刺激薬の一般的な副作用。特に小児では体重減少につながる可能性がある。"
+    wikiUrl: "https://en.wikipedia.org/wiki/Anorectic"
+
+  # Receptors
+  alpha-2-agonist:
+    name:
+      en: "Alpha-2 Agonist"
+      zh: "α2激动剂"
+      ja: "α2作動薬"
+    description:
+      en: "A drug that activates alpha-2 adrenergic receptors. Guanfacine and clonidine are alpha-2 agonists used for ADHD."
+      zh: "一种激活α2肾上腺素能受体的药物。胍法辛和可乐定是用于ADHD的α2激动剂。"
+      ja: "α2アドレナリン受容体を活性化する薬物。グアンファシンとクロニジンはADHDに使用されるα2作動薬である。"
+    wikiUrl: "https://en.wikipedia.org/wiki/Alpha-2_adrenergic_receptor_agonist"

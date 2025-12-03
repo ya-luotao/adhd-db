@@ -1,5 +1,6 @@
 ---
 import DatabaseLayout from '../../../layouts/DatabaseLayout.astro';
+import GlossaryText from '../../../components/GlossaryText.astro';
 import { getDrugs, getDrugRaw, getLocalizedValue, getLocalizedArray, type TravelStatus } from '../../../lib/data';
 import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../../i18n/utils';
 
@@ -131,7 +132,9 @@ const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().get
           <span class="title-marker"></span>
           {t('drugs.mechanism')}
         </h2>
-        <p class="mechanism-text">{l(drug.mechanismOfAction)}</p>
+        <p class="mechanism-text">
+          <GlossaryText text={l(drug.mechanismOfAction)} lang={lang} />
+        </p>
       </section>
     )}
 

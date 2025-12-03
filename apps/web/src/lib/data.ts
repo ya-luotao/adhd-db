@@ -352,3 +352,41 @@ export function inferTravelStatus(
 export function getAvailableRegions(drug: Drug): string[] {
   return drug.approvals?.filter(a => a.available).map(a => a.region) || [];
 }
+
+// Glossary Terms
+export interface Term {
+  id: string;
+  name: LocalizedField;
+  description: LocalizedField;
+  wikiUrl: string;
+}
+
+export interface TermsData {
+  terms: Record<string, Omit<Term, 'id'>>;
+}
+
+let termsCache: Term[] | null = null;
+
+export function getTerms(): Term[] {
+  if (termsCache) return termsCache;
+
+  const termsPath = path.join(getMetaPath(), 'terms.yaml');
+  if (!fs.existsSync(termsPath)) return [];
+
+  const data = readYamlFile<TermsData>(termsPath);
+  termsCache = Object.entries(data.terms).map(([id, term]) => ({
+    id,
+    ...term,
+  }));
+  return termsCache;
+}
+
+export function getTerm(id: string): Term | undefined {
+  const terms = getTerms();
+  return terms.find(t => t.id === id);
+}
+
+export function getTermsMap(): Map<string, Term> {
+  const terms = getTerms();
+  return new Map(terms.map(t => [t.id, t]));
+}

@@ -1,0 +1,300 @@
+---
+import { getTerms, getLocalizedValue, type Term } from '../lib/data';
+import type { Lang } from '../i18n/translations';
+
+interface Props {
+  text: string;
+  lang: Lang;
+  class?: string;
+}
+
+const { text, lang, class: className } = Astro.props;
+
+// Get all terms
+const terms = getTerms();
+
+// Build a map of term patterns to match (both localized names and English names)
+interface MatchInfo {
+  term: Term;
+  pattern: string;
+  localizedName: string;
+}
+
+const matchPatterns: MatchInfo[] = [];
+
+for (const term of terms) {
+  const localizedName = getLocalizedValue(term.name, lang);
+  const englishName = term.name.en || '';
+
+  // Add localized name pattern
+  if (localizedName) {
+    matchPatterns.push({
+      term,
+      pattern: localizedName.toLowerCase(),
+      localizedName,
+    });
+  }
+
+  // Add English name if different from localized (for matching English terms in non-English content)
+  if (englishName && englishName.toLowerCase() !== localizedName.toLowerCase()) {
+    matchPatterns.push({
+      term,
+      pattern: englishName.toLowerCase(),
+      localizedName,
+    });
+  }
+}
+
+// Sort by pattern length (longest first) to match longer terms before shorter ones
+matchPatterns.sort((a, b) => b.pattern.length - a.pattern.length);
+
+// Function to escape regex special characters
+function escapeRegex(str: string): string {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// Build combined regex pattern
+const regexPattern = matchPatterns
+  .map(m => `(${escapeRegex(m.pattern)})`)
+  .join('|');
+
+// Process text and create segments
+interface TextSegment {
+  type: 'text' | 'term';
+  content: string;
+  term?: Term;
+}
+
+const segments: TextSegment[] = [];
+
+if (regexPattern && text) {
+  const regex = new RegExp(regexPattern, 'gi');
+  let lastIndex = 0;
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    // Add text before match
+    if (match.index > lastIndex) {
+      segments.push({
+        type: 'text',
+        content: text.slice(lastIndex, match.index),
+      });
+    }
+
+    // Find which term matched
+    const matchedText = match[0].toLowerCase();
+    const matchInfo = matchPatterns.find(m => m.pattern === matchedText);
+
+    if (matchInfo) {
+      segments.push({
+        type: 'term',
+        content: match[0], // Keep original casing
+        term: matchInfo.term,
+      });
+    } else {
+      segments.push({
+        type: 'text',
+        content: match[0],
+      });
+    }
+
+    lastIndex = match.index + match[0].length;
+  }
+
+  // Add remaining text
+  if (lastIndex < text.length) {
+    segments.push({
+      type: 'text',
+      content: text.slice(lastIndex),
+    });
+  }
+} else {
+  segments.push({ type: 'text', content: text });
+}
+
+// Helper to get localized description
+const getDescription = (term: Term) => getLocalizedValue(term.description, lang);
+const getName = (term: Term) => getLocalizedValue(term.name, lang);
+---
+
+<span class:list={['glossary-text', className]}>
+  {segments.map(segment => (
+    segment.type === 'term' && segment.term ? (
+      <span class="glossary-term" data-term-id={segment.term.id}>
+        <span class="term-text">{segment.content}</span>
+        <span class="term-tooltip">
+          <span class="tooltip-header">
+            <span class="tooltip-name">{getName(segment.term)}</span>
+            <a href={segment.term.wikiUrl} target="_blank" rel="noopener noreferrer" class="tooltip-wiki">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+            </a>
+          </span>
+          <span class="tooltip-desc">{getDescription(segment.term)}</span>
+        </span>
+      </span>
+    ) : (
+      <Fragment set:html={segment.content} />
+    )
+  ))}
+</span>
+
+<style>
+  .glossary-text {
+    display: inline;
+  }
+
+  .glossary-term {
+    position: relative;
+    display: inline;
+  }
+
+  .term-text {
+    border-bottom: 1px dotted var(--dossier-gold, #c4a052);
+    cursor: help;
+    transition: border-color 0.15s, color 0.15s;
+  }
+
+  .glossary-term:hover .term-text {
+    color: var(--dossier-gold, #c4a052);
+    border-bottom-style: solid;
+  }
+
+  .term-tooltip {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    padding: 12px 14px;
+    background: var(--dossier-paper, #fffef9);
+    border: 1px solid var(--dossier-border, #e8e4dc);
+    border-radius: 6px;
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.08),
+      0 2px 4px rgba(0, 0, 0, 0.04);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+    transform: translateX(-50%) translateY(4px);
+    z-index: 100;
+    pointer-events: none;
+  }
+
+  .glossary-term:hover .term-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+  }
+
+  /* Arrow */
+  .term-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--dossier-border, #e8e4dc);
+  }
+
+  .term-tooltip::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: var(--dossier-paper, #fffef9);
+    z-index: 1;
+  }
+
+  .tooltip-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--dossier-border, #e8e4dc);
+  }
+
+  .tooltip-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--dossier-accent, #1a1a2e);
+    letter-spacing: 0.02em;
+  }
+
+  .tooltip-wiki {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    color: var(--dossier-muted, #8b8680);
+    background: var(--dossier-cream, #f5f2eb);
+    border-radius: 4px;
+    transition: color 0.15s, background 0.15s;
+    flex-shrink: 0;
+  }
+
+  .tooltip-wiki:hover {
+    color: var(--dossier-accent, #1a1a2e);
+    background: var(--dossier-border, #e8e4dc);
+  }
+
+  .tooltip-desc {
+    display: block;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: var(--dossier-ink, #2c2c2c);
+  }
+
+  /* Adjust tooltip position for terms near edges */
+  .glossary-term:first-child .term-tooltip,
+  .glossary-text > .glossary-term:nth-child(-n+2) .term-tooltip {
+    left: 0;
+    transform: translateX(0) translateY(4px);
+  }
+
+  .glossary-term:first-child:hover .term-tooltip,
+  .glossary-text > .glossary-term:nth-child(-n+2):hover .term-tooltip {
+    transform: translateX(0) translateY(0);
+  }
+
+  .glossary-term:first-child .term-tooltip::after,
+  .glossary-term:first-child .term-tooltip::before,
+  .glossary-text > .glossary-term:nth-child(-n+2) .term-tooltip::after,
+  .glossary-text > .glossary-term:nth-child(-n+2) .term-tooltip::before {
+    left: 24px;
+  }
+
+  /* Mobile: show tooltip below */
+  @media (max-width: 600px) {
+    .term-tooltip {
+      bottom: auto;
+      top: calc(100% + 8px);
+      width: 240px;
+    }
+
+    .term-tooltip::after {
+      top: auto;
+      bottom: 100%;
+      border-top-color: transparent;
+      border-bottom-color: var(--dossier-border, #e8e4dc);
+    }
+
+    .term-tooltip::before {
+      top: auto;
+      bottom: 100%;
+      border-top-color: transparent;
+      border-bottom-color: var(--dossier-paper, #fffef9);
+    }
+  }
+</style>
