@@ -199,6 +199,61 @@ export interface TravelRules {
   crossBorderRules?: CrossBorderRule[];
 }
 
+// FDA Data Types
+export interface FDAPharmacologicClass {
+  mechanismOfAction?: string[];
+  establishedClass?: string[];
+  physiologicEffect?: string[];
+}
+
+export interface FDAAbuseAndDependence {
+  controlledSubstanceClass?: string;
+  abuse?: LocalizedField;
+  dependence?: LocalizedField;
+}
+
+export interface FDAData {
+  applicationNumbers?: string[];
+  splSetId?: string;
+  splId?: string;
+  rxcui?: string[];
+  pharmacologicClass?: FDAPharmacologicClass;
+  boxedWarning?: LocalizedField;
+  fdaIndications?: LocalizedField;
+  abuseAndDependence?: FDAAbuseAndDependence;
+  labelEffectiveDate?: string;
+  fdaLabelUrl?: string;
+}
+
+export interface FAERSReaction {
+  reaction: LocalizedField;
+  reportCount: number;
+  percentage: number;
+}
+
+export interface FAERSDemographics {
+  byAge?: Array<{ ageGroup: string; count: number }>;
+  bySex?: Array<{ sex: string; count: number }>;
+}
+
+export interface FAERSOutcomes {
+  recovered?: number;
+  recovering?: number;
+  notRecovered?: number;
+  fatal?: number;
+  unknown?: number;
+}
+
+export interface FAERSData {
+  totalReports?: number;
+  seriousReports?: number;
+  topReactions?: FAERSReaction[];
+  demographics?: FAERSDemographics;
+  outcomes?: FAERSOutcomes;
+  dataRange?: { from?: string; to?: string };
+  lastUpdated?: string;
+}
+
 export interface Drug {
   id: string;
   genericName: string | LocalizedField;
@@ -240,6 +295,9 @@ export interface Drug {
     monitoringRequired?: string | LocalizedField;
   };
   travelRules?: TravelRules;
+  // OpenFDA Data
+  fdaData?: FDAData;
+  faersData?: FAERSData;
   lastUpdated?: string;
   sources?: string[];
   notes?: string | LocalizedField;
