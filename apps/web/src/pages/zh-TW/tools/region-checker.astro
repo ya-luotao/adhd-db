@@ -3,6 +3,8 @@ import Layout from '../../../layouts/Layout.astro';
 import { getDrugs, getRegions, getLocalizedValue, type TravelStatus } from '../../../lib/data';
 import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
 
+export const prerender = true;
+
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const drugs = getDrugs();
