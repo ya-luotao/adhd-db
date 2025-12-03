@@ -1,0 +1,569 @@
+---
+import DatabaseLayout from '../layouts/DatabaseLayout.astro';
+import { getLangFromUrl } from '../i18n/utils';
+import { getDrugs } from '../lib/data';
+
+export const prerender = true;
+
+const lang = getLangFromUrl(Astro.url);
+const drugs = getDrugs();
+const baseUrl = import.meta.env.SITE || 'https://adhd-db.com';
+---
+
+<DatabaseLayout title="API Documentation" activeTable="api">
+  <div class="api-docs">
+    <header class="page-header">
+      <h1 class="page-title">API</h1>
+      <p class="page-desc">RESTful API for accessing ADHD medication data. Free to use with CORS enabled.</p>
+    </header>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-value">v1</span>
+        <span class="stat-label">Version</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">JSON</span>
+        <span class="stat-label">Format</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">{drugs.length}</span>
+        <span class="stat-label">Drugs</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">4</span>
+        <span class="stat-label">Languages</span>
+      </div>
+    </div>
+
+    <!-- Base URL -->
+    <section class="api-section">
+      <h2 class="section-title">Base URL</h2>
+      <div class="code-block">
+        <pre><code>{baseUrl}/api/v1</code></pre>
+      </div>
+    </section>
+
+    <!-- Authentication -->
+    <section class="api-section">
+      <h2 class="section-title">Authentication</h2>
+      <p class="section-text">No authentication required. The API is publicly accessible.</p>
+    </section>
+
+    <!-- Endpoints -->
+    <section class="api-section">
+      <h2 class="section-title">Endpoints</h2>
+
+      <!-- GET /drugs -->
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="method get">GET</span>
+          <code class="endpoint-path">/api/v1/drugs</code>
+        </div>
+        <p class="endpoint-desc">Returns a list of all ADHD medications in the database.</p>
+
+        <h4 class="param-title">Query Parameters</h4>
+        <table class="param-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>lang</code></td>
+              <td>string</td>
+              <td><code>en</code></td>
+              <td>Response language: <code>en</code>, <code>zh</code>, <code>zh-TW</code>, <code>ja</code></td>
+            </tr>
+            <tr>
+              <td><code>class</code></td>
+              <td>string</td>
+              <td>-</td>
+              <td>Filter by drug class: <code>stimulant</code>, <code>non-stimulant</code></td>
+            </tr>
+            <tr>
+              <td><code>category</code></td>
+              <td>string</td>
+              <td>-</td>
+              <td>Filter by category: <code>methylphenidate</code>, <code>amphetamine</code>, etc.</td>
+            </tr>
+            <tr>
+              <td><code>region</code></td>
+              <td>string</td>
+              <td>-</td>
+              <td>Filter by availability in region: <code>US</code>, <code>CN</code>, <code>EU</code>, <code>JP</code>, <code>UK</code>, <code>AU</code>, <code>CA</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="param-title">Example Request</h4>
+        <div class="code-block">
+          <pre><code>curl "{baseUrl}/api/v1/drugs?lang=zh&class=stimulant"</code></pre>
+        </div>
+
+        <h4 class="param-title">Example Response</h4>
+        <div class="code-block">
+          <pre><code>{JSON.stringify({
+  count: 2,
+  data: [
+    {
+      id: "methylphenidate",
+      genericName: "盐酸哌甲酯",
+      drugClass: "stimulant",
+      category: "methylphenidate",
+      controlledSubstance: true,
+      brandNames: { US: ["Concerta", "Ritalin"], CN: ["专注达"] },
+      // ... more fields
+    }
+  ]
+}, null, 2)}</code></pre>
+        </div>
+      </div>
+
+      <!-- GET /drugs/:id -->
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="method get">GET</span>
+          <code class="endpoint-path">/api/v1/drugs/:id</code>
+        </div>
+        <p class="endpoint-desc">Returns detailed information about a specific medication.</p>
+
+        <h4 class="param-title">Path Parameters</h4>
+        <table class="param-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>id</code></td>
+              <td>string</td>
+              <td>Drug identifier (e.g., <code>methylphenidate</code>, <code>lisdexamfetamine</code>)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="param-title">Query Parameters</h4>
+        <table class="param-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>lang</code></td>
+              <td>string</td>
+              <td><code>en</code></td>
+              <td>Response language: <code>en</code>, <code>zh</code>, <code>zh-TW</code>, <code>ja</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="param-title">Available Drug IDs</h4>
+        <div class="drug-ids">
+          {drugs.map(drug => (
+            <code class="drug-id">{drug.id}</code>
+          ))}
+        </div>
+
+        <h4 class="param-title">Example Request</h4>
+        <div class="code-block">
+          <pre><code>curl "{baseUrl}/api/v1/drugs/methylphenidate?lang=ja"</code></pre>
+        </div>
+      </div>
+
+      <!-- GET /categories -->
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="method get">GET</span>
+          <code class="endpoint-path">/api/v1/categories</code>
+        </div>
+        <p class="endpoint-desc">Returns drug categories and classes with descriptions.</p>
+
+        <h4 class="param-title">Query Parameters</h4>
+        <table class="param-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>lang</code></td>
+              <td>string</td>
+              <td><code>en</code></td>
+              <td>Response language: <code>en</code>, <code>zh</code>, <code>zh-TW</code>, <code>ja</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 class="param-title">Example Request</h4>
+        <div class="code-block">
+          <pre><code>curl "{baseUrl}/api/v1/categories"</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Response Format -->
+    <section class="api-section">
+      <h2 class="section-title">Response Format</h2>
+      <p class="section-text">All responses are in JSON format with the following structure:</p>
+
+      <h4 class="param-title">Success Response</h4>
+      <div class="code-block">
+        <pre><code>{JSON.stringify({
+  count: 7,
+  data: ["..."]
+}, null, 2)}</code></pre>
+      </div>
+
+      <h4 class="param-title">Error Response</h4>
+      <div class="code-block">
+        <pre><code>{JSON.stringify({
+  error: "Not found",
+  message: "Drug with ID \"unknown\" not found"
+}, null, 2)}</code></pre>
+      </div>
+    </section>
+
+    <!-- Data Fields -->
+    <section class="api-section">
+      <h2 class="section-title">Drug Data Fields</h2>
+      <p class="section-text">Each drug object contains the following fields:</p>
+
+      <table class="param-table fields-table">
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>id</code></td>
+            <td>string</td>
+            <td>Unique identifier</td>
+          </tr>
+          <tr>
+            <td><code>genericName</code></td>
+            <td>string</td>
+            <td>Generic drug name (localized)</td>
+          </tr>
+          <tr>
+            <td><code>brandNames</code></td>
+            <td>object</td>
+            <td>Brand names by region (US, CN, EU, JP, etc.)</td>
+          </tr>
+          <tr>
+            <td><code>drugClass</code></td>
+            <td>string</td>
+            <td><code>stimulant</code> or <code>non-stimulant</code></td>
+          </tr>
+          <tr>
+            <td><code>category</code></td>
+            <td>string</td>
+            <td>Drug category (e.g., methylphenidate, amphetamine)</td>
+          </tr>
+          <tr>
+            <td><code>controlledSubstance</code></td>
+            <td>boolean</td>
+            <td>Whether the drug is a controlled substance</td>
+          </tr>
+          <tr>
+            <td><code>schedule</code></td>
+            <td>object</td>
+            <td>Control schedule by region</td>
+          </tr>
+          <tr>
+            <td><code>mechanismOfAction</code></td>
+            <td>string</td>
+            <td>How the drug works (localized)</td>
+          </tr>
+          <tr>
+            <td><code>forms</code></td>
+            <td>array</td>
+            <td>Available formulations with strengths and duration</td>
+          </tr>
+          <tr>
+            <td><code>approvals</code></td>
+            <td>array</td>
+            <td>Regulatory approvals by region</td>
+          </tr>
+          <tr>
+            <td><code>travelRules</code></td>
+            <td>object</td>
+            <td>International travel rules and requirements</td>
+          </tr>
+          <tr>
+            <td><code>typicalDosing</code></td>
+            <td>object</td>
+            <td>Dosing information for children and adults</td>
+          </tr>
+          <tr>
+            <td><code>sideEffects</code></td>
+            <td>object</td>
+            <td>Common, uncommon, and serious side effects</td>
+          </tr>
+          <tr>
+            <td><code>contraindications</code></td>
+            <td>array</td>
+            <td>Conditions where the drug should not be used</td>
+          </tr>
+          <tr>
+            <td><code>drugInteractions</code></td>
+            <td>array</td>
+            <td>Known drug interactions</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Rate Limiting -->
+    <section class="api-section">
+      <h2 class="section-title">Rate Limiting</h2>
+      <p class="section-text">Currently there are no rate limits. Please be respectful and cache responses when possible. Responses include <code>Cache-Control: public, max-age=3600</code> headers.</p>
+    </section>
+
+    <!-- CORS -->
+    <section class="api-section">
+      <h2 class="section-title">CORS</h2>
+      <p class="section-text">Cross-Origin Resource Sharing (CORS) is enabled for all origins. You can use this API directly from browser JavaScript.</p>
+
+      <h4 class="param-title">JavaScript Example</h4>
+      <div class="code-block">
+        <pre><code>{`fetch('${baseUrl}/api/v1/drugs?lang=en')
+  .then(res => res.json())
+  .then(data => {
+    console.log(data.count + ' drugs found');
+    data.data.forEach(drug => {
+      console.log(drug.genericName);
+    });
+  });`}</code></pre>
+      </div>
+    </section>
+  </div>
+</DatabaseLayout>
+
+<style>
+  .api-docs {
+    max-width: 900px;
+  }
+
+  .page-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .page-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #111827;
+  }
+
+  .page-desc {
+    color: #6b7280;
+    font-size: 0.95rem;
+  }
+
+  /* Stats Grid */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .stat-card {
+    background: #f8f9fa;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .stat-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #00a86b;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Sections */
+  .api-section {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .section-text {
+    color: #4b5563;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  /* Endpoints */
+  .endpoint {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .endpoint-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .method {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+
+  .method.get {
+    background: #dcfce7;
+    color: #166534;
+  }
+
+  .endpoint-path {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .endpoint-desc {
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-bottom: 1.25rem;
+  }
+
+  /* Parameter tables */
+  .param-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #374151;
+    margin: 1.25rem 0 0.75rem 0;
+  }
+
+  .param-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .param-table th {
+    text-align: left;
+    padding: 0.5rem 0.75rem;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+  }
+
+  .param-table td {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #e5e7eb;
+    color: #4b5563;
+  }
+
+  .param-table code {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    background: #f3f4f6;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #dc2626;
+  }
+
+  .fields-table td:first-child code {
+    color: #00a86b;
+  }
+
+  /* Drug IDs */
+  .drug-ids {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .drug-id {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    background: #f3f4f6;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: #00a86b;
+  }
+
+  /* Code blocks */
+  .code-block {
+    background: #1f2937;
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+  }
+
+  .code-block pre {
+    margin: 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: #e5e7eb;
+  }
+
+  .code-block code {
+    display: block;
+    white-space: pre;
+  }
+</style>
