@@ -272,8 +272,8 @@ export const translations = {
     'drugs.editOnGithub': '在 GitHub 上编辑以贡献',
 
     // Drug class short labels
-    'class.stimulantShort': '兴',
-    'class.nonStimulantShort': '非',
+    'class.stimulantShort': '兴奋剂',
+    'class.nonStimulantShort': '非兴奋剂',
 
     // Common
     'common.yes': '是',
@@ -452,8 +452,8 @@ export const translations = {
     'drugs.editOnGithub': '在 GitHub 上編輯以貢獻',
 
     // Drug class short labels
-    'class.stimulantShort': '興',
-    'class.nonStimulantShort': '非',
+    'class.stimulantShort': '興奮劑',
+    'class.nonStimulantShort': '非興奮劑',
 
     // Common
     'common.yes': '是',
