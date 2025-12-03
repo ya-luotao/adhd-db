@@ -93,6 +93,28 @@ export const translations = {
     'drugs.chemicalStructure': 'Chemical Structure',
     'drugs.molecularFormula': 'Molecular Formula',
 
+    // FDA Data
+    'drugs.fdaData': 'FDA Label Data',
+    'drugs.boxedWarning': 'Black Box Warning',
+    'drugs.pharmacologicClass': 'Pharmacologic Classification',
+    'drugs.fdaIndications': 'FDA-Approved Indications',
+    'drugs.controlledClass': 'Controlled Substance Class',
+    'drugs.viewFdaLabel': 'View Full FDA Label',
+    'drugs.fdaSource': 'Source: OpenFDA',
+
+    // FAERS Data
+    'drugs.faersData': 'Adverse Event Reports (FAERS)',
+    'drugs.faersDescription': 'Real-world adverse event reports from FDA Adverse Event Reporting System',
+    'drugs.totalReports': 'Total Reports',
+    'drugs.seriousReports': 'Serious Reports',
+    'drugs.topReactions': 'Most Reported Reactions',
+    'drugs.reportCount': 'reports',
+    'drugs.faersDisclaimer': 'FAERS data shows reported events, not incidence rates. Report counts cannot be used to compare drug safety.',
+    'drugs.demographics': 'Demographics',
+    'drugs.byAge': 'By Age Group',
+    'drugs.bySex': 'By Sex',
+    'drugs.outcomes': 'Outcomes',
+
     // Drug class short labels
     'class.stimulantShort': 'STM',
     'class.nonStimulantShort': 'NON',
@@ -274,6 +296,28 @@ export const translations = {
     'drugs.chemicalStructure': '化学结构',
     'drugs.molecularFormula': '分子式',
     'drugs.editOnGithub': '在 GitHub 上编辑以贡献',
+
+    // FDA Data
+    'drugs.fdaData': 'FDA 标签数据',
+    'drugs.boxedWarning': '黑框警告',
+    'drugs.pharmacologicClass': '药理分类',
+    'drugs.fdaIndications': 'FDA 批准适应症',
+    'drugs.controlledClass': '管制药物级别',
+    'drugs.viewFdaLabel': '查看完整 FDA 标签',
+    'drugs.fdaSource': '数据来源：OpenFDA',
+
+    // FAERS Data
+    'drugs.faersData': '不良事件报告 (FAERS)',
+    'drugs.faersDescription': '来自 FDA 不良事件报告系统的真实世界数据',
+    'drugs.totalReports': '报告总数',
+    'drugs.seriousReports': '严重报告',
+    'drugs.topReactions': '最常报告的反应',
+    'drugs.reportCount': '份报告',
+    'drugs.faersDisclaimer': 'FAERS 数据显示的是报告的事件，而非发生率。报告数量不能用于比较药物安全性。',
+    'drugs.demographics': '人口统计',
+    'drugs.byAge': '按年龄组',
+    'drugs.bySex': '按性别',
+    'drugs.outcomes': '结局',
 
     // Drug class short labels
     'class.stimulantShort': '兴奋剂',
@@ -457,6 +501,28 @@ export const translations = {
     'drugs.molecularFormula': '分子式',
     'drugs.editOnGithub': '在 GitHub 上編輯以貢獻',
 
+    // FDA Data
+    'drugs.fdaData': 'FDA 標籤數據',
+    'drugs.boxedWarning': '黑框警告',
+    'drugs.pharmacologicClass': '藥理分類',
+    'drugs.fdaIndications': 'FDA 批准適應症',
+    'drugs.controlledClass': '管制藥物級別',
+    'drugs.viewFdaLabel': '查看完整 FDA 標籤',
+    'drugs.fdaSource': '數據來源：OpenFDA',
+
+    // FAERS Data
+    'drugs.faersData': '不良事件報告 (FAERS)',
+    'drugs.faersDescription': '來自 FDA 不良事件報告系統的真實世界數據',
+    'drugs.totalReports': '報告總數',
+    'drugs.seriousReports': '嚴重報告',
+    'drugs.topReactions': '最常報告的反應',
+    'drugs.reportCount': '份報告',
+    'drugs.faersDisclaimer': 'FAERS 數據顯示的是報告的事件，而非發生率。報告數量不能用於比較藥物安全性。',
+    'drugs.demographics': '人口統計',
+    'drugs.byAge': '按年齡組',
+    'drugs.bySex': '按性別',
+    'drugs.outcomes': '結局',
+
     // Drug class short labels
     'class.stimulantShort': '興奮劑',
     'class.nonStimulantShort': '非興奮劑',
@@ -638,6 +704,28 @@ export const translations = {
     'drugs.chemicalStructure': '化学構造',
     'drugs.molecularFormula': '分子式',
     'drugs.editOnGithub': 'GitHub で編集して貢献',
+
+    // FDA Data
+    'drugs.fdaData': 'FDA ラベルデータ',
+    'drugs.boxedWarning': '黒枠警告',
+    'drugs.pharmacologicClass': '薬理学的分類',
+    'drugs.fdaIndications': 'FDA 承認適応症',
+    'drugs.controlledClass': '規制物質分類',
+    'drugs.viewFdaLabel': 'FDA ラベル全文を見る',
+    'drugs.fdaSource': 'データソース：OpenFDA',
+
+    // FAERS Data
+    'drugs.faersData': '有害事象報告 (FAERS)',
+    'drugs.faersDescription': 'FDA有害事象報告システムからの実世界データ',
+    'drugs.totalReports': '総報告数',
+    'drugs.seriousReports': '重篤な報告',
+    'drugs.topReactions': '最も報告された反応',
+    'drugs.reportCount': '件の報告',
+    'drugs.faersDisclaimer': 'FAERSデータは報告された事象を示しており、発生率ではありません。報告数は薬物の安全性比較には使用できません。',
+    'drugs.demographics': '人口統計',
+    'drugs.byAge': '年齢層別',
+    'drugs.bySex': '性別',
+    'drugs.outcomes': '転帰',
 
     // Drug class short labels
     'class.stimulantShort': '刺',

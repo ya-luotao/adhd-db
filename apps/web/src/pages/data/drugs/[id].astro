@@ -200,6 +200,168 @@ const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().get
     )}
 
     <!-- ============================================
+         FDA BLACK BOX WARNING
+         ============================================ -->
+    {drug.fdaData?.boxedWarning && (
+      <section class="blackbox-section">
+        <div class="blackbox-header">
+          <div class="blackbox-stripe"></div>
+          <div class="blackbox-title-block">
+            <span class="blackbox-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                <line x1="12" y1="9" x2="12" y2="13"></line>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+            </span>
+            <h2 class="blackbox-title">{t('drugs.boxedWarning')}</h2>
+          </div>
+          <div class="blackbox-stripe"></div>
+        </div>
+
+        <div class="blackbox-content">
+          <div class="blackbox-warning">
+            <div class="warning-border">
+              <p class="warning-text">{l(drug.fdaData.boxedWarning)}</p>
+            </div>
+          </div>
+
+          {drug.fdaData.pharmacologicClass && (
+            <div class="fda-class-info">
+              <h3 class="fda-info-title">{t('drugs.pharmacologicClass')}</h3>
+              <div class="fda-class-tags">
+                {drug.fdaData.pharmacologicClass.mechanismOfAction?.map((moa: string) => (
+                  <span class="fda-tag fda-tag-moa">{moa}</span>
+                ))}
+                {drug.fdaData.pharmacologicClass.establishedClass?.map((epc: string) => (
+                  <span class="fda-tag fda-tag-epc">{epc}</span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {drug.fdaData.fdaLabelUrl && (
+            <a
+              href={drug.fdaData.fdaLabelUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="fda-label-link"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+              {t('drugs.viewFdaLabel')}
+            </a>
+          )}
+        </div>
+      </section>
+    )}
+
+    <!-- ============================================
+         FAERS ADVERSE EVENTS DATA
+         ============================================ -->
+    {drug.faersData && drug.faersData.totalReports > 0 && (
+      <section class="faers-section">
+        <h2 class="section-title">
+          <span class="title-marker"></span>
+          {t('drugs.faersData')}
+        </h2>
+
+        <div class="faers-content">
+          <!-- Stats Row -->
+          <div class="faers-stats">
+            <div class="faers-stat">
+              <span class="stat-value">{drug.faersData.totalReports.toLocaleString()}</span>
+              <span class="stat-label">{t('drugs.totalReports')}</span>
+            </div>
+            <div class="faers-stat faers-stat-serious">
+              <span class="stat-value">{drug.faersData.seriousReports.toLocaleString()}</span>
+              <span class="stat-label">{t('drugs.seriousReports')}</span>
+            </div>
+            <div class="faers-stat">
+              <span class="stat-value">{Math.round((drug.faersData.seriousReports / drug.faersData.totalReports) * 100)}%</span>
+              <span class="stat-label">Serious Rate</span>
+            </div>
+          </div>
+
+          <!-- Top Reactions Chart -->
+          {drug.faersData.topReactions && drug.faersData.topReactions.length > 0 && (
+            <div class="faers-reactions">
+              <h3 class="faers-subtitle">{t('drugs.topReactions')}</h3>
+              <div class="reactions-chart">
+                {drug.faersData.topReactions.slice(0, 8).map((reaction: any) => {
+                  const maxPercentage = drug.faersData.topReactions[0].percentage;
+                  const barWidth = (reaction.percentage / maxPercentage) * 100;
+                  return (
+                    <div class="reaction-bar-row">
+                      <span class="reaction-name">{l(reaction.reaction)}</span>
+                      <div class="reaction-bar-container">
+                        <div
+                          class="reaction-bar"
+                          style={`width: ${barWidth}%`}
+                        >
+                          <span class="reaction-percent">{reaction.percentage}%</span>
+                        </div>
+                      </div>
+                      <span class="reaction-count">{reaction.reportCount.toLocaleString()}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          <!-- Demographics -->
+          {drug.faersData.demographics && (
+            <div class="faers-demographics">
+              {drug.faersData.demographics.bySex && (
+                <div class="demo-section">
+                  <h4 class="demo-title">{t('drugs.bySex')}</h4>
+                  <div class="demo-bars">
+                    {drug.faersData.demographics.bySex.map((item: any) => {
+                      const total = drug.faersData.demographics.bySex.reduce((sum: number, i: any) => sum + i.count, 0);
+                      const percent = Math.round((item.count / total) * 100);
+                      return (
+                        <div class="demo-bar-item">
+                          <span class="demo-label">{item.sex}</span>
+                          <div class="demo-bar-bg">
+                            <div class="demo-bar-fill" style={`width: ${percent}%`}></div>
+                          </div>
+                          <span class="demo-percent">{percent}%</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          <!-- Disclaimer -->
+          <div class="faers-disclaimer">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <span>{t('drugs.faersDisclaimer')}</span>
+          </div>
+
+          <div class="faers-source">
+            <span class="source-text">{t('drugs.fdaSource')}</span>
+            {drug.faersData.dataRange && (
+              <span class="source-range">
+                ({drug.faersData.dataRange.from} - {drug.faersData.dataRange.to})
+              </span>
+            )}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- ============================================
          REGIONAL APPROVALS
          ============================================ -->
     <section class="approvals-section">
@@ -893,6 +1055,393 @@ const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().get
 
   .structure-section {
     margin-bottom: var(--space-8);
+  }
+
+  /* ============================================
+     FDA BLACK BOX WARNING
+     ============================================ */
+
+  .blackbox-section {
+    margin-bottom: var(--space-8);
+  }
+
+  .blackbox-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .blackbox-stripe {
+    flex: 1;
+    height: 4px;
+    background: #1a1a2e;
+    border-radius: 2px;
+  }
+
+  .blackbox-title-block {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: 0 var(--space-4);
+    flex-shrink: 0;
+  }
+
+  .blackbox-icon {
+    color: #1a1a2e;
+  }
+
+  .blackbox-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #1a1a2e;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .blackbox-content {
+    background: var(--dossier-paper);
+    border: 2px solid #1a1a2e;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .blackbox-warning {
+    padding: var(--space-4);
+    background: #1a1a2e;
+  }
+
+  .warning-border {
+    border: 2px solid #fff;
+    padding: var(--space-4);
+    border-radius: 2px;
+  }
+
+  .warning-text {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #fff;
+    font-weight: 500;
+  }
+
+  .fda-class-info {
+    padding: var(--space-4);
+    border-top: 1px solid var(--dossier-border);
+  }
+
+  .fda-info-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--dossier-muted);
+    margin: 0 0 var(--space-3);
+  }
+
+  .fda-class-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .fda-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: var(--dossier-cream);
+    color: var(--dossier-accent);
+    border: 1px solid var(--dossier-border);
+  }
+
+  .fda-tag-moa {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.3);
+    color: #1d4ed8;
+  }
+
+  .fda-tag-epc {
+    background: rgba(168, 85, 247, 0.1);
+    border-color: rgba(168, 85, 247, 0.3);
+    color: #7c3aed;
+  }
+
+  .fda-label-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin: var(--space-4);
+    padding: var(--space-2) var(--space-4);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--dossier-blue);
+    text-decoration: none;
+    background: rgba(43, 108, 176, 0.08);
+    border-radius: 4px;
+    transition: all 0.15s;
+  }
+
+  .fda-label-link:hover {
+    background: var(--dossier-blue);
+    color: #fff;
+  }
+
+  /* ============================================
+     FAERS SECTION
+     ============================================ */
+
+  .faers-section {
+    margin-bottom: var(--space-8);
+  }
+
+  .faers-content {
+    background: var(--dossier-paper);
+    border: 1px solid var(--dossier-border);
+    border-radius: 4px;
+    padding: var(--space-5);
+  }
+
+  .faers-stats {
+    display: flex;
+    gap: var(--space-4);
+    margin-bottom: var(--space-5);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--dossier-border);
+    flex-wrap: wrap;
+  }
+
+  .faers-stat {
+    flex: 1;
+    min-width: 100px;
+    padding: var(--space-3) var(--space-4);
+    background: var(--dossier-cream);
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  .faers-stat-serious {
+    background: rgba(239, 68, 68, 0.1);
+  }
+
+  .faers-stat .stat-value {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dossier-accent);
+    line-height: 1.2;
+  }
+
+  .faers-stat-serious .stat-value {
+    color: #dc2626;
+  }
+
+  .faers-stat .stat-label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--dossier-muted);
+    margin-top: var(--space-1);
+  }
+
+  .faers-reactions {
+    margin-bottom: var(--space-5);
+  }
+
+  .faers-subtitle {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--dossier-muted);
+    margin: 0 0 var(--space-3);
+  }
+
+  .reactions-chart {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .reaction-bar-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 60px;
+    gap: var(--space-3);
+    align-items: center;
+    font-size: 0.8rem;
+  }
+
+  .reaction-name {
+    font-size: 0.75rem;
+    color: var(--dossier-ink);
+    text-transform: capitalize;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .reaction-bar-container {
+    height: 24px;
+    background: var(--dossier-cream);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .reaction-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--dossier-gold) 0%, #e8d5a3 100%);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: var(--space-2);
+    min-width: 40px;
+    transition: width 0.5s ease-out;
+  }
+
+  .reaction-percent {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: var(--dossier-accent);
+  }
+
+  .reaction-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--dossier-muted);
+    text-align: right;
+  }
+
+  .faers-demographics {
+    margin-bottom: var(--space-4);
+    padding: var(--space-4);
+    background: var(--dossier-cream);
+    border-radius: 4px;
+  }
+
+  .demo-section {
+    margin-bottom: var(--space-3);
+  }
+
+  .demo-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .demo-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--dossier-muted);
+    margin: 0 0 var(--space-2);
+  }
+
+  .demo-bars {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .demo-bar-item {
+    display: grid;
+    grid-template-columns: 70px 1fr 40px;
+    gap: var(--space-2);
+    align-items: center;
+  }
+
+  .demo-label {
+    font-size: 0.75rem;
+    color: var(--dossier-ink);
+  }
+
+  .demo-bar-bg {
+    height: 16px;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--dossier-border);
+  }
+
+  .demo-bar-fill {
+    height: 100%;
+    background: var(--dossier-blue);
+    border-radius: 8px;
+    transition: width 0.5s ease-out;
+  }
+
+  .demo-percent {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--dossier-accent);
+    text-align: right;
+  }
+
+  .faers-disclaimer {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    background: rgba(251, 191, 36, 0.1);
+    border-radius: 4px;
+    margin-bottom: var(--space-3);
+  }
+
+  .faers-disclaimer svg {
+    flex-shrink: 0;
+    color: #b45309;
+    margin-top: 2px;
+  }
+
+  .faers-disclaimer span {
+    font-size: 0.7rem;
+    line-height: 1.5;
+    color: #78350f;
+  }
+
+  .faers-source {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--dossier-muted);
+  }
+
+  .source-range {
+    color: var(--dossier-muted);
+    opacity: 0.7;
+  }
+
+  @media (max-width: 600px) {
+    .reaction-bar-row {
+      grid-template-columns: 100px 1fr 50px;
+    }
+
+    .faers-stats {
+      flex-direction: column;
+    }
+
+    .faers-stat {
+      min-width: auto;
+    }
+
+    .demo-bar-item {
+      grid-template-columns: 60px 1fr 35px;
+    }
   }
 
   .structure-content {
