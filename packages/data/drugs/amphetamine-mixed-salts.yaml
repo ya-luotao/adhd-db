@@ -25,6 +25,14 @@ manufacturers:
     region: "US"
     product: "Mydayis"
 
+# Chemical Structure (Amphetamine base)
+chemicalStructure:
+  smiles: "CC(CC1=CC=CC=C1)N"
+  pubchemCid: 3007
+  molecularFormula: "C9H13N"
+  imageUrl: "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3007/PNG"
+  wikipediaUrl: "https://en.wikipedia.org/wiki/File:Amphetamine-2D-skeletal.svg"
+
 # Classification
 drugClass: "stimulant"
 

@@ -31,6 +31,14 @@ manufacturers:
     region: "JP"
     product: "コンサータ"
 
+# Chemical Structure
+chemicalStructure:
+  smiles: "COC(=O)C(C1CCCCN1)C2=CC=CC=C2"
+  pubchemCid: 4158
+  molecularFormula: "C14H19NO2"
+  imageUrl: "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4158/PNG"
+  wikipediaUrl: "https://en.wikipedia.org/wiki/File:Methylphenidate-2D-skeletal.svg"
+
 # Classification
 drugClass: "stimulant"
 

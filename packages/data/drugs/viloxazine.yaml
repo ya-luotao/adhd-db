@@ -22,6 +22,14 @@ manufacturers:
     region: "US"
     product: "Qelbree"
 
+# Chemical Structure
+chemicalStructure:
+  smiles: "CCOC1=CC=CC=C1OCC2CNCCO2"
+  pubchemCid: 5666
+  molecularFormula: "C13H19NO3"
+  imageUrl: "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5666/PNG"
+  wikipediaUrl: "https://en.wikipedia.org/wiki/File:Viloxazine.svg"
+
 # Classification
 drugClass: "non-stimulant"
 

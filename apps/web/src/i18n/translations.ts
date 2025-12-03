@@ -90,6 +90,8 @@ export const translations = {
     'drugs.rawYaml': 'Raw YAML',
     'drugs.showRaw': 'Show raw YAML data',
     'drugs.editOnGithub': 'Edit on GitHub to contribute',
+    'drugs.chemicalStructure': 'Chemical Structure',
+    'drugs.molecularFormula': 'Molecular Formula',
 
     // Drug class short labels
     'class.stimulantShort': 'STM',
@@ -269,6 +271,8 @@ export const translations = {
     'drugs.serious': '严重',
     'drugs.rawYaml': '原始 YAML',
     'drugs.showRaw': '显示原始 YAML 数据',
+    'drugs.chemicalStructure': '化学结构',
+    'drugs.molecularFormula': '分子式',
     'drugs.editOnGithub': '在 GitHub 上编辑以贡献',
 
     // Drug class short labels
@@ -449,6 +453,8 @@ export const translations = {
     'drugs.serious': '嚴重',
     'drugs.rawYaml': '原始 YAML',
     'drugs.showRaw': '顯示原始 YAML 數據',
+    'drugs.chemicalStructure': '化學結構',
+    'drugs.molecularFormula': '分子式',
     'drugs.editOnGithub': '在 GitHub 上編輯以貢獻',
 
     // Drug class short labels
@@ -629,6 +635,8 @@ export const translations = {
     'drugs.serious': '重篤',
     'drugs.rawYaml': '生の YAML',
     'drugs.showRaw': '生の YAML データを表示',
+    'drugs.chemicalStructure': '化学構造',
+    'drugs.molecularFormula': '分子式',
     'drugs.editOnGithub': 'GitHub で編集して貢献',
 
     // Drug class short labels

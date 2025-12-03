@@ -28,6 +28,14 @@ manufacturers:
     region: "JP"
     product: "ストラテラ"
 
+# Chemical Structure
+chemicalStructure:
+  smiles: "CC1=CC=CC=C1O[C@H](CCNC)C2=CC=CC=C2"
+  pubchemCid: 54841
+  molecularFormula: "C17H21NO"
+  imageUrl: "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/54841/PNG"
+  wikipediaUrl: "https://en.wikipedia.org/wiki/File:Atomoxetine_structure.svg"
+
 # Classification
 drugClass: "non-stimulant"
 

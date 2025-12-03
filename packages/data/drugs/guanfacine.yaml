@@ -25,6 +25,14 @@ manufacturers:
     region: "JP"
     product: "インチュニブ"
 
+# Chemical Structure
+chemicalStructure:
+  smiles: "NC(=N)NC(=O)CC1=C(Cl)C=CC=C1Cl"
+  pubchemCid: 3519
+  molecularFormula: "C9H9Cl2N3O"
+  imageUrl: "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/3519/PNG"
+  wikipediaUrl: "https://en.wikipedia.org/wiki/File:Guanfacine.svg"
+
 # Classification
 drugClass: "non-stimulant"
 

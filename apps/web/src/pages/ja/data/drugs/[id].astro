@@ -139,6 +139,67 @@ const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().get
     )}
 
     <!-- ============================================
+         CHEMICAL STRUCTURE
+         ============================================ -->
+    {drug.chemicalStructure && (
+      <section class="structure-section">
+        <h2 class="section-title">
+          <span class="title-marker"></span>
+          {t('drugs.chemicalStructure')}
+        </h2>
+        <div class="structure-content">
+          <div class="structure-image">
+            <img
+              src={drug.chemicalStructure.imageUrl}
+              alt={`${l(drug.genericName)} chemical structure`}
+              loading="lazy"
+            />
+          </div>
+          <div class="structure-info">
+            <div class="structure-row">
+              <span class="structure-label">{t('drugs.molecularFormula')}</span>
+              <span class="structure-value formula">{drug.chemicalStructure.molecularFormula}</span>
+            </div>
+            <div class="structure-row">
+              <span class="structure-label">SMILES</span>
+              <code class="structure-value smiles">{drug.chemicalStructure.smiles}</code>
+            </div>
+            <div class="structure-links">
+              <a
+                href={`https://pubchem.ncbi.nlm.nih.gov/compound/${drug.chemicalStructure.pubchemCid}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="structure-link"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                PubChem
+              </a>
+              {drug.chemicalStructure.wikipediaUrl && (
+                <a
+                  href={drug.chemicalStructure.wikipediaUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="structure-link"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                  Wikipedia
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- ============================================
          REGIONAL APPROVALS
          ============================================ -->
     <section class="approvals-section">
@@ -824,6 +885,124 @@ const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().get
     line-height: 1.7;
     color: var(--dossier-ink);
     max-width: 70ch;
+  }
+
+  /* ============================================
+     CHEMICAL STRUCTURE
+     ============================================ */
+
+  .structure-section {
+    margin-bottom: var(--space-8);
+  }
+
+  .structure-content {
+    display: flex;
+    gap: var(--space-6);
+    align-items: flex-start;
+    background: var(--dossier-paper);
+    border: 1px solid var(--dossier-border);
+    border-radius: 4px;
+    padding: var(--space-5);
+  }
+
+  .structure-image {
+    flex-shrink: 0;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: 1px solid var(--dossier-border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .structure-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .structure-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .structure-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: var(--space-4);
+  }
+
+  .structure-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--dossier-muted);
+  }
+
+  .structure-value {
+    font-size: 0.9rem;
+    color: var(--dossier-accent);
+  }
+
+  .structure-value.formula {
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .structure-value.smiles {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    padding: var(--space-2) var(--space-3);
+    background: var(--dossier-cream);
+    border-radius: 4px;
+    word-break: break-all;
+    display: block;
+  }
+
+  .structure-links {
+    display: flex;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px dashed var(--dossier-border);
+  }
+
+  .structure-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--dossier-blue);
+    text-decoration: none;
+    padding: var(--space-2) var(--space-3);
+    background: rgba(43, 108, 176, 0.08);
+    border-radius: 4px;
+    transition: all 0.15s;
+  }
+
+  .structure-link:hover {
+    background: var(--dossier-blue);
+    color: #fff;
+  }
+
+  @media (max-width: 600px) {
+    .structure-content {
+      flex-direction: column;
+    }
+
+    .structure-image {
+      width: 100%;
+      height: 180px;
+    }
   }
 
   /* ============================================
@@ -2207,6 +2386,7 @@ const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().get
 
   .case-file,
   .mechanism-section,
+  .structure-section,
   .approvals-section,
   .forms-section,
   .hazmat-section,
@@ -2215,6 +2395,7 @@ const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().get
   }
 
   .mechanism-section { animation-delay: 0.05s; }
+  .structure-section { animation-delay: 0.08s; }
   .approvals-section { animation-delay: 0.1s; }
   .forms-section { animation-delay: 0.15s; }
   .hazmat-section { animation-delay: 0.2s; }

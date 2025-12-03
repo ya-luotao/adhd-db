@@ -28,6 +28,14 @@ manufacturers:
     region: "JP"
     product: "ビバンセ"
 
+# Chemical Structure
+chemicalStructure:
+  smiles: "C[C@@H](CC1=CC=CC=C1)NC(=O)[C@H](CCCCN)N"
+  pubchemCid: 11597698
+  molecularFormula: "C15H25N3O"
+  imageUrl: "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/11597698/PNG"
+  wikipediaUrl: "https://en.wikipedia.org/wiki/File:Lisdexamfetamine.svg"
+
 # Classification
 drugClass: "stimulant"
 

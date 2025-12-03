@@ -25,6 +25,14 @@ manufacturers:
     region: "US"
     product: "Catapres"
 
+# Chemical Structure
+chemicalStructure:
+  smiles: "ClC1=CC=CC(Cl)=C1NC1=NCCN1"
+  pubchemCid: 2803
+  molecularFormula: "C9H9Cl2N3"
+  imageUrl: "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/2803/PNG"
+  wikipediaUrl: "https://en.wikipedia.org/wiki/File:Clonidine.svg"
+
 # Classification
 drugClass: "non-stimulant"
 
