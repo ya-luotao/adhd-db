@@ -50,6 +50,13 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
 
 <DatabaseLayout title={l(drug.genericName)} activeDrugId={drug.id}>
   <article class="drug-page">
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+      <a href={getLocalizedPath('/data/drugs', lang)} class="crumb">drugs</a>
+      <span class="crumb-sep">/</span>
+      <span class="crumb-current">{drug.id}</span>
+    </nav>
+
     <!-- HERO: Bold asymmetric header -->
     <header class="hero">
       <div class="hero-label">
@@ -397,6 +404,35 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
 
     max-width: 900px;
     color: var(--text-primary);
+  }
+
+  /* BREADCRUMB */
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+  }
+
+  .crumb {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .crumb:hover {
+    color: var(--accent);
+  }
+
+  .crumb-sep {
+    color: var(--border-strong);
+  }
+
+  .crumb-current {
+    color: var(--text-secondary);
+    font-weight: 500;
   }
 
   /* HERO */
