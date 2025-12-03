@@ -7,7 +7,7 @@ export const prerender = true;
 
 const lang = getLangFromUrl(Astro.url);
 const drugs = getDrugs();
-const baseUrl = import.meta.env.SITE || 'https://adhd-db.com';
+const baseUrl = import.meta.env.SITE || 'https://adhddb.org';
 ---
 
 <DatabaseLayout title="API Documentation" activeTable="api">
