@@ -1,239 +1,1052 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getDrugs, getDataTypes, getLocalizedValue } from '../lib/data';
+import { getDrugs, getLocalizedValue, getRegions } from '../lib/data';
 import { getLangFromUrl, useTranslations, getLocalizedPath } from '../i18n/utils';
-// Prerender at build time (required for Cloudflare Workers)
-export const prerender = true;
+import '../styles/tokens.css';
 
+export const prerender = true;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const l = (value: any) => getLocalizedValue(value, lang);
 
 const drugs = getDrugs();
-const dataTypes = getDataTypes();
+const regions = getRegions();
+const regionCodes = Object.keys(regions.regions);
 const stimulants = drugs.filter(d => d.drugClass === 'stimulant');
 const nonStimulants = drugs.filter(d => d.drugClass === 'non-stimulant');
+const totalApprovals = drugs.reduce((acc, d) => acc + (d.approvals?.filter((a: any) => a.available).length || 0), 0);
+
+const alternates = [
+  { lang: 'en', path: '/' },
+  { lang: 'zh', path: '/zh/' },
+  { lang: 'ja', path: '/ja/' },
+  { lang: 'zh-TW', path: '/zh-TW/' },
+];
 ---
 
-<Layout title={t('nav.home')}>
-  <h1>{t('home.title')}</h1>
-
-  <p class="page-description">
-    {t('home.description')}
-  </p>
-
-  <div class="tools-promo">
-    {t('home.toolsPromo')} <a href={getLocalizedPath('/tools/region-checker', lang)}>{t('home.toolsPromoLink')}</a>
-  </div>
-
-  <div class="grid">
-    <div class="card">
-      <h3>{t('home.schema.title')}</h3>
-      <p>{t('home.schema.desc')}</p>
-      <a href={getLocalizedPath('/schema', lang)}>{t('home.schema.link')} &rarr;</a>
-    </div>
-
-    <div class="card">
-      <h3>{t('home.meta.title')}</h3>
-      <p>{t('home.meta.desc')}</p>
-      <a href={getLocalizedPath('/meta', lang)}>{t('home.meta.link')} &rarr;</a>
-    </div>
-
-    <div class="card">
-      <h3>{t('home.data.title')}</h3>
-      <p>{dataTypes.reduce((acc, t) => acc + t.count, 0)} {t('home.entries')} {dataTypes.length} {t('home.types')}</p>
-      <a href={getLocalizedPath('/data', lang)}>{t('home.data.link')} &rarr;</a>
-    </div>
-  </div>
-
-  <h2>{t('home.stats')}</h2>
-
-  <div class="grid">
-    <div class="card stat-card">
-      <h3>{t('home.totalDrugs')}</h3>
-      <p class="stat-number">{drugs.length}</p>
-    </div>
-    <div class="card stat-card">
-      <h3>{t('home.stimulants')}</h3>
-      <p class="stat-number stat-stimulant">{stimulants.length}</p>
-    </div>
-    <div class="card stat-card">
-      <h3>{t('home.nonStimulants')}</h3>
-      <p class="stat-number stat-non-stimulant">{nonStimulants.length}</p>
-    </div>
-  </div>
-
-  <h2>{t('home.allDrugs')}</h2>
-
-  <div class="table-wrapper">
-    <table>
-      <thead>
-        <tr>
-          <th>{t('table.drug')}</th>
-          <th>{t('table.class')}</th>
-          <th>US</th>
-          <th>CN</th>
-          <th>EU</th>
-          <th>JP</th>
-        </tr>
-      </thead>
-      <tbody>
-        {drugs.map(drug => {
-          const getAvailability = (region: string) => {
-            const approval = drug.approvals?.find(a => a.region === region);
-            return approval?.available ? '✓' : '✗';
-          };
-          return (
-            <tr>
-              <td>
-                <a href={getLocalizedPath(`/data/drugs/${drug.id}`, lang)}>{l(drug.genericName)}</a>
-              </td>
-              <td>
-                <span class={`tag ${drug.drugClass}`}>{l(drug.drugClassLabel) || drug.drugClass}</span>
-              </td>
-              <td class="availability">{getAvailability('US')}</td>
-              <td class="availability">{getAvailability('CN')}</td>
-              <td class="availability">{getAvailability('EU')}</td>
-              <td class="availability">{getAvailability('JP')}</td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Mobile-friendly drug cards -->
-  <div class="drug-cards-mobile">
-    {drugs.map(drug => {
-      const regions = drug.approvals?.filter(a => a.available).map(a => a.region) || [];
-      return (
-        <a href={getLocalizedPath(`/data/drugs/${drug.id}`, lang)} class="card drug-card-mobile">
-          <div class="drug-card-header">
-            <h3>{l(drug.genericName)}</h3>
-            <span class={`tag ${drug.drugClass}`}>{l(drug.drugClassLabel) || drug.drugClass}</span>
-          </div>
-          <div class="drug-card-regions">
-            {regions.map(region => (
-              <span class="tag available">{region}</span>
-            ))}
-            {regions.length === 0 && <span class="no-regions">{t('data.noData')}</span>}
-          </div>
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <meta name="generator" content={Astro.generator} />
+    <title>ADHD-DB | Global ADHD Medication Database</title>
+    {alternates.map(({ lang: l, path }) => (
+      <link rel="alternate" hreflang={l} href={path} />
+    ))}
+  </head>
+  <body>
+    <div class="page">
+      <!-- Navigation -->
+      <nav class="nav">
+        <a href="/" class="nav-logo">
+          <span class="logo-mark">◆</span>
+          <span class="logo-text">ADHD-DB</span>
         </a>
-      );
-    })}
-  </div>
-</Layout>
+        <div class="nav-links">
+          <a href={getLocalizedPath('/data/drugs', lang)}>Database</a>
+          <a href={getLocalizedPath('/tools/region-checker', lang)}>Tools</a>
+          <a href={getLocalizedPath('/travel', lang)}>Travel</a>
+          <a href="https://github.com/ya-luotao/adhd-db" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <div class="nav-lang">
+          {alternates.map(({ lang: code, path }) => (
+            <a href={path} class:list={['lang-link', { active: lang === code }]}>
+              {code === 'en' ? 'EN' : code === 'zh' ? '中文' : code === 'zh-TW' ? '繁體' : '日本語'}
+            </a>
+          ))}
+        </div>
+      </nav>
+
+      <!-- Hero Section -->
+      <header class="hero">
+        <div class="hero-content">
+          <p class="hero-eyebrow">Open Source Database</p>
+          <h1 class="hero-title">
+            <span class="title-line">Global ADHD</span>
+            <span class="title-line">Medication</span>
+            <span class="title-line title-accent">Reference</span>
+          </h1>
+          <p class="hero-desc">
+            Comprehensive database of ADHD medications with regulatory approvals,
+            formulations, and availability across {regionCodes.length} regions worldwide.
+          </p>
+          <div class="hero-actions">
+            <a href={getLocalizedPath('/data/drugs', lang)} class="btn-primary">
+              Explore Database
+              <span class="btn-arrow">→</span>
+            </a>
+            <a href={getLocalizedPath('/tools/region-checker', lang)} class="btn-secondary">
+              Region Checker
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-ring">
+            <div class="stat-main">
+              <span class="stat-value">{drugs.length}</span>
+              <span class="stat-label">Drugs</span>
+            </div>
+            <div class="stat-secondary">
+              <div class="stat-item">
+                <span class="stat-num">{stimulants.length}</span>
+                <span class="stat-name">Stimulants</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-num">{nonStimulants.length}</span>
+                <span class="stat-name">Non-Stimulants</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-num">{regionCodes.length}</span>
+                <span class="stat-name">Regions</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-num">{totalApprovals}</span>
+                <span class="stat-name">Approvals</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Drug Matrix Section -->
+      <section class="matrix-section">
+        <div class="section-header">
+          <h2 class="section-title">Availability Matrix</h2>
+          <p class="section-desc">Regional approval status at a glance</p>
+        </div>
+
+        <div class="matrix">
+          <div class="matrix-header">
+            <div class="matrix-drug-col">Drug</div>
+            {regionCodes.slice(0, 7).map(code => (
+              <div class="matrix-region-col">{code}</div>
+            ))}
+          </div>
+          {drugs.map((drug, idx) => {
+            const getStatus = (region: string) => {
+              const approval = drug.approvals?.find((a: any) => a.region === region);
+              return approval?.available;
+            };
+            return (
+              <a href={getLocalizedPath(`/data/drugs/${drug.id}`, lang)} class="matrix-row" style={`--row-delay: ${idx * 0.05}s`}>
+                <div class="matrix-drug">
+                  <span class="drug-name">{l(drug.genericName)}</span>
+                  <span class="drug-class" data-class={drug.drugClass}>
+                    {drug.drugClass === 'stimulant' ? 'STM' : 'NON'}
+                  </span>
+                </div>
+                {regionCodes.slice(0, 7).map(code => (
+                  <div class="matrix-cell">
+                    <span class:list={['cell-dot', { available: getStatus(code), unavailable: getStatus(code) === false }]}>
+                      {getStatus(code) ? '●' : getStatus(code) === false ? '○' : '–'}
+                    </span>
+                  </div>
+                ))}
+              </a>
+            );
+          })}
+        </div>
+
+        <div class="matrix-legend">
+          <span class="legend-item"><span class="legend-dot available">●</span> Available</span>
+          <span class="legend-item"><span class="legend-dot unavailable">○</span> Not Available</span>
+          <span class="legend-item"><span class="legend-dot">–</span> No Data</span>
+        </div>
+      </section>
+
+      <!-- Quick Access Cards -->
+      <section class="cards-section">
+        <div class="card-grid">
+          <a href={getLocalizedPath('/data/drugs', lang)} class="access-card card-drugs">
+            <div class="card-icon">◉</div>
+            <div class="card-content">
+              <h3>Drug Database</h3>
+              <p>Browse all {drugs.length} ADHD medications with detailed formulations, pharmacology, and regional data.</p>
+            </div>
+            <span class="card-arrow">→</span>
+          </a>
+
+          <a href={getLocalizedPath('/meta', lang)} class="access-card card-meta">
+            <div class="card-icon">◈</div>
+            <div class="card-content">
+              <h3>Metadata</h3>
+              <p>Region definitions, regulatory agencies, and drug classification schemas.</p>
+            </div>
+            <span class="card-arrow">→</span>
+          </a>
+
+          <a href={getLocalizedPath('/schema', lang)} class="access-card card-schema">
+            <div class="card-icon">◇</div>
+            <div class="card-content">
+              <h3>Schema</h3>
+              <p>YAML template defining the structure for all drug entries in the database.</p>
+            </div>
+            <span class="card-arrow">→</span>
+          </a>
+
+          <a href={getLocalizedPath('/tools/region-checker', lang)} class="access-card card-tools">
+            <div class="card-icon">⬡</div>
+            <div class="card-content">
+              <h3>Region Checker</h3>
+              <p>Find which medications are available in your country or compare across regions.</p>
+            </div>
+            <span class="card-arrow">→</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Contribute Section -->
+      <section class="contribute-section">
+        <div class="contribute-content">
+          <h2>Open Source & Community Driven</h2>
+          <p>
+            ADHD-DB is a free, open-source project. Help improve medication data accuracy,
+            add new drugs, or expand regional coverage.
+          </p>
+          <a href="https://github.com/ya-luotao/adhd-db" target="_blank" rel="noopener" class="contribute-btn">
+            Contribute on GitHub
+            <span class="btn-arrow">→</span>
+          </a>
+        </div>
+        <div class="contribute-visual">
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-dot"></span>
+              <span class="code-dot"></span>
+              <span class="code-dot"></span>
+              <span class="code-file">methylphenidate.yaml</span>
+            </div>
+            <pre class="code-content"><code>id: methylphenidate
+genericName:
+  en: Methylphenidate
+  zh: 哌醋甲酯
+drugClass: stimulant
+approvals:
+  - region: US
+    available: true
+  - region: CN
+    available: true</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <span class="logo-mark">◆</span>
+            <span class="logo-text">ADHD-DB</span>
+          </div>
+          <p class="footer-disclaimer">
+            This database is for informational purposes only. Always consult healthcare
+            professionals for medical advice.
+          </p>
+          <div class="footer-links">
+            <a href="https://github.com/ya-luotao/adhd-db" target="_blank">GitHub</a>
+            <span class="footer-sep">·</span>
+            <a href={getLocalizedPath('/data/drugs', lang)}>Database</a>
+            <span class="footer-sep">·</span>
+            <a href={getLocalizedPath('/travel', lang)}>Travel Guide</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
 
 <style>
-  .page-description {
-    margin-bottom: var(--space-4);
-    color: var(--color-text-tertiary);
-    font-size: var(--text-lg);
-    line-height: var(--leading-relaxed);
-  }
-
-  .tools-promo {
-    margin-bottom: var(--space-8);
-    padding: var(--space-4);
-    background: var(--color-surface-secondary);
-    border-radius: var(--radius-lg);
-    border-left: 4px solid var(--color-primary);
-    font-size: var(--text-base);
-  }
-
-  .tools-promo a {
-    color: var(--color-primary);
-    font-weight: var(--font-semibold);
-  }
-
-  .stat-card {
-    text-align: center;
-  }
-
-  .stat-number {
-    font-size: var(--text-4xl);
-    font-weight: var(--font-bold);
-    color: var(--color-text-primary);
+  /* Reset & Base */
+  *, *::before, *::after {
+    box-sizing: border-box;
     margin: 0;
+    padding: 0;
   }
 
-  .stat-stimulant {
-    color: var(--color-stimulant-text);
+  html {
+    scroll-behavior: smooth;
   }
 
-  .stat-non-stimulant {
-    color: var(--color-non-stimulant-text);
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: #fafaf9;
+    color: #1a1a1a;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
 
-  .table-wrapper {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+  /* Variables */
+  .page {
+    --accent: #00a86b;
+    --accent-dark: #008f5b;
+    --accent-light: rgba(0, 168, 107, 0.1);
+    --stimulant: #dc2626;
+    --non-stimulant: #2563eb;
+    --text-primary: #1a1a1a;
+    --text-secondary: #525252;
+    --text-muted: #a3a3a3;
+    --border: #e5e5e5;
+    --surface: #ffffff;
+    --surface-alt: #f5f5f4;
   }
 
-  .availability {
+  /* Navigation */
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 4rem;
+    position: sticky;
+    top: 0;
+    background: rgba(250, 250, 249, 0.9);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .logo-mark {
+    color: var(--accent);
+    font-size: 1.25rem;
+  }
+
+  .logo-text {
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    font-size: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover {
+    color: var(--accent);
+  }
+
+  .nav-lang {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .lang-link {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--text-muted);
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .lang-link:hover {
+    color: var(--accent);
+    background: var(--accent-light);
+  }
+
+  .lang-link.active {
+    color: white;
+    background: var(--accent);
+  }
+
+  /* Hero Section */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    padding: 6rem 4rem 8rem;
+    min-height: 80vh;
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 4.5rem;
+    font-weight: 400;
+    line-height: 1.05;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+  }
+
+  .title-line {
+    display: block;
+  }
+
+  .title-accent {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-desc {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.75rem;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-arrow {
+    transition: transform 0.2s;
+  }
+
+  .btn-primary:hover .btn-arrow {
+    transform: translateX(4px);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 1rem 1.75rem;
+    background: transparent;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* Hero Stats */
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .stat-ring {
+    position: relative;
+    width: 360px;
+    height: 360px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
+  }
+
+  .stat-ring::before {
+    content: '';
+    position: absolute;
+    inset: 20px;
+    border: 1px dashed var(--border);
+    border-radius: 50%;
+  }
+
+  .stat-main {
     text-align: center;
-    font-size: var(--text-lg);
   }
 
-  /* Mobile drug cards - hidden by default */
-  .drug-cards-mobile {
-    display: none;
+  .stat-value {
+    display: block;
+    font-family: 'Instrument Serif', serif;
+    font-size: 5rem;
+    font-weight: 400;
+    color: var(--accent);
+    line-height: 1;
   }
 
-  .drug-card-mobile {
+  .stat-label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+  }
+
+  .stat-secondary {
+    position: absolute;
+    inset: 0;
+  }
+
+  .stat-item {
+    position: absolute;
+    text-align: center;
+    background: var(--surface);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    min-width: 90px;
+  }
+
+  .stat-item:nth-child(1) { top: -20px; left: 50%; transform: translateX(-50%); }
+  .stat-item:nth-child(2) { right: -30px; top: 50%; transform: translateY(-50%); }
+  .stat-item:nth-child(3) { bottom: -20px; left: 50%; transform: translateX(-50%); }
+  .stat-item:nth-child(4) { left: -30px; top: 50%; transform: translateY(-50%); }
+
+  .stat-num {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .stat-name {
+    display: block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+  }
+
+  /* Matrix Section */
+  .matrix-section {
+    padding: 6rem 4rem;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-desc {
+    color: var(--text-muted);
+    font-size: 1rem;
+  }
+
+  .matrix {
+    max-width: 900px;
+    margin: 0 auto;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .matrix-header {
+    display: grid;
+    grid-template-columns: 200px repeat(7, 1fr);
+    background: var(--surface-alt);
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 1rem;
+  }
+
+  .matrix-drug-col {
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+  }
+
+  .matrix-region-col {
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  .matrix-row {
+    display: grid;
+    grid-template-columns: 200px repeat(7, 1fr);
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid var(--border);
     text-decoration: none;
     color: inherit;
+    transition: background 0.15s;
+    animation: fadeInRow 0.4s ease both;
+    animation-delay: var(--row-delay);
   }
 
-  .drug-card-mobile:hover {
-    text-decoration: none;
+  @keyframes fadeInRow {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  .drug-card-header {
+  .matrix-row:last-child {
+    border-bottom: none;
+  }
+
+  .matrix-row:hover {
+    background: var(--accent-light);
+  }
+
+  .matrix-drug {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .drug-name {
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+
+  .drug-class {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background: var(--surface-alt);
+    color: var(--text-muted);
+  }
+
+  .drug-class[data-class="stimulant"] {
+    background: rgba(220, 38, 38, 0.1);
+    color: var(--stimulant);
+  }
+
+  .drug-class[data-class="non-stimulant"] {
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--non-stimulant);
+  }
+
+  .matrix-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cell-dot {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  .cell-dot.available {
+    color: var(--accent);
+  }
+
+  .cell-dot.unavailable {
+    color: var(--text-muted);
+    opacity: 0.5;
+  }
+
+  .matrix-legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .legend-dot {
+    font-size: 0.9rem;
+  }
+
+  .legend-dot.available {
+    color: var(--accent);
+  }
+
+  .legend-dot.unavailable {
+    opacity: 0.5;
+  }
+
+  /* Cards Section */
+  .cards-section {
+    padding: 6rem 4rem;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .access-card {
+    display: flex;
     align-items: flex-start;
-    gap: var(--space-2);
-    margin-bottom: var(--space-3);
+    gap: 1.25rem;
+    padding: 2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.25s;
   }
 
-  .drug-card-header h3 {
-    margin: 0;
-    color: var(--color-primary);
-    font-size: var(--text-lg);
+  .access-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
   }
 
-  .drug-card-regions {
+  .card-icon {
+    font-size: 1.5rem;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .card-content h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-content p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .card-arrow {
+    margin-left: auto;
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  .access-card:hover .card-arrow {
+    color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  /* Contribute Section */
+  .contribute-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    padding: 6rem 4rem;
+    background: var(--text-primary);
+    color: white;
+  }
+
+  .contribute-content h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin-bottom: 1.25rem;
+  }
+
+  .contribute-content p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+
+  .contribute-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.75rem;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+
+  .contribute-btn:hover {
+    background: var(--accent-dark);
+  }
+
+  .contribute-btn:hover .btn-arrow {
+    transform: translateX(4px);
+  }
+
+  .contribute-visual {
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-1);
+    align-items: center;
+    justify-content: center;
   }
 
-  .no-regions {
-    color: var(--color-text-muted);
-    font-size: var(--text-sm);
+  .code-block {
+    width: 100%;
+    max-width: 400px;
+    background: #0d0d0d;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
   }
 
-  /* Mobile responsive */
-  @media (max-width: 639px) {
-    .page-description {
-      font-size: var(--text-base);
-      margin-bottom: var(--space-6);
+  .code-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1rem;
+    background: #1a1a1a;
+    border-bottom: 1px solid #2a2a2a;
+  }
+
+  .code-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #3a3a3a;
+  }
+
+  .code-dot:nth-child(1) { background: #ff5f57; }
+  .code-dot:nth-child(2) { background: #febc2e; }
+  .code-dot:nth-child(3) { background: #28c840; }
+
+  .code-file {
+    margin-left: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: #666;
+  }
+
+  .code-content {
+    padding: 1.25rem;
+    margin: 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    line-height: 1.7;
+    color: #a0a0a0;
+    overflow-x: auto;
+  }
+
+  .code-content code {
+    display: block;
+    white-space: pre;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 3rem 4rem;
+    background: var(--surface-alt);
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-content {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .footer-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer-disclaimer {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover {
+    color: var(--accent);
+  }
+
+  .footer-sep {
+    color: var(--text-muted);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      padding: 4rem 2rem 5rem;
+      min-height: auto;
     }
 
-    .stat-number {
-      font-size: var(--text-3xl);
+    .hero-title {
+      font-size: 3.5rem;
     }
 
-    .table-wrapper {
+    .hero-stats {
+      order: -1;
+    }
+
+    .stat-ring {
+      width: 280px;
+      height: 280px;
+    }
+
+    .stat-value {
+      font-size: 4rem;
+    }
+
+    .stat-item {
+      padding: 0.5rem 0.75rem;
+      min-width: 70px;
+    }
+
+    .stat-num {
+      font-size: 1.25rem;
+    }
+
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contribute-section {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .nav {
+      padding: 1rem 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .nav-links {
       display: none;
     }
 
-    .drug-cards-mobile {
-      display: flex;
+    .nav-lang {
+      gap: 0.125rem;
+    }
+
+    .hero {
+      padding: 2.5rem 1.5rem 3rem;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+    }
+
+    .hero-actions {
       flex-direction: column;
-      gap: var(--space-3);
+    }
+
+    .stat-ring {
+      width: 240px;
+      height: 240px;
+    }
+
+    .stat-value {
+      font-size: 3rem;
+    }
+
+    .stat-item:nth-child(2),
+    .stat-item:nth-child(4) {
+      display: none;
+    }
+
+    .matrix-section,
+    .cards-section,
+    .contribute-section {
+      padding: 3rem 1.5rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .matrix {
+      overflow-x: auto;
+    }
+
+    .matrix-header,
+    .matrix-row {
+      min-width: 600px;
+    }
+
+    .contribute-content h2 {
+      font-size: 2rem;
+    }
+
+    .footer {
+      padding: 2rem 1.5rem;
     }
   }
 </style>

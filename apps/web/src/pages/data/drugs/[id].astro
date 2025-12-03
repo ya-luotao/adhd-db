@@ -1,5 +1,5 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
+import DatabaseLayout from '../../../layouts/DatabaseLayout.astro';
 import { getDrugs, getDrugRaw, getLocalizedValue, getLocalizedArray, type TravelStatus } from '../../../lib/data';
 import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../../i18n/utils';
 
@@ -23,525 +23,1266 @@ const rawYaml = getDrugRaw(drug.id);
 const l = (value: any) => getLocalizedValue(value, lang);
 const la = (value: any) => getLocalizedArray(value, lang);
 
-// Travel status colors
-const statusColors: Record<TravelStatus, string> = {
-  allowed: 'var(--color-success)',
-  restricted: 'var(--color-warning)',
-  requires_permit: 'var(--color-warning)',
-  prohibited: 'var(--color-danger)',
+// Travel status config
+const statusConfig: Record<TravelStatus, { color: string; bg: string; label: string }> = {
+  allowed: { color: '#22c55e', bg: 'rgba(34, 197, 94, 0.15)', label: 'GO' },
+  restricted: { color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.15)', label: 'CAUTION' },
+  requires_permit: { color: '#a855f7', bg: 'rgba(168, 85, 247, 0.15)', label: 'PERMIT' },
+  prohibited: { color: '#ef4444', bg: 'rgba(239, 68, 68, 0.15)', label: 'STOP' },
 };
+
+// Region emoji flags
+const regionFlags: Record<string, string> = {
+  US: '🇺🇸', CN: '🇨🇳', EU: '🇪🇺', JP: '🇯🇵', UK: '🇬🇧', AU: '🇦🇺', CA: '🇨🇦'
+};
+
+// Get available regions count
+const availableCount = drug.approvals?.filter((a: any) => a.available).length || 0;
+const totalRegions = drug.approvals?.length || 0;
+
+// Drug class colors
+const classColors = {
+  stimulant: '#ef4444',
+  'non-stimulant': '#3b82f6'
+};
+const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#888';
 ---
 
-<Layout title={l(drug.genericName)}>
-  <nav class="back-nav">
-    <a href={getLocalizedPath('/data/drugs', lang)}>&larr; {t('drugs.backToList')}</a>
-  </nav>
+<DatabaseLayout title={l(drug.genericName)} activeDrugId={drug.id}>
+  <article class="drug-page">
+    <!-- HERO: Bold asymmetric header -->
+    <header class="hero">
+      <div class="hero-label">
+        <span class="label-dot" style={`background: ${classColor}`}></span>
+        <span class="label-text">{l(drug.drugClassLabel) || drug.drugClass}</span>
+        {drug.controlledSubstance && <span class="controlled-tag">CONTROLLED</span>}
+      </div>
 
-  <h1>{l(drug.genericName)}</h1>
+      <h1 class="drug-title">{l(drug.genericName)}</h1>
 
-  <div class="drug-tags">
-    <span class={`tag ${drug.drugClass}`}>{l(drug.drugClassLabel) || drug.drugClass}</span>
-    <span class="tag tag-category">{l(drug.categoryLabel) || drug.category}</span>
-    {drug.controlledSubstance && (
-      <span class="tag tag-controlled">{t('common.controlled')}</span>
-    )}
-  </div>
+      <div class="hero-stats">
+        <div class="stat-block stat-primary">
+          <span class="stat-number">{availableCount}</span>
+          <span class="stat-divider">/</span>
+          <span class="stat-total">{totalRegions}</span>
+          <span class="stat-label">REGIONS</span>
+        </div>
 
-  <div class="grid info-grid">
-    <div class="card">
-      <h3>{t('drugs.brandNames')}</h3>
-      {Object.entries(drug.brandNames || {}).map(([region, brands]: [string, any]) => (
-        brands?.length > 0 && (
-          <div class="brand-region">
-            <strong>{region}:</strong> {brands.join(', ')}
+        {drug.forms && (
+          <div class="stat-block">
+            <span class="stat-number">{drug.forms.length}</span>
+            <span class="stat-label">FORMS</span>
+          </div>
+        )}
+
+        {drug.durationHours && (
+          <div class="stat-block">
+            <span class="stat-number">{drug.durationHours}</span>
+            <span class="stat-unit">hr</span>
+            <span class="stat-label">DURATION</span>
+          </div>
+        )}
+
+        {drug.onsetMinutes && (
+          <div class="stat-block">
+            <span class="stat-number">{drug.onsetMinutes}</span>
+            <span class="stat-unit">min</span>
+            <span class="stat-label">ONSET</span>
+          </div>
+        )}
+      </div>
+    </header>
+
+    <!-- QUICK DATA: Horizontal scroll cards -->
+    <section class="data-ribbon">
+      <div class="ribbon-card">
+        <span class="ribbon-label">CATEGORY</span>
+        <span class="ribbon-value">{l(drug.categoryLabel) || drug.category}</span>
+      </div>
+
+      {drug.neurotransmittersAffected && (
+        <div class="ribbon-card ribbon-wide">
+          <span class="ribbon-label">TARGETS</span>
+          <div class="ribbon-chips">
+            {drug.neurotransmittersAffected.map((nt: string) => (
+              <span class="chip chip-neuro">{nt.toUpperCase()}</span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {Object.entries(drug.brandNames || {}).slice(0, 1).map(([region, brands]: [string, any]) => (
+        brands?.[0] && (
+          <div class="ribbon-card">
+            <span class="ribbon-label">BRAND ({region})</span>
+            <span class="ribbon-value">{brands[0]}</span>
           </div>
         )
       ))}
-    </div>
+    </section>
 
-    <div class="card">
-      <h3>{t('drugs.mechanism')}</h3>
-      <p class="mechanism-text">
-        {l(drug.mechanismOfAction)}
-      </p>
-      {drug.neurotransmittersAffected && (
-        <div class="neurotransmitters">
-          <strong>{t('drugs.affects')}:</strong> {drug.neurotransmittersAffected.join(', ')}
-        </div>
-      )}
-    </div>
-  </div>
+    <!-- MECHANISM -->
+    {drug.mechanismOfAction && (
+      <section class="content-block">
+        <h2 class="block-title">
+          <span class="title-marker"></span>
+          {t('drugs.mechanism')}
+        </h2>
+        <p class="mechanism-text">{l(drug.mechanismOfAction)}</p>
+      </section>
+    )}
 
-  <h2>{t('drugs.approvals')}</h2>
+    <!-- REGIONAL APPROVALS: Grid of status cards -->
+    <section class="content-block">
+      <h2 class="block-title">
+        <span class="title-marker"></span>
+        {t('drugs.approvals')}
+      </h2>
 
-  <div class="table-wrapper">
-    <table>
-      <thead>
-        <tr>
-          <th>{t('table.region')}</th>
-          <th>{t('table.agency')}</th>
-          <th>{t('table.year')}</th>
-          <th>{t('table.ages')}</th>
-          <th>{t('table.available')}</th>
-          <th>{t('table.notes')}</th>
-        </tr>
-      </thead>
-      <tbody>
+      <div class="region-grid">
         {drug.approvals?.map((approval: any) => (
-          <tr>
-            <td><strong>{approval.region}</strong></td>
-            <td>{approval.agency}</td>
-            <td>{approval.year || '-'}</td>
-            <td>{l(approval.approvedAges) || '-'}</td>
-            <td>
-              <span class={`tag ${approval.available ? 'available' : 'unavailable'}`}>
-                {approval.available ? t('common.yes') : t('common.no')}
+          <div class="region-card" data-available={approval.available}>
+            <div class="region-header">
+              <span class="region-flag">{regionFlags[approval.region] || ''}</span>
+              <span class="region-code">{approval.region}</span>
+              <span class="region-status" data-available={approval.available}>
+                {approval.available ? 'ACTIVE' : 'INACTIVE'}
               </span>
-            </td>
-            <td class="notes-cell">{l(approval.notes) || '-'}</td>
-          </tr>
+            </div>
+
+            <div class="region-data">
+              <div class="data-row">
+                <span class="data-key">Agency</span>
+                <span class="data-val">{approval.agency}</span>
+              </div>
+              {approval.year && (
+                <div class="data-row">
+                  <span class="data-key">Year</span>
+                  <span class="data-val data-year">{approval.year}</span>
+                </div>
+              )}
+              <div class="data-row">
+                <span class="data-key">Ages</span>
+                <span class="data-val">{l(approval.approvedAges) || '—'}</span>
+              </div>
+            </div>
+
+            {l(approval.notes) && (
+              <div class="region-note">{l(approval.notes)}</div>
+            )}
+          </div>
         ))}
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Mobile-friendly approval cards (shown on small screens) -->
-  <div class="approval-cards">
-    {drug.approvals?.map((approval: any) => (
-      <div class="card approval-card">
-        <div class="approval-header">
-          <strong class="approval-region">{approval.region}</strong>
-          <span class={`tag ${approval.available ? 'available' : 'unavailable'}`}>
-            {approval.available ? t('common.yes') : t('common.no')}
-          </span>
-        </div>
-        <div class="approval-details">
-          <p><strong>{t('table.agency')}:</strong> {approval.agency}</p>
-          <p><strong>{t('table.year')}:</strong> {approval.year || '-'}</p>
-          <p><strong>{t('table.ages')}:</strong> {l(approval.approvedAges) || '-'}</p>
-          {l(approval.notes) && <p class="approval-notes"><strong>{t('table.notes')}:</strong> {l(approval.notes)}</p>}
-        </div>
       </div>
-    ))}
-  </div>
+    </section>
 
-  {drug.travelRules && (
-    <>
-      <h2>{t('travel.title')}</h2>
+    <!-- TRAVEL RULES -->
+    {drug.travelRules && (
+      <section class="content-block travel-block">
+        <h2 class="block-title">
+          <span class="title-marker marker-warning"></span>
+          {t('travel.title')}
+        </h2>
 
-      {drug.travelRules.generalAdvice && (
-        <div class="card travel-advice">
-          <p>{l(drug.travelRules.generalAdvice)}</p>
+        {drug.travelRules.generalAdvice && (
+          <div class="travel-alert">
+            <span class="alert-icon">!</span>
+            <p>{l(drug.travelRules.generalAdvice)}</p>
+          </div>
+        )}
+
+        {drug.travelRules.requiredDocumentation && drug.travelRules.requiredDocumentation.length > 0 && (
+          <div class="docs-required">
+            <h3 class="sub-title">{t('travel.requiredDocs')}</h3>
+            <div class="doc-list">
+              {drug.travelRules.requiredDocumentation.map((doc: any) => (
+                <div class="doc-item">
+                  <span class="doc-bullet">◆</span>
+                  <div class="doc-content">
+                    <span class="doc-type">{l(doc.typeLabel)}</span>
+                    {doc.notes && <span class="doc-note">{l(doc.notes)}</span>}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {drug.travelRules.maxPersonalSupply && (
+              <div class="supply-limit">
+                <span class="supply-label">MAX SUPPLY</span>
+                <span class="supply-value">{drug.travelRules.maxPersonalSupply.default}</span>
+              </div>
+            )}
+          </div>
+        )}
+
+        {drug.travelRules.crossBorderRules && drug.travelRules.crossBorderRules.length > 0 && (
+          <div class="routes-section">
+            <h3 class="sub-title">{t('travel.specificRules')}</h3>
+            <div class="routes-grid">
+              {drug.travelRules.crossBorderRules.map((rule: any) => {
+                const config = statusConfig[rule.status as TravelStatus];
+                return (
+                  <div class="route-card" style={`--route-color: ${config.color}; --route-bg: ${config.bg}`}>
+                    <div class="route-header">
+                      <div class="route-path">
+                        <span class="route-from">{rule.fromRegion}</span>
+                        <span class="route-arrow">→</span>
+                        <span class="route-to">{rule.toRegion}</span>
+                      </div>
+                      <span class="route-badge">{config.label}</span>
+                    </div>
+
+                    <div class="route-body">
+                      {rule.maxSupply && (
+                        <div class="route-info">
+                          <span class="info-key">Limit:</span>
+                          <span class="info-val">{rule.maxSupply}</span>
+                        </div>
+                      )}
+
+                      {la(rule.requirements).length > 0 && (
+                        <ul class="route-reqs">
+                          {la(rule.requirements).map((req: string) => (
+                            <li>{req}</li>
+                          ))}
+                        </ul>
+                      )}
+
+                      {rule.notes && (
+                        <p class="route-note">{l(rule.notes)}</p>
+                      )}
+                    </div>
+
+                    {rule.sources && rule.sources.length > 0 && (
+                      <div class="route-sources">
+                        {rule.sources.map((src: string) => (
+                          <a href={src} target="_blank" rel="noopener noreferrer">↗ {new URL(src).hostname}</a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        <a href={getLocalizedPath('/tools/region-checker', lang)} class="tool-link">
+          {t('travel.useChecker')} <span class="link-arrow">→</span>
+        </a>
+      </section>
+    )}
+
+    <!-- FORMULATIONS -->
+    {drug.forms && drug.forms.length > 0 && (
+      <section class="content-block">
+        <h2 class="block-title">
+          <span class="title-marker"></span>
+          {t('drugs.forms')}
+        </h2>
+
+        <div class="forms-grid">
+          {drug.forms.map((form: any) => (
+            <div class="form-card">
+              <div class="form-header">
+                <span class="form-name">{form.brandName || l(form.typeLabel) || form.type}</span>
+                <span class="form-duration">{form.durationHours}h</span>
+              </div>
+
+              <div class="form-meta">
+                <span class="form-type">{l(form.releaseTypeLabel) || form.releaseType}</span>
+              </div>
+
+              {form.strengths && (
+                <div class="form-strengths">
+                  {form.strengths.map((s: string) => (
+                    <span class="strength">{s}</span>
+                  ))}
+                </div>
+              )}
+
+              {form.notes && (
+                <p class="form-note">{l(form.notes)}</p>
+              )}
+            </div>
+          ))}
         </div>
-      )}
+      </section>
+    )}
 
-      {drug.travelRules.requiredDocumentation && drug.travelRules.requiredDocumentation.length > 0 && (
-        <div class="card">
-          <h3>{t('travel.requiredDocs')}</h3>
-          <ul class="doc-list">
-            {drug.travelRules.requiredDocumentation.map((doc: any) => (
-              <li>
-                <strong>{l(doc.typeLabel)}</strong>
-                {doc.notes && <span class="doc-notes"> - {l(doc.notes)}</span>}
-              </li>
-            ))}
-          </ul>
-          {drug.travelRules.maxPersonalSupply && (
-            <p class="max-supply">
-              <strong>{t('travel.maxSupply')}:</strong> {drug.travelRules.maxPersonalSupply.default}
-            </p>
+    <!-- SIDE EFFECTS -->
+    {drug.sideEffects && (
+      <section class="content-block">
+        <h2 class="block-title">
+          <span class="title-marker marker-danger"></span>
+          {t('drugs.sideEffects')}
+        </h2>
+
+        <div class="effects-layout">
+          {drug.sideEffects.common && (
+            <div class="effects-col">
+              <h3 class="effects-heading">{t('drugs.common')}</h3>
+              <ul class="effects-list">
+                {drug.sideEffects.common.map((se: any) => (
+                  <li class="effect-item">
+                    <span class="effect-name">{l(se.name)}</span>
+                    <span class="effect-freq">{se.frequency}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {drug.sideEffects.serious && (
+            <div class="effects-col effects-serious">
+              <h3 class="effects-heading">{t('drugs.serious')}</h3>
+              <ul class="effects-list">
+                {drug.sideEffects.serious.map((se: any) => (
+                  <li class="effect-item effect-serious">
+                    <span class="effect-name">{l(se.name)}</span>
+                    {se.notes && <span class="effect-notes">{l(se.notes)}</span>}
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
         </div>
-      )}
+      </section>
+    )}
 
-      {drug.travelRules.crossBorderRules && drug.travelRules.crossBorderRules.length > 0 && (
-        <>
-          <h3>{t('travel.specificRules')}</h3>
-          <div class="travel-rules-grid">
-            {drug.travelRules.crossBorderRules.map((rule: any) => (
-              <div class="card travel-rule-card" style={`border-left: 4px solid ${statusColors[rule.status as TravelStatus]}`}>
-                <div class="travel-route">
-                  <span class="region-tag">{rule.fromRegion}</span>
-                  <span class="arrow">&rarr;</span>
-                  <span class="region-tag">{rule.toRegion}</span>
-                </div>
-                <div class="travel-status" style={`color: ${statusColors[rule.status as TravelStatus]}`}>
-                  {l(rule.statusLabel) || t(`travel.status.${rule.status}`)}
-                </div>
-                {rule.maxSupply && (
-                  <div class="travel-max-supply">
-                    <strong>{t('travel.maxSupply')}:</strong> {rule.maxSupply}
-                  </div>
-                )}
-                {la(rule.requirements).length > 0 && (
-                  <div class="travel-requirements">
-                    <strong>{t('travel.requirements')}:</strong>
-                    <ul>
-                      {la(rule.requirements).map((req: string) => (
-                        <li>{req}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                {rule.notes && (
-                  <p class="travel-notes">{l(rule.notes)}</p>
-                )}
-                {rule.sources && rule.sources.length > 0 && (
-                  <div class="travel-sources">
-                    <strong>{t('travel.sources')}:</strong>
-                    {rule.sources.map((src: string) => (
-                      <a href={src} target="_blank" rel="noopener noreferrer">{new URL(src).hostname}</a>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </>
-      )}
-
-      <div class="travel-checker-link">
-        <a href={getLocalizedPath('/tools/region-checker', lang)} class="btn btn-primary">
-          {t('travel.useChecker')}
-        </a>
-      </div>
-    </>
-  )}
-
-  {drug.forms && drug.forms.length > 0 && (
-    <>
-      <h2>{t('drugs.forms')}</h2>
-      <div class="grid">
-        {drug.forms.map((form: any) => (
-          <div class="card">
-            <h3>{form.brandName || l(form.typeLabel) || form.type}</h3>
-            <p><strong>{t('common.type')}:</strong> {l(form.typeLabel) || form.type} ({l(form.releaseTypeLabel) || form.releaseType})</p>
-            <p><strong>{t('common.strengths')}:</strong> {form.strengths?.join(', ')}</p>
-            <p><strong>{t('common.duration')}:</strong> {form.durationHours} {t('common.hours')}</p>
-            {form.notes && <p class="form-notes">{l(form.notes)}</p>}
-          </div>
-        ))}
-      </div>
-    </>
-  )}
-
-  {drug.sideEffects && (
-    <>
-      <h2>{t('drugs.sideEffects')}</h2>
-      <div class="grid">
-        {drug.sideEffects.common && (
-          <div class="card">
-            <h3>{t('drugs.common')}</h3>
-            <ul class="side-effects-list">
-              {drug.sideEffects.common.map((se: any) => (
-                <li>{l(se.name)} <span class="frequency">({se.frequency})</span></li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {drug.sideEffects.serious && (
-          <div class="card card-serious">
-            <h3>{t('drugs.serious')}</h3>
-            <ul class="side-effects-list">
-              {drug.sideEffects.serious.map((se: any) => (
-                <li>
-                  <strong>{l(se.name)}</strong>
-                  {se.notes && <span class="side-effect-notes">{l(se.notes)}</span>}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
-    </>
-  )}
-
-  <h2>{t('drugs.rawYaml')}</h2>
-  <details class="raw-yaml">
-    <summary>
-      {t('drugs.showRaw')}
-    </summary>
-    <pre><code>{rawYaml}</code></pre>
-    <p class="contribute-link">
-      <a href={`https://github.com/ya-luotao/adhd-db/edit/main/packages/data/drugs/${drug.id}.yaml`} target="_blank" rel="noopener">
-        {t('drugs.editOnGithub')} &rarr;
-      </a>
-    </p>
-  </details>
-</Layout>
+    <!-- RAW DATA -->
+    <section class="content-block raw-block">
+      <details class="raw-toggle">
+        <summary class="raw-summary">
+          <span class="raw-label">{t('drugs.showRaw')}</span>
+          <span class="raw-icon">+</span>
+        </summary>
+        <div class="raw-content">
+          <pre><code>{rawYaml}</code></pre>
+          <a
+            href={`https://github.com/ya-luotao/adhd-db/edit/main/packages/data/drugs/${drug.id}.yaml`}
+            target="_blank"
+            rel="noopener"
+            class="edit-link"
+          >
+            {t('drugs.editOnGithub')} ↗
+          </a>
+        </div>
+      </details>
+    </section>
+  </article>
+</DatabaseLayout>
 
 <style>
-  .back-nav {
-    margin-bottom: var(--space-4);
+  /* ===========================================
+   * ADHD-DB DRUG PAGE — "NEURAL SPARK" THEME
+   * Aggressive, bold, unconventional
+   * =========================================== */
+
+  .drug-page {
+    --accent: #00a86b;
+    --accent-dim: rgba(0, 168, 107, 0.1);
+    --accent-bold: #008f5b;
+    --danger: #dc2626;
+    --danger-dim: rgba(220, 38, 38, 0.08);
+    --warning: #d97706;
+    --warning-dim: rgba(217, 119, 6, 0.1);
+    --surface: #ffffff;
+    --surface-raised: #f8f9fa;
+    --surface-elevated: #f1f3f5;
+    --border: #e5e7eb;
+    --border-strong: #d1d5db;
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --text-muted: #9ca3af;
+
+    max-width: 900px;
+    color: var(--text-primary);
   }
 
-  .drug-tags {
-    margin-bottom: var(--space-4);
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-  }
-
-  .tag-category {
-    background: var(--color-bg-tertiary);
-    color: var(--color-text-secondary);
-  }
-
-  .tag-controlled {
-    background: var(--color-warning-light);
-    color: var(--color-warning-700);
-  }
-
-  .info-grid {
+  /* HERO */
+  .hero {
     margin-bottom: var(--space-8);
+    padding-bottom: var(--space-8);
+    border-bottom: 1px solid var(--border);
   }
 
-  .brand-region {
-    margin-bottom: var(--space-2);
+  .hero-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
   }
 
-  .mechanism-text {
-    font-size: var(--text-sm);
-    line-height: var(--leading-relaxed);
+  .label-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
   }
 
-  .neurotransmitters {
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.1); }
+  }
+
+  .label-text {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-secondary);
+  }
+
+  .controlled-tag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    background: rgba(255, 170, 0, 0.2);
+    color: var(--warning);
+    border: 1px solid var(--warning);
+    border-radius: 2px;
+  }
+
+  .drug-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: var(--space-6);
+    color: var(--text-primary);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+  }
+
+  .stat-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--space-4);
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    min-width: 100px;
+    position: relative;
+  }
+
+  .stat-block::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .stat-block:hover {
+    border-color: var(--accent);
+  }
+
+  .stat-block:hover::before {
+    opacity: 1;
+  }
+
+  .stat-primary {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+
+  .stat-primary .stat-label {
+    width: 100%;
     margin-top: var(--space-2);
   }
 
-  .table-wrapper {
+  .stat-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--accent-bold);
+    line-height: 1;
+  }
+
+  .stat-divider {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    margin: 0 2px;
+  }
+
+  .stat-total {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+  }
+
+  .stat-unit {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-left: 2px;
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    margin-top: var(--space-2);
+  }
+
+  /* DATA RIBBON */
+  .data-ribbon {
+    display: flex;
+    gap: var(--space-3);
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    margin: var(--space-4) 0;
+    padding-bottom: var(--space-4);
+    margin-bottom: var(--space-8);
+    scrollbar-width: none;
   }
 
-  .notes-cell {
-    font-size: var(--text-xs);
-    max-width: 200px;
-  }
-
-  /* Mobile approval cards - hidden by default */
-  .approval-cards {
+  .data-ribbon::-webkit-scrollbar {
     display: none;
   }
 
-  .approval-card {
-    padding: var(--space-4);
+  .ribbon-card {
+    flex-shrink: 0;
+    padding: var(--space-3) var(--space-4);
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: 4px;
   }
 
-  .approval-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--space-3);
-    padding-bottom: var(--space-2);
-    border-bottom: 1px solid var(--color-border);
+  .ribbon-wide {
+    min-width: 200px;
   }
 
-  .approval-region {
-    font-size: var(--text-lg);
-  }
-
-  .approval-details p {
-    margin-bottom: var(--space-1);
-    font-size: var(--text-sm);
-  }
-
-  .approval-notes {
-    margin-top: var(--space-2);
-    color: var(--color-text-tertiary);
-  }
-
-  .form-notes {
-    font-size: var(--text-sm);
-    color: var(--color-text-tertiary);
-    margin-top: var(--space-2);
-  }
-
-  .side-effects-list {
-    margin-left: var(--space-6);
-  }
-
-  .side-effects-list li {
-    margin-bottom: var(--space-2);
-  }
-
-  .frequency {
-    color: var(--color-text-tertiary);
-  }
-
-  .side-effect-notes {
-    color: var(--color-text-tertiary);
+  .ribbon-label {
     display: block;
-    font-size: var(--text-sm);
-    margin-top: var(--space-1);
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-1);
   }
 
-  .card-serious {
-    border-left: 4px solid var(--color-danger);
+  .ribbon-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
   }
 
-  .raw-yaml summary {
-    cursor: pointer;
-    padding: var(--space-3);
-    background: var(--color-bg-tertiary);
-    border-radius: var(--radius-md);
-    font-weight: var(--font-medium);
+  .ribbon-chips {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
   }
 
-  .raw-yaml pre {
-    margin-top: var(--space-4);
+  .chip {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 2px;
   }
 
-  .contribute-link {
-    margin-top: var(--space-4);
-    padding-top: var(--space-4);
-    border-top: 1px solid var(--color-border);
-    font-size: var(--text-sm);
+  .chip-neuro {
+    background: var(--accent-dim);
+    color: var(--accent-bold);
+    border: 1px solid var(--accent);
   }
 
-  .contribute-link a {
-    color: var(--color-primary);
-    font-weight: var(--font-medium);
+  /* CONTENT BLOCKS */
+  .content-block {
+    margin-bottom: var(--space-10);
   }
 
-  /* Travel info styles */
-  .travel-advice {
-    background: var(--color-bg-tertiary);
+  .block-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-5);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .title-marker {
+    width: 4px;
+    height: 16px;
+    background: var(--accent);
+    border-radius: 1px;
+  }
+
+  .title-marker.marker-warning {
+    background: var(--warning);
+  }
+
+  .title-marker.marker-danger {
+    background: var(--danger);
+  }
+
+  .sub-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
     margin-bottom: var(--space-4);
   }
 
-  .travel-advice p {
+  /* MECHANISM */
+  .mechanism-text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    max-width: 70ch;
+  }
+
+  /* REGION GRID */
+  .region-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .region-card {
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .region-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .region-card[data-available="false"] {
+    opacity: 0.5;
+  }
+
+  .region-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    background: var(--surface-elevated);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .region-flag {
+    font-size: 1.3rem;
+  }
+
+  .region-code {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+    flex: 1;
+  }
+
+  .region-status {
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 3px 8px;
+    border-radius: 2px;
+    background: var(--danger-dim);
+    color: var(--danger);
+  }
+
+  .region-status[data-available="true"] {
+    background: var(--accent-dim);
+    color: var(--accent-bold);
+  }
+
+  .region-data {
+    padding: var(--space-4);
+  }
+
+  .data-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .data-row:last-child {
+    border-bottom: none;
+  }
+
+  .data-key {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .data-val {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    text-align: right;
+  }
+
+  .data-year {
+    font-family: 'DM Mono', monospace;
+    color: var(--accent-bold);
+  }
+
+  .region-note {
+    padding: var(--space-3) var(--space-4);
+    background: var(--surface-elevated);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+  }
+
+  /* TRAVEL SECTION */
+  .travel-block {
+    background: var(--surface-raised);
+    padding: var(--space-6);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    border-left: 3px solid var(--warning);
+  }
+
+  .travel-alert {
+    display: flex;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    background: var(--warning-dim);
+    border: 1px solid var(--warning);
+    border-radius: 4px;
+    margin-bottom: var(--space-6);
+  }
+
+  .alert-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--warning);
+    color: #000;
+    font-weight: 900;
+    font-size: 0.9rem;
+    border-radius: 50%;
+  }
+
+  .travel-alert p {
     margin: 0;
-    line-height: var(--leading-relaxed);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  .docs-required {
+    margin-bottom: var(--space-6);
   }
 
   .doc-list {
-    margin-left: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
     margin-bottom: var(--space-4);
   }
 
-  .doc-list li {
-    margin-bottom: var(--space-2);
+  .doc-item {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
   }
 
-  .doc-notes {
-    color: var(--color-text-tertiary);
+  .doc-bullet {
+    color: var(--accent);
+    font-size: 0.7rem;
+    margin-top: 4px;
   }
 
-  .max-supply {
-    margin-top: var(--space-3);
-    padding-top: var(--space-3);
-    border-top: 1px solid var(--color-border);
+  .doc-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
   }
 
-  .travel-rules-grid {
+  .doc-type {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .doc-note {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .supply-limit {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--surface-elevated);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+
+  .supply-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+  }
+
+  .supply-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--accent-bold);
+  }
+
+  /* ROUTES */
+  .routes-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: var(--space-4);
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-6);
   }
 
-  .travel-rule-card {
+  .route-card {
+    background: var(--surface-elevated);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--route-color);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .route-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-4);
+    background: var(--route-bg);
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .route-path {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+  }
+
+  .route-from, .route-to {
+    font-size: 1rem;
+  }
+
+  .route-arrow {
+    color: var(--text-muted);
+  }
+
+  .route-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 4px 12px;
+    background: var(--route-color);
+    color: #000;
+    border-radius: 2px;
+  }
+
+  .route-body {
     padding: var(--space-4);
   }
 
-  .travel-route {
+  .route-info {
     display: flex;
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
+    font-size: 0.85rem;
+  }
+
+  .info-key {
+    color: var(--text-muted);
+  }
+
+  .info-val {
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .route-reqs {
+    margin: var(--space-3) 0;
+    padding-left: var(--space-5);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  .route-reqs li {
+    margin-bottom: var(--space-2);
+  }
+
+  .route-note {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    background: var(--surface-elevated);
+    padding: var(--space-3);
+    border-radius: 4px;
+    margin: 0;
+  }
+
+  .route-sources {
+    padding: var(--space-3) var(--space-4);
+    border-top: 1px solid var(--border);
+    font-size: 0.7rem;
+  }
+
+  .route-sources a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-right: var(--space-4);
+  }
+
+  .route-sources a:hover {
+    color: var(--accent);
+  }
+
+  .tool-link {
+    display: inline-flex;
     align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-5);
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .tool-link:hover {
+    background: var(--accent-bold);
+    transform: translateY(-2px);
+  }
+
+  .link-arrow {
+    transition: transform 0.2s;
+  }
+
+  .tool-link:hover .link-arrow {
+    transform: translateX(4px);
+  }
+
+  /* FORMS */
+  .forms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .form-card {
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: var(--space-4);
+    transition: border-color 0.2s;
+  }
+
+  .form-card:hover {
+    border-color: var(--accent);
+  }
+
+  .form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--space-2);
+  }
+
+  .form-name {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .form-duration {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--accent-bold);
+    background: var(--accent-dim);
+    padding: 2px 8px;
+    border-radius: 2px;
+  }
+
+  .form-meta {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: var(--space-3);
+  }
+
+  .form-strengths {
+    display: flex;
+    flex-wrap: wrap;
     gap: var(--space-2);
     margin-bottom: var(--space-3);
   }
 
-  .region-tag {
-    background: var(--color-bg-tertiary);
-    padding: var(--space-1) var(--space-2);
-    border-radius: var(--radius-sm);
-    font-weight: var(--font-medium);
+  .strength {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 4px 10px;
+    background: var(--surface-elevated);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--text-secondary);
   }
 
-  .arrow {
-    color: var(--color-text-tertiary);
+  .form-note {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0;
   }
 
-  .travel-status {
-    font-weight: var(--font-semibold);
-    margin-bottom: var(--space-2);
+  /* SIDE EFFECTS */
+  .effects-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-6);
   }
 
-  .travel-max-supply {
-    font-size: var(--text-sm);
-    margin-bottom: var(--space-2);
+  .effects-col {
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: var(--space-5);
   }
 
-  .travel-requirements {
-    font-size: var(--text-sm);
-    margin-bottom: var(--space-2);
+  .effects-serious {
+    border-left: 3px solid var(--danger);
   }
 
-  .travel-requirements ul {
-    margin-left: var(--space-4);
+  .effects-heading {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-4);
+  }
+
+  .effects-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .effect-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--border);
+    gap: var(--space-4);
+  }
+
+  .effect-item:last-child {
+    border-bottom: none;
+  }
+
+  .effect-name {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .effect-freq {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--warning);
+    background: var(--warning-dim);
+    padding: 3px 10px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  .effect-serious {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .effect-serious .effect-name {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .effect-notes {
+    font-size: 0.8rem;
+    color: var(--text-muted);
     margin-top: var(--space-1);
   }
 
-  .travel-requirements li {
-    margin-bottom: var(--space-1);
+  /* RAW DATA */
+  .raw-toggle {
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
   }
 
-  .travel-notes {
-    font-size: var(--text-sm);
-    color: var(--color-text-secondary);
-    margin-top: var(--space-2);
-    padding-top: var(--space-2);
-    border-top: 1px solid var(--color-border);
+  .raw-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-4);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
   }
 
-  .travel-sources {
-    font-size: var(--text-xs);
-    color: var(--color-text-tertiary);
-    margin-top: var(--space-2);
+  .raw-summary:hover {
+    background: var(--surface-elevated);
   }
 
-  .travel-sources a {
-    margin-left: var(--space-1);
+  .raw-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
   }
 
-  .travel-checker-link {
-    margin-top: var(--space-6);
-    margin-bottom: var(--space-6);
+  .raw-icon {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    transition: transform 0.2s;
   }
 
-  .btn {
-    display: inline-block;
-    padding: var(--space-2) var(--space-4);
-    border-radius: var(--radius-md);
+  .raw-toggle[open] .raw-icon {
+    transform: rotate(45deg);
+  }
+
+  .raw-content {
+    padding: var(--space-4);
+    border-top: 1px solid var(--border);
+  }
+
+  .raw-content pre {
+    margin: 0 0 var(--space-4);
+    padding: var(--space-4);
+    background: var(--surface);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    max-height: 400px;
+    overflow: auto;
+  }
+
+  .edit-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--accent-bold);
+    font-size: 0.85rem;
+    font-weight: 600;
     text-decoration: none;
-    font-weight: var(--font-medium);
   }
 
-  .btn-primary {
-    background: var(--color-primary);
-    color: white;
+  .edit-link:hover {
+    text-decoration: underline;
   }
 
-  .btn-primary:hover {
-    background: var(--color-primary-600);
-  }
-
-  /* Mobile responsive */
+  /* RESPONSIVE */
   @media (max-width: 639px) {
-    .table-wrapper {
-      display: none;
+    .drug-page {
+      padding: var(--space-2) 0;
     }
 
-    .approval-cards {
-      display: flex;
-      flex-direction: column;
+    .drug-title {
+      font-size: 2.2rem;
+    }
+
+    .hero-stats {
       gap: var(--space-3);
     }
 
-    .drug-tags .tag {
-      margin-bottom: var(--space-1);
+    .stat-block {
+      padding: var(--space-3);
+      min-width: 80px;
+    }
+
+    .stat-number {
+      font-size: 1.5rem;
+    }
+
+    .region-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .forms-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .effects-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .travel-block {
+      padding: var(--space-4);
+    }
+
+    .route-header {
+      flex-direction: column;
+      align-items: flex-start;
     }
   }
+
+  /* ANIMATIONS */
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .content-block {
+    animation: slideUp 0.5s ease-out;
+  }
+
+  .region-card,
+  .form-card,
+  .route-card {
+    animation: slideUp 0.4s ease-out both;
+  }
+
+  .region-card:nth-child(1), .form-card:nth-child(1), .route-card:nth-child(1) { animation-delay: 0.05s; }
+  .region-card:nth-child(2), .form-card:nth-child(2), .route-card:nth-child(2) { animation-delay: 0.1s; }
+  .region-card:nth-child(3), .form-card:nth-child(3), .route-card:nth-child(3) { animation-delay: 0.15s; }
+  .region-card:nth-child(4), .form-card:nth-child(4), .route-card:nth-child(4) { animation-delay: 0.2s; }
+  .region-card:nth-child(5), .form-card:nth-child(5), .route-card:nth-child(5) { animation-delay: 0.25s; }
+  .region-card:nth-child(6), .form-card:nth-child(6) { animation-delay: 0.3s; }
+  .region-card:nth-child(7) { animation-delay: 0.35s; }
 </style>

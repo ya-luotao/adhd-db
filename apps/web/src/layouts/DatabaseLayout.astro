@@ -1,0 +1,927 @@
+---
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../i18n/utils';
+import { getDrugs, getLocalizedValue } from '../lib/data';
+import '../styles/tokens.css';
+
+interface Props {
+  title: string;
+  activeTable?: 'drugs' | 'meta' | 'schema';
+  activeDrugId?: string;
+}
+
+const { title, activeTable = 'drugs', activeDrugId } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const drugs = getDrugs();
+
+const l = (value: any) => getLocalizedValue(value, lang);
+
+// Get active drug for inspector
+const activeDrug = activeDrugId ? drugs.find(d => d.id === activeDrugId) : null;
+
+// Define tables
+const tables = [
+  { id: 'drugs', label: 'drugs', path: '/data/drugs', icon: '◉', count: drugs.length },
+  { id: 'meta', label: 'meta', path: '/meta', icon: '◈', count: 2 },
+  { id: 'schema', label: 'schema', path: '/schema', icon: '◇', count: 1 },
+];
+
+// Alternates for SEO
+const alternates = [
+  { lang: 'en', path: Astro.url.pathname.replace(/^\/(zh|ja|zh-TW)/, '') || '/' },
+  { lang: 'zh', path: `/zh${Astro.url.pathname.replace(/^\/(zh|ja|zh-TW)/, '')}` },
+  { lang: 'ja', path: `/ja${Astro.url.pathname.replace(/^\/(zh|ja|zh-TW)/, '')}` },
+  { lang: 'zh-TW', path: `/zh-TW${Astro.url.pathname.replace(/^\/(zh|ja|zh-TW)/, '')}` },
+];
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} | ADHD-DB</title>
+    {alternates.map(({ lang: l, path }) => (
+      <link rel="alternate" hreflang={l} href={path} />
+    ))}
+  </head>
+  <body>
+    <div class="db-layout">
+      <!-- LEFT SIDEBAR -->
+      <aside class="sidebar">
+        <header class="sidebar-header">
+          <a href={getLocalizedPath('/', lang)} class="logo">
+            <span class="logo-icon">◆</span>
+            <span class="logo-text">ADHD-DB</span>
+          </a>
+        </header>
+
+        <!-- Table Selector -->
+        <div class="table-selector">
+          <label class="selector-label">TABLE</label>
+          <div class="select-wrapper">
+            <select id="table-select" class="table-select">
+              {tables.map((table) => (
+                <option
+                  value={getLocalizedPath(table.path, lang)}
+                  selected={activeTable === table.id}
+                >
+                  {table.icon} {table.label} ({table.count})
+                </option>
+              ))}
+            </select>
+            <span class="select-arrow">▼</span>
+          </div>
+        </div>
+
+        <!-- Table Content -->
+        <div class="table-content">
+          {activeTable === 'drugs' && (
+            <>
+              <div class="table-header">
+                <span class="col-name">Name</span>
+                <span class="col-class">Class</span>
+                <span class="col-status">Avail</span>
+              </div>
+              <div class="table-rows">
+                {drugs.map((drug) => {
+                  const isActive = drug.id === activeDrugId;
+                  const availableCount = drug.approvals?.filter((a: any) => a.available).length || 0;
+                  const totalRegions = drug.approvals?.length || 0;
+                  return (
+                    <a
+                      href={getLocalizedPath(`/data/drugs/${drug.id}`, lang)}
+                      class:list={['table-row', { active: isActive }]}
+                    >
+                      <span class="row-name">{l(drug.genericName)}</span>
+                      <span class="row-class" data-class={drug.drugClass}>
+                        {drug.drugClass === 'stimulant' ? 'STM' : 'NON'}
+                      </span>
+                      <span class="row-status">
+                        <span class="status-num">{availableCount}</span>
+                        <span class="status-sep">/</span>
+                        <span class="status-total">{totalRegions}</span>
+                      </span>
+                    </a>
+                  );
+                })}
+              </div>
+            </>
+          )}
+
+          {activeTable === 'meta' && (
+            <>
+              <div class="table-header">
+                <span class="col-name">File</span>
+                <span class="col-type">Type</span>
+              </div>
+              <div class="table-rows">
+                <a href={getLocalizedPath('/meta', lang)} class="table-row">
+                  <span class="row-name">regions.yaml</span>
+                  <span class="row-type">YAML</span>
+                </a>
+                <a href={getLocalizedPath('/meta', lang)} class="table-row">
+                  <span class="row-name">categories.yaml</span>
+                  <span class="row-type">YAML</span>
+                </a>
+              </div>
+            </>
+          )}
+
+          {activeTable === 'schema' && (
+            <>
+              <div class="table-header">
+                <span class="col-name">File</span>
+                <span class="col-type">Type</span>
+              </div>
+              <div class="table-rows">
+                <a href={getLocalizedPath('/schema', lang)} class="table-row">
+                  <span class="row-name">drug-schema.yaml</span>
+                  <span class="row-type">YAML</span>
+                </a>
+              </div>
+            </>
+          )}
+        </div>
+
+        <footer class="sidebar-footer">
+          <!-- Language Switcher -->
+          <div class="footer-section">
+            <label class="footer-label">LANGUAGE</label>
+            <div class="lang-switcher">
+              <a href={alternates.find(a => a.lang === 'en')?.path} class:list={['lang-btn', { active: lang === 'en' }]}>EN</a>
+              <a href={alternates.find(a => a.lang === 'zh')?.path} class:list={['lang-btn', { active: lang === 'zh' }]}>中文</a>
+              <a href={alternates.find(a => a.lang === 'zh-TW')?.path} class:list={['lang-btn', { active: lang === 'zh-TW' }]}>繁體</a>
+              <a href={alternates.find(a => a.lang === 'ja')?.path} class:list={['lang-btn', { active: lang === 'ja' }]}>日本語</a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="footer-section">
+            <label class="footer-label">TOOLS</label>
+            <div class="footer-links">
+              <a href={getLocalizedPath('/tools/region-checker', lang)} class="footer-link">Region Checker</a>
+              <a href={getLocalizedPath('/travel', lang)} class="footer-link">Travel Guide</a>
+            </div>
+          </div>
+
+          <!-- Contribute -->
+          <div class="footer-section footer-contribute">
+            <div class="contribute-text">
+              <span class="contribute-icon">◆</span>
+              <span>Open source project. Contributions welcome!</span>
+            </div>
+            <a href="https://github.com/ya-luotao/adhd-db" target="_blank" rel="noopener" class="contribute-btn">
+              Contribute on GitHub →
+            </a>
+          </div>
+        </footer>
+      </aside>
+
+      <!-- MIDDLE PANEL: Content -->
+      <main class="content">
+        <slot />
+      </main>
+
+      <!-- RIGHT PANEL: Inspector -->
+      {activeDrug && (
+        <aside class="inspector">
+          <header class="inspector-header">
+            <span class="inspector-title">Inspector</span>
+            <span class="inspector-type">Drug</span>
+          </header>
+
+          <div class="inspector-content">
+            <!-- Drug Name -->
+            <div class="inspector-section">
+              <label class="inspector-label">Generic Name</label>
+              <div class="inspector-value inspector-name">{l(activeDrug.genericName)}</div>
+            </div>
+
+            <!-- ID -->
+            <div class="inspector-section">
+              <label class="inspector-label">ID</label>
+              <code class="inspector-code">{activeDrug.id}</code>
+            </div>
+
+            <!-- Class -->
+            <div class="inspector-section">
+              <label class="inspector-label">Drug Class</label>
+              <span class="inspector-badge" data-class={activeDrug.drugClass}>
+                {activeDrug.drugClass}
+              </span>
+            </div>
+
+            <!-- Category -->
+            <div class="inspector-section">
+              <label class="inspector-label">Category</label>
+              <div class="inspector-value">{activeDrug.category}</div>
+            </div>
+
+            <!-- Mechanism -->
+            {activeDrug.pharmacology?.mechanism && (
+              <div class="inspector-section">
+                <label class="inspector-label">Mechanism</label>
+                <div class="inspector-value inspector-small">{l(activeDrug.pharmacology.mechanism)}</div>
+              </div>
+            )}
+
+            <!-- Approvals Summary -->
+            <div class="inspector-section">
+              <label class="inspector-label">Approvals</label>
+              <div class="inspector-approvals">
+                {activeDrug.approvals?.map((approval: any) => (
+                  <div class="approval-row">
+                    <span class="approval-region">{approval.region}</span>
+                    <span class:list={['approval-status', { available: approval.available }]}>
+                      {approval.available ? 'Available' : 'Not Available'}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <!-- Brand Names -->
+            {activeDrug.brandNames && Object.keys(activeDrug.brandNames).length > 0 && (
+              <div class="inspector-section">
+                <label class="inspector-label">Brand Names</label>
+                <div class="inspector-brands">
+                  {Object.entries(activeDrug.brandNames).map(([region, brands]: [string, any]) => (
+                    <div class="brand-row">
+                      <span class="brand-region">{region}</span>
+                      <span class="brand-names">{brands.slice(0, 2).join(', ')}{brands.length > 2 ? '...' : ''}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <!-- Formulations Count -->
+            {activeDrug.formulations && (
+              <div class="inspector-section">
+                <label class="inspector-label">Formulations</label>
+                <div class="inspector-value">
+                  <span class="inspector-stat">{activeDrug.formulations.length}</span> forms
+                </div>
+              </div>
+            )}
+
+            <!-- Side Effects Count -->
+            {activeDrug.sideEffects && (
+              <div class="inspector-section">
+                <label class="inspector-label">Side Effects</label>
+                <div class="inspector-value">
+                  <span class="inspector-stat">{activeDrug.sideEffects.length}</span> documented
+                </div>
+              </div>
+            )}
+          </div>
+        </aside>
+      )}
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  /* DATABASE LAYOUT - SQL Client Style */
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .db-layout {
+    --sidebar-width: 320px;
+    --header-height: 48px;
+    --accent: #00a86b;
+    --accent-dim: rgba(0, 168, 107, 0.1);
+    --accent-bold: #008f5b;
+    --danger: #dc2626;
+    --warning: #d97706;
+    --surface: #ffffff;
+    --surface-alt: #f8f9fa;
+    --surface-hover: #f1f3f5;
+    --border: #e5e7eb;
+    --border-strong: #d1d5db;
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --text-muted: #9ca3af;
+
+    display: flex;
+    height: 100vh;
+    background: var(--surface);
+    font-family: 'Inter', -apple-system, sans-serif;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
+    background: var(--surface-alt);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .sidebar-header {
+    height: var(--header-height);
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+
+  .logo-icon {
+    color: var(--accent);
+    font-size: 1rem;
+  }
+
+  .logo-text {
+    font-family: 'DM Mono', monospace;
+    letter-spacing: -0.02em;
+  }
+
+  /* TABLE SELECTOR */
+  .table-selector {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .selector-label {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .select-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .table-select {
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 10px 36px 10px 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .table-select:hover {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+  }
+
+  .table-select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-dim);
+  }
+
+  .select-arrow {
+    position: absolute;
+    right: 12px;
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+
+  /* TABLE CONTENT */
+  .table-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .table-header {
+    display: grid;
+    grid-template-columns: 1fr 50px 55px;
+    gap: 8px;
+    padding: 8px 16px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .col-class, .col-status, .col-type {
+    text-align: center;
+  }
+
+  .table-rows {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  .table-rows::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .table-rows::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .table-rows::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+  }
+
+  .table-row {
+    display: grid;
+    grid-template-columns: 1fr 50px 55px;
+    gap: 8px;
+    padding: 10px 16px;
+    text-decoration: none;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.1s;
+    font-size: 0.8rem;
+  }
+
+  .table-row:hover {
+    background: var(--surface-hover);
+  }
+
+  .table-row.active {
+    background: var(--accent-dim);
+    border-left: 3px solid var(--accent);
+    padding-left: 13px;
+  }
+
+  .row-name {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .row-class {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 2px 0;
+    border-radius: 2px;
+    background: var(--surface);
+    color: var(--text-muted);
+  }
+
+  .row-class[data-class="stimulant"] {
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+  }
+
+  .row-class[data-class="non-stimulant"] {
+    background: rgba(59, 130, 246, 0.1);
+    color: #2563eb;
+  }
+
+  .row-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-align: center;
+    color: var(--text-muted);
+  }
+
+  .row-status {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1px;
+  }
+
+  .status-num {
+    color: var(--accent-bold);
+    font-weight: 600;
+  }
+
+  .status-sep {
+    color: var(--text-muted);
+  }
+
+  .status-total {
+    color: var(--text-muted);
+  }
+
+  .sidebar-footer {
+    padding: 16px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: var(--surface);
+  }
+
+  .footer-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .footer-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+  }
+
+  .lang-switcher {
+    display: flex;
+    gap: 4px;
+  }
+
+  .lang-btn {
+    padding: 6px 10px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    transition: all 0.15s;
+  }
+
+  .lang-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .lang-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 12px;
+  }
+
+  .footer-link {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .footer-link:hover {
+    color: var(--accent);
+  }
+
+  .footer-contribute {
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    gap: 10px;
+  }
+
+  .contribute-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+
+  .contribute-icon {
+    color: var(--accent);
+    font-size: 0.65rem;
+  }
+
+  .contribute-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-bold);
+    text-decoration: none;
+    background: var(--accent-dim);
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    transition: all 0.15s;
+  }
+
+  .contribute-btn:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  /* MAIN CONTENT */
+  .content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 32px 48px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  .content::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .content::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .content::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+  }
+
+  /* INSPECTOR PANEL */
+  .inspector {
+    --inspector-width: 280px;
+    width: var(--inspector-width);
+    min-width: var(--inspector-width);
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .inspector-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: var(--surface-alt);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .inspector-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+  }
+
+  .inspector-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--accent);
+    background: var(--accent-dim);
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+
+  .inspector-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  .inspector-section {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .inspector-section:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .inspector-label {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .inspector-value {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+  }
+
+  .inspector-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-primary);
+  }
+
+  .inspector-small {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .inspector-code {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--accent);
+    background: var(--accent-dim);
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+
+  .inspector-badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: var(--surface-alt);
+    color: var(--text-secondary);
+  }
+
+  .inspector-badge[data-class="stimulant"] {
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+  }
+
+  .inspector-badge[data-class="non-stimulant"] {
+    background: rgba(59, 130, 246, 0.1);
+    color: #2563eb;
+  }
+
+  .inspector-stat {
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .inspector-approvals {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .approval-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 8px;
+    background: var(--surface-alt);
+    border-radius: 4px;
+    font-size: 0.75rem;
+  }
+
+  .approval-region {
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .approval-status {
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+
+  .approval-status.available {
+    color: var(--accent);
+  }
+
+  .inspector-brands {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .brand-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .brand-row:last-child {
+    border-bottom: none;
+  }
+
+  .brand-region {
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    color: var(--accent);
+    font-size: 0.65rem;
+  }
+
+  .brand-names {
+    color: var(--text-secondary);
+    text-align: right;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* TABLET: Hide inspector */
+  @media (max-width: 1200px) {
+    .inspector {
+      display: none;
+    }
+  }
+
+  /* MOBILE: Stack layout */
+  @media (max-width: 900px) {
+    .db-layout {
+      flex-direction: column;
+    }
+
+    .sidebar {
+      width: 100%;
+      min-width: 100%;
+      height: auto;
+      max-height: 40vh;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .content {
+      padding: 24px 16px;
+    }
+
+    .inspector {
+      display: none;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .sidebar {
+      max-height: 35vh;
+    }
+
+    .table-header {
+      display: none;
+    }
+
+    .drug-row {
+      grid-template-columns: 1fr 40px 50px;
+      padding: 8px 12px;
+      font-size: 0.8rem;
+    }
+
+    .content {
+      padding: 16px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tableSelect = document.getElementById('table-select') as HTMLSelectElement;
+    if (tableSelect) {
+      tableSelect.addEventListener('change', (e) => {
+        const target = e.target as HTMLSelectElement;
+        if (target.value) {
+          window.location.href = target.value;
+        }
+      });
+    }
+  });
+</script>

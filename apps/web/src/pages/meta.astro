@@ -1,10 +1,9 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import DatabaseLayout from '../layouts/DatabaseLayout.astro';
 import { getRegions } from '../lib/data';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 // Prerender at build time (required for Cloudflare Workers)
 export const prerender = true;
-
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -13,58 +12,304 @@ const regions = Object.entries(meta.regions);
 const categories = Object.entries(meta.drugCategories);
 ---
 
-<Layout title={t('meta.title')}>
-  <h1>{t('meta.title')}</h1>
+<DatabaseLayout title={t('meta.title')} activeTable="meta">
+  <div class="meta-page">
+    <header class="page-header">
+      <h1 class="page-title">meta</h1>
+      <p class="page-desc">Region definitions and drug categories used in the database.</p>
+    </header>
 
-  <p style="margin-bottom: 1.5rem; color: #666;">
-    {t('meta.description')}
-  </p>
-
-  <h2>{t('meta.regions')} ({regions.length})</h2>
-
-  <div class="grid">
-    {regions.map(([code, region]: [string, any]) => (
-      <div class="card">
-        <h3>{code} - {region.name}</h3>
-        {region.nameLocal !== region.name && (
-          <p style="color: #666; margin-bottom: 0.5rem;">{region.nameLocal}</p>
-        )}
-        <table style="font-size: 0.875rem;">
-          <tr>
-            <td><strong>Agency</strong></td>
-            <td>{region.regulatoryAgency}</td>
-          </tr>
-          <tr>
-            <td><strong>Full Name</strong></td>
-            <td style="font-size: 0.75rem;">{region.agencyFullName}</td>
-          </tr>
-          <tr>
-            <td><strong>Currency</strong></td>
-            <td>{region.currency}</td>
-          </tr>
-          {region.schedules?.length > 0 && (
-            <tr>
-              <td><strong>Schedules</strong></td>
-              <td style="font-size: 0.75rem;">{region.schedules.join(', ')}</td>
-            </tr>
-          )}
-        </table>
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-value">{regions.length}</span>
+        <span class="stat-label">Regions</span>
       </div>
-    ))}
-  </div>
-
-  <h2>{t('meta.drugCategories')}</h2>
-
-  <div class="grid">
-    {categories.map(([category, drugs]: [string, string[]]) => (
-      <div class="card">
-        <h3 style="text-transform: capitalize;">{category}</h3>
-        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-          {drugs.map((drug: string) => (
-            <li>{drug}</li>
-          ))}
-        </ul>
+      <div class="stat-card">
+        <span class="stat-value">{categories.length}</span>
+        <span class="stat-label">Categories</span>
       </div>
-    ))}
+      <div class="stat-card">
+        <span class="stat-value">2</span>
+        <span class="stat-label">Files</span>
+      </div>
+    </div>
+
+    <section class="data-section">
+      <h2 class="section-title">
+        <span class="title-marker"></span>
+        Regions
+        <span class="section-count">{regions.length}</span>
+      </h2>
+
+      <div class="region-grid">
+        {regions.map(([code, region]: [string, any]) => (
+          <div class="region-card">
+            <div class="region-header">
+              <span class="region-code">{code}</span>
+              <span class="region-name">{region.name}</span>
+            </div>
+            {region.nameLocal !== region.name && (
+              <p class="region-local">{region.nameLocal}</p>
+            )}
+            <div class="region-data">
+              <div class="data-row">
+                <span class="data-key">Agency</span>
+                <span class="data-val">{region.regulatoryAgency}</span>
+              </div>
+              <div class="data-row">
+                <span class="data-key">Full Name</span>
+                <span class="data-val data-small">{region.agencyFullName}</span>
+              </div>
+              <div class="data-row">
+                <span class="data-key">Currency</span>
+                <span class="data-val">{region.currency}</span>
+              </div>
+              {region.schedules?.length > 0 && (
+                <div class="data-row">
+                  <span class="data-key">Schedules</span>
+                  <span class="data-val data-small">{region.schedules.join(', ')}</span>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="data-section">
+      <h2 class="section-title">
+        <span class="title-marker"></span>
+        Drug Categories
+        <span class="section-count">{categories.length}</span>
+      </h2>
+
+      <div class="category-grid">
+        {categories.map(([category, drugs]: [string, string[]]) => (
+          <div class="category-card">
+            <h3 class="category-name">{category}</h3>
+            <ul class="drug-list">
+              {drugs.map((drug: string) => (
+                <li>{drug}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
   </div>
-</Layout>
+</DatabaseLayout>
+
+<style>
+  .meta-page {
+    max-width: 900px;
+  }
+
+  .page-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .page-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #111827;
+  }
+
+  .page-desc {
+    color: #6b7280;
+    font-size: 0.95rem;
+  }
+
+  /* Stats Grid */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .stat-card {
+    background: #f8f9fa;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .stat-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #00a86b;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .data-section {
+    margin-bottom: 3rem;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #4b5563;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .title-marker {
+    width: 4px;
+    height: 16px;
+    background: #00a86b;
+    border-radius: 1px;
+  }
+
+  .section-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: #9ca3af;
+    background: #f3f4f6;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-left: auto;
+  }
+
+  .region-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .region-card {
+    background: #f8f9fa;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 1rem;
+    transition: border-color 0.15s;
+  }
+
+  .region-card:hover {
+    border-color: #00a86b;
+  }
+
+  .region-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .region-code {
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #00a86b;
+  }
+
+  .region-name {
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .region-local {
+    font-size: 0.8rem;
+    color: #6b7280;
+    margin-bottom: 0.75rem;
+  }
+
+  .region-data {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .data-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 0.8rem;
+  }
+
+  .data-row:last-child {
+    border-bottom: none;
+  }
+
+  .data-key {
+    color: #9ca3af;
+  }
+
+  .data-val {
+    color: #374151;
+    font-weight: 500;
+    text-align: right;
+  }
+
+  .data-small {
+    font-size: 0.7rem;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .category-card {
+    background: #f8f9fa;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 1rem;
+  }
+
+  .category-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: #111827;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .drug-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .drug-list li {
+    font-size: 0.8rem;
+    color: #4b5563;
+    padding: 0.25rem 0;
+  }
+
+  .drug-list li::before {
+    content: '◆';
+    color: #00a86b;
+    font-size: 0.5rem;
+    margin-right: 0.5rem;
+  }
+</style>

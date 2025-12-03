@@ -1,257 +1,369 @@
 ---
-import Layout from '../../../../layouts/Layout.astro';
+import DatabaseLayout from '../../../../layouts/DatabaseLayout.astro';
 import { getDrugs, getLocalizedValue } from '../../../../lib/data';
-import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../../../i18n/utils';
+import { getLangFromUrl, useTranslations } from '../../../../i18n/utils';
+
+// Prerender at build time (required for Cloudflare Workers)
+export const prerender = true;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const drugs = getDrugs();
 
-// Get all unique regions from approvals
-const allRegions = [...new Set(drugs.flatMap(d => d.approvals?.map(a => a.region) || []))].sort();
+const l = (value: any) => getLocalizedValue(value, lang);
+
+// Calculate stats
+const stimulants = drugs.filter(d => d.drugClass === 'stimulant');
+const nonStimulants = drugs.filter(d => d.drugClass === 'non-stimulant');
+const allRegions = [...new Set(drugs.flatMap(d => d.approvals?.map((a: any) => a.region) || []))];
+const totalApprovals = drugs.reduce((acc, d) => acc + (d.approvals?.filter((a: any) => a.available).length || 0), 0);
 ---
 
-<Layout title={t('drugs.title')}>
-  <h1>{t('drugs.title')}</h1>
+<DatabaseLayout title={t('drugs.title')} activeTable="drugs">
+  <div class="index-page">
+    <header class="page-header">
+      <h1 class="page-title">drugs</h1>
+      <p class="page-desc">ADHD medication database with multi-region regulatory data</p>
+    </header>
 
-  <p class="page-description">
-    {drugs.length} {t('drugs.description')}
-  </p>
-
-  <div class="filters">
-    <input
-      type="text"
-      id="search"
-      placeholder={t('filter.search')}
-      class="search-input"
-    />
-    <div class="filter-group">
-      <label>{t('filter.class')}:</label>
-      <select id="class-filter">
-        <option value="all">{t('filter.all')}</option>
-        <option value="stimulant">{t('drugs.stimulants')}</option>
-        <option value="non-stimulant">{t('drugs.nonStimulants')}</option>
-      </select>
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-value">{drugs.length}</span>
+        <span class="stat-label">Total Drugs</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">{stimulants.length}</span>
+        <span class="stat-label">Stimulants</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">{nonStimulants.length}</span>
+        <span class="stat-label">Non-Stimulants</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">{allRegions.length}</span>
+        <span class="stat-label">Regions</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">{totalApprovals}</span>
+        <span class="stat-label">Approvals</span>
+      </div>
     </div>
-    <div class="filter-group">
-      <label>{t('filter.region')}:</label>
-      <select id="region-filter">
-        <option value="all">{t('filter.all')}</option>
-        {allRegions.map(region => (
-          <option value={region}>{region}</option>
-        ))}
-      </select>
-    </div>
-  </div>
 
-  <div class="grid" id="drug-list">
-    {drugs.map(drug => {
-      const regions = drug.approvals?.filter(a => a.available).map(a => a.region) || [];
-      const genericName = getLocalizedValue(drug.genericName, lang);
-      const brandNames = Object.values(drug.brandNames || {}).flat();
-      return (
-        <a
-          href={getLocalizedPath(`/data/drugs/${drug.id}`, lang)}
-          class="card drug-card"
-          data-class={drug.drugClass}
-          data-regions={regions.join(',')}
-          data-name={genericName.toLowerCase()}
-          data-brands={brandNames.join(',').toLowerCase()}
-        >
-          <h3>{genericName}</h3>
-          <p class="drug-category">
-            {drug.category}
-          </p>
-          <div>
-            <span class={`tag ${drug.drugClass}`}>
-              {drug.drugClass === 'stimulant' ? t('home.stimulants') : t('home.nonStimulants')}
-            </span>
-            {regions.slice(0, 4).map(region => (
-              <span class="tag available">{region}</span>
-            ))}
-            {regions.length > 4 && <span class="tag available">+{regions.length - 4}</span>}
-          </div>
-          <div class="brand-names">
-            <strong>{t('drugs.brandNames')}:</strong> {brandNames.slice(0, 3).join(', ')}
-            {brandNames.length > 3 && '...'}
-          </div>
-        </a>
-      );
-    })}
-  </div>
+    <!-- Data Table -->
+    <section class="data-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="title-marker"></span>
+          All Records
+          <span class="record-count">{drugs.length} rows</span>
+        </h2>
+      </div>
 
-  <p id="no-results" class="no-results">
-    {t('data.noData')}
-  </p>
-</Layout>
+      <div class="data-table">
+        <div class="table-head">
+          <span class="th col-id">id</span>
+          <span class="th col-name">genericName</span>
+          <span class="th col-class">drugClass</span>
+          <span class="th col-category">category</span>
+          <span class="th col-approvals">approvals</span>
+        </div>
+        <div class="table-body">
+          {drugs.map((drug, idx) => {
+            const availableCount = drug.approvals?.filter((a: any) => a.available).length || 0;
+            const totalRegions = drug.approvals?.length || 0;
+            return (
+              <div class="table-row" data-idx={idx}>
+                <span class="td col-id">
+                  <code>{drug.id}</code>
+                </span>
+                <span class="td col-name">{l(drug.genericName)}</span>
+                <span class="td col-class">
+                  <span class="class-badge" data-class={drug.drugClass}>
+                    {drug.drugClass}
+                  </span>
+                </span>
+                <span class="td col-category">{drug.category}</span>
+                <span class="td col-approvals">
+                  <span class="approval-stat">
+                    <span class="avail">{availableCount}</span>
+                    <span class="sep">/</span>
+                    <span class="total">{totalRegions}</span>
+                  </span>
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <!-- Schema Preview -->
+    <section class="data-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="title-marker"></span>
+          Schema Fields
+        </h2>
+      </div>
+      <div class="schema-preview">
+        <code class="field"><span class="key">id</span>: string</code>
+        <code class="field"><span class="key">genericName</span>: LocalizedString</code>
+        <code class="field"><span class="key">drugClass</span>: "stimulant" | "non-stimulant"</code>
+        <code class="field"><span class="key">category</span>: string</code>
+        <code class="field"><span class="key">brandNames</span>: Record&lt;Region, string[]&gt;</code>
+        <code class="field"><span class="key">approvals</span>: Approval[]</code>
+        <code class="field"><span class="key">formulations</span>: Formulation[]</code>
+        <code class="field"><span class="key">pharmacology</span>: Pharmacology</code>
+        <code class="field"><span class="key">sideEffects</span>: SideEffect[]</code>
+      </div>
+    </section>
+  </div>
+</DatabaseLayout>
 
 <style>
-  .page-description {
-    margin-bottom: var(--space-6);
-    color: var(--color-text-tertiary);
+  .index-page {
+    max-width: 1000px;
   }
 
-  .drug-category {
-    color: var(--color-text-tertiary);
-    font-size: var(--text-sm);
-    margin-bottom: var(--space-2);
+  .page-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
   }
 
-  .brand-names {
-    margin-top: var(--space-3);
-    font-size: var(--text-sm);
-    color: var(--color-text-secondary);
+  .page-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #111827;
   }
 
-  .no-results {
-    display: none;
-    text-align: center;
-    color: var(--color-text-tertiary);
-    padding: var(--space-8);
+  .page-desc {
+    color: #6b7280;
+    font-size: 0.95rem;
   }
 
-  .filters {
+  /* Stats Grid */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .stat-card {
+    background: #f8f9fa;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .stat-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #00a86b;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Data Section */
+  .data-section {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-header {
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #4b5563;
+  }
+
+  .title-marker {
+    width: 4px;
+    height: 16px;
+    background: #00a86b;
+    border-radius: 1px;
+  }
+
+  .record-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #9ca3af;
+    background: #f3f4f6;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-left: auto;
+  }
+
+  /* Data Table */
+  .data-table {
+    background: #f8f9fa;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .table-head {
+    display: grid;
+    grid-template-columns: 180px 1fr 100px 140px 80px;
+    gap: 8px;
+    padding: 10px 16px;
+    background: #fff;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .th {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: lowercase;
+    color: #9ca3af;
+  }
+
+  .table-body {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  .table-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 100px 140px 80px;
+    gap: 8px;
+    padding: 10px 16px;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 0.8rem;
+    transition: background 0.1s;
+  }
+
+  .table-row:last-child {
+    border-bottom: none;
+  }
+
+  .table-row:hover {
+    background: #fff;
+  }
+
+  .td {
+    display: flex;
+    align-items: center;
+  }
+
+  .col-id code {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: #00a86b;
+    background: rgba(0, 168, 107, 0.1);
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+
+  .col-name {
+    font-weight: 500;
+    color: #111827;
+  }
+
+  .class-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 3px;
+    background: #f3f4f6;
+    color: #6b7280;
+  }
+
+  .class-badge[data-class="stimulant"] {
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+  }
+
+  .class-badge[data-class="non-stimulant"] {
+    background: rgba(59, 130, 246, 0.1);
+    color: #2563eb;
+  }
+
+  .col-category {
+    font-size: 0.75rem;
+    color: #6b7280;
+  }
+
+  .approval-stat {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .approval-stat .avail {
+    color: #00a86b;
+    font-weight: 600;
+  }
+
+  .approval-stat .sep {
+    color: #d1d5db;
+  }
+
+  .approval-stat .total {
+    color: #9ca3af;
+  }
+
+  /* Schema Preview */
+  .schema-preview {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-3);
-    margin-bottom: var(--space-6);
-    align-items: center;
+    gap: 8px;
+    padding: 1rem;
+    background: #f8f9fa;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
   }
 
-  .search-input {
-    flex: 1;
-    min-width: 200px;
-    padding: var(--space-2-5) var(--space-4);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    font-size: var(--text-base);
-    background: var(--color-bg-primary);
+  .schema-preview .field {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    color: #4b5563;
   }
 
-  .search-input:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    box-shadow: var(--shadow-focus);
+  .schema-preview .key {
+    color: #00a86b;
+    font-weight: 500;
   }
 
-  .filter-group {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-  }
-
-  .filter-group label {
-    font-size: var(--text-sm);
-    color: var(--color-text-tertiary);
-    font-weight: var(--font-medium);
-  }
-
-  .filter-group select {
-    padding: var(--space-2) var(--space-3);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    font-size: var(--text-sm);
-    background: var(--color-bg-primary);
-    color: var(--color-text-primary);
-  }
-
-  .filter-group select:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    box-shadow: var(--shadow-focus);
-  }
-
-  a.drug-card {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  a.drug-card:hover {
-    box-shadow: var(--shadow-md);
-    transform: translateY(-2px);
-    transition: all var(--transition-base);
-  }
-
-  a.drug-card h3 {
-    color: var(--color-primary);
-  }
-
-  a.drug-card.hidden {
-    display: none;
-  }
-
-  /* Mobile responsive filters */
-  @media (max-width: 639px) {
-    .filters {
-      flex-direction: column;
-      align-items: stretch;
+  @media (max-width: 768px) {
+    .table-head,
+    .table-row {
+      grid-template-columns: 1fr 80px 60px;
     }
 
-    .search-input {
-      width: 100%;
-      min-width: unset;
-    }
-
-    .filter-group {
-      width: 100%;
-    }
-
-    .filter-group label {
-      min-width: 60px;
-    }
-
-    .filter-group select {
-      flex: 1;
-    }
-
-    /* Stack tags on mobile */
-    a.drug-card .tag {
-      margin-bottom: var(--space-1);
+    .col-id,
+    .col-category {
+      display: none;
     }
   }
 </style>
-
-<script>
-  const searchInput = document.getElementById('search') as HTMLInputElement;
-  const classFilter = document.getElementById('class-filter') as HTMLSelectElement;
-  const regionFilter = document.getElementById('region-filter') as HTMLSelectElement;
-  const drugList = document.getElementById('drug-list');
-  const noResults = document.getElementById('no-results');
-
-  function filterDrugs() {
-    const searchTerm = searchInput.value.toLowerCase();
-    const selectedClass = classFilter.value;
-    const selectedRegion = regionFilter.value;
-
-    const cards = drugList?.querySelectorAll('.drug-card') || [];
-    let visibleCount = 0;
-
-    cards.forEach(card => {
-      const drugClass = card.getAttribute('data-class') || '';
-      const regions = card.getAttribute('data-regions') || '';
-      const name = card.getAttribute('data-name') || '';
-      const brands = card.getAttribute('data-brands') || '';
-
-      const matchesSearch = !searchTerm ||
-        name.includes(searchTerm) ||
-        brands.includes(searchTerm);
-      const matchesClass = selectedClass === 'all' || drugClass === selectedClass;
-      const matchesRegion = selectedRegion === 'all' || regions.includes(selectedRegion);
-
-      if (matchesSearch && matchesClass && matchesRegion) {
-        card.classList.remove('hidden');
-        visibleCount++;
-      } else {
-        card.classList.add('hidden');
-      }
-    });
-
-    if (noResults) {
-      noResults.style.display = visibleCount === 0 ? 'block' : 'none';
-    }
-  }
-
-  searchInput?.addEventListener('input', filterDrugs);
-  classFilter?.addEventListener('change', filterDrugs);
-  regionFilter?.addEventListener('change', filterDrugs);
-</script>
