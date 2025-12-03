@@ -3,39 +3,30 @@ import Layout from '../../../layouts/Layout.astro';
 import { getDrugs, getRegions, getLocalizedValue, getLocalizedArray, inferTravelStatus, getCrossBorderRule, type Drug, type TravelStatus } from '../../../lib/data';
 import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../../i18n/utils';
 
-// Prerender all routes at build time (required for Cloudflare Workers)
-export const prerender = true;
-
-// Get all drugs and regions
+// Dynamic SSR - parse route at request time
 const drugs = getDrugs();
 const regionsData = getRegions();
 const regionCodes = Object.keys(regionsData.regions);
 
-// Generate all possible routes: drug-from-ORIGIN-to-DEST
-export function getStaticPaths() {
-  const drugs = getDrugs();
-  const regionsData = getRegions();
-  const regionCodes = Object.keys(regionsData.regions);
+// Parse route: drug-id-from-ORIGIN-to-DEST
+const routeParam = Astro.params.route || '';
+const routeMatch = routeParam.match(/^(.+)-from-([a-z]{2}(?:-[a-z]{2})?)-to-([a-z]{2}(?:-[a-z]{2})?)$/i);
 
-  const paths: { params: { route: string }; props: any }[] = [];
-
-  for (const drug of drugs) {
-    for (const fromRegion of regionCodes) {
-      for (const toRegion of regionCodes) {
-        if (fromRegion !== toRegion) {
-          paths.push({
-            params: { route: `${drug.id}-from-${fromRegion.toLowerCase()}-to-${toRegion.toLowerCase()}` },
-            props: { drug, fromRegion, toRegion, regionsData },
-          });
-        }
-      }
-    }
-  }
-
-  return paths;
+if (!routeMatch) {
+  return Astro.redirect('/zh-TW/travel');
 }
 
-const { drug, fromRegion, toRegion, regionsData: regions } = Astro.props;
+const [, drugId, fromRegionParam, toRegionParam] = routeMatch;
+const fromRegion = fromRegionParam.toUpperCase();
+const toRegion = toRegionParam.toUpperCase();
+
+// Validate drug and regions exist
+const drug = drugs.find((d: Drug) => d.id === drugId);
+if (!drug || !regionCodes.includes(fromRegion) || !regionCodes.includes(toRegion) || fromRegion === toRegion) {
+  return Astro.redirect('/zh-TW/travel');
+}
+
+const regions = regionsData;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
