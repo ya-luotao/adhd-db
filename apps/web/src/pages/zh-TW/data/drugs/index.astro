@@ -1,7 +1,7 @@
 ---
 import DatabaseLayout from '../../../../layouts/DatabaseLayout.astro';
 import { getDrugs, getLocalizedValue } from '../../../../lib/data';
-import { getLangFromUrl, useTranslations } from '../../../../i18n/utils';
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../../../i18n/utils';
 
 // Prerender at build time (required for Cloudflare Workers)
 export const prerender = true;
@@ -17,243 +17,576 @@ const stimulants = drugs.filter(d => d.drugClass === 'stimulant');
 const nonStimulants = drugs.filter(d => d.drugClass === 'non-stimulant');
 const allRegions = [...new Set(drugs.flatMap(d => d.approvals?.map((a: any) => a.region) || []))];
 const totalApprovals = drugs.reduce((acc, d) => acc + (d.approvals?.filter((a: any) => a.available).length || 0), 0);
+
+// Drug class colors
+const classColors = {
+  stimulant: '#ef4444',
+  'non-stimulant': '#3b82f6'
+};
 ---
 
 <DatabaseLayout title={t('drugs.title')} activeTable="drugs">
-  <div class="index-page">
-    <header class="page-header">
-      <h1 class="page-title">drugs</h1>
-      <p class="page-desc">ADHD medication database with multi-region regulatory data</p>
+  <article class="dossier">
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+      <a href={getLocalizedPath('/data', lang)} class="crumb">data</a>
+      <span class="crumb-sep">/</span>
+      <span class="crumb-current">drugs</span>
+    </nav>
+
+    <!-- CASE FILE HEADER -->
+    <header class="case-file">
+      <div class="case-file-band">
+        <div class="case-file-left">
+          <span class="case-label">DATABASE</span>
+          <span class="case-number">DRUG-REGISTRY</span>
+        </div>
+        <div class="case-file-right">
+          <span class="registry-stamp">
+            <span class="stamp-border">
+              <span class="stamp-text">ADHD<br/>MEDICATIONS</span>
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="case-file-body">
+        <div class="specimen-id">
+          <span class="specimen-label">PHARMACEUTICAL DATABASE</span>
+          <h1 class="specimen-name">Drug Registry</h1>
+        </div>
+
+        <p class="registry-desc">ADHD medication database with multi-region regulatory data</p>
+      </div>
+
+      <div class="case-file-stripe"></div>
     </header>
 
-    <!-- Stats Grid -->
-    <div class="stats-grid">
-      <div class="stat-card">
-        <span class="stat-value">{drugs.length}</span>
-        <span class="stat-label">Total Drugs</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-value">{stimulants.length}</span>
-        <span class="stat-label">Stimulants</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-value">{nonStimulants.length}</span>
-        <span class="stat-label">Non-Stimulants</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-value">{allRegions.length}</span>
-        <span class="stat-label">Regions</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-value">{totalApprovals}</span>
-        <span class="stat-label">Approvals</span>
-      </div>
-    </div>
-
-    <!-- Data Table -->
-    <section class="data-section">
-      <div class="section-header">
-        <h2 class="section-title">
-          <span class="title-marker"></span>
-          All Records
-          <span class="record-count">{drugs.length} rows</span>
-        </h2>
-      </div>
-
-      <div class="data-table">
-        <div class="table-head">
-          <span class="th col-id">id</span>
-          <span class="th col-name">genericName</span>
-          <span class="th col-class">drugClass</span>
-          <span class="th col-category">category</span>
-          <span class="th col-approvals">approvals</span>
+    <!-- STATS GRID -->
+    <section class="stats-section">
+      <div class="stats-grid">
+        <div class="stat-card stat-primary">
+          <div class="stat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+              <polyline points="17 21 17 13 7 13 7 21"></polyline>
+              <polyline points="7 3 7 8 15 8"></polyline>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <span class="stat-value">{drugs.length}</span>
+            <span class="stat-label">Total Drugs</span>
+          </div>
         </div>
-        <div class="table-body">
-          {drugs.map((drug, idx) => {
-            const availableCount = drug.approvals?.filter((a: any) => a.available).length || 0;
-            const totalRegions = drug.approvals?.length || 0;
-            return (
-              <div class="table-row" data-idx={idx}>
-                <span class="td col-id">
-                  <code>{drug.id}</code>
-                </span>
-                <span class="td col-name">{l(drug.genericName)}</span>
-                <span class="td col-class">
-                  <span class="class-badge" data-class={drug.drugClass}>
-                    {drug.drugClass}
-                  </span>
-                </span>
-                <span class="td col-category">{drug.category}</span>
-                <span class="td col-approvals">
-                  <span class="approval-stat">
-                    <span class="avail">{availableCount}</span>
-                    <span class="sep">/</span>
-                    <span class="total">{totalRegions}</span>
-                  </span>
-                </span>
-              </div>
-            );
-          })}
+        <div class="stat-card stat-stimulant">
+          <div class="stat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <span class="stat-value">{stimulants.length}</span>
+            <span class="stat-label">Stimulants</span>
+          </div>
+        </div>
+        <div class="stat-card stat-nonstim">
+          <div class="stat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 6v6l4 2"></path>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <span class="stat-value">{nonStimulants.length}</span>
+            <span class="stat-label">Non-Stimulants</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <span class="stat-value">{allRegions.length}</span>
+            <span class="stat-label">Regions</span>
+          </div>
+        </div>
+        <div class="stat-card stat-approvals">
+          <div class="stat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <span class="stat-value">{totalApprovals}</span>
+            <span class="stat-label">Approvals</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Schema Preview -->
-    <section class="data-section">
-      <div class="section-header">
-        <h2 class="section-title">
-          <span class="title-marker"></span>
-          Schema Fields
-        </h2>
-      </div>
-      <div class="schema-preview">
-        <code class="field"><span class="key">id</span>: string</code>
-        <code class="field"><span class="key">genericName</span>: LocalizedString</code>
-        <code class="field"><span class="key">drugClass</span>: "stimulant" | "non-stimulant"</code>
-        <code class="field"><span class="key">category</span>: string</code>
-        <code class="field"><span class="key">brandNames</span>: Record&lt;Region, string[]&gt;</code>
-        <code class="field"><span class="key">approvals</span>: Approval[]</code>
-        <code class="field"><span class="key">formulations</span>: Formulation[]</code>
-        <code class="field"><span class="key">pharmacology</span>: Pharmacology</code>
-        <code class="field"><span class="key">sideEffects</span>: SideEffect[]</code>
+    <!-- DATA TABLE -->
+    <section class="records-section">
+      <h2 class="section-title">
+        <span class="title-marker"></span>
+        All Records
+        <span class="record-count">{drugs.length} entries</span>
+      </h2>
+
+      <div class="records-table">
+        <div class="table-header">
+          <span class="col-id">ID</span>
+          <span class="col-name">Generic Name</span>
+          <span class="col-class">Class</span>
+          <span class="col-category">Category</span>
+          <span class="col-approvals">Approvals</span>
+        </div>
+        {drugs.map((drug, idx) => {
+          const availableCount = drug.approvals?.filter((a: any) => a.available).length || 0;
+          const totalRegions = drug.approvals?.length || 0;
+          const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#888';
+          return (
+            <a href={getLocalizedPath(`/data/drugs/${drug.id}`, lang)} class="table-row" data-idx={idx}>
+              <span class="col-id">
+                <code>{drug.id}</code>
+              </span>
+              <span class="col-name">{l(drug.genericName)}</span>
+              <span class="col-class">
+                <span class="class-badge" style={`--class-color: ${classColor}`}>
+                  {l(drug.drugClassLabel) || drug.drugClass}
+                </span>
+              </span>
+              <span class="col-category">{l(drug.categoryLabel) || drug.category}</span>
+              <span class="col-approvals">
+                <span class="approval-indicator">
+                  <span class="approval-bar" style={`--fill: ${(availableCount / totalRegions) * 100}%`}></span>
+                  <span class="approval-text">{availableCount}/{totalRegions}</span>
+                </span>
+              </span>
+            </a>
+          );
+        })}
       </div>
     </section>
-  </div>
+
+    <!-- SCHEMA SECTION -->
+    <section class="archive-section">
+      <details class="archive-folder">
+        <summary class="folder-tab">
+          <div class="tab-left">
+            <span class="folder-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+            </span>
+            <span class="folder-label">Schema Definition</span>
+          </div>
+          <div class="tab-right">
+            <span class="classified-stamp">SPEC</span>
+            <span class="folder-toggle">+</span>
+          </div>
+        </summary>
+        <div class="folder-contents">
+          <div class="file-header">
+            <span class="file-id">TYPE: Drug</span>
+          </div>
+          <div class="schema-grid">
+            <div class="schema-field">
+              <span class="field-key">id</span>
+              <span class="field-type">string</span>
+            </div>
+            <div class="schema-field">
+              <span class="field-key">genericName</span>
+              <span class="field-type">LocalizedString</span>
+            </div>
+            <div class="schema-field">
+              <span class="field-key">drugClass</span>
+              <span class="field-type">"stimulant" | "non-stimulant"</span>
+            </div>
+            <div class="schema-field">
+              <span class="field-key">category</span>
+              <span class="field-type">string</span>
+            </div>
+            <div class="schema-field">
+              <span class="field-key">brandNames</span>
+              <span class="field-type">Record&lt;Region, string[]&gt;</span>
+            </div>
+            <div class="schema-field">
+              <span class="field-key">approvals</span>
+              <span class="field-type">Approval[]</span>
+            </div>
+            <div class="schema-field">
+              <span class="field-key">formulations</span>
+              <span class="field-type">Formulation[]</span>
+            </div>
+            <div class="schema-field">
+              <span class="field-key">pharmacology</span>
+              <span class="field-type">Pharmacology</span>
+            </div>
+            <div class="schema-field">
+              <span class="field-key">sideEffects</span>
+              <span class="field-type">SideEffect[]</span>
+            </div>
+          </div>
+        </div>
+      </details>
+    </section>
+  </article>
 </DatabaseLayout>
 
 <style>
-  .index-page {
+  /* ===========================================
+   * PHARMACEUTICAL DOSSIER DESIGN SYSTEM
+   * =========================================== */
+
+  .dossier {
+    --dossier-bg: #fdfcfa;
+    --dossier-paper: #fffef9;
+    --dossier-border: #e8e4dc;
+    --dossier-accent: #1a1a2e;
+    --dossier-muted: #8b8680;
+    --dossier-gold: #c4a052;
+    --dossier-cream: #f5f2eb;
+    --dossier-ink: #2c2c2c;
+    --dossier-red: #c53030;
+    --dossier-green: #276749;
+    --dossier-blue: #2b6cb0;
+
     max-width: 1000px;
+    color: var(--dossier-ink);
   }
 
-  .page-header {
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid #e5e7eb;
+  /* Paper texture overlay */
+  .dossier::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.015;
+    pointer-events: none;
+    z-index: -1;
   }
 
-  .page-title {
-    font-family: 'DM Mono', monospace;
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: #111827;
-  }
-
-  .page-desc {
-    color: #6b7280;
-    font-size: 0.95rem;
-  }
-
-  /* Stats Grid */
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2.5rem;
-  }
-
-  .stat-card {
-    background: #f8f9fa;
-    border: 1px solid #e5e7eb;
-    border-radius: 6px;
-    padding: 1rem;
+  /* BREADCRUMB */
+  .breadcrumb {
     display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .stat-value {
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
     font-family: 'DM Mono', monospace;
-    font-size: 1.75rem;
-    font-weight: 600;
-    color: #00a86b;
-  }
-
-  .stat-label {
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: #6b7280;
-    text-transform: uppercase;
+    font-size: 0.7rem;
     letter-spacing: 0.05em;
   }
 
-  /* Data Section */
-  .data-section {
-    margin-bottom: 2.5rem;
+  .crumb {
+    color: var(--dossier-muted);
+    text-decoration: none;
+    transition: color 0.15s;
   }
 
-  .section-header {
-    margin-bottom: 1rem;
+  .crumb:hover {
+    color: var(--dossier-gold);
+  }
+
+  .crumb-sep {
+    color: var(--dossier-border);
+  }
+
+  .crumb-current {
+    color: var(--dossier-accent);
+    font-weight: 500;
+  }
+
+  /* ============================================
+     CASE FILE HEADER
+     ============================================ */
+
+  .case-file {
+    background: var(--dossier-paper);
+    border: 2px solid var(--dossier-border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: var(--space-8);
+    box-shadow:
+      0 4px 6px rgba(0, 0, 0, 0.02),
+      0 10px 20px rgba(0, 0, 0, 0.03),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    position: relative;
+  }
+
+  .case-file-band {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-3) var(--space-5);
+    background: var(--dossier-cream);
+    border-bottom: 1px solid var(--dossier-border);
+  }
+
+  .case-file-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .case-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--dossier-muted);
+  }
+
+  .case-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--dossier-accent);
+  }
+
+  .case-file-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .registry-stamp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stamp-border {
+    width: 52px;
+    height: 52px;
+    border: 2px dashed var(--dossier-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-12deg);
+    opacity: 0.7;
+  }
+
+  .stamp-border .stamp-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.35rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--dossier-gold);
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .case-file-body {
+    padding: var(--space-6);
+  }
+
+  .specimen-id {
+    margin-bottom: var(--space-3);
+  }
+
+  .specimen-label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--dossier-muted);
+    margin-bottom: var(--space-2);
+  }
+
+  .specimen-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 6vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--dossier-accent);
+    margin: 0;
+  }
+
+  .registry-desc {
+    font-size: 0.9rem;
+    color: var(--dossier-muted);
+    margin: 0;
+  }
+
+  .case-file-stripe {
+    height: 4px;
+    background: linear-gradient(90deg,
+      var(--dossier-gold) 0%,
+      #e8d5a3 50%,
+      var(--dossier-gold) 100%
+    );
+  }
+
+  /* ============================================
+     STATS GRID
+     ============================================ */
+
+  .stats-section {
+    margin-bottom: var(--space-8);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--space-3);
+  }
+
+  .stat-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background: var(--dossier-paper);
+    border: 1px solid var(--dossier-border);
+    border-radius: 4px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  .stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--dossier-cream);
+    border-radius: 50%;
+    color: var(--dossier-gold);
+    flex-shrink: 0;
+  }
+
+  .stat-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .stat-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--dossier-accent);
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--dossier-muted);
+  }
+
+  .stat-primary .stat-icon {
+    background: rgba(196, 160, 82, 0.15);
+    color: var(--dossier-gold);
+  }
+
+  .stat-stimulant .stat-icon {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+  }
+
+  .stat-nonstim .stat-icon {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+  }
+
+  .stat-approvals .stat-icon {
+    background: rgba(39, 103, 73, 0.1);
+    color: var(--dossier-green);
+  }
+
+  /* ============================================
+     RECORDS TABLE
+     ============================================ */
+
+  .records-section {
+    margin-bottom: var(--space-8);
   }
 
   .section-title {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    font-size: 0.85rem;
+    gap: var(--space-3);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #4b5563;
+    letter-spacing: 0.12em;
+    color: var(--dossier-accent);
+    margin: 0 0 var(--space-4);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--dossier-border);
   }
 
   .title-marker {
     width: 4px;
     height: 16px;
-    background: #00a86b;
+    background: var(--dossier-gold);
     border-radius: 1px;
   }
 
   .record-count {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
     font-weight: 500;
-    color: #9ca3af;
-    background: #f3f4f6;
-    padding: 2px 8px;
-    border-radius: 3px;
+    color: var(--dossier-muted);
     margin-left: auto;
+    background: var(--dossier-cream);
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-size: 0.65rem;
   }
 
-  /* Data Table */
-  .data-table {
-    background: #f8f9fa;
-    border: 1px solid #e5e7eb;
-    border-radius: 6px;
+  .records-table {
+    border: 1px solid var(--dossier-border);
+    border-radius: 4px;
     overflow: hidden;
   }
 
-  .table-head {
+  .table-header {
     display: grid;
-    grid-template-columns: 180px 1fr 100px 140px 80px;
-    gap: 8px;
-    padding: 10px 16px;
-    background: #fff;
-    border-bottom: 1px solid #e5e7eb;
-  }
-
-  .th {
+    grid-template-columns: 160px 1fr 100px 140px 100px;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--dossier-cream);
+    border-bottom: 1px solid var(--dossier-border);
     font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     font-weight: 600;
-    text-transform: lowercase;
-    color: #9ca3af;
-  }
-
-  .table-body {
-    max-height: 400px;
-    overflow-y: auto;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--dossier-muted);
   }
 
   .table-row {
     display: grid;
-    grid-template-columns: 180px 1fr 100px 140px 80px;
-    gap: 8px;
-    padding: 10px 16px;
-    border-bottom: 1px solid #e5e7eb;
+    grid-template-columns: 160px 1fr 100px 140px 100px;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--dossier-border);
     font-size: 0.8rem;
-    transition: background 0.1s;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s;
   }
 
   .table-row:last-child {
@@ -261,109 +594,324 @@ const totalApprovals = drugs.reduce((acc, d) => acc + (d.approvals?.filter((a: a
   }
 
   .table-row:hover {
-    background: #fff;
-  }
-
-  .td {
-    display: flex;
-    align-items: center;
+    background: var(--dossier-cream);
   }
 
   .col-id code {
     font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    color: #00a86b;
-    background: rgba(0, 168, 107, 0.1);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--dossier-gold);
+    background: rgba(196, 160, 82, 0.12);
     padding: 2px 6px;
-    border-radius: 3px;
+    border-radius: 2px;
   }
 
   .col-name {
-    font-weight: 500;
-    color: #111827;
+    font-weight: 600;
+    color: var(--dossier-accent);
   }
 
   .class-badge {
     font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    font-weight: 600;
+    font-size: 0.55rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
     padding: 3px 8px;
-    border-radius: 3px;
-    background: #f3f4f6;
-    color: #6b7280;
-  }
-
-  .class-badge[data-class="stimulant"] {
-    background: rgba(239, 68, 68, 0.1);
-    color: #dc2626;
-  }
-
-  .class-badge[data-class="non-stimulant"] {
-    background: rgba(59, 130, 246, 0.1);
-    color: #2563eb;
+    background: transparent;
+    border: 1px solid var(--class-color);
+    color: var(--class-color);
+    border-radius: 2px;
   }
 
   .col-category {
     font-size: 0.75rem;
-    color: #6b7280;
-  }
-
-  .approval-stat {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.8rem;
+    color: var(--dossier-muted);
     display: flex;
     align-items: center;
-    gap: 2px;
   }
 
-  .approval-stat .avail {
-    color: #00a86b;
-    font-weight: 600;
-  }
-
-  .approval-stat .sep {
-    color: #d1d5db;
-  }
-
-  .approval-stat .total {
-    color: #9ca3af;
-  }
-
-  /* Schema Preview */
-  .schema-preview {
+  .col-approvals {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 1rem;
-    background: #f8f9fa;
-    border: 1px solid #e5e7eb;
-    border-radius: 6px;
+    align-items: center;
   }
 
-  .schema-preview .field {
+  .approval-indicator {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    width: 100%;
+  }
+
+  .approval-bar {
+    flex: 1;
+    height: 4px;
+    background: var(--dossier-border);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .approval-bar::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: var(--fill);
+    background: var(--dossier-green);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+
+  .approval-text {
     font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    padding: 4px 10px;
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 4px;
-    color: #4b5563;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--dossier-accent);
+    white-space: nowrap;
   }
 
-  .schema-preview .key {
-    color: #00a86b;
-    font-weight: 500;
+  /* ============================================
+     ARCHIVE SECTION (Schema)
+     ============================================ */
+
+  .archive-section {
+    margin-bottom: var(--space-8);
   }
+
+  .archive-folder {
+    background: var(--dossier-cream);
+    border: 1px solid var(--dossier-border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .folder-tab {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-4);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+  }
+
+  .folder-tab:hover {
+    background: rgba(0, 0, 0, 0.02);
+  }
+
+  .tab-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .folder-icon {
+    color: var(--dossier-muted);
+  }
+
+  .folder-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--dossier-accent);
+  }
+
+  .tab-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .classified-stamp {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 2px 8px;
+    background: transparent;
+    border: 1px solid var(--dossier-muted);
+    color: var(--dossier-muted);
+    border-radius: 2px;
+  }
+
+  .folder-toggle {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.2rem;
+    color: var(--dossier-muted);
+    transition: transform 0.2s;
+  }
+
+  .archive-folder[open] .folder-toggle {
+    transform: rotate(45deg);
+  }
+
+  .folder-contents {
+    padding: var(--space-4);
+    border-top: 1px solid var(--dossier-border);
+    background: var(--dossier-paper);
+  }
+
+  .file-header {
+    margin-bottom: var(--space-3);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px dashed var(--dossier-border);
+  }
+
+  .file-id {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--dossier-accent);
+  }
+
+  .schema-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-2);
+  }
+
+  .schema-field {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background: var(--dossier-cream);
+    border: 1px solid var(--dossier-border);
+    border-radius: 3px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+  }
+
+  .field-key {
+    font-weight: 600;
+    color: var(--dossier-gold);
+  }
+
+  .field-key::after {
+    content: ':';
+    color: var(--dossier-muted);
+  }
+
+  .field-type {
+    color: var(--dossier-muted);
+  }
+
+  /* ============================================
+     RESPONSIVE
+     ============================================ */
 
   @media (max-width: 768px) {
-    .table-head,
-    .table-row {
-      grid-template-columns: 1fr 80px 60px;
+    .table-header {
+      display: none;
     }
 
-    .col-id,
+    .table-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      padding: var(--space-4);
+    }
+
+    .col-id {
+      order: 1;
+    }
+
+    .col-name {
+      order: 2;
+      flex: 1;
+      min-width: 120px;
+    }
+
+    .col-class {
+      order: 3;
+    }
+
     .col-category {
       display: none;
     }
+
+    .col-approvals {
+      order: 4;
+      width: 100%;
+      margin-top: var(--space-2);
+      padding-top: var(--space-2);
+      border-top: 1px dashed var(--dossier-border);
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stat-card {
+      padding: var(--space-3);
+    }
+
+    .stat-icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .stat-icon svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+    }
   }
+
+  @media (max-width: 480px) {
+    .case-file-band {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-3);
+    }
+
+    .case-file-right {
+      width: 100%;
+      justify-content: flex-end;
+    }
+
+    .specimen-name {
+      font-size: 1.8rem;
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .schema-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ============================================
+     ANIMATIONS
+     ============================================ */
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .case-file,
+  .stats-section,
+  .records-section,
+  .archive-section {
+    animation: slideUp 0.5s ease-out;
+  }
+
+  .stats-section { animation-delay: 0.05s; }
+  .records-section { animation-delay: 0.1s; }
+  .archive-section { animation-delay: 0.15s; }
 </style>
