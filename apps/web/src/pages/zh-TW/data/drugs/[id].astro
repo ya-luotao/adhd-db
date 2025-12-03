@@ -182,87 +182,172 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
       </div>
     </section>
 
-    <!-- TRAVEL RULES -->
+    <!-- TRAVEL RULES - BOARDING PASS DESIGN -->
     {drug.travelRules && (
-      <section class="content-block travel-block">
-        <h2 class="block-title">
-          <span class="title-marker marker-warning"></span>
-          {t('travel.title')}
-        </h2>
-
-        {drug.travelRules.generalAdvice && (
-          <div class="travel-alert">
-            <span class="alert-icon">!</span>
-            <p>{l(drug.travelRules.generalAdvice)}</p>
-          </div>
-        )}
-
-        {drug.travelRules.requiredDocumentation && drug.travelRules.requiredDocumentation.length > 0 && (
-          <div class="docs-required">
-            <h3 class="sub-title">{t('travel.requiredDocs')}</h3>
-            <div class="doc-list">
-              {drug.travelRules.requiredDocumentation.map((doc: any) => (
-                <div class="doc-item">
-                  <span class="doc-bullet">◆</span>
-                  <div class="doc-content">
-                    <span class="doc-type">{l(doc.typeLabel)}</span>
-                    {doc.notes && <span class="doc-note">{l(doc.notes)}</span>}
-                  </div>
-                </div>
-              ))}
+      <section class="travel-pass">
+        <!-- Pass Header -->
+        <header class="pass-header">
+          <div class="pass-header-left">
+            <span class="pass-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+            </span>
+            <div class="pass-title-block">
+              <span class="pass-eyebrow">{t('travel.title')}</span>
+              <span class="pass-drug-name">{l(drug.genericName)}</span>
             </div>
-
-            {drug.travelRules.maxPersonalSupply && (
-              <div class="supply-limit">
-                <span class="supply-label">MAX SUPPLY</span>
-                <span class="supply-value">{drug.travelRules.maxPersonalSupply.default}</span>
-              </div>
+          </div>
+          <div class="pass-header-right">
+            {drug.controlledSubstance && (
+              <span class="pass-controlled-stamp">
+                <span class="stamp-inner">CONTROLLED</span>
+              </span>
             )}
           </div>
+        </header>
+
+        <!-- Perforated Divider -->
+        <div class="pass-perforation"></div>
+
+        <!-- Advisory Banner -->
+        {drug.travelRules.generalAdvice && (
+          <div class="pass-advisory">
+            <div class="advisory-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+            </div>
+            <p class="advisory-text">{l(drug.travelRules.generalAdvice)}</p>
+          </div>
         )}
 
+        <!-- Two-Column Layout: Documents & Supply -->
+        <div class="pass-info-grid">
+          <!-- Required Documents -->
+          {drug.travelRules.requiredDocumentation && drug.travelRules.requiredDocumentation.length > 0 && (
+            <div class="pass-docs">
+              <h3 class="pass-section-title">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                {t('travel.requiredDocs')}
+              </h3>
+              <ul class="docs-checklist">
+                {drug.travelRules.requiredDocumentation.map((doc: any) => (
+                  <li class="checklist-item">
+                    <span class="check-box"></span>
+                    <div class="check-content">
+                      <span class="check-label">{l(doc.typeLabel)}</span>
+                      {doc.notes && <span class="check-note">{l(doc.notes)}</span>}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <!-- Supply Limit Tag -->
+          {drug.travelRules.maxPersonalSupply && (
+            <div class="pass-supply">
+              <div class="supply-tag">
+                <div class="tag-hole"></div>
+                <div class="tag-body">
+                  <span class="tag-label">{t('travel.maxSupply')}</span>
+                  <span class="tag-value">{drug.travelRules.maxPersonalSupply.default}</span>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <!-- Cross-Border Routes -->
         {drug.travelRules.crossBorderRules && drug.travelRules.crossBorderRules.length > 0 && (
-          <div class="routes-section">
-            <h3 class="sub-title">{t('travel.specificRules')}</h3>
-            <div class="routes-grid">
+          <div class="pass-routes">
+            <h3 class="pass-section-title routes-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+              {t('travel.specificRules')}
+            </h3>
+
+            <div class="routes-stack">
               {drug.travelRules.crossBorderRules.map((rule: any) => {
                 const config = statusConfig[rule.status as TravelStatus];
                 return (
-                  <div class="route-card" style={`--route-color: ${config.color}; --route-bg: ${config.bg}`}>
-                    <div class="route-header">
-                      <div class="route-path">
-                        <span class="route-from">{rule.fromRegion}</span>
-                        <span class="route-arrow">→</span>
-                        <span class="route-to">{rule.toRegion}</span>
+                  <div class="route-ticket" data-status={rule.status}>
+                    <!-- Route Header with Flight Path -->
+                    <div class="ticket-route">
+                      <div class="route-endpoint">
+                        <span class="endpoint-flag">{regionFlags[rule.fromRegion] || ''}</span>
+                        <span class="endpoint-code">{rule.fromRegion}</span>
                       </div>
-                      <span class="route-badge">{config.label}</span>
+
+                      <div class="route-flight-path">
+                        <span class="flight-dot"></span>
+                        <span class="flight-line"></span>
+                        <svg class="flight-plane" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+                        </svg>
+                        <span class="flight-line"></span>
+                        <span class="flight-dot"></span>
+                      </div>
+
+                      <div class="route-endpoint">
+                        <span class="endpoint-flag">{regionFlags[rule.toRegion] || ''}</span>
+                        <span class="endpoint-code">{rule.toRegion}</span>
+                      </div>
                     </div>
 
-                    <div class="route-body">
+                    <!-- Status Stamp -->
+                    <div class="ticket-stamp" style={`--stamp-color: ${config.color}`}>
+                      <div class="stamp-circle">
+                        <span class="stamp-text">{config.label}</span>
+                      </div>
+                    </div>
+
+                    <!-- Ticket Details -->
+                    <div class="ticket-details">
                       {rule.maxSupply && (
-                        <div class="route-info">
-                          <span class="info-key">Limit:</span>
-                          <span class="info-val">{rule.maxSupply}</span>
+                        <div class="detail-row">
+                          <span class="detail-icon">📦</span>
+                          <span class="detail-label">Limit</span>
+                          <span class="detail-value">{rule.maxSupply}</span>
                         </div>
                       )}
 
                       {la(rule.requirements).length > 0 && (
-                        <ul class="route-reqs">
-                          {la(rule.requirements).map((req: string) => (
-                            <li>{req}</li>
-                          ))}
-                        </ul>
+                        <div class="detail-requirements">
+                          <span class="req-label">{t('travel.requirements')}:</span>
+                          <ul class="req-list">
+                            {la(rule.requirements).map((req: string) => (
+                              <li>{req}</li>
+                            ))}
+                          </ul>
+                        </div>
                       )}
 
                       {rule.notes && (
-                        <p class="route-note">{l(rule.notes)}</p>
+                        <p class="detail-notes">{l(rule.notes)}</p>
                       )}
                     </div>
 
+                    <!-- Sources Footer -->
                     {rule.sources && rule.sources.length > 0 && (
-                      <div class="route-sources">
+                      <div class="ticket-sources">
+                        <span class="sources-label">{t('travel.sources')}:</span>
                         {rule.sources.map((src: string) => (
-                          <a href={src} target="_blank" rel="noopener noreferrer">↗ {new URL(src).hostname}</a>
+                          <a href={src} target="_blank" rel="noopener noreferrer" class="source-link">
+                            {new URL(src).hostname}
+                          </a>
                         ))}
                       </div>
                     )}
@@ -273,9 +358,25 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
           </div>
         )}
 
-        <a href={getLocalizedPath('/tools/region-checker', lang)} class="tool-link">
-          {t('travel.useChecker')} <span class="link-arrow">→</span>
-        </a>
+        <!-- Pass Footer with CTA -->
+        <div class="pass-footer">
+          <div class="pass-barcode">
+            <div class="barcode-lines">
+              {[...Array(30)].map((_, i) => (
+                <span class="bar" style={`height: ${20 + Math.random() * 20}px`}></span>
+              ))}
+            </div>
+          </div>
+          <a href={getLocalizedPath('/tools/region-checker', lang)} class="pass-cta">
+            <span class="cta-text">{t('travel.useChecker')}</span>
+            <span class="cta-arrow">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </span>
+          </a>
+        </div>
       </section>
     )}
 
@@ -743,244 +844,665 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     color: var(--text-muted);
   }
 
-  /* TRAVEL SECTION */
-  .travel-block {
-    background: var(--surface-raised);
-    padding: var(--space-6);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    border-left: 3px solid var(--warning);
+  /* ============================================
+   * TRAVEL PASS - BOARDING PASS AESTHETIC
+   * ============================================ */
+
+  .travel-pass {
+    --pass-bg: #fdfcfa;
+    --pass-border: #e8e4dc;
+    --pass-accent: #1a1a2e;
+    --pass-muted: #8b8680;
+    --pass-gold: #c4a052;
+    --pass-cream: #f5f2eb;
+
+    background: var(--pass-bg);
+    border: 2px solid var(--pass-border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: var(--space-10);
+    box-shadow:
+      0 4px 6px rgba(0, 0, 0, 0.03),
+      0 10px 20px rgba(0, 0, 0, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    position: relative;
   }
 
-  .travel-alert {
+  .travel-pass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.02;
+    pointer-events: none;
+  }
+
+  .pass-header {
     display: flex;
-    gap: var(--space-4);
-    padding: var(--space-4);
-    background: var(--warning-dim);
-    border: 1px solid var(--warning);
-    border-radius: 4px;
-    margin-bottom: var(--space-6);
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-5) var(--space-6);
+    background: linear-gradient(135deg, var(--pass-accent) 0%, #2d2d44 100%);
+    color: #fff;
+    position: relative;
   }
 
-  .alert-icon {
-    flex-shrink: 0;
-    width: 24px;
-    height: 24px;
+  .pass-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--pass-gold), #e8d5a3, var(--pass-gold));
+  }
+
+  .pass-header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .pass-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--warning);
-    color: #000;
-    font-weight: 900;
-    font-size: 0.9rem;
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
-  .travel-alert p {
+  .pass-icon svg {
+    opacity: 0.9;
+  }
+
+  .pass-title-block {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .pass-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    opacity: 0.7;
+  }
+
+  .pass-drug-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .pass-controlled-stamp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: rotate(-12deg);
+    animation: stampPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes stampPulse {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+  }
+
+  .stamp-inner {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: #fbbf24;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .pass-perforation {
+    height: 0;
+    border-top: 2px dashed var(--pass-border);
+    margin: 0 var(--space-4);
+    position: relative;
+  }
+
+  .pass-perforation::before,
+  .pass-perforation::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    border: 2px solid var(--pass-border);
+  }
+
+  .pass-perforation::before {
+    left: -10px;
+    border-left-color: transparent;
+  }
+
+  .pass-perforation::after {
+    right: -10px;
+    border-right-color: transparent;
+  }
+
+  .pass-advisory {
+    display: flex;
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-6);
+    background: linear-gradient(90deg, #fef3c7 0%, #fef9e7 100%);
+    border-bottom: 1px solid #fcd34d;
+    align-items: flex-start;
+  }
+
+  .advisory-icon {
+    flex-shrink: 0;
+    color: #b45309;
+    margin-top: 2px;
+  }
+
+  .advisory-text {
     margin: 0;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     line-height: 1.6;
-    color: var(--text-secondary);
+    color: #78350f;
   }
 
-  .docs-required {
-    margin-bottom: var(--space-6);
+  .pass-info-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-6);
+    padding: var(--space-6);
+    align-items: start;
   }
 
-  .doc-list {
+  @media (max-width: 600px) {
+    .pass-info-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .pass-docs {
+    flex: 1;
+  }
+
+  .pass-section-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--pass-muted);
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--pass-border);
+  }
+
+  .docs-checklist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
-    margin-bottom: var(--space-4);
   }
 
-  .doc-item {
+  .checklist-item {
     display: flex;
     gap: var(--space-3);
     align-items: flex-start;
   }
 
-  .doc-bullet {
-    color: var(--accent);
-    font-size: 0.7rem;
-    margin-top: 4px;
+  .check-box {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--pass-border);
+    border-radius: 3px;
+    margin-top: 2px;
+    position: relative;
+    background: #fff;
   }
 
-  .doc-content {
+  .check-box::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 5px;
+    width: 4px;
+    height: 8px;
+    border: 2px solid var(--pass-gold);
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+    opacity: 0.6;
+  }
+
+  .check-content {
     display: flex;
     flex-direction: column;
-    gap: var(--space-1);
+    gap: 2px;
   }
 
-  .doc-type {
-    font-weight: 600;
-    color: var(--text-primary);
+  .check-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--pass-accent);
   }
 
-  .doc-note {
-    font-size: 0.8rem;
-    color: var(--text-muted);
+  .check-note {
+    font-size: 0.75rem;
+    color: var(--pass-muted);
   }
 
-  .supply-limit {
-    display: inline-flex;
+  .pass-supply {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .supply-tag {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-3) var(--space-4);
-    background: var(--surface-elevated);
-    border: 1px solid var(--border);
-    border-radius: 4px;
+    background: var(--pass-cream);
+    border: 1px solid var(--pass-border);
+    border-radius: 8px;
+    padding: var(--space-3) var(--space-5);
+    position: relative;
+    box-shadow: 2px 2px 0 var(--pass-border);
   }
 
-  .supply-label {
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-muted);
+  .tag-hole {
+    width: 12px;
+    height: 12px;
+    background: var(--pass-bg);
+    border: 2px solid var(--pass-border);
+    border-radius: 50%;
+    margin-bottom: var(--space-2);
   }
 
-  .supply-value {
+  .tag-body {
+    text-align: center;
+  }
+
+  .tag-label {
+    display: block;
     font-family: 'DM Mono', monospace;
-    font-size: 1rem;
+    font-size: 0.55rem;
     font-weight: 600;
-    color: var(--accent-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--pass-muted);
+    margin-bottom: 4px;
   }
 
-  /* ROUTES */
-  .routes-grid {
-    display: grid;
+  .tag-value {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--pass-accent);
+    line-height: 1;
+  }
+
+  .pass-routes {
+    padding: 0 var(--space-6) var(--space-6);
+  }
+
+  .routes-title {
+    margin-bottom: var(--space-5);
+  }
+
+  .routes-stack {
+    display: flex;
+    flex-direction: column;
     gap: var(--space-4);
-    margin-bottom: var(--space-6);
   }
 
-  .route-card {
-    background: var(--surface-elevated);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--route-color);
-    border-radius: 4px;
+  .route-ticket {
+    background: #fff;
+    border: 1px solid var(--pass-border);
+    border-radius: 8px;
     overflow: hidden;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
   }
 
-  .route-header {
+  .route-ticket:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  }
+
+  .route-ticket[data-status="allowed"] { border-left: 4px solid #22c55e; }
+  .route-ticket[data-status="restricted"] { border-left: 4px solid #f59e0b; }
+  .route-ticket[data-status="requires_permit"] { border-left: 4px solid #a855f7; }
+  .route-ticket[data-status="prohibited"] { border-left: 4px solid #ef4444; }
+
+  .ticket-route {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
-    padding: var(--space-4);
-    background: var(--route-bg);
-    flex-wrap: wrap;
-    gap: var(--space-3);
+    padding: var(--space-5) var(--space-5);
+    background: linear-gradient(180deg, #fafaf8 0%, #fff 100%);
+    border-bottom: 1px dashed var(--pass-border);
   }
 
-  .route-path {
+  .route-endpoint {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: var(--space-2);
+    gap: 4px;
+    min-width: 50px;
+  }
+
+  .endpoint-flag {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .endpoint-code {
     font-family: 'DM Mono', monospace;
-    font-weight: 600;
-  }
-
-  .route-from, .route-to {
-    font-size: 1rem;
-  }
-
-  .route-arrow {
-    color: var(--text-muted);
-  }
-
-  .route-badge {
-    font-size: 0.65rem;
+    font-size: 0.9rem;
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    padding: 4px 12px;
-    background: var(--route-color);
-    color: #000;
-    border-radius: 2px;
+    color: var(--pass-accent);
+    letter-spacing: 0.05em;
   }
 
-  .route-body {
-    padding: var(--space-4);
-  }
-
-  .route-info {
+  .route-flight-path {
+    flex: 1;
     display: flex;
-    gap: var(--space-2);
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0 var(--space-4);
+    position: relative;
+  }
+
+  .flight-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--pass-accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .flight-line {
+    flex: 1;
+    height: 2px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--pass-border) 0,
+      var(--pass-border) 4px,
+      transparent 4px,
+      transparent 8px
+    );
+  }
+
+  .flight-plane {
+    flex-shrink: 0;
+    color: var(--pass-gold);
+    margin: 0 var(--space-2);
+    animation: flyPlane 2s ease-in-out infinite;
+  }
+
+  @keyframes flyPlane {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+  }
+
+  .ticket-stamp {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+  }
+
+  .stamp-circle {
+    width: 52px;
+    height: 52px;
+    border: 3px solid var(--stamp-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-15deg);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5);
+  }
+
+  .stamp-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: var(--stamp-color);
+    text-align: center;
+  }
+
+  .ticket-details {
+    padding: var(--space-4) var(--space-5);
+  }
+
+  .detail-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
     margin-bottom: var(--space-3);
     font-size: 0.85rem;
   }
 
-  .info-key {
-    color: var(--text-muted);
+  .detail-icon {
+    font-size: 0.9rem;
   }
 
-  .info-val {
-    font-family: 'DM Mono', monospace;
+  .detail-label {
+    color: var(--pass-muted);
     font-weight: 500;
-    color: var(--text-primary);
   }
 
-  .route-reqs {
-    margin: var(--space-3) 0;
-    padding-left: var(--space-5);
-    font-size: 0.85rem;
-    color: var(--text-secondary);
+  .detail-value {
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    color: var(--pass-accent);
   }
 
-  .route-reqs li {
+  .detail-requirements {
+    margin-top: var(--space-3);
+  }
+
+  .req-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--pass-muted);
+    display: block;
     margin-bottom: var(--space-2);
   }
 
-  .route-note {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    background: var(--surface-elevated);
-    padding: var(--space-3);
-    border-radius: 4px;
+  .req-list {
     margin: 0;
+    padding-left: var(--space-5);
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: #4b5563;
   }
 
-  .route-sources {
+  .req-list li {
+    margin-bottom: var(--space-1);
+  }
+
+  .req-list li::marker {
+    color: var(--pass-gold);
+  }
+
+  .detail-notes {
+    margin: var(--space-4) 0 0;
     padding: var(--space-3) var(--space-4);
-    border-top: 1px solid var(--border);
+    background: var(--pass-cream);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: #6b7280;
+    border-left: 3px solid var(--pass-gold);
+  }
+
+  .ticket-sources {
+    padding: var(--space-3) var(--space-5);
+    background: #f9fafb;
+    border-top: 1px solid var(--pass-border);
     font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
   }
 
-  .route-sources a {
-    color: var(--text-muted);
+  .sources-label {
+    color: var(--pass-muted);
+    font-weight: 500;
+  }
+
+  .source-link {
+    color: #6366f1;
     text-decoration: none;
-    margin-right: var(--space-4);
+    padding: 2px 8px;
+    background: #eef2ff;
+    border-radius: 4px;
+    transition: all 0.15s;
   }
 
-  .route-sources a:hover {
-    color: var(--accent);
+  .source-link:hover {
+    background: #6366f1;
+    color: #fff;
   }
 
-  .tool-link {
+  .pass-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-5) var(--space-6);
+    background: linear-gradient(180deg, #f9f9f7 0%, #f5f4f0 100%);
+    border-top: 1px solid var(--pass-border);
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .pass-barcode {
+    flex: 1;
+    min-width: 120px;
+    max-width: 200px;
+  }
+
+  .barcode-lines {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 40px;
+  }
+
+  .bar {
+    width: 3px;
+    background: var(--pass-accent);
+    opacity: 0.2;
+    border-radius: 1px;
+  }
+
+  .bar:nth-child(3n) {
+    width: 2px;
+  }
+
+  .bar:nth-child(5n) {
+    width: 4px;
+    opacity: 0.3;
+  }
+
+  .pass-cta {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-2);
+    gap: var(--space-3);
     padding: var(--space-3) var(--space-5);
-    background: var(--accent);
+    background: var(--pass-accent);
     color: #fff;
-    font-weight: 700;
-    font-size: 0.85rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: 6px;
     transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
-  .tool-link:hover {
-    background: var(--accent-bold);
+  .pass-cta:hover {
+    background: #2d2d44;
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
-  .link-arrow {
+  .cta-arrow {
+    display: flex;
     transition: transform 0.2s;
   }
 
-  .tool-link:hover .link-arrow {
+  .pass-cta:hover .cta-arrow {
     transform: translateX(4px);
+  }
+
+  @media (max-width: 639px) {
+    .pass-header {
+      padding: var(--space-4);
+      flex-wrap: wrap;
+      gap: var(--space-3);
+    }
+
+    .pass-controlled-stamp {
+      width: 56px;
+      height: 56px;
+    }
+
+    .pass-drug-name {
+      font-size: 1.2rem;
+    }
+
+    .pass-info-grid {
+      padding: var(--space-4);
+    }
+
+    .pass-routes {
+      padding: 0 var(--space-4) var(--space-4);
+    }
+
+    .ticket-route {
+      padding: var(--space-4);
+    }
+
+    .ticket-stamp {
+      position: static;
+      margin: var(--space-3) var(--space-5) 0;
+    }
+
+    .stamp-circle {
+      width: 44px;
+      height: 44px;
+    }
+
+    .pass-footer {
+      padding: var(--space-4);
+    }
   }
 
   /* FORMS */
