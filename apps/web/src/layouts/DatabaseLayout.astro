@@ -26,12 +26,12 @@ const tables = [
   { id: 'schema', label: 'schema', path: '/schema', icon: '◇', count: 1 },
 ];
 
-// Alternates for SEO
+// Alternates for SEO (zh-TW must come before zh in regex to match correctly)
 const alternates = [
-  { lang: 'en', path: Astro.url.pathname.replace(/^\/(zh|ja|zh-TW)/, '') || '/' },
-  { lang: 'zh', path: `/zh${Astro.url.pathname.replace(/^\/(zh|ja|zh-TW)/, '')}` },
-  { lang: 'ja', path: `/ja${Astro.url.pathname.replace(/^\/(zh|ja|zh-TW)/, '')}` },
-  { lang: 'zh-TW', path: `/zh-TW${Astro.url.pathname.replace(/^\/(zh|ja|zh-TW)/, '')}` },
+  { lang: 'en', path: Astro.url.pathname.replace(/^\/(zh-TW|zh|ja)/, '') || '/' },
+  { lang: 'zh', path: `/zh${Astro.url.pathname.replace(/^\/(zh-TW|zh|ja)/, '')}` },
+  { lang: 'ja', path: `/ja${Astro.url.pathname.replace(/^\/(zh-TW|zh|ja)/, '')}` },
+  { lang: 'zh-TW', path: `/zh-TW${Astro.url.pathname.replace(/^\/(zh-TW|zh|ja)/, '')}` },
 ];
 ---
 

@@ -501,32 +501,7 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: var(--space-4);
-    background: var(--surface-raised);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    min-width: 100px;
-    position: relative;
-  }
-
-  .stat-block::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--accent);
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-
-  .stat-block:hover {
-    border-color: var(--accent);
-  }
-
-  .stat-block:hover::before {
-    opacity: 1;
+    min-width: 70px;
   }
 
   .stat-primary {
@@ -543,7 +518,7 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
 
   .stat-number {
     font-family: 'DM Mono', monospace;
-    font-size: 2rem;
+    font-size: 1.25rem;
     font-weight: 500;
     color: var(--accent-bold);
     line-height: 1;
@@ -551,14 +526,14 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
 
   .stat-divider {
     font-family: 'DM Mono', monospace;
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: var(--text-muted);
     margin: 0 2px;
   }
 
   .stat-total {
     font-family: 'DM Mono', monospace;
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: var(--text-secondary);
   }
 
@@ -580,10 +555,10 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
   /* DATA RIBBON */
   .data-ribbon {
     display: flex;
-    gap: var(--space-3);
+    gap: var(--space-4);
     overflow-x: auto;
-    padding-bottom: var(--space-4);
-    margin-bottom: var(--space-8);
+    padding-bottom: var(--space-3);
+    margin-bottom: var(--space-6);
     scrollbar-width: none;
   }
 
@@ -593,49 +568,44 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
 
   .ribbon-card {
     flex-shrink: 0;
-    padding: var(--space-3) var(--space-4);
-    background: var(--surface-raised);
-    border: 1px solid var(--border);
-    border-radius: 4px;
   }
 
   .ribbon-wide {
-    min-width: 200px;
+    min-width: 150px;
   }
 
   .ribbon-label {
     display: block;
-    font-size: 0.6rem;
+    font-size: 0.55rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.1em;
     color: var(--text-muted);
-    margin-bottom: var(--space-1);
+    margin-bottom: 2px;
   }
 
   .ribbon-value {
-    font-size: 0.95rem;
-    font-weight: 600;
+    font-size: 0.8rem;
+    font-weight: 500;
     color: var(--text-primary);
   }
 
   .ribbon-chips {
     display: flex;
-    gap: var(--space-2);
+    gap: var(--space-1);
     flex-wrap: wrap;
   }
 
   .chip {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 600;
-    padding: 4px 10px;
+    padding: 2px 6px;
     border-radius: 2px;
   }
 
   .chip-neuro {
     background: var(--accent-dim);
     color: var(--accent-bold);
-    border: 1px solid var(--accent);
   }
 
   /* CONTENT BLOCKS */
@@ -692,53 +662,43 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
   /* REGION GRID */
   .region-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: var(--space-4);
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--space-2);
   }
 
   .region-card {
-    background: var(--surface-raised);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-
-  .region-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-2px);
+    padding: var(--space-3);
+    border-bottom: 1px solid var(--border);
   }
 
   .region-card[data-available="false"] {
-    opacity: 0.5;
+    opacity: 0.4;
   }
 
   .region-header {
     display: flex;
     align-items: center;
     gap: var(--space-2);
-    padding: var(--space-3) var(--space-4);
-    background: var(--surface-elevated);
-    border-bottom: 1px solid var(--border);
+    margin-bottom: var(--space-2);
   }
 
   .region-flag {
-    font-size: 1.3rem;
+    font-size: 1rem;
   }
 
   .region-code {
     font-family: 'DM Mono', monospace;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 600;
     flex: 1;
   }
 
   .region-status {
-    font-size: 0.6rem;
+    font-size: 0.55rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    padding: 3px 8px;
+    letter-spacing: 0.05em;
+    padding: 2px 6px;
     border-radius: 2px;
     background: var(--danger-dim);
     color: var(--danger);
@@ -750,31 +710,26 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
   }
 
   .region-data {
-    padding: var(--space-4);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
   }
 
   .data-row {
     display: flex;
-    justify-content: space-between;
+    gap: var(--space-2);
     align-items: baseline;
-    padding: var(--space-2) 0;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .data-row:last-child {
-    border-bottom: none;
   }
 
   .data-key {
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     color: var(--text-muted);
   }
 
   .data-val {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     color: var(--text-primary);
     font-weight: 500;
-    text-align: right;
   }
 
   .data-year {
@@ -783,11 +738,9 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
   }
 
   .region-note {
-    padding: var(--space-3) var(--space-4);
-    background: var(--surface-elevated);
-    font-size: 0.75rem;
+    margin-top: var(--space-2);
+    font-size: 0.7rem;
     color: var(--text-muted);
-    border-top: 1px solid var(--border);
   }
 
   /* TRAVEL SECTION */
@@ -1033,99 +986,87 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
   /* FORMS */
   .forms-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: var(--space-4);
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-2);
   }
 
   .form-card {
-    background: var(--surface-raised);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: var(--space-4);
-    transition: border-color 0.2s;
-  }
-
-  .form-card:hover {
-    border-color: var(--accent);
+    padding: var(--space-3);
+    border-bottom: 1px solid var(--border);
   }
 
   .form-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: var(--space-2);
+    gap: var(--space-2);
+    margin-bottom: var(--space-1);
   }
 
   .form-name {
+    font-size: 0.85rem;
     font-weight: 600;
     color: var(--text-primary);
   }
 
   .form-duration {
     font-family: 'DM Mono', monospace;
-    font-size: 0.9rem;
+    font-size: 0.75rem;
     font-weight: 500;
     color: var(--accent-bold);
-    background: var(--accent-dim);
-    padding: 2px 8px;
-    border-radius: 2px;
   }
 
   .form-meta {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--text-muted);
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--space-2);
   }
 
   .form-strengths {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-2);
-    margin-bottom: var(--space-3);
+    gap: var(--space-1);
   }
 
   .strength {
     font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     font-weight: 500;
-    padding: 4px 10px;
+    padding: 2px 6px;
     background: var(--surface-elevated);
-    border: 1px solid var(--border);
     border-radius: 2px;
     color: var(--text-secondary);
   }
 
   .form-note {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: var(--text-muted);
-    margin: 0;
+    margin: var(--space-2) 0 0;
   }
 
   /* SIDE EFFECTS */
   .effects-layout {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--space-6);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-4);
   }
 
   .effects-col {
-    background: var(--surface-raised);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: var(--space-5);
+    padding: var(--space-3) 0;
   }
 
   .effects-serious {
-    border-left: 3px solid var(--danger);
+    border-left: 2px solid var(--danger);
+    padding-left: var(--space-3);
   }
 
   .effects-heading {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     color: var(--text-muted);
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-3);
   }
 
   .effects-list {
@@ -1138,9 +1079,9 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--space-3) 0;
+    padding: var(--space-2) 0;
     border-bottom: 1px solid var(--border);
-    gap: var(--space-4);
+    gap: var(--space-3);
   }
 
   .effect-item:last-child {
@@ -1148,18 +1089,15 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
   }
 
   .effect-name {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: var(--text-secondary);
   }
 
   .effect-freq {
     font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     font-weight: 500;
     color: var(--warning);
-    background: var(--warning-dim);
-    padding: 3px 10px;
-    border-radius: 2px;
     white-space: nowrap;
   }
 
@@ -1174,9 +1112,9 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
   }
 
   .effect-notes {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: var(--text-muted);
-    margin-top: var(--space-1);
+    margin-top: 2px;
   }
 
   /* RAW DATA */
@@ -1308,17 +1246,4 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     animation: slideUp 0.5s ease-out;
   }
 
-  .region-card,
-  .form-card,
-  .route-card {
-    animation: slideUp 0.4s ease-out both;
-  }
-
-  .region-card:nth-child(1), .form-card:nth-child(1), .route-card:nth-child(1) { animation-delay: 0.05s; }
-  .region-card:nth-child(2), .form-card:nth-child(2), .route-card:nth-child(2) { animation-delay: 0.1s; }
-  .region-card:nth-child(3), .form-card:nth-child(3), .route-card:nth-child(3) { animation-delay: 0.15s; }
-  .region-card:nth-child(4), .form-card:nth-child(4), .route-card:nth-child(4) { animation-delay: 0.2s; }
-  .region-card:nth-child(5), .form-card:nth-child(5), .route-card:nth-child(5) { animation-delay: 0.25s; }
-  .region-card:nth-child(6), .form-card:nth-child(6) { animation-delay: 0.3s; }
-  .region-card:nth-child(7) { animation-delay: 0.35s; }
 </style>
