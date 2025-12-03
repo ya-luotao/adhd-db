@@ -64,6 +64,15 @@ export const translations = {
     'data.entries': 'entries',
     'data.noData': 'No data available yet.',
 
+    // Categories page
+    'categories.title': 'Drug Categories',
+    'categories.description': 'Pharmacological categories of ADHD medications.',
+    'categories.mechanism': 'Mechanism',
+    'categories.commonBrands': 'Common Brands',
+    'categories.learnMore': 'Learn more on Wikipedia',
+    'categories.drugsInCategory': 'Drugs in this category',
+    'categories.viewAll': 'View all drugs',
+
     // Drugs page
     'drugs.title': 'Drugs',
     'drugs.description': 'ADHD medications in the database.',
@@ -81,6 +90,10 @@ export const translations = {
     'drugs.rawYaml': 'Raw YAML',
     'drugs.showRaw': 'Show raw YAML data',
     'drugs.editOnGithub': 'Edit on GitHub to contribute',
+
+    // Drug class short labels
+    'class.stimulantShort': 'STM',
+    'class.nonStimulantShort': 'NON',
 
     // Common
     'common.yes': 'Yes',
@@ -231,6 +244,15 @@ export const translations = {
     'data.entries': '条目',
     'data.noData': '暂无数据。',
 
+    // Categories page
+    'categories.title': '药物分类',
+    'categories.description': 'ADHD药物的药理学分类。',
+    'categories.mechanism': '作用机制',
+    'categories.commonBrands': '常见品牌',
+    'categories.learnMore': '在维基百科了解更多',
+    'categories.drugsInCategory': '此分类下的药物',
+    'categories.viewAll': '查看所有药物',
+
     // Drugs page
     'drugs.title': '药物',
     'drugs.description': '数据库中的 ADHD 药物。',
@@ -248,6 +270,10 @@ export const translations = {
     'drugs.rawYaml': '原始 YAML',
     'drugs.showRaw': '显示原始 YAML 数据',
     'drugs.editOnGithub': '在 GitHub 上编辑以贡献',
+
+    // Drug class short labels
+    'class.stimulantShort': '兴',
+    'class.nonStimulantShort': '非',
 
     // Common
     'common.yes': '是',
@@ -398,6 +424,15 @@ export const translations = {
     'data.entries': '條目',
     'data.noData': '暫無數據。',
 
+    // Categories page
+    'categories.title': '藥物分類',
+    'categories.description': 'ADHD藥物的藥理學分類。',
+    'categories.mechanism': '作用機制',
+    'categories.commonBrands': '常見品牌',
+    'categories.learnMore': '在維基百科了解更多',
+    'categories.drugsInCategory': '此分類下的藥物',
+    'categories.viewAll': '查看所有藥物',
+
     // Drugs page
     'drugs.title': '藥物',
     'drugs.description': '資料庫中的 ADHD 藥物。',
@@ -415,6 +450,10 @@ export const translations = {
     'drugs.rawYaml': '原始 YAML',
     'drugs.showRaw': '顯示原始 YAML 數據',
     'drugs.editOnGithub': '在 GitHub 上編輯以貢獻',
+
+    // Drug class short labels
+    'class.stimulantShort': '興',
+    'class.nonStimulantShort': '非',
 
     // Common
     'common.yes': '是',
@@ -565,6 +604,15 @@ export const translations = {
     'data.entries': 'エントリ',
     'data.noData': 'データはまだありません。',
 
+    // Categories page
+    'categories.title': '薬物カテゴリ',
+    'categories.description': 'ADHD治療薬の薬理学的分類。',
+    'categories.mechanism': '作用機序',
+    'categories.commonBrands': '主な商品名',
+    'categories.learnMore': 'Wikipediaで詳しく',
+    'categories.drugsInCategory': 'このカテゴリの薬物',
+    'categories.viewAll': 'すべての薬物を見る',
+
     // Drugs page
     'drugs.title': '薬物',
     'drugs.description': 'データベース内の ADHD 薬物。',
@@ -582,6 +630,10 @@ export const translations = {
     'drugs.rawYaml': '生の YAML',
     'drugs.showRaw': '生の YAML データを表示',
     'drugs.editOnGithub': 'GitHub で編集して貢献',
+
+    // Drug class short labels
+    'class.stimulantShort': '刺',
+    'class.nonStimulantShort': '非',
 
     // Common
     'common.yes': 'はい',

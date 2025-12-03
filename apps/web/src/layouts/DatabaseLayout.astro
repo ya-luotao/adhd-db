@@ -1,11 +1,11 @@
 ---
 import { getLangFromUrl, useTranslations, getLocalizedPath } from '../i18n/utils';
-import { getDrugs, getLocalizedValue } from '../lib/data';
+import { getDrugs, getLocalizedValue, getCategoryList } from '../lib/data';
 import '../styles/tokens.css';
 
 interface Props {
   title: string;
-  activeTable?: 'drugs' | 'meta' | 'schema';
+  activeTable?: 'drugs' | 'categories' | 'meta' | 'schema';
   activeDrugId?: string;
 }
 
@@ -13,6 +13,7 @@ const { title, activeTable = 'drugs', activeDrugId } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const drugs = getDrugs();
+const categories = getCategoryList();
 
 const l = (value: any) => getLocalizedValue(value, lang);
 
@@ -22,8 +23,9 @@ const activeDrug = activeDrugId ? drugs.find(d => d.id === activeDrugId) : null;
 // Define tables
 const tables = [
   { id: 'drugs', label: 'drugs', path: '/data/drugs', icon: '◉', count: drugs.length },
-  { id: 'meta', label: 'meta', path: '/meta', icon: '◈', count: 2 },
-  { id: 'schema', label: 'schema', path: '/schema', icon: '◇', count: 1 },
+  { id: 'categories', label: 'categories', path: '/data/categories', icon: '◈', count: categories.length },
+  { id: 'meta', label: 'meta', path: '/meta', icon: '◇', count: 2 },
+  { id: 'schema', label: 'schema', path: '/schema', icon: '○', count: 1 },
 ];
 
 // Alternates for SEO (zh-TW must come before zh in regex to match correctly)
@@ -96,11 +98,33 @@ const alternates = [
                     >
                       <span class="row-name">{l(drug.genericName)}</span>
                       <span class="row-class" data-class={drug.drugClass}>
-                        {drug.drugClass === 'stimulant' ? 'STM' : 'NON'}
+                        {drug.drugClass === 'stimulant' ? t('class.stimulantShort') : t('class.nonStimulantShort')}
                       </span>
                     </a>
                   );
                 })}
+              </div>
+            </>
+          )}
+
+          {activeTable === 'categories' && (
+            <>
+              <div class="table-header">
+                <span class="col-name">Name</span>
+                <span class="col-class">Class</span>
+              </div>
+              <div class="table-rows">
+                {categories.map((cat) => (
+                  <a
+                    href={getLocalizedPath(`/data/categories`, lang)}
+                    class="table-row"
+                  >
+                    <span class="row-name">{l(cat.name)}</span>
+                    <span class="row-class" data-class={cat.drugClass}>
+                      {cat.drugClass === 'stimulant' ? t('class.stimulantShort') : t('class.nonStimulantShort')}
+                    </span>
+                  </a>
+                ))}
               </div>
             </>
           )}
