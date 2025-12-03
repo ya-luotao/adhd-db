@@ -136,299 +136,290 @@ const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().get
     )}
 
     <!-- ============================================
-         REGIONAL APPROVALS: PASSPORT VISA STAMPS
-         Ink stamps at various angles
+         REGIONAL APPROVALS
          ============================================ -->
-    <section class="visa-section">
-      <div class="visa-header">
-        <div class="visa-title-block">
-          <span class="visa-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="3" y="4" width="18" height="16" rx="2"></rect>
-              <line x1="3" y1="10" x2="21" y2="10"></line>
-              <line x1="9" y1="4" x2="9" y2="10"></line>
-            </svg>
-          </span>
-          <h2 class="visa-title">{t('drugs.approvals')}</h2>
-        </div>
-        <span class="visa-subtitle">REGULATORY STATUS BY REGION</span>
-      </div>
+    <section class="approvals-section">
+      <h2 class="section-title">
+        <span class="title-marker"></span>
+        {t('drugs.approvals')}
+      </h2>
 
-      <div class="visa-stamps">
-        {drug.approvals?.map((approval: any, index: number) => {
-          const rotation = ((index * 7) % 15) - 7;
-          return (
-            <div class="visa-stamp" data-available={approval.available} style={`--rotation: ${rotation}deg`}>
-              <div class="stamp-outer">
-                <div class="stamp-inner-ring">
-                  <span class="stamp-flag">{regionFlags[approval.region] || ''}</span>
-                  <span class="stamp-region">{approval.region}</span>
-                  <span class="stamp-agency">{approval.agency}</span>
-                  {approval.year && <span class="stamp-year">{approval.year}</span>}
-                </div>
-              </div>
-              <div class="stamp-status" data-available={approval.available}>
-                {approval.available ? 'APPROVED' : 'PENDING'}
-              </div>
-              {l(approval.approvedAges) && (
-                <div class="stamp-ages">Ages: {l(approval.approvedAges)}</div>
-              )}
-              {l(approval.notes) && (
-                <div class="stamp-notes">{l(approval.notes)}</div>
-              )}
-            </div>
-          );
-        })}
+      <div class="approvals-table">
+        <div class="approvals-header">
+          <span class="col-region">Region</span>
+          <span class="col-agency">Agency</span>
+          <span class="col-year">Year</span>
+          <span class="col-ages">Ages</span>
+          <span class="col-status">Status</span>
+        </div>
+        {drug.approvals?.map((approval: any) => (
+          <div class="approval-row" data-available={approval.available}>
+            <span class="col-region">
+              <span class="region-flag">{regionFlags[approval.region] || ''}</span>
+              <span class="region-code">{approval.region}</span>
+            </span>
+            <span class="col-agency">{approval.agency}</span>
+            <span class="col-year">{approval.year || '—'}</span>
+            <span class="col-ages">{l(approval.approvedAges) || '—'}</span>
+            <span class="col-status">
+              <span class="status-dot" data-available={approval.available}></span>
+              {approval.available ? 'Available' : 'Not Available'}
+            </span>
+          </div>
+        ))}
       </div>
     </section>
 
-    <!-- TRAVEL RULES - BOARDING PASS DESIGN -->
+    <!-- TRAVEL RULES - MODAL -->
     {drug.travelRules && (
-      <section class="travel-pass">
-        <!-- Pass Header -->
-        <header class="pass-header">
-          <div class="pass-header-left">
-            <span class="pass-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      <>
+        <!-- TRAVEL MODAL -->
+        <div class="travel-modal" id="travel-modal">
+          <div class="modal-backdrop" id="modal-backdrop"></div>
+          <div class="modal-content">
+            <button class="modal-close" id="modal-close">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
               </svg>
-            </span>
-            <div class="pass-title-block">
-              <span class="pass-eyebrow">{t('travel.title')}</span>
-              <span class="pass-drug-name">{l(drug.genericName)}</span>
-            </div>
-          </div>
-          <div class="pass-header-right">
-            {drug.controlledSubstance && (
-              <span class="pass-controlled-stamp">
-                <span class="stamp-inner">CONTROLLED</span>
-              </span>
-            )}
-          </div>
-        </header>
+            </button>
 
-        <!-- Perforated Divider -->
-        <div class="pass-perforation"></div>
-
-        <!-- Advisory Banner -->
-        {drug.travelRules.generalAdvice && (
-          <div class="pass-advisory">
-            <div class="advisory-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="8" x2="12" y2="12"></line>
-                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-              </svg>
-            </div>
-            <p class="advisory-text">{l(drug.travelRules.generalAdvice)}</p>
-          </div>
-        )}
-
-        <!-- Two-Column Layout: Documents & Supply -->
-        <div class="pass-info-grid">
-          <!-- Required Documents -->
-          {drug.travelRules.requiredDocumentation && drug.travelRules.requiredDocumentation.length > 0 && (
-            <div class="pass-docs">
-              <h3 class="pass-section-title">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                  <polyline points="14 2 14 8 20 8"></polyline>
-                  <line x1="16" y1="13" x2="8" y2="13"></line>
-                  <line x1="16" y1="17" x2="8" y2="17"></line>
-                  <polyline points="10 9 9 9 8 9"></polyline>
-                </svg>
-                {t('travel.requiredDocs')}
-              </h3>
-              <ul class="docs-checklist">
-                {drug.travelRules.requiredDocumentation.map((doc: any) => (
-                  <li class="checklist-item">
-                    <span class="check-box"></span>
-                    <div class="check-content">
-                      <span class="check-label">{l(doc.typeLabel)}</span>
-                      {doc.notes && <span class="check-note">{l(doc.notes)}</span>}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          <!-- Supply Limit Tag -->
-          {drug.travelRules.maxPersonalSupply && (
-            <div class="pass-supply">
-              <div class="supply-tag">
-                <div class="tag-hole"></div>
-                <div class="tag-body">
-                  <span class="tag-label">{t('travel.maxSupply')}</span>
-                  <span class="tag-value">{drug.travelRules.maxPersonalSupply.default}</span>
+            <div class="travel-pass">
+              <!-- Pass Header -->
+              <header class="pass-header">
+                <div class="pass-header-left">
+                  <span class="pass-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+                    </svg>
+                  </span>
+                  <div class="pass-title-block">
+                    <span class="pass-eyebrow">{t('travel.title')}</span>
+                    <span class="pass-drug-name">{l(drug.genericName)}</span>
+                  </div>
                 </div>
+                <div class="pass-header-right">
+                  {drug.controlledSubstance && (
+                    <span class="pass-controlled-stamp">
+                      <span class="stamp-inner">CONTROLLED</span>
+                    </span>
+                  )}
+                </div>
+              </header>
+
+              <!-- Perforated Divider -->
+              <div class="pass-perforation"></div>
+
+              <!-- Advisory Banner -->
+              {drug.travelRules.generalAdvice && (
+                <div class="pass-advisory">
+                  <div class="advisory-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="12" y1="8" x2="12" y2="12"></line>
+                      <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                  </div>
+                  <p class="advisory-text">{l(drug.travelRules.generalAdvice)}</p>
+                </div>
+              )}
+
+              <!-- Two-Column Layout: Documents & Supply -->
+              <div class="pass-info-grid">
+                <!-- Required Documents -->
+                {drug.travelRules.requiredDocumentation && drug.travelRules.requiredDocumentation.length > 0 && (
+                  <div class="pass-docs">
+                    <h3 class="pass-section-title">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                      </svg>
+                      {t('travel.requiredDocs')}
+                    </h3>
+                    <ul class="docs-checklist">
+                      {drug.travelRules.requiredDocumentation.map((doc: any) => (
+                        <li class="checklist-item">
+                          <span class="check-box"></span>
+                          <div class="check-content">
+                            <span class="check-label">{l(doc.typeLabel)}</span>
+                            {doc.notes && <span class="check-note">{l(doc.notes)}</span>}
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                <!-- Supply Limit Tag -->
+                {drug.travelRules.maxPersonalSupply && (
+                  <div class="pass-supply">
+                    <div class="supply-tag">
+                      <div class="tag-hole"></div>
+                      <div class="tag-body">
+                        <span class="tag-label">{t('travel.maxSupply')}</span>
+                        <span class="tag-value">{drug.travelRules.maxPersonalSupply.default}</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <!-- Cross-Border Routes -->
+              {drug.travelRules.crossBorderRules && drug.travelRules.crossBorderRules.length > 0 && (
+                <div class="pass-routes">
+                  <h3 class="pass-section-title routes-title">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="2" y1="12" x2="22" y2="12"></line>
+                      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                    {t('travel.specificRules')}
+                  </h3>
+
+                  <div class="routes-stack">
+                    {drug.travelRules.crossBorderRules.map((rule: any) => {
+                      const config = statusConfig[rule.status as TravelStatus];
+                      return (
+                        <div class="route-ticket" data-status={rule.status}>
+                          <!-- Route Header with Flight Path -->
+                          <div class="ticket-route">
+                            <div class="route-endpoint">
+                              <span class="endpoint-flag">{regionFlags[rule.fromRegion] || ''}</span>
+                              <span class="endpoint-code">{rule.fromRegion}</span>
+                            </div>
+
+                            <div class="route-flight-path">
+                              <span class="flight-dot"></span>
+                              <span class="flight-line"></span>
+                              <svg class="flight-plane" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+                              </svg>
+                              <span class="flight-line"></span>
+                              <span class="flight-dot"></span>
+                            </div>
+
+                            <div class="route-endpoint">
+                              <span class="endpoint-flag">{regionFlags[rule.toRegion] || ''}</span>
+                              <span class="endpoint-code">{rule.toRegion}</span>
+                            </div>
+                          </div>
+
+                          <!-- Status Stamp -->
+                          <div class="ticket-stamp" style={`--stamp-color: ${config.color}`}>
+                            <div class="stamp-circle">
+                              <span class="stamp-text">{config.label}</span>
+                            </div>
+                          </div>
+
+                          <!-- Ticket Details -->
+                          <div class="ticket-details">
+                            {rule.maxSupply && (
+                              <div class="detail-row">
+                                <span class="detail-icon">📦</span>
+                                <span class="detail-label">Limit</span>
+                                <span class="detail-value">{rule.maxSupply}</span>
+                              </div>
+                            )}
+
+                            {la(rule.requirements).length > 0 && (
+                              <div class="detail-requirements">
+                                <span class="req-label">{t('travel.requirements')}:</span>
+                                <ul class="req-list">
+                                  {la(rule.requirements).map((req: string) => (
+                                    <li>{req}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+
+                            {rule.notes && (
+                              <p class="detail-notes">{l(rule.notes)}</p>
+                            )}
+                          </div>
+
+                          <!-- Sources Footer -->
+                          {rule.sources && rule.sources.length > 0 && (
+                            <div class="ticket-sources">
+                              <span class="sources-label">{t('travel.sources')}:</span>
+                              {rule.sources.map((src: string) => (
+                                <a href={src} target="_blank" rel="noopener noreferrer" class="source-link">
+                                  {new URL(src).hostname}
+                                </a>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              <!-- Pass Footer with CTA -->
+              <div class="pass-footer">
+                <div class="pass-barcode">
+                  <div class="barcode-lines">
+                    {[...Array(30)].map((_, i) => (
+                      <span class="bar" style={`height: ${20 + Math.random() * 20}px`}></span>
+                    ))}
+                  </div>
+                </div>
+                <a href={getLocalizedPath('/tools/region-checker', lang)} class="pass-cta">
+                  <span class="cta-text">{t('travel.useChecker')}</span>
+                  <span class="cta-arrow">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </span>
+                </a>
               </div>
             </div>
-          )}
-        </div>
-
-        <!-- Cross-Border Routes -->
-        {drug.travelRules.crossBorderRules && drug.travelRules.crossBorderRules.length > 0 && (
-          <div class="pass-routes">
-            <h3 class="pass-section-title routes-title">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="2" y1="12" x2="22" y2="12"></line>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-              </svg>
-              {t('travel.specificRules')}
-            </h3>
-
-            <div class="routes-stack">
-              {drug.travelRules.crossBorderRules.map((rule: any) => {
-                const config = statusConfig[rule.status as TravelStatus];
-                return (
-                  <div class="route-ticket" data-status={rule.status}>
-                    <!-- Route Header with Flight Path -->
-                    <div class="ticket-route">
-                      <div class="route-endpoint">
-                        <span class="endpoint-flag">{regionFlags[rule.fromRegion] || ''}</span>
-                        <span class="endpoint-code">{rule.fromRegion}</span>
-                      </div>
-
-                      <div class="route-flight-path">
-                        <span class="flight-dot"></span>
-                        <span class="flight-line"></span>
-                        <svg class="flight-plane" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
-                        </svg>
-                        <span class="flight-line"></span>
-                        <span class="flight-dot"></span>
-                      </div>
-
-                      <div class="route-endpoint">
-                        <span class="endpoint-flag">{regionFlags[rule.toRegion] || ''}</span>
-                        <span class="endpoint-code">{rule.toRegion}</span>
-                      </div>
-                    </div>
-
-                    <!-- Status Stamp -->
-                    <div class="ticket-stamp" style={`--stamp-color: ${config.color}`}>
-                      <div class="stamp-circle">
-                        <span class="stamp-text">{config.label}</span>
-                      </div>
-                    </div>
-
-                    <!-- Ticket Details -->
-                    <div class="ticket-details">
-                      {rule.maxSupply && (
-                        <div class="detail-row">
-                          <span class="detail-icon">📦</span>
-                          <span class="detail-label">Limit</span>
-                          <span class="detail-value">{rule.maxSupply}</span>
-                        </div>
-                      )}
-
-                      {la(rule.requirements).length > 0 && (
-                        <div class="detail-requirements">
-                          <span class="req-label">{t('travel.requirements')}:</span>
-                          <ul class="req-list">
-                            {la(rule.requirements).map((req: string) => (
-                              <li>{req}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-
-                      {rule.notes && (
-                        <p class="detail-notes">{l(rule.notes)}</p>
-                      )}
-                    </div>
-
-                    <!-- Sources Footer -->
-                    {rule.sources && rule.sources.length > 0 && (
-                      <div class="ticket-sources">
-                        <span class="sources-label">{t('travel.sources')}:</span>
-                        {rule.sources.map((src: string) => (
-                          <a href={src} target="_blank" rel="noopener noreferrer" class="source-link">
-                            {new URL(src).hostname}
-                          </a>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
           </div>
-        )}
-
-        <!-- Pass Footer with CTA -->
-        <div class="pass-footer">
-          <div class="pass-barcode">
-            <div class="barcode-lines">
-              {[...Array(30)].map((_, i) => (
-                <span class="bar" style={`height: ${20 + Math.random() * 20}px`}></span>
-              ))}
-            </div>
-          </div>
-          <a href={getLocalizedPath('/tools/region-checker', lang)} class="pass-cta">
-            <span class="cta-text">{t('travel.useChecker')}</span>
-            <span class="cta-arrow">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </span>
-          </a>
         </div>
-      </section>
+      </>
     )}
 
     <!-- ============================================
-         FORMULATIONS: PRESCRIPTION PAD SLIPS
-         Rx symbol, perforated edges, pharmacy codes
+         FORMULATIONS TABLE
+         Clean table with ℞ header
          ============================================ -->
     {drug.forms && drug.forms.length > 0 && (
-      <section class="rx-section">
-        <div class="rx-header">
-          <div class="rx-symbol">℞</div>
-          <div class="rx-title-block">
-            <h2 class="rx-title">{t('drugs.forms')}</h2>
-            <span class="rx-subtitle">AVAILABLE FORMULATIONS</span>
-          </div>
+      <section class="forms-section">
+        <div class="forms-header">
+          <span class="rx-symbol">℞</span>
+          <h2 class="section-title">
+            <span class="title-marker"></span>
+            {t('drugs.forms')}
+          </h2>
         </div>
 
-        <div class="rx-grid">
-          {drug.forms.map((form: any, index: number) => (
-            <div class="rx-slip">
-              <div class="slip-perforation"></div>
-              <div class="slip-header">
-                <span class="slip-rx">℞</span>
-                <span class="slip-number">#{String(index + 1).padStart(3, '0')}</span>
-              </div>
-              <div class="slip-body">
-                <div class="slip-drug-name">{form.brandName || l(form.typeLabel) || form.type}</div>
-                <div class="slip-meta">
-                  <span class="slip-type">{l(form.releaseTypeLabel) || form.releaseType}</span>
-                  <span class="slip-duration">{form.durationHours}h duration</span>
-                </div>
-                {form.strengths && (
-                  <div class="slip-strengths">
-                    <span class="strengths-label">Available strengths:</span>
-                    <div class="strengths-list">
-                      {form.strengths.map((s: string) => (
-                        <span class="strength-pill">{s}</span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                {form.notes && (
-                  <p class="slip-notes">{l(form.notes)}</p>
-                )}
-              </div>
-              <div class="slip-footer">
-                <div class="slip-barcode">
-                  {[...Array(15)].map(() => (
-                    <span class="barcode-line"></span>
-                  ))}
-                </div>
-              </div>
+        <div class="forms-table">
+          <div class="forms-table-header">
+            <span class="col-form">Form</span>
+            <span class="col-release">Release</span>
+            <span class="col-duration">Duration</span>
+            <span class="col-strengths">Strengths</span>
+          </div>
+          {drug.forms.map((form: any) => (
+            <div class="form-row">
+              <span class="col-form">
+                <span class="form-name">{form.brandName || l(form.typeLabel) || form.type}</span>
+              </span>
+              <span class="col-release">{l(form.releaseTypeLabel) || form.releaseType}</span>
+              <span class="col-duration">{form.durationHours}h</span>
+              <span class="col-strengths">
+                {form.strengths ? (
+                  <span class="strengths-list">
+                    {form.strengths.map((s: string) => (
+                      <span class="strength-pill">{s}</span>
+                    ))}
+                  </span>
+                ) : '—'}
+              </span>
             </div>
           ))}
         </div>
@@ -632,9 +623,9 @@ const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().get
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--space-4) var(--space-5);
-    background: linear-gradient(135deg, var(--dossier-accent) 0%, #2d2d44 100%);
-    color: #fff;
+    padding: var(--space-3) var(--space-5);
+    background: var(--dossier-cream);
+    border-bottom: 1px solid var(--dossier-border);
   }
 
   .case-file-left {
@@ -645,33 +636,34 @@ const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().get
 
   .case-label {
     font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
+    font-size: 0.55rem;
     font-weight: 600;
-    letter-spacing: 0.2em;
-    opacity: 0.7;
+    letter-spacing: 0.15em;
+    color: var(--dossier-muted);
   }
 
   .case-number {
     font-family: 'DM Mono', monospace;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
+    color: var(--dossier-accent);
   }
 
   .case-file-right {
     display: flex;
     align-items: center;
-    gap: var(--space-4);
+    gap: var(--space-3);
   }
 
   .classification-badge {
     font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
+    font-size: 0.55rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.1em;
     padding: 4px 10px;
-    background: rgba(255, 255, 255, 0.1);
+    background: transparent;
     border: 1px solid var(--class-color);
     color: var(--class-color);
     border-radius: 2px;
@@ -684,28 +676,23 @@ const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().get
   }
 
   .stamp-border {
-    width: 56px;
-    height: 56px;
-    border: 2px dashed rgba(251, 191, 36, 0.5);
+    width: 48px;
+    height: 48px;
+    border: 2px dashed var(--dossier-gold);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     transform: rotate(-12deg);
-    animation: stampPulse 3s ease-in-out infinite;
-  }
-
-  @keyframes stampPulse {
-    0%, 100% { opacity: 0.7; }
-    50% { opacity: 1; }
+    opacity: 0.7;
   }
 
   .stamp-border .stamp-text {
     font-family: 'DM Mono', monospace;
-    font-size: 0.4rem;
+    font-size: 0.35rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
-    color: #fbbf24;
+    letter-spacing: 0.08em;
+    color: var(--dossier-gold);
     text-align: center;
     line-height: 1.4;
   }
@@ -837,170 +824,207 @@ const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().get
   }
 
   /* ============================================
-     VISA STAMPS (Regional Approvals)
+     REGIONAL APPROVALS
      ============================================ */
 
-  .visa-section {
+  .approvals-section {
     margin-bottom: var(--space-8);
   }
 
-  .visa-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: var(--space-5);
-    padding-bottom: var(--space-3);
-    border-bottom: 2px solid var(--dossier-accent);
+  .approvals-table {
+    border: 1px solid var(--dossier-border);
+    border-radius: 4px;
+    overflow: hidden;
   }
 
-  .visa-title-block {
-    display: flex;
-    align-items: center;
+  .approvals-header {
+    display: grid;
+    grid-template-columns: 100px 80px 60px 1fr 110px;
     gap: var(--space-3);
-  }
-
-  .visa-icon {
-    color: var(--dossier-accent);
-    opacity: 0.7;
-  }
-
-  .visa-title {
+    padding: var(--space-3) var(--space-4);
+    background: var(--dossier-cream);
+    border-bottom: 1px solid var(--dossier-border);
     font-family: 'DM Mono', monospace;
-    font-size: 0.8rem;
-    font-weight: 700;
+    font-size: 0.6rem;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--dossier-accent);
-    margin: 0;
-  }
-
-  .visa-subtitle {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.55rem;
     letter-spacing: 0.1em;
     color: var(--dossier-muted);
   }
 
-  .visa-stamps {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-4);
-    padding: var(--space-4);
+  .approval-row {
+    display: grid;
+    grid-template-columns: 100px 80px 60px 1fr 110px;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--dossier-border);
+    font-size: 0.8rem;
+    transition: background 0.15s;
+  }
+
+  .approval-row:last-child {
+    border-bottom: none;
+  }
+
+  .approval-row:hover {
     background: var(--dossier-cream);
-    border: 1px dashed var(--dossier-border);
-    border-radius: 4px;
   }
 
-  .visa-stamp {
-    position: relative;
-    padding: var(--space-3);
-    transform: rotate(var(--rotation, 0deg));
-    transition: transform 0.3s ease;
+  .approval-row[data-available="false"] {
+    opacity: 0.5;
   }
 
-  .visa-stamp:hover {
-    transform: rotate(0deg) scale(1.05);
-    z-index: 10;
+  .approval-row .col-region {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
   }
 
-  .visa-stamp[data-available="false"] {
-    opacity: 0.4;
+  .region-flag {
+    font-size: 1rem;
   }
 
-  .stamp-outer {
-    width: 90px;
-    height: 90px;
-    border: 3px solid var(--dossier-accent);
+  .region-code {
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    color: var(--dossier-accent);
+  }
+
+  .col-agency {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--dossier-muted);
+  }
+
+  .col-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--dossier-accent);
+  }
+
+  .col-ages {
+    font-size: 0.75rem;
+    color: var(--dossier-ink);
+  }
+
+  .col-status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 0.7rem;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
+    background: var(--dossier-red);
+  }
+
+  .status-dot[data-available="true"] {
+    background: var(--dossier-green);
+  }
+
+  @media (max-width: 700px) {
+    .approvals-header {
+      display: none;
+    }
+
+    .approval-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+
+    .approval-row .col-region {
+      flex: 1;
+      min-width: 80px;
+    }
+
+    .col-agency,
+    .col-year,
+    .col-ages {
+      font-size: 0.7rem;
+    }
+
+    .col-status {
+      width: 100%;
+      margin-top: var(--space-1);
+      padding-top: var(--space-2);
+      border-top: 1px dashed var(--dossier-border);
+    }
+  }
+
+  /* ============================================
+     TRAVEL MODAL
+     ============================================ */
+
+  .travel-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+  }
+
+  .travel-modal.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 26, 46, 0.5);
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 700px;
+    max-height: 85vh;
+    overflow-y: auto;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    transform: translateY(20px);
+    transition: transform 0.3s;
+  }
+
+  .travel-modal.open .modal-content {
+    transform: translateY(0);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    z-index: 10;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: var(--dossier-paper);
-    position: relative;
-  }
-
-  .stamp-outer::before {
-    content: '';
-    position: absolute;
-    inset: 4px;
     border: 1px solid var(--dossier-border);
     border-radius: 50%;
+    cursor: pointer;
+    color: var(--dossier-muted);
+    transition: all 0.2s;
   }
 
-  .stamp-inner-ring {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 1px;
-  }
-
-  .stamp-flag {
-    font-size: 1.2rem;
-    line-height: 1;
-  }
-
-  .stamp-region {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.8rem;
-    font-weight: 800;
-    letter-spacing: 0.1em;
+  .modal-close:hover {
+    background: var(--dossier-cream);
     color: var(--dossier-accent);
-  }
-
-  .stamp-agency {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.45rem;
-    letter-spacing: 0.05em;
-    color: var(--dossier-muted);
-  }
-
-  .stamp-year {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.55rem;
-    font-weight: 700;
-    color: var(--dossier-gold);
-  }
-
-  .stamp-status {
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%) rotate(calc(var(--rotation, 0deg) * -1));
-    font-family: 'DM Mono', monospace;
-    font-size: 0.45rem;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    padding: 2px 8px;
-    background: var(--dossier-red);
-    color: #fff;
-    border-radius: 2px;
-    white-space: nowrap;
-  }
-
-  .stamp-status[data-available="true"] {
-    background: var(--dossier-green);
-  }
-
-  .stamp-ages {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%) rotate(calc(var(--rotation, 0deg) * -1));
-    margin-top: var(--space-3);
-    font-family: 'DM Mono', monospace;
-    font-size: 0.55rem;
-    color: var(--dossier-muted);
-    white-space: nowrap;
-  }
-
-  .stamp-notes {
-    display: none;
+    border-color: var(--dossier-accent);
   }
 
   /* ============================================
-     TRAVEL PASS (Boarding Pass - existing)
+     TRAVEL PASS (Boarding Pass - in modal)
      ============================================ */
 
   .travel-pass {
@@ -1608,216 +1632,133 @@ const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().get
   }
 
   /* ============================================
-     RX SLIPS (Formulations)
+     FORMS TABLE (Dosage Forms)
      ============================================ */
 
-  .rx-section {
+  .forms-section {
     margin-bottom: var(--space-8);
   }
 
-  .rx-header {
+  .forms-header {
     display: flex;
     align-items: center;
-    gap: var(--space-4);
-    margin-bottom: var(--space-5);
-    padding-bottom: var(--space-3);
-    border-bottom: 2px solid var(--dossier-blue);
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
   }
 
-  .rx-symbol {
+  .forms-header .rx-symbol {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: var(--dossier-blue);
     line-height: 1;
   }
 
-  .rx-title-block {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .rx-title {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--dossier-accent);
+  .forms-header .section-title {
     margin: 0;
+    padding-bottom: 0;
+    border-bottom: none;
   }
 
-  .rx-subtitle {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.55rem;
-    letter-spacing: 0.1em;
-    color: var(--dossier-muted);
-  }
-
-  .rx-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: var(--space-4);
-  }
-
-  .rx-slip {
-    background: var(--dossier-paper);
+  .forms-table {
     border: 1px solid var(--dossier-border);
     border-radius: 4px;
     overflow: hidden;
-    position: relative;
-    transition: transform 0.2s, box-shadow 0.2s;
   }
 
-  .rx-slip:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
-  }
-
-  .slip-perforation {
-    height: 0;
-    border-top: 2px dashed var(--dossier-border);
-    position: relative;
-  }
-
-  .slip-perforation::before,
-  .slip-perforation::after {
-    content: '';
-    position: absolute;
-    top: -6px;
-    width: 12px;
-    height: 12px;
-    background: var(--dossier-bg);
-    border-radius: 50%;
-  }
-
-  .slip-perforation::before {
-    left: -6px;
-  }
-
-  .slip-perforation::after {
-    right: -6px;
-  }
-
-  .slip-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--space-2) var(--space-3);
-    background: linear-gradient(90deg, rgba(43, 108, 176, 0.08) 0%, transparent 100%);
+  .forms-table-header {
+    display: grid;
+    grid-template-columns: 1fr 100px 80px 1fr;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--dossier-cream);
     border-bottom: 1px solid var(--dossier-border);
-  }
-
-  .slip-rx {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--dossier-blue);
-  }
-
-  .slip-number {
     font-family: 'DM Mono', monospace;
     font-size: 0.6rem;
-    font-weight: 600;
-    color: var(--dossier-muted);
-    letter-spacing: 0.1em;
-  }
-
-  .slip-body {
-    padding: var(--space-4);
-  }
-
-  .slip-drug-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--dossier-accent);
-    margin-bottom: var(--space-2);
-  }
-
-  .slip-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--space-3);
-    font-size: 0.7rem;
-    color: var(--dossier-muted);
-  }
-
-  .slip-duration {
-    font-family: 'DM Mono', monospace;
-    font-weight: 600;
-    color: var(--dossier-blue);
-  }
-
-  .slip-strengths {
-    margin-top: var(--space-3);
-  }
-
-  .strengths-label {
-    display: block;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.5rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--dossier-muted);
-    margin-bottom: var(--space-2);
   }
 
-  .strengths-list {
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 100px 80px 1fr;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--dossier-border);
+    font-size: 0.8rem;
+    transition: background 0.15s;
+  }
+
+  .form-row:last-child {
+    border-bottom: none;
+  }
+
+  .form-row:hover {
+    background: var(--dossier-cream);
+  }
+
+  .form-name {
+    font-weight: 600;
+    color: var(--dossier-accent);
+  }
+
+  .col-release {
+    font-size: 0.75rem;
+    color: var(--dossier-muted);
+  }
+
+  .col-duration {
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    color: var(--dossier-blue);
+  }
+
+  .col-strengths .strengths-list {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-1);
+    gap: 4px;
   }
 
   .strength-pill {
     font-family: 'DM Mono', monospace;
     font-size: 0.6rem;
     font-weight: 600;
-    padding: 3px 8px;
+    padding: 2px 6px;
     background: var(--dossier-cream);
     border: 1px solid var(--dossier-border);
-    border-radius: 12px;
+    border-radius: 10px;
     color: var(--dossier-accent);
   }
 
-  .slip-notes {
-    margin: var(--space-3) 0 0;
-    font-size: 0.75rem;
-    line-height: 1.5;
-    color: var(--dossier-muted);
-    font-style: italic;
-  }
+  @media (max-width: 600px) {
+    .forms-table-header {
+      display: none;
+    }
 
-  .slip-footer {
-    padding: var(--space-2) var(--space-3);
-    background: var(--dossier-cream);
-    border-top: 1px solid var(--dossier-border);
-  }
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
 
-  .slip-barcode {
-    display: flex;
-    gap: 1px;
-    height: 20px;
-  }
+    .form-row .col-form {
+      flex: 1;
+      min-width: 120px;
+    }
 
-  .barcode-line {
-    width: 2px;
-    height: 100%;
-    background: var(--dossier-accent);
-    opacity: 0.15;
-  }
+    .col-release,
+    .col-duration {
+      font-size: 0.7rem;
+    }
 
-  .barcode-line:nth-child(2n) {
-    width: 3px;
-    opacity: 0.25;
-  }
-
-  .barcode-line:nth-child(3n) {
-    width: 1px;
-    opacity: 0.1;
+    .col-strengths {
+      width: 100%;
+      margin-top: var(--space-1);
+      padding-top: var(--space-2);
+      border-top: 1px dashed var(--dossier-border);
+    }
   }
 
   /* ============================================
@@ -2233,10 +2174,6 @@ const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().get
       padding: var(--space-4);
     }
 
-    .rx-grid {
-      grid-template-columns: 1fr;
-    }
-
     .hazmat-grid {
       grid-template-columns: 1fr;
     }
@@ -2267,19 +2204,53 @@ const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().get
 
   .case-file,
   .mechanism-section,
-  .visa-section,
-  .travel-pass,
-  .rx-section,
+  .approvals-section,
+  .forms-section,
   .hazmat-section,
   .archive-section {
     animation: slideUp 0.5s ease-out;
   }
 
   .mechanism-section { animation-delay: 0.05s; }
-  .visa-section { animation-delay: 0.1s; }
-  .travel-pass { animation-delay: 0.15s; }
-  .rx-section { animation-delay: 0.2s; }
-  .hazmat-section { animation-delay: 0.25s; }
-  .archive-section { animation-delay: 0.3s; }
+  .approvals-section { animation-delay: 0.1s; }
+  .forms-section { animation-delay: 0.15s; }
+  .hazmat-section { animation-delay: 0.2s; }
+  .archive-section { animation-delay: 0.25s; }
 
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const inspectorBtn = document.getElementById('inspector-travel-btn');
+    const modal = document.getElementById('travel-modal');
+    const backdrop = document.getElementById('modal-backdrop');
+    const closeBtn = document.getElementById('modal-close');
+
+    const openModal = () => {
+      if (modal) {
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+    };
+
+    const closeModal = () => {
+      if (modal) {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    };
+
+    // Open from inspector button
+    inspectorBtn?.addEventListener('click', openModal);
+
+    // Close handlers
+    backdrop?.addEventListener('click', closeModal);
+    closeBtn?.addEventListener('click', closeModal);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal?.classList.contains('open')) {
+        closeModal();
+      }
+    });
+  });
+</script>

@@ -218,83 +218,41 @@ const alternates = [
               <div class="inspector-value inspector-name">{l(activeDrug.genericName)}</div>
             </div>
 
-            <!-- ID -->
-            <div class="inspector-section">
-              <label class="inspector-label">ID</label>
-              <code class="inspector-code">{activeDrug.id}</code>
-            </div>
-
-            <!-- Class -->
-            <div class="inspector-section">
-              <label class="inspector-label">Drug Class</label>
-              <span class="inspector-badge" data-class={activeDrug.drugClass}>
-                {activeDrug.drugClass}
-              </span>
-            </div>
-
-            <!-- Category -->
-            <div class="inspector-section">
-              <label class="inspector-label">Category</label>
-              <div class="inspector-value">{activeDrug.category}</div>
-            </div>
-
-            <!-- Mechanism -->
-            {activeDrug.pharmacology?.mechanism && (
-              <div class="inspector-section">
-                <label class="inspector-label">Mechanism</label>
-                <div class="inspector-value inspector-small">{l(activeDrug.pharmacology.mechanism)}</div>
+            <!-- Class & Category -->
+            <div class="inspector-section inspector-row">
+              <div class="inspector-col">
+                <label class="inspector-label">Class</label>
+                <span class="inspector-badge" data-class={activeDrug.drugClass}>
+                  {activeDrug.drugClass}
+                </span>
               </div>
-            )}
+              <div class="inspector-col">
+                <label class="inspector-label">Category</label>
+                <div class="inspector-value-sm">{activeDrug.category}</div>
+              </div>
+            </div>
 
-            <!-- Approvals Summary -->
+            <!-- Approvals Summary - Compact -->
             <div class="inspector-section">
-              <label class="inspector-label">Approvals</label>
-              <div class="inspector-approvals">
+              <label class="inspector-label">Availability</label>
+              <div class="inspector-regions">
                 {activeDrug.approvals?.map((approval: any) => (
-                  <div class="approval-row">
-                    <span class="approval-region">{approval.region}</span>
-                    <span class:list={['approval-status', { available: approval.available }]}>
-                      {approval.available ? 'Available' : 'Not Available'}
-                    </span>
-                  </div>
+                  <span class:list={['region-chip', { available: approval.available }]}>
+                    {approval.region}
+                  </span>
                 ))}
               </div>
             </div>
 
-            <!-- Brand Names -->
-            {activeDrug.brandNames && Object.keys(activeDrug.brandNames).length > 0 && (
-              <div class="inspector-section">
-                <label class="inspector-label">Brand Names</label>
-                <div class="inspector-brands">
-                  {Object.entries(activeDrug.brandNames).map(([region, brands]: [string, any]) => (
-                    <div class="brand-row">
-                      <span class="brand-region">{region}</span>
-                      <span class="brand-names">{brands.slice(0, 2).join(', ')}{brands.length > 2 ? '...' : ''}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            <!-- Formulations Count -->
-            {activeDrug.formulations && (
-              <div class="inspector-section">
-                <label class="inspector-label">Formulations</label>
-                <div class="inspector-value">
-                  <span class="inspector-stat">{activeDrug.formulations.length}</span> forms
-                </div>
-              </div>
-            )}
-
-            <!-- Side Effects Count -->
-            {activeDrug.sideEffects && (
-              <div class="inspector-section">
-                <label class="inspector-label">Side Effects</label>
-                <div class="inspector-value">
-                  <span class="inspector-stat">{activeDrug.sideEffects.length}</span> documented
-                </div>
-              </div>
-            )}
+            <!-- Actions -->
+            <div class="inspector-actions">
+              <button class="inspector-action-btn" id="inspector-travel-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+                </svg>
+                Travel Info
+              </button>
+            </div>
           </div>
         </aside>
       )}
@@ -303,7 +261,7 @@ const alternates = [
 </html>
 
 <style is:global>
-  /* DATABASE LAYOUT - SQL Client Style */
+  /* DATABASE LAYOUT - Dossier Style */
 
   html, body {
     height: 100%;
@@ -315,19 +273,19 @@ const alternates = [
   .db-layout {
     --sidebar-width: 320px;
     --header-height: 48px;
-    --accent: #00a86b;
-    --accent-dim: rgba(0, 168, 107, 0.1);
-    --accent-bold: #008f5b;
-    --danger: #dc2626;
-    --warning: #d97706;
-    --surface: #ffffff;
-    --surface-alt: #f8f9fa;
-    --surface-hover: #f1f3f5;
-    --border: #e5e7eb;
-    --border-strong: #d1d5db;
-    --text-primary: #111827;
-    --text-secondary: #4b5563;
-    --text-muted: #9ca3af;
+    --accent: #c4a052;
+    --accent-dim: rgba(196, 160, 82, 0.12);
+    --accent-bold: #a88a3d;
+    --danger: #c53030;
+    --warning: #b45309;
+    --surface: #fdfcfa;
+    --surface-alt: #f5f2eb;
+    --surface-hover: #edeae3;
+    --border: #e8e4dc;
+    --border-strong: #d4cfc4;
+    --text-primary: #1a1a2e;
+    --text-secondary: #4a4a5a;
+    --text-muted: #8b8680;
 
     display: flex;
     height: 100vh;
@@ -351,8 +309,8 @@ const alternates = [
     padding: 0 16px;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid var(--border);
     background: var(--surface);
+    border-bottom: 1px solid var(--border);
   }
 
   .logo {
@@ -372,7 +330,8 @@ const alternates = [
 
   .logo-text {
     font-family: 'DM Mono', monospace;
-    letter-spacing: -0.02em;
+    letter-spacing: 0.02em;
+    font-size: 0.85rem;
   }
 
   /* TABLE SELECTOR */
@@ -500,6 +459,7 @@ const alternates = [
     background: var(--accent-dim);
     border-left: 3px solid var(--accent);
     padding-left: 13px;
+    font-weight: 600;
   }
 
   .row-name {
@@ -607,9 +567,10 @@ const alternates = [
   }
 
   .lang-btn.active {
-    background: var(--accent);
+    background: var(--accent-dim);
     border-color: var(--accent);
-    color: white;
+    color: var(--accent-bold);
+    font-weight: 600;
   }
 
   .footer-links {
@@ -651,8 +612,10 @@ const alternates = [
     display: inline-flex;
     align-items: center;
     padding: 8px 12px;
-    font-size: 0.75rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
     font-weight: 600;
+    letter-spacing: 0.03em;
     color: var(--accent-bold);
     text-decoration: none;
     background: var(--accent-dim);
@@ -663,7 +626,8 @@ const alternates = [
 
   .contribute-btn:hover {
     background: var(--accent);
-    color: white;
+    border-color: var(--accent);
+    color: #fff;
   }
 
   /* MAIN CONTENT */
@@ -710,21 +674,23 @@ const alternates = [
   }
 
   .inspector-title {
-    font-size: 0.75rem;
-    font-weight: 700;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--text-secondary);
+    color: var(--text-muted);
   }
 
   .inspector-type {
     font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    font-weight: 500;
-    color: var(--accent);
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: var(--accent-bold);
     background: var(--accent-dim);
-    padding: 2px 8px;
-    border-radius: 3px;
+    padding: 3px 8px;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
   }
 
   .inspector-content {
@@ -763,8 +729,9 @@ const alternates = [
   }
 
   .inspector-name {
+    font-family: 'Cormorant Garamond', serif;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: var(--text-primary);
   }
 
@@ -875,6 +842,72 @@ const alternates = [
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .inspector-row {
+    display: flex;
+    gap: var(--space-4);
+  }
+
+  .inspector-col {
+    flex: 1;
+  }
+
+  .inspector-value-sm {
+    font-size: 0.8rem;
+    color: var(--text-primary);
+  }
+
+  .inspector-regions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .region-chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 600;
+    padding: 3px 6px;
+    border-radius: 3px;
+    background: var(--surface-alt);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+
+  .region-chip.available {
+    background: rgba(196, 160, 82, 0.1);
+    color: var(--accent-bold);
+    border-color: var(--accent);
+  }
+
+  .inspector-actions {
+    margin-top: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border);
+  }
+
+  .inspector-action-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-bold);
+    background: var(--accent-dim);
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .inspector-action-btn:hover {
+    background: var(--accent);
+    color: #fff;
   }
 
   /* TABLET: Hide inspector */
