@@ -1,0 +1,204 @@
+# Drug Category Definitions for ADHD Database
+# Categories are pharmacological groupings of ADHD medications
+
+categories:
+  methylphenidate:
+    id: "methylphenidate"
+    drugClass: "stimulant"
+    name:
+      en: "Methylphenidate"
+      zh: "哌甲酯类"
+      zh-TW: "哌甲酯類"
+      ja: "メチルフェニデート系"
+
+    description:
+      en: "Methylphenidate is a central nervous system stimulant that works by blocking the reuptake of dopamine and norepinephrine. It is the most widely prescribed ADHD medication globally, available in immediate-release and extended-release formulations."
+      zh: "哌甲酯是一种中枢神经系统兴奋剂，通过阻断多巴胺和去甲肾上腺素的再摄取发挥作用。它是全球处方量最大的ADHD药物，有速释和缓释两种剂型。"
+      zh-TW: "哌甲酯是一種中樞神經系統興奮劑，通過阻斷多巴胺和去甲腎上腺素的再攝取發揮作用。它是全球處方量最大的ADHD藥物，有速釋和緩釋兩種劑型。"
+      ja: "メチルフェニデートは、ドーパミンとノルエピネフリンの再取り込みを阻害する中枢神経刺激薬です。世界で最も広く処方されているADHD治療薬で、即放性と徐放性の製剤があります。"
+
+    mechanism:
+      en: "Dopamine-norepinephrine reuptake inhibitor (DNRI)"
+      zh: "多巴胺-去甲肾上腺素再摄取抑制剂 (DNRI)"
+      zh-TW: "多巴胺-去甲腎上腺素再攝取抑制劑 (DNRI)"
+      ja: "ドーパミン・ノルエピネフリン再取り込み阻害薬 (DNRI)"
+
+    wikipediaUrl:
+      en: "https://en.wikipedia.org/wiki/Methylphenidate"
+      zh: "https://zh.wikipedia.org/wiki/哌甲酯"
+      ja: "https://ja.wikipedia.org/wiki/メチルフェニデート"
+
+    commonBrands:
+      - "Ritalin"
+      - "Concerta"
+      - "Daytrana"
+
+  amphetamine:
+    id: "amphetamine"
+    drugClass: "stimulant"
+    name:
+      en: "Amphetamine"
+      zh: "苯丙胺类"
+      zh-TW: "苯丙胺類"
+      ja: "アンフェタミン系"
+
+    description:
+      en: "Amphetamines are potent central nervous system stimulants that increase the release and block the reuptake of dopamine and norepinephrine. They include mixed amphetamine salts (Adderall) and the prodrug lisdexamfetamine (Vyvanse). More restricted globally than methylphenidate."
+      zh: "苯丙胺类是强效中枢神经系统兴奋剂，可增加多巴胺和去甲肾上腺素的释放并阻断其再摄取。包括混合苯丙胺盐（Adderall）和前体药物赖氨酸安非他命（Vyvanse）。在全球范围内比哌甲酯受到更严格的管制。"
+      zh-TW: "苯丙胺類是強效中樞神經系統興奮劑，可增加多巴胺和去甲腎上腺素的釋放並阻斷其再攝取。包括混合苯丙胺鹽（Adderall）和前體藥物賴氨酸安非他命（Vyvanse）。在全球範圍內比哌甲酯受到更嚴格的管制。"
+      ja: "アンフェタミン系は、ドーパミンとノルエピネフリンの放出を増加させ、再取り込みを阻害する強力な中枢神経刺激薬です。混合アンフェタミン塩（Adderall）やプロドラッグのリスデキサンフェタミン（Vyvanse）が含まれます。メチルフェニデートより世界的に規制が厳しいです。"
+
+    mechanism:
+      en: "Dopamine-norepinephrine releasing agent (DNRA)"
+      zh: "多巴胺-去甲肾上腺素释放剂 (DNRA)"
+      zh-TW: "多巴胺-去甲腎上腺素釋放劑 (DNRA)"
+      ja: "ドーパミン・ノルエピネフリン放出促進薬 (DNRA)"
+
+    wikipediaUrl:
+      en: "https://en.wikipedia.org/wiki/Amphetamine"
+      zh: "https://zh.wikipedia.org/wiki/苯丙胺"
+      ja: "https://ja.wikipedia.org/wiki/アンフェタミン"
+
+    commonBrands:
+      - "Adderall"
+      - "Vyvanse"
+      - "Dexedrine"
+
+    notes:
+      en: "Prohibited or highly restricted in many Asian countries including China and Japan"
+      zh: "在包括中国和日本在内的许多亚洲国家被禁止或严格限制"
+      zh-TW: "在包括中國和日本在內的許多亞洲國家被禁止或嚴格限制"
+      ja: "中国や日本を含む多くのアジア諸国で禁止または厳しく制限されています"
+
+  atomoxetine:
+    id: "atomoxetine"
+    drugClass: "non-stimulant"
+    name:
+      en: "Atomoxetine"
+      zh: "托莫西汀"
+      zh-TW: "托莫西汀"
+      ja: "アトモキセチン"
+
+    description:
+      en: "Atomoxetine is a selective norepinephrine reuptake inhibitor (SNRI) and the first non-stimulant medication approved for ADHD. It is not a controlled substance in most countries, making it easier to prescribe and travel with. Takes 4-6 weeks for full effect."
+      zh: "托莫西汀是选择性去甲肾上腺素再摄取抑制剂(SNRI)，是第一个获批用于ADHD的非兴奋剂药物。在大多数国家不是管制药物，因此更容易处方和携带旅行。需要4-6周才能完全起效。"
+      zh-TW: "托莫西汀是選擇性去甲腎上腺素再攝取抑制劑(SNRI)，是第一個獲批用於ADHD的非興奮劑藥物。在大多數國家不是管制藥物，因此更容易處方和攜帶旅行。需要4-6週才能完全起效。"
+      ja: "アトモキセチンは選択的ノルエピネフリン再取り込み阻害薬（SNRI）で、ADHDに承認された最初の非刺激薬です。ほとんどの国で規制物質ではないため、処方や旅行時の携帯が容易です。完全な効果が現れるまで4〜6週間かかります。"
+
+    mechanism:
+      en: "Selective norepinephrine reuptake inhibitor (SNRI)"
+      zh: "选择性去甲肾上腺素再摄取抑制剂 (SNRI)"
+      zh-TW: "選擇性去甲腎上腺素再攝取抑制劑 (SNRI)"
+      ja: "選択的ノルエピネフリン再取り込み阻害薬 (SNRI)"
+
+    wikipediaUrl:
+      en: "https://en.wikipedia.org/wiki/Atomoxetine"
+      zh: "https://zh.wikipedia.org/wiki/托莫西汀"
+      ja: "https://ja.wikipedia.org/wiki/アトモキセチン"
+
+    commonBrands:
+      - "Strattera"
+
+  alpha2-agonist:
+    id: "alpha2-agonist"
+    drugClass: "non-stimulant"
+    name:
+      en: "Alpha-2 Agonists"
+      zh: "α2激动剂"
+      zh-TW: "α2激動劑"
+      ja: "α2アゴニスト"
+
+    description:
+      en: "Alpha-2 adrenergic agonists (guanfacine, clonidine) were originally developed for hypertension but are now approved for ADHD. They work by stimulating alpha-2 receptors in the prefrontal cortex, improving attention and impulse control without stimulant effects."
+      zh: "α2肾上腺素能激动剂（胍法辛、可乐定）最初用于治疗高血压，现已获批用于ADHD。它们通过刺激前额叶皮层的α2受体发挥作用，在不产生兴奋剂效应的情况下改善注意力和冲动控制。"
+      zh-TW: "α2腎上腺素能激動劑（胍法辛、可樂定）最初用於治療高血壓，現已獲批用於ADHD。它們通過刺激前額葉皮層的α2受體發揮作用，在不產生興奮劑效應的情況下改善注意力和衝動控制。"
+      ja: "α2アドレナリン受容体作動薬（グアンファシン、クロニジン）はもともと高血圧治療薬として開発されましたが、現在はADHDにも承認されています。前頭前皮質のα2受容体を刺激することで、刺激薬の作用なしに注意力と衝動制御を改善します。"
+
+    mechanism:
+      en: "Alpha-2 adrenergic receptor agonist"
+      zh: "α2肾上腺素能受体激动剂"
+      zh-TW: "α2腎上腺素能受體激動劑"
+      ja: "α2アドレナリン受容体作動薬"
+
+    wikipediaUrl:
+      en: "https://en.wikipedia.org/wiki/Alpha-2_adrenergic_receptor_agonist"
+      zh: "https://zh.wikipedia.org/wiki/Α2肾上腺素能激动剂"
+      ja: "https://ja.wikipedia.org/wiki/Α2アドレナリン受容体作動薬"
+
+    commonBrands:
+      - "Intuniv (guanfacine)"
+      - "Kapvay (clonidine)"
+
+    drugs:
+      - "guanfacine"
+      - "clonidine"
+
+  viloxazine:
+    id: "viloxazine"
+    drugClass: "non-stimulant"
+    name:
+      en: "Viloxazine"
+      zh: "维洛沙嗪"
+      zh-TW: "維洛沙嗪"
+      ja: "ビロキサジン"
+
+    description:
+      en: "Viloxazine is a newer non-stimulant ADHD medication approved by the FDA in 2021. It is a selective norepinephrine reuptake inhibitor with serotonin modulating activity. Originally used as an antidepressant in Europe, it was reformulated for ADHD treatment."
+      zh: "维洛沙嗪是一种较新的非兴奋剂ADHD药物，于2021年获FDA批准。它是一种选择性去甲肾上腺素再摄取抑制剂，具有血清素调节活性。最初在欧洲用作抗抑郁药，后被重新配制用于ADHD治疗。"
+      zh-TW: "維洛沙嗪是一種較新的非興奮劑ADHD藥物，於2021年獲FDA批准。它是一種選擇性去甲腎上腺素再攝取抑制劑，具有血清素調節活性。最初在歐洲用作抗抑鬱藥，後被重新配製用於ADHD治療。"
+      ja: "ビロキサジンは2021年にFDAに承認された新しい非刺激性ADHD治療薬です。セロトニン調節作用を持つ選択的ノルエピネフリン再取り込み阻害薬です。もともとヨーロッパで抗うつ薬として使用されていましたが、ADHD治療用に再製剤化されました。"
+
+    mechanism:
+      en: "Selective norepinephrine reuptake inhibitor with serotonin modulating activity"
+      zh: "选择性去甲肾上腺素再摄取抑制剂，具有血清素调节活性"
+      zh-TW: "選擇性去甲腎上腺素再攝取抑制劑，具有血清素調節活性"
+      ja: "セロトニン調節作用を持つ選択的ノルエピネフリン再取り込み阻害薬"
+
+    wikipediaUrl:
+      en: "https://en.wikipedia.org/wiki/Viloxazine"
+      zh: "https://en.wikipedia.org/wiki/Viloxazine"
+      ja: "https://en.wikipedia.org/wiki/Viloxazine"
+
+    commonBrands:
+      - "Qelbree"
+
+# Drug class summary
+drugClasses:
+  stimulant:
+    name:
+      en: "Stimulants"
+      zh: "兴奋剂类"
+      zh-TW: "興奮劑類"
+      ja: "中枢刺激薬"
+    description:
+      en: "First-line treatment for ADHD. Work by increasing dopamine and norepinephrine in the brain. Fast-acting but are controlled substances."
+      zh: "ADHD的一线治疗药物。通过增加大脑中的多巴胺和去甲肾上腺素发挥作用。起效快但属于管制药品。"
+      zh-TW: "ADHD的一線治療藥物。通過增加大腦中的多巴胺和去甲腎上腺素發揮作用。起效快但屬於管制藥品。"
+      ja: "ADHDの第一選択薬。脳内のドーパミンとノルエピネフリンを増加させることで作用します。即効性がありますが、規制物質です。"
+    wikipediaUrl:
+      en: "https://en.wikipedia.org/wiki/Stimulant"
+      zh: "https://zh.wikipedia.org/wiki/兴奋剂"
+      ja: "https://ja.wikipedia.org/wiki/興奮薬"
+    categories:
+      - "methylphenidate"
+      - "amphetamine"
+
+  non-stimulant:
+    name:
+      en: "Non-Stimulants"
+      zh: "非兴奋剂类"
+      zh-TW: "非興奮劑類"
+      ja: "非中枢刺激薬"
+    description:
+      en: "Alternative treatments when stimulants are ineffective, contraindicated, or cause intolerable side effects. Generally not controlled substances, making them easier to prescribe and travel with."
+      zh: "当兴奋剂无效、有禁忌症或引起不可耐受的副作用时的替代治疗。通常不是管制药品，因此更容易处方和携带旅行。"
+      zh-TW: "當興奮劑無效、有禁忌症或引起不可耐受的副作用時的替代治療。通常不是管制藥品，因此更容易處方和攜帶旅行。"
+      ja: "刺激薬が効果がない、禁忌がある、または耐えられない副作用がある場合の代替治療。一般的に規制物質ではないため、処方や旅行時の携帯が容易です。"
+    wikipediaUrl:
+      en: "https://en.wikipedia.org/wiki/Attention_deficit_hyperactivity_disorder_management#Non-stimulant_medications"
+      zh: "https://en.wikipedia.org/wiki/Attention_deficit_hyperactivity_disorder_management#Non-stimulant_medications"
+      ja: "https://en.wikipedia.org/wiki/Attention_deficit_hyperactivity_disorder_management#Non-stimulant_medications"
+    categories:
+      - "atomoxetine"
+      - "alpha2-agonist"
+      - "viloxazine"

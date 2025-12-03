@@ -1,0 +1,361 @@
+---
+import DatabaseLayout from '../../../../layouts/DatabaseLayout.astro';
+import { getCategoryList, getDrugClasses, getLocalizedValue, getDrugs } from '../../../../lib/data';
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../../../i18n/utils';
+
+// Prerender at build time (required for Cloudflare Workers)
+export const prerender = true;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const categories = getCategoryList();
+const drugClasses = getDrugClasses();
+const drugs = getDrugs();
+
+const l = (value: any) => getLocalizedValue(value, lang);
+
+// Get Wikipedia URL for current language (fallback to English)
+const getWikiUrl = (urls: { en?: string; zh?: string; ja?: string } | undefined) => {
+  if (!urls) return '';
+  return urls[lang as keyof typeof urls] || urls.en || '';
+};
+
+// Group categories by drug class
+const stimulantCategories = categories.filter(c => c.drugClass === 'stimulant');
+const nonStimulantCategories = categories.filter(c => c.drugClass === 'non-stimulant');
+
+// Count drugs per category
+const getDrugCountForCategory = (categoryId: string) => {
+  return drugs.filter(d => d.category === categoryId).length;
+};
+---
+
+<DatabaseLayout title={t('categories.title')} activeTable="categories">
+  <div class="categories-page">
+    <header class="page-header">
+      <h1 class="page-title">categories</h1>
+      <p class="page-desc">{t('categories.description')}</p>
+    </header>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-value">{categories.length}</span>
+        <span class="stat-label">Total Categories</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">{stimulantCategories.length}</span>
+        <span class="stat-label">{t('drugs.stimulants')}</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">{nonStimulantCategories.length}</span>
+        <span class="stat-label">{t('drugs.nonStimulants')}</span>
+      </div>
+    </div>
+
+    <!-- Drug Classes Section -->
+    {Object.entries(drugClasses).map(([classId, drugClass]) => (
+      <section class="class-section">
+        <div class="class-header">
+          <h2 class="class-title">
+            <span class="class-badge" data-class={classId}>{l(drugClass.name)}</span>
+          </h2>
+          <p class="class-desc">{l(drugClass.description)}</p>
+          {getWikiUrl(drugClass.wikipediaUrl) && (
+            <a href={getWikiUrl(drugClass.wikipediaUrl)} target="_blank" rel="noopener" class="wiki-link">
+              {t('categories.learnMore')} →
+            </a>
+          )}
+        </div>
+
+        <div class="categories-grid">
+          {categories.filter(c => c.drugClass === classId).map(category => (
+            <div class="category-card">
+              <div class="card-header">
+                <h3 class="card-title">{l(category.name)}</h3>
+                <span class="drug-count">{getDrugCountForCategory(category.id)} drugs</span>
+              </div>
+
+              <p class="card-desc">{l(category.description)}</p>
+
+              <div class="card-meta">
+                <div class="meta-row">
+                  <span class="meta-label">{t('categories.mechanism')}</span>
+                  <span class="meta-value">{l(category.mechanism)}</span>
+                </div>
+
+                {category.commonBrands && category.commonBrands.length > 0 && (
+                  <div class="meta-row">
+                    <span class="meta-label">{t('categories.commonBrands')}</span>
+                    <span class="meta-value brands">{category.commonBrands.join(', ')}</span>
+                  </div>
+                )}
+              </div>
+
+              {category.notes && (
+                <div class="card-notes">
+                  {l(category.notes)}
+                </div>
+              )}
+
+              <div class="card-footer">
+                {getWikiUrl(category.wikipediaUrl) && (
+                  <a href={getWikiUrl(category.wikipediaUrl)} target="_blank" rel="noopener" class="card-link wiki">
+                    Wikipedia →
+                  </a>
+                )}
+                <a href={getLocalizedPath('/data/drugs', lang)} class="card-link">
+                  {t('categories.viewAll')} →
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</DatabaseLayout>
+
+<style>
+  .categories-page {
+    max-width: 1000px;
+  }
+
+  .page-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .page-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #111827;
+  }
+
+  .page-desc {
+    color: #6b7280;
+    font-size: 0.95rem;
+  }
+
+  /* Stats Grid */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .stat-card {
+    background: #f8f9fa;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .stat-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #00a86b;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Class Section */
+  .class-section {
+    margin-bottom: 3rem;
+  }
+
+  .class-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .class-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .class-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 4px;
+    background: #f3f4f6;
+    color: #4b5563;
+  }
+
+  .class-badge[data-class="stimulant"] {
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+  }
+
+  .class-badge[data-class="non-stimulant"] {
+    background: rgba(59, 130, 246, 0.1);
+    color: #2563eb;
+  }
+
+  .class-desc {
+    color: #6b7280;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+  }
+
+  .wiki-link {
+    font-size: 0.8rem;
+    color: #00a86b;
+    text-decoration: none;
+  }
+
+  .wiki-link:hover {
+    text-decoration: underline;
+  }
+
+  /* Categories Grid */
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .category-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+
+  .category-card:hover {
+    border-color: #00a86b;
+    box-shadow: 0 4px 12px rgba(0, 168, 107, 0.1);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+  }
+
+  .drug-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #00a86b;
+    background: rgba(0, 168, 107, 0.1);
+    padding: 3px 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+
+  .card-desc {
+    font-size: 0.85rem;
+    color: #6b7280;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: #f8f9fa;
+    border-radius: 6px;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .meta-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #9ca3af;
+  }
+
+  .meta-value {
+    font-size: 0.8rem;
+    color: #4b5563;
+  }
+
+  .meta-value.brands {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: #6b7280;
+  }
+
+  .card-notes {
+    font-size: 0.8rem;
+    color: #d97706;
+    background: rgba(217, 119, 6, 0.1);
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    border-left: 3px solid #d97706;
+  }
+
+  .card-footer {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid #f3f4f6;
+  }
+
+  .card-link {
+    font-size: 0.8rem;
+    color: #00a86b;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .card-link:hover {
+    text-decoration: underline;
+  }
+
+  .card-link.wiki {
+    color: #6b7280;
+  }
+
+  @media (max-width: 768px) {
+    .categories-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .card-header {
+      flex-direction: column;
+    }
+  }
+</style>

@@ -76,6 +76,51 @@ export function getRegions() {
   return readYamlFile<{ regions: Record<string, unknown>; drugCategories: Record<string, string[]> }>(regionsPath);
 }
 
+// Categories
+export interface Category {
+  id: string;
+  drugClass: string;
+  name: LocalizedField;
+  description: LocalizedField;
+  mechanism: LocalizedField;
+  wikipediaUrl: { en?: string; zh?: string; ja?: string };
+  commonBrands: string[];
+  notes?: LocalizedField;
+  drugs?: string[];
+}
+
+export interface DrugClass {
+  name: LocalizedField;
+  description: LocalizedField;
+  wikipediaUrl: { en?: string; zh?: string; ja?: string };
+  categories: string[];
+}
+
+export interface CategoriesData {
+  categories: Record<string, Category>;
+  drugClasses: Record<string, DrugClass>;
+}
+
+export function getCategories(): CategoriesData {
+  const categoriesPath = path.join(getMetaPath(), 'categories.yaml');
+  return readYamlFile<CategoriesData>(categoriesPath);
+}
+
+export function getCategoryList(): Category[] {
+  const data = getCategories();
+  return Object.values(data.categories);
+}
+
+export function getCategory(id: string): Category | undefined {
+  const data = getCategories();
+  return data.categories[id];
+}
+
+export function getDrugClasses(): Record<string, DrugClass> {
+  const data = getCategories();
+  return data.drugClasses;
+}
+
 // Data - Drugs
 export interface LocalizedField {
   en?: string;
@@ -237,6 +282,14 @@ export function getDataTypes(): { name: string; count: number; path: string }[] 
       path: '/data/drugs',
     });
   }
+
+  // Add categories from meta
+  const categoriesData = getCategories();
+  types.push({
+    name: 'Categories',
+    count: Object.keys(categoriesData.categories).length,
+    path: '/data/categories',
+  });
 
   return types;
 }
