@@ -46,10 +46,13 @@ const classColors = {
   'non-stimulant': '#3b82f6'
 };
 const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#888';
+
+// Generate case file number
+const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().getFullYear()}`;
 ---
 
 <DatabaseLayout title={l(drug.genericName)} activeDrugId={drug.id}>
-  <article class="drug-page">
+  <article class="dossier">
     <!-- BREADCRUMB -->
     <nav class="breadcrumb">
       <a href={getLocalizedPath('/data/drugs', lang)} class="crumb">drugs</a>
@@ -57,81 +60,74 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
       <span class="crumb-current">{drug.id}</span>
     </nav>
 
-    <!-- HERO: Bold asymmetric header -->
-    <header class="hero">
-      <div class="hero-label">
-        <span class="label-dot" style={`background: ${classColor}`}></span>
-        <span class="label-text">{l(drug.drugClassLabel) || drug.drugClass}</span>
-        {drug.controlledSubstance && <span class="controlled-tag">CONTROLLED</span>}
+    <!-- ============================================
+         HERO: CASE FILE COVER
+         Classified dossier header with specimen ID
+         ============================================ -->
+    <header class="case-file">
+      <div class="case-file-band">
+        <div class="case-file-left">
+          <span class="case-label">CASE FILE</span>
+          <span class="case-number">{caseNumber}</span>
+        </div>
+        <div class="case-file-right">
+          <span class="classification-badge" style={`--class-color: ${classColor}`}>
+            {l(drug.drugClassLabel) || drug.drugClass}
+          </span>
+          {drug.controlledSubstance && (
+            <span class="controlled-stamp">
+              <span class="stamp-border">
+                <span class="stamp-text">CONTROLLED<br/>SUBSTANCE</span>
+              </span>
+            </span>
+          )}
+        </div>
       </div>
 
-      <h1 class="drug-title">{l(drug.genericName)}</h1>
-
-      <div class="hero-stats">
-        <div class="stat-block stat-primary">
-          <span class="stat-number">{availableCount}</span>
-          <span class="stat-divider">/</span>
-          <span class="stat-total">{totalRegions}</span>
-          <span class="stat-label">REGIONS</span>
+      <div class="case-file-body">
+        <div class="specimen-id">
+          <span class="specimen-label">SPECIMEN IDENTIFICATION</span>
+          <h1 class="specimen-name">{l(drug.genericName)}</h1>
         </div>
 
-        {drug.forms && (
-          <div class="stat-block">
-            <span class="stat-number">{drug.forms.length}</span>
-            <span class="stat-label">FORMS</span>
+        <!-- Integrated specimen tags -->
+        <div class="case-tags">
+          <div class="case-tag">
+            <span class="case-tag-label">CATEGORY</span>
+            <span class="case-tag-value">{l(drug.categoryLabel) || drug.category}</span>
           </div>
-        )}
 
-        {drug.durationHours && (
-          <div class="stat-block">
-            <span class="stat-number">{drug.durationHours}</span>
-            <span class="stat-unit">hr</span>
-            <span class="stat-label">DURATION</span>
-          </div>
-        )}
+          {drug.neurotransmittersAffected && (
+            <div class="case-tag case-tag-wide">
+              <span class="case-tag-label">TARGETS</span>
+              <div class="case-tag-chips">
+                {drug.neurotransmittersAffected.map((nt: string) => (
+                  <span class="target-chip">{nt.toUpperCase()}</span>
+                ))}
+              </div>
+            </div>
+          )}
 
-        {drug.onsetMinutes && (
-          <div class="stat-block">
-            <span class="stat-number">{drug.onsetMinutes}</span>
-            <span class="stat-unit">min</span>
-            <span class="stat-label">ONSET</span>
-          </div>
-        )}
+          {Object.entries(drug.brandNames || {}).slice(0, 1).map(([region, brands]: [string, any]) => (
+            brands?.[0] && (
+              <div class="case-tag">
+                <span class="case-tag-label">BRAND ({region})</span>
+                <span class="case-tag-value">{brands[0]}</span>
+              </div>
+            )
+          ))}
+        </div>
       </div>
+
+      <div class="case-file-stripe"></div>
     </header>
 
-    <!-- QUICK DATA: Horizontal scroll cards -->
-    <section class="data-ribbon">
-      <div class="ribbon-card">
-        <span class="ribbon-label">CATEGORY</span>
-        <span class="ribbon-value">{l(drug.categoryLabel) || drug.category}</span>
-      </div>
-
-      {drug.neurotransmittersAffected && (
-        <div class="ribbon-card ribbon-wide">
-          <span class="ribbon-label">TARGETS</span>
-          <div class="ribbon-chips">
-            {drug.neurotransmittersAffected.map((nt: string) => (
-              <span class="chip chip-neuro">{nt.toUpperCase()}</span>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {Object.entries(drug.brandNames || {}).slice(0, 1).map(([region, brands]: [string, any]) => (
-        brands?.[0] && (
-          <div class="ribbon-card">
-            <span class="ribbon-label">BRAND ({region})</span>
-            <span class="ribbon-value">{brands[0]}</span>
-          </div>
-        )
-      ))}
-    </section>
-
-    <!-- MECHANISM -->
+    <!-- ============================================
+         MECHANISM
+         ============================================ -->
     {drug.mechanismOfAction && (
-      <section class="content-block">
-        <h2 class="block-title">
+      <section class="mechanism-section">
+        <h2 class="section-title">
           <span class="title-marker"></span>
           {t('drugs.mechanism')}
         </h2>
@@ -139,46 +135,50 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
       </section>
     )}
 
-    <!-- REGIONAL APPROVALS: Grid of status cards -->
-    <section class="content-block">
-      <h2 class="block-title">
-        <span class="title-marker"></span>
-        {t('drugs.approvals')}
-      </h2>
+    <!-- ============================================
+         REGIONAL APPROVALS: PASSPORT VISA STAMPS
+         Ink stamps at various angles
+         ============================================ -->
+    <section class="visa-section">
+      <div class="visa-header">
+        <div class="visa-title-block">
+          <span class="visa-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+              <line x1="9" y1="4" x2="9" y2="10"></line>
+            </svg>
+          </span>
+          <h2 class="visa-title">{t('drugs.approvals')}</h2>
+        </div>
+        <span class="visa-subtitle">REGULATORY STATUS BY REGION</span>
+      </div>
 
-      <div class="region-grid">
-        {drug.approvals?.map((approval: any) => (
-          <div class="region-card" data-available={approval.available}>
-            <div class="region-header">
-              <span class="region-flag">{regionFlags[approval.region] || ''}</span>
-              <span class="region-code">{approval.region}</span>
-              <span class="region-status" data-available={approval.available}>
-                {approval.available ? 'ACTIVE' : 'INACTIVE'}
-              </span>
-            </div>
-
-            <div class="region-data">
-              <div class="data-row">
-                <span class="data-key">Agency</span>
-                <span class="data-val">{approval.agency}</span>
-              </div>
-              {approval.year && (
-                <div class="data-row">
-                  <span class="data-key">Year</span>
-                  <span class="data-val data-year">{approval.year}</span>
+      <div class="visa-stamps">
+        {drug.approvals?.map((approval: any, index: number) => {
+          const rotation = ((index * 7) % 15) - 7;
+          return (
+            <div class="visa-stamp" data-available={approval.available} style={`--rotation: ${rotation}deg`}>
+              <div class="stamp-outer">
+                <div class="stamp-inner-ring">
+                  <span class="stamp-flag">{regionFlags[approval.region] || ''}</span>
+                  <span class="stamp-region">{approval.region}</span>
+                  <span class="stamp-agency">{approval.agency}</span>
+                  {approval.year && <span class="stamp-year">{approval.year}</span>}
                 </div>
-              )}
-              <div class="data-row">
-                <span class="data-key">Ages</span>
-                <span class="data-val">{l(approval.approvedAges) || '—'}</span>
               </div>
+              <div class="stamp-status" data-available={approval.available}>
+                {approval.available ? 'APPROVED' : 'PENDING'}
+              </div>
+              {l(approval.approvedAges) && (
+                <div class="stamp-ages">Ages: {l(approval.approvedAges)}</div>
+              )}
+              {l(approval.notes) && (
+                <div class="stamp-notes">{l(approval.notes)}</div>
+              )}
             </div>
-
-            {l(approval.notes) && (
-              <div class="region-note">{l(approval.notes)}</div>
-            )}
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
 
@@ -380,60 +380,94 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
       </section>
     )}
 
-    <!-- FORMULATIONS -->
+    <!-- ============================================
+         FORMULATIONS: PRESCRIPTION PAD SLIPS
+         Rx symbol, perforated edges, pharmacy codes
+         ============================================ -->
     {drug.forms && drug.forms.length > 0 && (
-      <section class="content-block">
-        <h2 class="block-title">
-          <span class="title-marker"></span>
-          {t('drugs.forms')}
-        </h2>
+      <section class="rx-section">
+        <div class="rx-header">
+          <div class="rx-symbol">℞</div>
+          <div class="rx-title-block">
+            <h2 class="rx-title">{t('drugs.forms')}</h2>
+            <span class="rx-subtitle">AVAILABLE FORMULATIONS</span>
+          </div>
+        </div>
 
-        <div class="forms-grid">
-          {drug.forms.map((form: any) => (
-            <div class="form-card">
-              <div class="form-header">
-                <span class="form-name">{form.brandName || l(form.typeLabel) || form.type}</span>
-                <span class="form-duration">{form.durationHours}h</span>
+        <div class="rx-grid">
+          {drug.forms.map((form: any, index: number) => (
+            <div class="rx-slip">
+              <div class="slip-perforation"></div>
+              <div class="slip-header">
+                <span class="slip-rx">℞</span>
+                <span class="slip-number">#{String(index + 1).padStart(3, '0')}</span>
               </div>
-
-              <div class="form-meta">
-                <span class="form-type">{l(form.releaseTypeLabel) || form.releaseType}</span>
+              <div class="slip-body">
+                <div class="slip-drug-name">{form.brandName || l(form.typeLabel) || form.type}</div>
+                <div class="slip-meta">
+                  <span class="slip-type">{l(form.releaseTypeLabel) || form.releaseType}</span>
+                  <span class="slip-duration">{form.durationHours}h duration</span>
+                </div>
+                {form.strengths && (
+                  <div class="slip-strengths">
+                    <span class="strengths-label">Available strengths:</span>
+                    <div class="strengths-list">
+                      {form.strengths.map((s: string) => (
+                        <span class="strength-pill">{s}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {form.notes && (
+                  <p class="slip-notes">{l(form.notes)}</p>
+                )}
               </div>
-
-              {form.strengths && (
-                <div class="form-strengths">
-                  {form.strengths.map((s: string) => (
-                    <span class="strength">{s}</span>
+              <div class="slip-footer">
+                <div class="slip-barcode">
+                  {[...Array(15)].map(() => (
+                    <span class="barcode-line"></span>
                   ))}
                 </div>
-              )}
-
-              {form.notes && (
-                <p class="form-note">{l(form.notes)}</p>
-              )}
+              </div>
             </div>
           ))}
         </div>
       </section>
     )}
 
-    <!-- SIDE EFFECTS -->
+    <!-- ============================================
+         SIDE EFFECTS: HAZMAT WARNING LABELS
+         Caution tape stripes, warning triangles
+         ============================================ -->
     {drug.sideEffects && (
-      <section class="content-block">
-        <h2 class="block-title">
-          <span class="title-marker marker-danger"></span>
-          {t('drugs.sideEffects')}
-        </h2>
+      <section class="hazmat-section">
+        <div class="hazmat-header">
+          <div class="caution-stripe"></div>
+          <div class="hazmat-title-block">
+            <span class="hazmat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                <line x1="12" y1="9" x2="12" y2="13"></line>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+            </span>
+            <h2 class="hazmat-title">{t('drugs.sideEffects')}</h2>
+          </div>
+          <div class="caution-stripe"></div>
+        </div>
 
-        <div class="effects-layout">
+        <div class="hazmat-grid">
           {drug.sideEffects.common && (
-            <div class="effects-col">
-              <h3 class="effects-heading">{t('drugs.common')}</h3>
-              <ul class="effects-list">
+            <div class="hazmat-card hazmat-common">
+              <div class="card-tab">
+                <span class="tab-label">COMMON</span>
+              </div>
+              <ul class="hazmat-list">
                 {drug.sideEffects.common.map((se: any) => (
-                  <li class="effect-item">
-                    <span class="effect-name">{l(se.name)}</span>
-                    <span class="effect-freq">{se.frequency}</span>
+                  <li class="hazmat-item">
+                    <span class="item-bullet"></span>
+                    <span class="item-name">{l(se.name)}</span>
+                    <span class="item-freq">{se.frequency}</span>
                   </li>
                 ))}
               </ul>
@@ -441,38 +475,71 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
           )}
 
           {drug.sideEffects.serious && (
-            <div class="effects-col effects-serious">
-              <h3 class="effects-heading">{t('drugs.serious')}</h3>
-              <ul class="effects-list">
+            <div class="hazmat-card hazmat-serious">
+              <div class="card-tab tab-danger">
+                <span class="tab-icon">⚠</span>
+                <span class="tab-label">SERIOUS</span>
+              </div>
+              <ul class="hazmat-list">
                 {drug.sideEffects.serious.map((se: any) => (
-                  <li class="effect-item effect-serious">
-                    <span class="effect-name">{l(se.name)}</span>
-                    {se.notes && <span class="effect-notes">{l(se.notes)}</span>}
+                  <li class="hazmat-item hazmat-item-serious">
+                    <span class="item-bullet bullet-danger"></span>
+                    <div class="item-content">
+                      <span class="item-name">{l(se.name)}</span>
+                      {se.notes && <span class="item-notes">{l(se.notes)}</span>}
+                    </div>
                   </li>
                 ))}
               </ul>
+              <div class="serious-warning">
+                <span class="warning-icon">!</span>
+                <span class="warning-text">Seek medical attention immediately</span>
+              </div>
             </div>
           )}
         </div>
       </section>
     )}
 
-    <!-- RAW DATA -->
-    <section class="content-block raw-block">
-      <details class="raw-toggle">
-        <summary class="raw-summary">
-          <span class="raw-label">{t('drugs.showRaw')}</span>
-          <span class="raw-icon">+</span>
+    <!-- ============================================
+         RAW DATA: ARCHIVE FILE DRAWER
+         Manila folder tabs, classified stamp
+         ============================================ -->
+    <section class="archive-section">
+      <details class="archive-folder">
+        <summary class="folder-tab">
+          <div class="tab-left">
+            <span class="folder-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </span>
+            <span class="folder-label">{t('drugs.showRaw')}</span>
+          </div>
+          <div class="tab-right">
+            <span class="classified-stamp">ARCHIVE</span>
+            <span class="folder-toggle">+</span>
+          </div>
         </summary>
-        <div class="raw-content">
-          <pre><code>{rawYaml}</code></pre>
+        <div class="folder-contents">
+          <div class="file-header">
+            <span class="file-id">FILE: {drug.id}.yaml</span>
+            <span class="file-date">Last updated: {new Date().toISOString().split('T')[0]}</span>
+          </div>
+          <pre class="file-code"><code>{rawYaml}</code></pre>
           <a
             href={`https://github.com/ya-luotao/adhd-db/edit/main/packages/data/drugs/${drug.id}.yaml`}
             target="_blank"
             rel="noopener"
             class="edit-link"
           >
-            {t('drugs.editOnGithub')} ↗
+            <span class="edit-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+              </svg>
+            </span>
+            {t('drugs.editOnGithub')}
           </a>
         </div>
       </details>
@@ -482,29 +549,36 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
 
 <style>
   /* ===========================================
-   * ADHD-DB DRUG PAGE — "NEURAL SPARK" THEME
-   * Aggressive, bold, unconventional
+   * PHARMACEUTICAL DOSSIER DESIGN SYSTEM
+   * A cohesive document-inspired aesthetic
    * =========================================== */
 
-  .drug-page {
-    --accent: #00a86b;
-    --accent-dim: rgba(0, 168, 107, 0.1);
-    --accent-bold: #008f5b;
-    --danger: #dc2626;
-    --danger-dim: rgba(220, 38, 38, 0.08);
-    --warning: #d97706;
-    --warning-dim: rgba(217, 119, 6, 0.1);
-    --surface: #ffffff;
-    --surface-raised: #f8f9fa;
-    --surface-elevated: #f1f3f5;
-    --border: #e5e7eb;
-    --border-strong: #d1d5db;
-    --text-primary: #111827;
-    --text-secondary: #4b5563;
-    --text-muted: #9ca3af;
+  .dossier {
+    --dossier-bg: #fdfcfa;
+    --dossier-paper: #fffef9;
+    --dossier-border: #e8e4dc;
+    --dossier-accent: #1a1a2e;
+    --dossier-muted: #8b8680;
+    --dossier-gold: #c4a052;
+    --dossier-cream: #f5f2eb;
+    --dossier-ink: #2c2c2c;
+    --dossier-red: #c53030;
+    --dossier-green: #276749;
+    --dossier-blue: #2b6cb0;
 
     max-width: 900px;
-    color: var(--text-primary);
+    color: var(--dossier-ink);
+  }
+
+  /* Paper texture overlay */
+  .dossier::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.015;
+    pointer-events: none;
+    z-index: -1;
   }
 
   /* BREADCRUMB */
@@ -514,339 +588,420 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     gap: var(--space-2);
     margin-bottom: var(--space-4);
     font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
   }
 
   .crumb {
-    color: var(--text-muted);
+    color: var(--dossier-muted);
     text-decoration: none;
     transition: color 0.15s;
   }
 
   .crumb:hover {
-    color: var(--accent);
+    color: var(--dossier-gold);
   }
 
   .crumb-sep {
-    color: var(--border-strong);
+    color: var(--dossier-border);
   }
 
   .crumb-current {
-    color: var(--text-secondary);
+    color: var(--dossier-accent);
     font-weight: 500;
   }
 
-  /* HERO */
-  .hero {
+  /* ============================================
+     CASE FILE COVER (Hero)
+     ============================================ */
+
+  .case-file {
+    background: var(--dossier-paper);
+    border: 2px solid var(--dossier-border);
+    border-radius: 4px;
+    overflow: hidden;
     margin-bottom: var(--space-8);
-    padding-bottom: var(--space-8);
-    border-bottom: 1px solid var(--border);
+    box-shadow:
+      0 4px 6px rgba(0, 0, 0, 0.02),
+      0 10px 20px rgba(0, 0, 0, 0.03),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    position: relative;
   }
 
-  .hero-label {
+  .case-file-band {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-4) var(--space-5);
+    background: linear-gradient(135deg, var(--dossier-accent) 0%, #2d2d44 100%);
+    color: #fff;
+  }
+
+  .case-file-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .case-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    opacity: 0.7;
+  }
+
+  .case-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+
+  .case-file-right {
     display: flex;
     align-items: center;
-    gap: var(--space-3);
-    margin-bottom: var(--space-4);
+    gap: var(--space-4);
   }
 
-  .label-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(1.1); }
-  }
-
-  .label-text {
-    font-size: 0.75rem;
+  .classification-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: var(--text-secondary);
-  }
-
-  .controlled-tag {
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
     padding: 4px 10px;
-    background: rgba(255, 170, 0, 0.2);
-    color: var(--warning);
-    border: 1px solid var(--warning);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--class-color);
+    color: var(--class-color);
     border-radius: 2px;
   }
 
-  .drug-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
-    font-weight: 600;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    margin-bottom: var(--space-6);
-    color: var(--text-primary);
-  }
-
-  .hero-stats {
+  .controlled-stamp {
     display: flex;
-    gap: var(--space-6);
-    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
   }
 
-  .stat-block {
+  .stamp-border {
+    width: 56px;
+    height: 56px;
+    border: 2px dashed rgba(251, 191, 36, 0.5);
+    border-radius: 50%;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    min-width: 70px;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-12deg);
+    animation: stampPulse 3s ease-in-out infinite;
   }
 
-  .stat-primary {
-    flex-direction: row;
-    align-items: baseline;
-    gap: 0;
-    flex-wrap: wrap;
+  @keyframes stampPulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
   }
 
-  .stat-primary .stat-label {
-    width: 100%;
-    margin-top: var(--space-2);
-  }
-
-  .stat-number {
+  .stamp-border .stamp-text {
     font-family: 'DM Mono', monospace;
-    font-size: 1.25rem;
-    font-weight: 500;
-    color: var(--accent-bold);
-    line-height: 1;
+    font-size: 0.4rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #fbbf24;
+    text-align: center;
+    line-height: 1.4;
   }
 
-  .stat-divider {
+  .case-file-body {
+    padding: var(--space-6);
+  }
+
+  .specimen-id {
+    margin-bottom: var(--space-5);
+  }
+
+  .specimen-label {
+    display: block;
     font-family: 'DM Mono', monospace;
-    font-size: 1rem;
-    color: var(--text-muted);
-    margin: 0 2px;
-  }
-
-  .stat-total {
-    font-family: 'DM Mono', monospace;
-    font-size: 1rem;
-    color: var(--text-secondary);
-  }
-
-  .stat-unit {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    margin-left: 2px;
-  }
-
-  .stat-label {
-    font-size: 0.65rem;
+    font-size: 0.55rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--text-muted);
-    margin-top: var(--space-2);
+    letter-spacing: 0.2em;
+    color: var(--dossier-muted);
+    margin-bottom: var(--space-2);
   }
 
-  /* DATA RIBBON */
-  .data-ribbon {
+  .specimen-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 7vw, 3.5rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--dossier-accent);
+    margin: 0;
+  }
+
+  .case-tags {
     display: flex;
     gap: var(--space-4);
-    overflow-x: auto;
-    padding-bottom: var(--space-3);
-    margin-bottom: var(--space-6);
-    scrollbar-width: none;
+    flex-wrap: wrap;
+    margin-top: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px dashed var(--dossier-border);
   }
 
-  .data-ribbon::-webkit-scrollbar {
-    display: none;
+  .case-tag {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
   }
 
-  .ribbon-card {
-    flex-shrink: 0;
-  }
-
-  .ribbon-wide {
+  .case-tag-wide {
+    flex: 1;
     min-width: 150px;
   }
 
-  .ribbon-label {
-    display: block;
-    font-size: 0.55rem;
-    font-weight: 700;
+  .case-tag-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.5rem;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-muted);
-    margin-bottom: 2px;
+    letter-spacing: 0.15em;
+    color: var(--dossier-muted);
   }
 
-  .ribbon-value {
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: var(--text-primary);
+  .case-tag-value {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--dossier-accent);
   }
 
-  .ribbon-chips {
+  .case-tag-chips {
     display: flex;
     gap: var(--space-1);
-    flex-wrap: wrap;
   }
 
-  .chip {
-    font-size: 0.65rem;
-    font-weight: 600;
+  .target-chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    font-weight: 700;
     padding: 2px 6px;
+    background: rgba(196, 160, 82, 0.15);
+    color: var(--dossier-gold);
     border-radius: 2px;
+    letter-spacing: 0.05em;
   }
 
-  .chip-neuro {
-    background: var(--accent-dim);
-    color: var(--accent-bold);
+  .case-file-stripe {
+    height: 4px;
+    background: linear-gradient(90deg,
+      var(--dossier-gold) 0%,
+      #e8d5a3 50%,
+      var(--dossier-gold) 100%
+    );
   }
 
-  /* CONTENT BLOCKS */
-  .content-block {
-    margin-bottom: var(--space-10);
+  /* ============================================
+     MECHANISM
+     ============================================ */
+
+  .mechanism-section {
+    margin-bottom: var(--space-8);
   }
 
-  .block-title {
+  .section-title {
     display: flex;
     align-items: center;
     gap: var(--space-3);
-    font-size: 0.85rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    color: var(--text-secondary);
-    margin-bottom: var(--space-5);
+    color: var(--dossier-accent);
+    margin: 0 0 var(--space-4);
     padding-bottom: var(--space-3);
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--dossier-border);
   }
 
   .title-marker {
     width: 4px;
     height: 16px;
-    background: var(--accent);
+    background: var(--dossier-gold);
     border-radius: 1px;
   }
 
-  .title-marker.marker-warning {
-    background: var(--warning);
-  }
-
-  .title-marker.marker-danger {
-    background: var(--danger);
-  }
-
-  .sub-title {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-muted);
-    margin-bottom: var(--space-4);
-  }
-
-  /* MECHANISM */
   .mechanism-text {
-    font-size: 1rem;
+    font-size: 0.95rem;
     line-height: 1.7;
-    color: var(--text-secondary);
+    color: var(--dossier-ink);
     max-width: 70ch;
   }
 
-  /* REGION GRID */
-  .region-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: var(--space-2);
+  /* ============================================
+     VISA STAMPS (Regional Approvals)
+     ============================================ */
+
+  .visa-section {
+    margin-bottom: var(--space-8);
   }
 
-  .region-card {
+  .visa-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: var(--space-5);
+    padding-bottom: var(--space-3);
+    border-bottom: 2px solid var(--dossier-accent);
+  }
+
+  .visa-title-block {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .visa-icon {
+    color: var(--dossier-accent);
+    opacity: 0.7;
+  }
+
+  .visa-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--dossier-accent);
+    margin: 0;
+  }
+
+  .visa-subtitle {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    color: var(--dossier-muted);
+  }
+
+  .visa-stamps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    background: var(--dossier-cream);
+    border: 1px dashed var(--dossier-border);
+    border-radius: 4px;
+  }
+
+  .visa-stamp {
+    position: relative;
     padding: var(--space-3);
-    border-bottom: 1px solid var(--border);
+    transform: rotate(var(--rotation, 0deg));
+    transition: transform 0.3s ease;
   }
 
-  .region-card[data-available="false"] {
+  .visa-stamp:hover {
+    transform: rotate(0deg) scale(1.05);
+    z-index: 10;
+  }
+
+  .visa-stamp[data-available="false"] {
     opacity: 0.4;
   }
 
-  .region-header {
+  .stamp-outer {
+    width: 90px;
+    height: 90px;
+    border: 3px solid var(--dossier-accent);
+    border-radius: 50%;
     display: flex;
     align-items: center;
-    gap: var(--space-2);
-    margin-bottom: var(--space-2);
+    justify-content: center;
+    background: var(--dossier-paper);
+    position: relative;
   }
 
-  .region-flag {
-    font-size: 1rem;
+  .stamp-outer::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 1px solid var(--dossier-border);
+    border-radius: 50%;
   }
 
-  .region-code {
+  .stamp-inner-ring {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1px;
+  }
+
+  .stamp-flag {
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  .stamp-region {
     font-family: 'DM Mono', monospace;
     font-size: 0.8rem;
-    font-weight: 600;
-    flex: 1;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--dossier-accent);
   }
 
-  .region-status {
+  .stamp-agency {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.45rem;
+    letter-spacing: 0.05em;
+    color: var(--dossier-muted);
+  }
+
+  .stamp-year {
+    font-family: 'DM Mono', monospace;
     font-size: 0.55rem;
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 2px 6px;
-    border-radius: 2px;
-    background: var(--danger-dim);
-    color: var(--danger);
+    color: var(--dossier-gold);
   }
 
-  .region-status[data-available="true"] {
-    background: var(--accent-dim);
-    color: var(--accent-bold);
-  }
-
-  .region-data {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2) var(--space-4);
-  }
-
-  .data-row {
-    display: flex;
-    gap: var(--space-2);
-    align-items: baseline;
-  }
-
-  .data-key {
-    font-size: 0.65rem;
-    color: var(--text-muted);
-  }
-
-  .data-val {
-    font-size: 0.75rem;
-    color: var(--text-primary);
-    font-weight: 500;
-  }
-
-  .data-year {
+  .stamp-status {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(calc(var(--rotation, 0deg) * -1));
     font-family: 'DM Mono', monospace;
-    color: var(--accent-bold);
+    font-size: 0.45rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    padding: 2px 8px;
+    background: var(--dossier-red);
+    color: #fff;
+    border-radius: 2px;
+    white-space: nowrap;
   }
 
-  .region-note {
-    margin-top: var(--space-2);
-    font-size: 0.7rem;
-    color: var(--text-muted);
+  .stamp-status[data-available="true"] {
+    background: var(--dossier-green);
+  }
+
+  .stamp-ages {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) rotate(calc(var(--rotation, 0deg) * -1));
+    margin-top: var(--space-3);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--dossier-muted);
+    white-space: nowrap;
+  }
+
+  .stamp-notes {
+    display: none;
   }
 
   /* ============================================
-   * TRAVEL PASS - BOARDING PASS AESTHETIC
-   * ============================================ */
+     TRAVEL PASS (Boarding Pass - existing)
+     ============================================ */
 
   .travel-pass {
     --pass-bg: #fdfcfa;
@@ -860,7 +1015,7 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     border: 2px solid var(--pass-border);
     border-radius: 12px;
     overflow: hidden;
-    margin-bottom: var(--space-10);
+    margin-bottom: var(--space-8);
     box-shadow:
       0 4px 6px rgba(0, 0, 0, 0.03),
       0 10px 20px rgba(0, 0, 0, 0.04),
@@ -868,7 +1023,6 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     position: relative;
   }
 
-  /* Subtle paper texture */
   .travel-pass::before {
     content: '';
     position: absolute;
@@ -878,7 +1032,6 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     pointer-events: none;
   }
 
-  /* Pass Header */
   .pass-header {
     display: flex;
     justify-content: space-between;
@@ -954,12 +1107,7 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     animation: stampPulse 3s ease-in-out infinite;
   }
 
-  @keyframes stampPulse {
-    0%, 100% { opacity: 0.8; }
-    50% { opacity: 1; }
-  }
-
-  .stamp-inner {
+  .pass-controlled-stamp .stamp-inner {
     font-family: 'DM Mono', monospace;
     font-size: 0.5rem;
     font-weight: 700;
@@ -969,7 +1117,6 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     line-height: 1.3;
   }
 
-  /* Perforated Divider */
   .pass-perforation {
     height: 0;
     border-top: 2px dashed var(--pass-border);
@@ -1000,7 +1147,6 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     border-right-color: transparent;
   }
 
-  /* Advisory Banner */
   .pass-advisory {
     display: flex;
     gap: var(--space-4);
@@ -1023,7 +1169,6 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     color: #78350f;
   }
 
-  /* Info Grid */
   .pass-info-grid {
     display: grid;
     grid-template-columns: 1fr auto;
@@ -1038,7 +1183,6 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     }
   }
 
-  /* Documents Checklist */
   .pass-docs {
     flex: 1;
   }
@@ -1115,7 +1259,6 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     color: var(--pass-muted);
   }
 
-  /* Supply Tag */
   .pass-supply {
     display: flex;
     justify-content: flex-end;
@@ -1133,7 +1276,7 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     box-shadow: 2px 2px 0 var(--pass-border);
   }
 
-  .tag-hole {
+  .supply-tag .tag-hole {
     width: 12px;
     height: 12px;
     background: var(--pass-bg);
@@ -1142,11 +1285,11 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     margin-bottom: var(--space-2);
   }
 
-  .tag-body {
+  .supply-tag .tag-body {
     text-align: center;
   }
 
-  .tag-label {
+  .supply-tag .tag-label {
     display: block;
     font-family: 'DM Mono', monospace;
     font-size: 0.55rem;
@@ -1157,7 +1300,7 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     margin-bottom: 4px;
   }
 
-  .tag-value {
+  .supply-tag .tag-value {
     display: block;
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.5rem;
@@ -1166,7 +1309,6 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     line-height: 1;
   }
 
-  /* Routes Section */
   .pass-routes {
     padding: 0 var(--space-6) var(--space-6);
   }
@@ -1181,7 +1323,6 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     gap: var(--space-4);
   }
 
-  /* Route Ticket */
   .route-ticket {
     background: #fff;
     border: 1px solid var(--pass-border);
@@ -1196,8 +1337,6 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
   }
 
-
-  /* Route Flight Path */
   .ticket-route {
     display: flex;
     align-items: center;
@@ -1270,7 +1409,6 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     50% { transform: translateY(-3px); }
   }
 
-  /* Status Stamp */
   .ticket-stamp {
     position: absolute;
     top: var(--space-3);
@@ -1290,7 +1428,7 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
   }
 
-  .stamp-text {
+  .stamp-circle .stamp-text {
     font-family: 'DM Mono', monospace;
     font-size: 0.5rem;
     font-weight: 800;
@@ -1299,7 +1437,6 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     text-align: center;
   }
 
-  /* Ticket Details */
   .ticket-details {
     padding: var(--space-3) var(--space-4);
   }
@@ -1368,7 +1505,6 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     border-left: 2px solid var(--pass-gold);
   }
 
-  /* Ticket Sources */
   .ticket-sources {
     padding: var(--space-2) var(--space-4);
     background: #f9fafb;
@@ -1399,7 +1535,6 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     color: #fff;
   }
 
-  /* Pass Footer */
   .pass-footer {
     display: flex;
     justify-content: space-between;
@@ -1472,8 +1607,591 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     transform: translateX(4px);
   }
 
-  /* Responsive */
+  /* ============================================
+     RX SLIPS (Formulations)
+     ============================================ */
+
+  .rx-section {
+    margin-bottom: var(--space-8);
+  }
+
+  .rx-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-5);
+    padding-bottom: var(--space-3);
+    border-bottom: 2px solid var(--dossier-blue);
+  }
+
+  .rx-symbol {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dossier-blue);
+    line-height: 1;
+  }
+
+  .rx-title-block {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .rx-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--dossier-accent);
+    margin: 0;
+  }
+
+  .rx-subtitle {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    color: var(--dossier-muted);
+  }
+
+  .rx-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .rx-slip {
+    background: var(--dossier-paper);
+    border: 1px solid var(--dossier-border);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .rx-slip:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  }
+
+  .slip-perforation {
+    height: 0;
+    border-top: 2px dashed var(--dossier-border);
+    position: relative;
+  }
+
+  .slip-perforation::before,
+  .slip-perforation::after {
+    content: '';
+    position: absolute;
+    top: -6px;
+    width: 12px;
+    height: 12px;
+    background: var(--dossier-bg);
+    border-radius: 50%;
+  }
+
+  .slip-perforation::before {
+    left: -6px;
+  }
+
+  .slip-perforation::after {
+    right: -6px;
+  }
+
+  .slip-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-2) var(--space-3);
+    background: linear-gradient(90deg, rgba(43, 108, 176, 0.08) 0%, transparent 100%);
+    border-bottom: 1px solid var(--dossier-border);
+  }
+
+  .slip-rx {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--dossier-blue);
+  }
+
+  .slip-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: var(--dossier-muted);
+    letter-spacing: 0.1em;
+  }
+
+  .slip-body {
+    padding: var(--space-4);
+  }
+
+  .slip-drug-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--dossier-accent);
+    margin-bottom: var(--space-2);
+  }
+
+  .slip-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-3);
+    font-size: 0.7rem;
+    color: var(--dossier-muted);
+  }
+
+  .slip-duration {
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    color: var(--dossier-blue);
+  }
+
+  .slip-strengths {
+    margin-top: var(--space-3);
+  }
+
+  .strengths-label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--dossier-muted);
+    margin-bottom: var(--space-2);
+  }
+
+  .strengths-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+  }
+
+  .strength-pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    background: var(--dossier-cream);
+    border: 1px solid var(--dossier-border);
+    border-radius: 12px;
+    color: var(--dossier-accent);
+  }
+
+  .slip-notes {
+    margin: var(--space-3) 0 0;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: var(--dossier-muted);
+    font-style: italic;
+  }
+
+  .slip-footer {
+    padding: var(--space-2) var(--space-3);
+    background: var(--dossier-cream);
+    border-top: 1px solid var(--dossier-border);
+  }
+
+  .slip-barcode {
+    display: flex;
+    gap: 1px;
+    height: 20px;
+  }
+
+  .barcode-line {
+    width: 2px;
+    height: 100%;
+    background: var(--dossier-accent);
+    opacity: 0.15;
+  }
+
+  .barcode-line:nth-child(2n) {
+    width: 3px;
+    opacity: 0.25;
+  }
+
+  .barcode-line:nth-child(3n) {
+    width: 1px;
+    opacity: 0.1;
+  }
+
+  /* ============================================
+     HAZMAT SECTION (Side Effects)
+     ============================================ */
+
+  .hazmat-section {
+    margin-bottom: var(--space-8);
+  }
+
+  .hazmat-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+  }
+
+  .caution-stripe {
+    flex: 1;
+    height: 8px;
+    background: repeating-linear-gradient(
+      -45deg,
+      #fbbf24 0,
+      #fbbf24 10px,
+      #1a1a2e 10px,
+      #1a1a2e 20px
+    );
+    border-radius: 2px;
+  }
+
+  .hazmat-title-block {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: 0 var(--space-4);
+    flex-shrink: 0;
+  }
+
+  .hazmat-icon {
+    color: #dc2626;
+  }
+
+  .hazmat-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--dossier-accent);
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .hazmat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .hazmat-card {
+    background: var(--dossier-paper);
+    border: 1px solid var(--dossier-border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .card-tab {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: var(--dossier-cream);
+    border-bottom: 1px solid var(--dossier-border);
+  }
+
+  .tab-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--dossier-muted);
+  }
+
+  .tab-danger {
+    background: linear-gradient(90deg, rgba(220, 38, 38, 0.1) 0%, var(--dossier-cream) 100%);
+  }
+
+  .tab-danger .tab-label {
+    color: var(--dossier-red);
+  }
+
+  .tab-icon {
+    font-size: 0.7rem;
+  }
+
+  .hazmat-list {
+    list-style: none;
+    margin: 0;
+    padding: var(--space-3);
+  }
+
+  .hazmat-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2) 0;
+    border-bottom: 1px dotted var(--dossier-border);
+  }
+
+  .hazmat-item:last-child {
+    border-bottom: none;
+  }
+
+  .item-bullet {
+    width: 6px;
+    height: 6px;
+    background: var(--dossier-gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .bullet-danger {
+    background: var(--dossier-red);
+  }
+
+  .item-name {
+    flex: 1;
+    font-size: 0.85rem;
+    color: var(--dossier-ink);
+  }
+
+  .item-freq {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: var(--dossier-gold);
+    white-space: nowrap;
+  }
+
+  .hazmat-item-serious {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+  }
+
+  .hazmat-item-serious .item-bullet {
+    position: absolute;
+    margin-top: 6px;
+  }
+
+  .item-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-left: calc(6px + var(--space-3));
+  }
+
+  .hazmat-item-serious .item-name {
+    font-weight: 500;
+  }
+
+  .item-notes {
+    font-size: 0.7rem;
+    color: var(--dossier-muted);
+    line-height: 1.4;
+  }
+
+  .serious-warning {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: rgba(220, 38, 38, 0.08);
+    border-top: 1px solid rgba(220, 38, 38, 0.2);
+  }
+
+  .warning-icon {
+    width: 16px;
+    height: 16px;
+    background: var(--dossier-red);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+    font-weight: 700;
+  }
+
+  .warning-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--dossier-red);
+  }
+
+  /* ============================================
+     ARCHIVE SECTION (Raw Data)
+     ============================================ */
+
+  .archive-section {
+    margin-bottom: var(--space-8);
+  }
+
+  .archive-folder {
+    background: var(--dossier-cream);
+    border: 1px solid var(--dossier-border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .folder-tab {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-4);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+  }
+
+  .folder-tab:hover {
+    background: rgba(0, 0, 0, 0.02);
+  }
+
+  .tab-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .folder-icon {
+    color: var(--dossier-muted);
+  }
+
+  .folder-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--dossier-accent);
+  }
+
+  .tab-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .classified-stamp {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 2px 8px;
+    background: transparent;
+    border: 1px solid var(--dossier-muted);
+    color: var(--dossier-muted);
+    border-radius: 2px;
+  }
+
+  .folder-toggle {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.2rem;
+    color: var(--dossier-muted);
+    transition: transform 0.2s;
+  }
+
+  .archive-folder[open] .folder-toggle {
+    transform: rotate(45deg);
+  }
+
+  .folder-contents {
+    padding: var(--space-4);
+    border-top: 1px solid var(--dossier-border);
+    background: var(--dossier-paper);
+  }
+
+  .file-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-3);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px dashed var(--dossier-border);
+  }
+
+  .file-id {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--dossier-accent);
+  }
+
+  .file-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--dossier-muted);
+  }
+
+  .file-code {
+    margin: 0 0 var(--space-4);
+    padding: var(--space-4);
+    background: #1a1a2e;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    max-height: 400px;
+    overflow: auto;
+    color: #e2e8f0;
+  }
+
+  .file-code code {
+    font-family: 'DM Mono', monospace;
+  }
+
+  .edit-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--dossier-blue);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .edit-link:hover {
+    color: var(--dossier-accent);
+  }
+
+  .edit-icon {
+    display: flex;
+  }
+
+  /* ============================================
+     RESPONSIVE
+     ============================================ */
+
   @media (max-width: 639px) {
+    .case-file-band {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-3);
+    }
+
+    .case-file-right {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .specimen-name {
+      font-size: 2rem;
+    }
+
+    .case-stats {
+      gap: var(--space-3);
+    }
+
+    .stat-stamp {
+      padding: var(--space-2) var(--space-3);
+      min-width: 60px;
+    }
+
+    .visa-stamps {
+      justify-content: center;
+    }
+
+    .visa-stamp {
+      transform: rotate(0deg) !important;
+    }
+
     .pass-header {
       padding: var(--space-4);
       flex-wrap: wrap;
@@ -1514,256 +2232,28 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     .pass-footer {
       padding: var(--space-4);
     }
-  }
 
-  /* FORMS */
-  .forms-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: var(--space-2);
-  }
-
-  .form-card {
-    padding: var(--space-3);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .form-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: var(--space-2);
-    margin-bottom: var(--space-1);
-  }
-
-  .form-name {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text-primary);
-  }
-
-  .form-duration {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--accent-bold);
-  }
-
-  .form-meta {
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    margin-bottom: var(--space-2);
-  }
-
-  .form-strengths {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-1);
-  }
-
-  .strength {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    font-weight: 500;
-    padding: 2px 6px;
-    background: var(--surface-elevated);
-    border-radius: 2px;
-    color: var(--text-secondary);
-  }
-
-  .form-note {
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    margin: var(--space-2) 0 0;
-  }
-
-  /* SIDE EFFECTS */
-  .effects-layout {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: var(--space-4);
-  }
-
-  .effects-col {
-    padding: var(--space-3) 0;
-  }
-
-  .effects-serious {
-    border-left: 2px solid var(--danger);
-    padding-left: var(--space-3);
-  }
-
-  .effects-heading {
-    font-size: 0.6rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-muted);
-    margin-bottom: var(--space-3);
-  }
-
-  .effects-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .effect-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--space-2) 0;
-    border-bottom: 1px solid var(--border);
-    gap: var(--space-3);
-  }
-
-  .effect-item:last-child {
-    border-bottom: none;
-  }
-
-  .effect-name {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-  }
-
-  .effect-freq {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    font-weight: 500;
-    color: var(--warning);
-    white-space: nowrap;
-  }
-
-  .effect-serious {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .effect-serious .effect-name {
-    color: var(--text-primary);
-    font-weight: 500;
-  }
-
-  .effect-notes {
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    margin-top: 2px;
-  }
-
-  /* RAW DATA */
-  .raw-toggle {
-    background: var(--surface-raised);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .raw-summary {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--space-4);
-    cursor: pointer;
-    user-select: none;
-    transition: background 0.2s;
-  }
-
-  .raw-summary:hover {
-    background: var(--surface-elevated);
-  }
-
-  .raw-label {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-  }
-
-  .raw-icon {
-    font-family: 'DM Mono', monospace;
-    font-size: 1.2rem;
-    color: var(--text-muted);
-    transition: transform 0.2s;
-  }
-
-  .raw-toggle[open] .raw-icon {
-    transform: rotate(45deg);
-  }
-
-  .raw-content {
-    padding: var(--space-4);
-    border-top: 1px solid var(--border);
-  }
-
-  .raw-content pre {
-    margin: 0 0 var(--space-4);
-    padding: var(--space-4);
-    background: var(--surface);
-    border-radius: 4px;
-    font-size: 0.75rem;
-    max-height: 400px;
-    overflow: auto;
-  }
-
-  .edit-link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    color: var(--accent-bold);
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  .edit-link:hover {
-    text-decoration: underline;
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 639px) {
-    .drug-page {
-      padding: var(--space-2) 0;
-    }
-
-    .drug-title {
-      font-size: 2.2rem;
-    }
-
-    .hero-stats {
-      gap: var(--space-3);
-    }
-
-    .stat-block {
-      padding: var(--space-3);
-      min-width: 80px;
-    }
-
-    .stat-number {
-      font-size: 1.5rem;
-    }
-
-    .region-grid {
+    .rx-grid {
       grid-template-columns: 1fr;
     }
 
-    .forms-grid {
+    .hazmat-grid {
       grid-template-columns: 1fr;
     }
 
-    .effects-layout {
-      grid-template-columns: 1fr;
+    .caution-stripe {
+      display: none;
     }
 
-    .travel-block {
-      padding: var(--space-4);
-    }
-
-    .route-header {
-      flex-direction: column;
-      align-items: flex-start;
+    .hazmat-title-block {
+      padding: 0;
     }
   }
 
-  /* ANIMATIONS */
+  /* ============================================
+     ANIMATIONS
+     ============================================ */
+
   @keyframes slideUp {
     from {
       opacity: 0;
@@ -1775,8 +2265,21 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     }
   }
 
-  .content-block {
+  .case-file,
+  .mechanism-section,
+  .visa-section,
+  .travel-pass,
+  .rx-section,
+  .hazmat-section,
+  .archive-section {
     animation: slideUp 0.5s ease-out;
   }
+
+  .mechanism-section { animation-delay: 0.05s; }
+  .visa-section { animation-delay: 0.1s; }
+  .travel-pass { animation-delay: 0.15s; }
+  .rx-section { animation-delay: 0.2s; }
+  .hazmat-section { animation-delay: 0.25s; }
+  .archive-section { animation-delay: 0.3s; }
 
 </style>
