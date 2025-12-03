@@ -1196,18 +1196,13 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
   }
 
-  /* Status-based left border */
-  .route-ticket[data-status="allowed"] { border-left: 4px solid #22c55e; }
-  .route-ticket[data-status="restricted"] { border-left: 4px solid #f59e0b; }
-  .route-ticket[data-status="requires_permit"] { border-left: 4px solid #a855f7; }
-  .route-ticket[data-status="prohibited"] { border-left: 4px solid #ef4444; }
 
   /* Route Flight Path */
   .ticket-route {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--space-5) var(--space-5);
+    padding: var(--space-3) var(--space-4);
     background: linear-gradient(180deg, #fafaf8 0%, #fff 100%);
     border-bottom: 1px dashed var(--pass-border);
   }
@@ -1221,13 +1216,13 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
   }
 
   .endpoint-flag {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     line-height: 1;
   }
 
   .endpoint-code {
     font-family: 'DM Mono', monospace;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 700;
     color: var(--pass-accent);
     letter-spacing: 0.05em;
@@ -1278,26 +1273,26 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
   /* Status Stamp */
   .ticket-stamp {
     position: absolute;
-    top: var(--space-4);
-    right: var(--space-4);
+    top: var(--space-3);
+    right: var(--space-3);
   }
 
   .stamp-circle {
-    width: 52px;
-    height: 52px;
-    border: 3px solid var(--stamp-color);
+    width: 42px;
+    height: 42px;
+    border: 2px solid var(--stamp-color);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     transform: rotate(-15deg);
     background: rgba(255, 255, 255, 0.9);
-    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
   }
 
   .stamp-text {
     font-family: 'DM Mono', monospace;
-    font-size: 0.55rem;
+    font-size: 0.5rem;
     font-weight: 800;
     letter-spacing: 0.05em;
     color: var(--stamp-color);
@@ -1306,19 +1301,19 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
 
   /* Ticket Details */
   .ticket-details {
-    padding: var(--space-4) var(--space-5);
+    padding: var(--space-3) var(--space-4);
   }
 
   .detail-row {
     display: flex;
     align-items: center;
-    gap: var(--space-3);
-    margin-bottom: var(--space-3);
-    font-size: 0.85rem;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+    font-size: 0.8rem;
   }
 
   .detail-icon {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 
   .detail-label {
@@ -1333,29 +1328,29 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
   }
 
   .detail-requirements {
-    margin-top: var(--space-3);
+    margin-top: var(--space-2);
   }
 
   .req-label {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--pass-muted);
     display: block;
-    margin-bottom: var(--space-2);
+    margin-bottom: var(--space-1);
   }
 
   .req-list {
     margin: 0;
-    padding-left: var(--space-5);
-    font-size: 0.85rem;
-    line-height: 1.7;
+    padding-left: var(--space-4);
+    font-size: 0.8rem;
+    line-height: 1.5;
     color: #4b5563;
   }
 
   .req-list li {
-    margin-bottom: var(--space-1);
+    margin-bottom: 0;
   }
 
   .req-list li::marker {
@@ -1363,25 +1358,25 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
   }
 
   .detail-notes {
-    margin: var(--space-4) 0 0;
-    padding: var(--space-3) var(--space-4);
+    margin: var(--space-2) 0 0;
+    padding: var(--space-2) var(--space-3);
     background: var(--pass-cream);
-    border-radius: 6px;
-    font-size: 0.8rem;
-    line-height: 1.6;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    line-height: 1.5;
     color: #6b7280;
-    border-left: 3px solid var(--pass-gold);
+    border-left: 2px solid var(--pass-gold);
   }
 
   /* Ticket Sources */
   .ticket-sources {
-    padding: var(--space-3) var(--space-5);
+    padding: var(--space-2) var(--space-4);
     background: #f9fafb;
     border-top: 1px solid var(--pass-border);
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     display: flex;
     align-items: center;
-    gap: var(--space-3);
+    gap: var(--space-2);
     flex-wrap: wrap;
   }
 
