@@ -7,7 +7,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "deploy": "astro build && npx wrangler pages deploy dist",
+    "deploy": "astro build && cp .assetsignore dist/ && npx wrangler deploy",
     "astro": "astro"
   },
   "dependencies": {

@@ -20,7 +20,7 @@ pnpm --filter @adhd-db/web build
 # Preview built web app
 pnpm --filter @adhd-db/web preview
 
-# Deploy to Cloudflare Pages
+# Deploy to Cloudflare Workers
 pnpm run deploy
 ```
 
@@ -55,4 +55,4 @@ This is a **pnpm monorepo** for an ADHD medication database with multi-region re
 - i18n routing: default locale `en` has no prefix, others use `/zh/`, `/ja/`
 - Translation strings in `apps/web/src/i18n/translations.ts`
 - Localization helpers `getLocalizedValue()` and `getLocalizedArray()` in `apps/web/src/lib/data.ts`
-- Deployed to Cloudflare Pages (see `wrangler.toml`)
+- Deployed to Cloudflare Workers (see `wrangler.jsonc`)
