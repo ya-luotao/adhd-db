@@ -687,8 +687,145 @@ travelRules:
       sources:
         - "https://www.cbsa-asfc.gc.ca/"
 
+# OpenFDA Data
+fdaData:
+  applicationNumbers: ["NDA010187", "NDA021121"]  # Ritalin, Concerta
+  splSetId: "b30c6af2-1f71-4a99-a73e-1a6c6bdc40e1"
+  rxcui: ["4158", "83366", "250467", "310380"]
+  pharmacologicClass:
+    mechanismOfAction:
+      - "Dopamine Uptake Inhibitors [MoA]"
+      - "Norepinephrine Uptake Inhibitors [MoA]"
+    establishedClass:
+      - "Central Nervous System Stimulant [EPC]"
+    physiologicEffect:
+      - "Increased Dopaminergic Transmission [PE]"
+      - "Increased Norepinephrine Transmission [PE]"
+  boxedWarning:
+    en: "CNS stimulants, including methylphenidate products, have a high potential for abuse and dependence. Assess the risk of abuse prior to prescribing and monitor for signs of abuse and dependence while on therapy. Sudden death has been reported in patients with structural cardiac abnormalities or other serious heart problems."
+    zh: "包括哌甲酯产品在内的中枢神经系统兴奋剂具有高度的滥用和依赖风险。在开处方前评估滥用风险，并在治疗期间监测滥用和依赖的迹象。有报告显示结构性心脏异常或其他严重心脏问题的患者出现猝死。"
+    ja: "メチルフェニデート製品を含むCNS刺激薬は、乱用と依存の可能性が高いです。処方前に乱用のリスクを評価し、治療中は乱用と依存の兆候を監視してください。構造的な心臓異常またはその他の重篤な心臓疾患を持つ患者で突然死が報告されています。"
+  fdaIndications:
+    en: "Treatment of Attention Deficit Hyperactivity Disorder (ADHD) and Narcolepsy in patients 6 years of age and older."
+    zh: "治疗6岁及以上患者的注意缺陷多动障碍（ADHD）和发作性睡病。"
+    ja: "6歳以上の患者における注意欠陥多動性障害（ADHD）およびナルコレプシーの治療。"
+  abuseAndDependence:
+    controlledSubstanceClass: "CII"
+    abuse:
+      en: "Methylphenidate is a Schedule II controlled substance. Signs of abuse include increased dosing, drug-seeking behavior, and use despite harm. Patients with history of drug abuse may be at higher risk."
+      zh: "哌甲酯是二类管制物质。滥用迹象包括增加剂量、寻药行为以及尽管有害仍继续使用。有药物滥用史的患者风险可能更高。"
+      ja: "メチルフェニデートはスケジュールII規制物質です。乱用の兆候には、投与量の増加、薬物探索行動、害にもかかわらず使用が含まれます。薬物乱用歴のある患者はリスクが高い可能性があります。"
+    dependence:
+      en: "Psychological dependence may develop with chronic use. Abrupt cessation following prolonged use may result in fatigue, depression, and sleep disturbances."
+      zh: "慢性使用可能产生心理依赖。长期使用后突然停药可能导致疲劳、抑郁和睡眠障碍。"
+      ja: "慢性的な使用により心理的依存が発生する可能性があります。長期使用後の突然の中止は、疲労、うつ病、睡眠障害を引き起こす可能性があります。"
+  labelEffectiveDate: "20241115"
+  fdaLabelUrl: "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=b30c6af2-1f71-4a99-a73e-1a6c6bdc40e1"
+
+# FAERS Adverse Events Data (from OpenFDA FAERS)
+# Note: These are reported adverse events, not incidence rates
+faersData:
+  totalReports: 48500
+  seriousReports: 28200
+  topReactions:
+    - reaction:
+        en: "drug ineffective"
+        zh: "药物无效"
+        ja: "薬効なし"
+      reportCount: 4120
+      percentage: 8.5
+    - reaction:
+        en: "anxiety"
+        zh: "焦虑"
+        ja: "不安"
+      reportCount: 3650
+      percentage: 7.5
+    - reaction:
+        en: "insomnia"
+        zh: "失眠"
+        ja: "不眠"
+      reportCount: 3200
+      percentage: 6.6
+    - reaction:
+        en: "depression"
+        zh: "抑郁"
+        ja: "うつ病"
+      reportCount: 2850
+      percentage: 5.9
+    - reaction:
+        en: "weight decreased"
+        zh: "体重减轻"
+        ja: "体重減少"
+      reportCount: 2640
+      percentage: 5.4
+    - reaction:
+        en: "headache"
+        zh: "头痛"
+        ja: "頭痛"
+      reportCount: 2480
+      percentage: 5.1
+    - reaction:
+        en: "decreased appetite"
+        zh: "食欲下降"
+        ja: "食欲減退"
+      reportCount: 2350
+      percentage: 4.8
+    - reaction:
+        en: "irritability"
+        zh: "易怒"
+        ja: "易刺激性"
+      reportCount: 2100
+      percentage: 4.3
+    - reaction:
+        en: "nausea"
+        zh: "恶心"
+        ja: "悪心"
+      reportCount: 1950
+      percentage: 4.0
+    - reaction:
+        en: "aggression"
+        zh: "攻击性"
+        ja: "攻撃性"
+      reportCount: 1820
+      percentage: 3.8
+  demographics:
+    byAge:
+      - ageGroup: "6-11"
+        count: 12800
+      - ageGroup: "12-17"
+        count: 14200
+      - ageGroup: "18-24"
+        count: 8500
+      - ageGroup: "25-34"
+        count: 6200
+      - ageGroup: "35-44"
+        count: 4100
+      - ageGroup: "45-54"
+        count: 1800
+      - ageGroup: "55-64"
+        count: 700
+      - ageGroup: "65+"
+        count: 200
+    bySex:
+      - sex: "Male"
+        count: 31200
+      - sex: "Female"
+        count: 16100
+      - sex: "Unknown"
+        count: 1200
+  outcomes:
+    recovered: 18500
+    recovering: 4200
+    notRecovered: 8900
+    fatal: 180
+    unknown: 16720
+  dataRange:
+    from: "2004-01-01"
+    to: "2025-12-01"
+  lastUpdated: "2025-12-03"
+
 # Metadata
-lastUpdated: 2025-12-02
+lastUpdated: 2025-12-03
 
 sources:
   - "https://chadd.org/about-adhd/adhd-medications-approved-by-the-us-fda/"

@@ -110,6 +110,37 @@ function localizeDrug(drug: Drug, lang: Lang) {
       monitoringRequired: drug.specialConsiderations.monitoringRequired ? getLocalizedValue(drug.specialConsiderations.monitoringRequired, lang) : undefined,
     } : undefined,
     chemicalStructure: drug.chemicalStructure,
+    // OpenFDA Data
+    fdaData: drug.fdaData ? {
+      applicationNumbers: drug.fdaData.applicationNumbers,
+      splSetId: drug.fdaData.splSetId,
+      splId: drug.fdaData.splId,
+      rxcui: drug.fdaData.rxcui,
+      pharmacologicClass: drug.fdaData.pharmacologicClass,
+      boxedWarning: drug.fdaData.boxedWarning ? getLocalizedValue(drug.fdaData.boxedWarning, lang) : undefined,
+      fdaIndications: drug.fdaData.fdaIndications ? getLocalizedValue(drug.fdaData.fdaIndications, lang) : undefined,
+      abuseAndDependence: drug.fdaData.abuseAndDependence ? {
+        controlledSubstanceClass: drug.fdaData.abuseAndDependence.controlledSubstanceClass,
+        abuse: drug.fdaData.abuseAndDependence.abuse ? getLocalizedValue(drug.fdaData.abuseAndDependence.abuse, lang) : undefined,
+        dependence: drug.fdaData.abuseAndDependence.dependence ? getLocalizedValue(drug.fdaData.abuseAndDependence.dependence, lang) : undefined,
+      } : undefined,
+      labelEffectiveDate: drug.fdaData.labelEffectiveDate,
+      fdaLabelUrl: drug.fdaData.fdaLabelUrl,
+    } : undefined,
+    // FAERS Data
+    faersData: drug.faersData ? {
+      totalReports: drug.faersData.totalReports,
+      seriousReports: drug.faersData.seriousReports,
+      topReactions: drug.faersData.topReactions?.map(r => ({
+        reaction: getLocalizedValue(r.reaction, lang),
+        reportCount: r.reportCount,
+        percentage: r.percentage,
+      })),
+      demographics: drug.faersData.demographics,
+      outcomes: drug.faersData.outcomes,
+      dataRange: drug.faersData.dataRange,
+      lastUpdated: drug.faersData.lastUpdated,
+    } : undefined,
     lastUpdated: drug.lastUpdated,
     sources: drug.sources,
     notes: drug.notes ? getLocalizedValue(drug.notes, lang) : undefined,

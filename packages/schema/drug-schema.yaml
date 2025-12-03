@@ -248,6 +248,100 @@ specialConsiderations:
     ja: ""
 
 # ============================================
+# OPENFDA DATA (from FDA Structured Product Labeling)
+# ============================================
+
+# FDA identifiers and references
+fdaData:
+  # Application numbers (NDA = New Drug Application, ANDA = Abbreviated NDA)
+  applicationNumbers: []          # e.g., ["NDA021121", "NDA010187"]
+
+  # SPL (Structured Product Label) identifiers
+  splSetId: ""                    # SPL Set ID for tracking versions
+  splId: ""                       # Individual SPL ID
+
+  # RxNorm Concept Unique Identifier(s)
+  rxcui: []                       # e.g., ["4158", "83366"]
+
+  # Pharmacological classification from FDA
+  pharmacologicClass:
+    mechanismOfAction: []         # pharm_class_moa, e.g., ["Central Nervous System Stimulant [MoA]"]
+    establishedClass: []          # pharm_class_epc, e.g., ["Central Nervous System Stimulant"]
+    physiologicEffect: []         # pharm_class_pe, e.g., ["Increased Central Nervous System Activity"]
+
+  # Black box warning - critical safety information (localized)
+  boxedWarning:
+    en: ""                        # Raw FDA black box warning text
+    zh: ""
+    ja: ""
+
+  # FDA-approved indications (more specific than general indications)
+  fdaIndications:
+    en: ""
+    zh: ""
+    ja: ""
+
+  # Abuse and dependence information (important for controlled substances)
+  abuseAndDependence:
+    controlledSubstanceClass: ""  # e.g., "CII" for Schedule II
+    abuse:
+      en: ""
+      zh: ""
+      ja: ""
+    dependence:
+      en: ""
+      zh: ""
+      ja: ""
+
+  # FDA label last update date
+  labelEffectiveDate: ""          # Format: YYYYMMDD
+
+  # Link to full FDA label
+  fdaLabelUrl: ""                 # e.g., "https://dailymed.nlm.nih.gov/dailymed/..."
+
+# FAERS (FDA Adverse Event Reporting System) data
+faersData:
+  # Total number of adverse event reports
+  totalReports: 0
+
+  # Number of serious adverse event reports
+  seriousReports: 0
+
+  # Top reported adverse reactions with frequency
+  topReactions:
+    - reaction:
+        en: ""
+        zh: ""
+        ja: ""
+      reportCount: 0
+      percentage: 0               # Percentage of total reports
+
+  # Demographics of reports
+  demographics:
+    byAge:                        # Age group breakdown
+      - ageGroup: ""              # e.g., "6-11", "12-17", "18-24"
+        count: 0
+    bySex:                        # Sex breakdown
+      - sex: ""                   # Male, Female, Unknown
+        count: 0
+
+  # Outcome breakdown
+  outcomes:
+    recovered: 0
+    recovering: 0
+    notRecovered: 0
+    fatal: 0
+    unknown: 0
+
+  # Data range and freshness
+  dataRange:
+    from: ""                      # e.g., "2004-01-01"
+    to: ""                        # e.g., "2025-12-01"
+
+  # Last time this data was fetched from OpenFDA
+  lastUpdated: ""
+
+# ============================================
 # METADATA
 # ============================================
 
