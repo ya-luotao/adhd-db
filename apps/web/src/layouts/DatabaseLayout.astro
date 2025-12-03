@@ -63,7 +63,6 @@ const alternates = [
 
         <!-- Table Selector -->
         <div class="table-selector">
-          <label class="selector-label">TABLE</label>
           <div class="select-wrapper">
             <select id="table-select" class="table-select">
               {tables.map((table) => (
@@ -86,13 +85,10 @@ const alternates = [
               <div class="table-header">
                 <span class="col-name">Name</span>
                 <span class="col-class">Class</span>
-                <span class="col-status">Avail</span>
               </div>
               <div class="table-rows">
                 {drugs.map((drug) => {
                   const isActive = drug.id === activeDrugId;
-                  const availableCount = drug.approvals?.filter((a: any) => a.available).length || 0;
-                  const totalRegions = drug.approvals?.length || 0;
                   return (
                     <a
                       href={getLocalizedPath(`/data/drugs/${drug.id}`, lang)}
@@ -101,11 +97,6 @@ const alternates = [
                       <span class="row-name">{l(drug.genericName)}</span>
                       <span class="row-class" data-class={drug.drugClass}>
                         {drug.drugClass === 'stimulant' ? 'STM' : 'NON'}
-                      </span>
-                      <span class="row-status">
-                        <span class="status-num">{availableCount}</span>
-                        <span class="status-sep">/</span>
-                        <span class="status-total">{totalRegions}</span>
                       </span>
                     </a>
                   );
@@ -293,6 +284,8 @@ const alternates = [
   html, body {
     height: 100%;
     overflow: hidden;
+    margin: 0;
+    padding: 0;
   }
 
   .db-layout {
@@ -427,7 +420,7 @@ const alternates = [
 
   .table-header {
     display: grid;
-    grid-template-columns: 1fr 50px 55px;
+    grid-template-columns: 1fr 50px;
     gap: 8px;
     padding: 8px 16px;
     font-size: 0.6rem;
@@ -465,7 +458,7 @@ const alternates = [
 
   .table-row {
     display: grid;
-    grid-template-columns: 1fr 50px 55px;
+    grid-template-columns: 1fr 50px;
     gap: 8px;
     padding: 10px 16px;
     text-decoration: none;
