@@ -5,7 +5,7 @@ import '../styles/tokens.css';
 
 interface Props {
   title: string;
-  activeTable?: 'drugs' | 'categories' | 'meta' | 'schema';
+  activeTable?: 'drugs' | 'categories' | 'meta' | 'schema' | 'api';
   activeDrugId?: string;
 }
 
@@ -26,6 +26,7 @@ const tables = [
   { id: 'categories', label: 'categories', path: '/data/categories', icon: '◈', count: categories.length },
   { id: 'meta', label: 'meta', path: '/meta', icon: '◇', count: 2 },
   { id: 'schema', label: 'schema', path: '/schema', icon: '○', count: 1 },
+  { id: 'api', label: 'api', path: '/api-docs', icon: '⬡', count: 3 },
 ];
 
 // Alternates for SEO (zh-TW must come before zh in regex to match correctly)
@@ -158,6 +159,29 @@ const alternates = [
                 <a href={getLocalizedPath('/schema', lang)} class="table-row">
                   <span class="row-name">drug-schema.yaml</span>
                   <span class="row-type">YAML</span>
+                </a>
+              </div>
+            </>
+          )}
+
+          {activeTable === 'api' && (
+            <>
+              <div class="table-header">
+                <span class="col-name">Endpoint</span>
+                <span class="col-type">Method</span>
+              </div>
+              <div class="table-rows">
+                <a href="/api-docs" class="table-row">
+                  <span class="row-name">/api/v1/drugs</span>
+                  <span class="row-type">GET</span>
+                </a>
+                <a href="/api-docs" class="table-row">
+                  <span class="row-name">/api/v1/drugs/:id</span>
+                  <span class="row-type">GET</span>
+                </a>
+                <a href="/api-docs" class="table-row">
+                  <span class="row-name">/api/v1/categories</span>
+                  <span class="row-type">GET</span>
                 </a>
               </div>
             </>
