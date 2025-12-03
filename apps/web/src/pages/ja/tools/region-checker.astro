@@ -1,7 +1,6 @@
 ---
-import Layout from '../../../layouts/Layout.astro';
 import { getDrugs, getRegions, getLocalizedValue, type TravelStatus } from '../../../lib/data';
-import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../../i18n/utils';
 
 export const prerender = true;
 
@@ -15,6 +14,7 @@ const regionCodes = Object.keys(regions);
 const drugsData = JSON.stringify(drugs.map(drug => ({
   id: drug.id,
   genericName: getLocalizedValue(drug.genericName, lang),
+  drugClass: drug.drugClass,
   controlledSubstance: drug.controlledSubstance,
   category: drug.category,
   schedule: drug.schedule,
@@ -44,62 +44,189 @@ const statusColors: Record<TravelStatus, string> = {
   requires_permit: '#f59e0b',
   prohibited: '#ef4444',
 };
+
+const alternates = [
+  { lang: 'en', path: '/tools/region-checker' },
+  { lang: 'zh', path: '/zh/tools/region-checker' },
+  { lang: 'ja', path: '/ja/tools/region-checker' },
+  { lang: 'zh-TW', path: '/zh-TW/tools/region-checker' },
+];
 ---
 
-<Layout title={t('tools.regionChecker.title')}>
-  <h1>{t('tools.regionChecker.title')}</h1>
-  <p class="description">{t('tools.regionChecker.description')}</p>
-
-  <div class="checker-form">
-    <div class="form-group">
-      <label for="drug-select">{t('tools.regionChecker.selectDrug')}</label>
-      <select id="drug-select">
-        <option value="">{t('tools.regionChecker.chooseDrug')}</option>
-        {drugs.map(drug => (
-          <option value={drug.id}>{getLocalizedValue(drug.genericName, lang)}</option>
-        ))}
-      </select>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group">
-        <label for="from-region">{t('tools.regionChecker.fromRegion')}</label>
-        <select id="from-region">
-          <option value="">{t('tools.regionChecker.chooseRegion')}</option>
-          {regionCodes.map(code => (
-            <option value={code}>{code} - {(regions as any)[code].name}</option>
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{t('tools.regionChecker.title')} | ADHD-DB</title>
+    {alternates.map(({ lang: l, path }) => (
+      <link rel="alternate" hreflang={l} href={path} />
+    ))}
+  </head>
+  <body>
+    <div class="page">
+      <!-- Navigation -->
+      <nav class="nav">
+        <a href={getLocalizedPath('/', lang)} class="nav-logo">
+          <span class="logo-mark">◆</span>
+          <span class="logo-text">ADHD-DB</span>
+        </a>
+        <div class="nav-links">
+          <a href={getLocalizedPath('/data/drugs', lang)}>Database</a>
+          <a href={getLocalizedPath('/tools/region-checker', lang)} class="active">Tools</a>
+          <a href={getLocalizedPath('/travel', lang)}>Travel</a>
+          <a href="https://github.com/ya-luotao/adhd-db" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <div class="nav-lang">
+          {alternates.map(({ lang: code, path }) => (
+            <a href={path} class:list={['lang-link', { active: lang === code }]}>
+              {code === 'en' ? 'EN' : code === 'zh' ? '中文' : code === 'zh-TW' ? '繁體' : '日本語'}
+            </a>
           ))}
-        </select>
-      </div>
+        </div>
+      </nav>
 
-      <div class="arrow-container">
-        <span class="arrow">&rarr;</span>
-      </div>
+      <!-- Hero -->
+      <header class="hero">
+        <div class="hero-badge">
+          <span class="badge-icon">⬡</span>
+          <span>Tool</span>
+        </div>
+        <h1 class="hero-title">{t('tools.regionChecker.title')}</h1>
+        <p class="hero-desc">{t('tools.regionChecker.description')}</p>
+      </header>
 
-      <div class="form-group">
-        <label for="to-region">{t('tools.regionChecker.toRegion')}</label>
-        <select id="to-region">
-          <option value="">{t('tools.regionChecker.chooseRegion')}</option>
-          {regionCodes.map(code => (
-            <option value={code}>{code} - {(regions as any)[code].name}</option>
-          ))}
-        </select>
-      </div>
+      <!-- Checker Tool -->
+      <main class="tool-section">
+        <div class="checker-container">
+          <!-- Form -->
+          <div class="checker-form">
+            <div class="form-header">
+              <span class="form-step">1</span>
+              <h2>Select Medication</h2>
+            </div>
+            <div class="form-group">
+              <label for="drug-select">{t('tools.regionChecker.selectDrug')}</label>
+              <div class="select-wrapper">
+                <select id="drug-select">
+                  <option value="">{t('tools.regionChecker.chooseDrug')}</option>
+                  {drugs.map(drug => (
+                    <option value={drug.id} data-class={drug.drugClass}>
+                      {getLocalizedValue(drug.genericName, lang)}
+                    </option>
+                  ))}
+                </select>
+                <span class="select-arrow">▼</span>
+              </div>
+            </div>
+
+            <div class="form-header">
+              <span class="form-step">2</span>
+              <h2>Select Route</h2>
+            </div>
+            <div class="route-selector">
+              <div class="form-group">
+                <label for="from-region">{t('tools.regionChecker.fromRegion')}</label>
+                <div class="select-wrapper">
+                  <select id="from-region">
+                    <option value="">{t('tools.regionChecker.chooseRegion')}</option>
+                    {regionCodes.map(code => (
+                      <option value={code}>{code} – {(regions as any)[code].name}</option>
+                    ))}
+                  </select>
+                  <span class="select-arrow">▼</span>
+                </div>
+              </div>
+
+              <div class="route-arrow">
+                <span class="arrow-line"></span>
+                <span class="arrow-head">→</span>
+                <span class="arrow-line"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="to-region">{t('tools.regionChecker.toRegion')}</label>
+                <div class="select-wrapper">
+                  <select id="to-region">
+                    <option value="">{t('tools.regionChecker.chooseRegion')}</option>
+                    {regionCodes.map(code => (
+                      <option value={code}>{code} – {(regions as any)[code].name}</option>
+                    ))}
+                  </select>
+                  <span class="select-arrow">▼</span>
+                </div>
+              </div>
+            </div>
+
+            <button id="check-btn" class="check-button">
+              <span>{t('tools.regionChecker.check')}</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+
+          <!-- Results -->
+          <div id="results" class="results hidden">
+            <div class="results-header">
+              <h2>Results</h2>
+              <button id="clear-btn" class="clear-button">Clear</button>
+            </div>
+            <div id="results-content"></div>
+          </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer">
+          <div class="disclaimer-icon">⚠</div>
+          <div class="disclaimer-content">
+            <strong>{t('tools.regionChecker.disclaimer.title')}</strong>
+            <p>{t('tools.regionChecker.disclaimer.text')}</p>
+          </div>
+        </div>
+      </main>
+
+      <!-- Quick Links -->
+      <section class="quick-links">
+        <a href={getLocalizedPath('/travel', lang)} class="quick-link">
+          <span class="quick-icon">✈</span>
+          <div class="quick-content">
+            <h3>Travel Guide</h3>
+            <p>Comprehensive travel information for ADHD medications</p>
+          </div>
+          <span class="quick-arrow">→</span>
+        </a>
+        <a href={getLocalizedPath('/data/drugs', lang)} class="quick-link">
+          <span class="quick-icon">◉</span>
+          <div class="quick-content">
+            <h3>Drug Database</h3>
+            <p>Browse all medications with detailed information</p>
+          </div>
+          <span class="quick-arrow">→</span>
+        </a>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-content">
+          <p class="footer-disclaimer">
+            This tool is for informational purposes only. Always verify with official sources and consult healthcare professionals.
+          </p>
+          <div class="footer-links">
+            <a href="https://github.com/ya-luotao/adhd-db" target="_blank">GitHub</a>
+            <span class="footer-sep">·</span>
+            <a href={getLocalizedPath('/', lang)}>Home</a>
+            <span class="footer-sep">·</span>
+            <a href={getLocalizedPath('/data/drugs', lang)}>Database</a>
+          </div>
+        </div>
+      </footer>
     </div>
-
-    <button id="check-btn" class="btn btn-primary">{t('tools.regionChecker.check')}</button>
-  </div>
-
-  <div id="results" class="results hidden">
-    <h2>{t('tools.regionChecker.results.title')}</h2>
-    <div id="results-content"></div>
-  </div>
-
-  <div class="disclaimer">
-    <strong>{t('tools.regionChecker.disclaimer.title')}</strong>
-    <p>{t('tools.regionChecker.disclaimer.text')}</p>
-  </div>
-</Layout>
+  </body>
+</html>
 
 <script define:vars={{ drugsData, regionsData, statusColors, lang }}>
   const drugs = JSON.parse(drugsData);
@@ -109,6 +236,7 @@ const statusColors: Record<TravelStatus, string> = {
   const fromRegion = document.getElementById('from-region');
   const toRegion = document.getElementById('to-region');
   const checkBtn = document.getElementById('check-btn');
+  const clearBtn = document.getElementById('clear-btn');
   const results = document.getElementById('results');
   const resultsContent = document.getElementById('results-content');
 
@@ -119,20 +247,43 @@ const statusColors: Record<TravelStatus, string> = {
   };
 
   const labels = {
-    en: { travelStatus: 'Travel Status', availability: 'Availability', availableInDest: 'Available in destination', notAvailableInDest: 'Not available in destination', brandNames: 'Brand Names in Destination', schedule: 'Schedule in Destination', requirements: 'Requirements', maxSupply: 'Maximum Supply', notes: 'Notes', inferred: 'This status is inferred from general rules. Verify with official sources.' },
-    zh: { travelStatus: '旅行状态', availability: '可用性', availableInDest: '目的地可用', notAvailableInDest: '目的地不可用', brandNames: '目的地品牌名', schedule: '目的地管制级别', requirements: '要求', maxSupply: '最大携带量', notes: '备注', inferred: '此状态根据一般规则推断。请与官方来源核实。' },
-    ja: { travelStatus: '旅行ステータス', availability: '入手可能性', availableInDest: '目的地で入手可能', notAvailableInDest: '目的地で入手不可', brandNames: '目的地での商品名', schedule: '目的地での規制区分', requirements: '要件', maxSupply: '最大携帯量', notes: '備考', inferred: 'このステータスは一般的なルールから推定されています。公式情報源でご確認ください。' },
+    en: {
+      travelStatus: 'Travel Status', availability: 'Availability', availableInDest: 'Available in destination',
+      notAvailableInDest: 'Not available in destination', brandNames: 'Brand Names', schedule: 'Schedule',
+      requirements: 'Requirements', maxSupply: 'Maximum Supply', notes: 'Notes',
+      inferred: 'Status inferred from general rules. Verify with official sources.',
+    },
+    zh: {
+      travelStatus: '旅行状态', availability: '可用性', availableInDest: '目的地可用',
+      notAvailableInDest: '目的地不可用', brandNames: '品牌名', schedule: '管制级别',
+      requirements: '要求', maxSupply: '最大携带量', notes: '备注',
+      inferred: '此状态根据一般规则推断。请与官方来源核实。',
+    },
+    ja: {
+      travelStatus: '旅行ステータス', availability: '入手可能性', availableInDest: '目的地で入手可能',
+      notAvailableInDest: '目的地で入手不可', brandNames: '商品名', schedule: '規制区分',
+      requirements: '要件', maxSupply: '最大携帯量', notes: '備考',
+      inferred: 'このステータスは一般的なルールから推定されています。公式情報源でご確認ください。',
+    },
   };
 
   const currentLabels = labels[lang] || labels.en;
   const currentStatusLabels = statusLabels[lang] || statusLabels.en;
+
+  clearBtn?.addEventListener('click', () => {
+    results.classList.add('hidden');
+    resultsContent.innerHTML = '';
+  });
 
   checkBtn.addEventListener('click', () => {
     const drugId = drugSelect.value;
     const from = fromRegion.value;
     const to = toRegion.value;
 
-    if (!drugId || !from || !to) { alert('薬物と両方の地域を選択してください'); return; }
+    if (!drugId || !from || !to) {
+      alert('Please select a drug and both regions');
+      return;
+    }
 
     const drug = drugs.find(d => d.id === drugId);
     if (!drug) return;
@@ -154,67 +305,706 @@ const statusColors: Record<TravelStatus, string> = {
     } else {
       const destApproval = drug.approvals?.find(a => a.region === to);
       const destAvailable = destApproval?.available ?? false;
+
       if (drug.category === 'amphetamine') {
         if (to === 'CN') { status = 'prohibited'; statusLabel = currentStatusLabels.prohibited; }
         else if (to === 'JP') { status = 'requires_permit'; statusLabel = currentStatusLabels.requires_permit; }
       } else if (drug.controlledSubstance) {
-        status = 'restricted'; statusLabel = currentStatusLabels.restricted;
+        status = 'restricted';
+        statusLabel = currentStatusLabels.restricted;
       }
     }
 
     const destApproval = drug.approvals?.find(a => a.region === to);
     const destAvailable = destApproval?.available ?? false;
     const destBrands = drug.brandNames?.[to] || [];
-    const destSchedule = drug.schedule?.[to] || '-';
+    const destSchedule = drug.schedule?.[to] || '–';
     const statusColor = statusColors[status];
+    const fromName = regions[from]?.name || from;
+    const toName = regions[to]?.name || to;
 
-    let html = `<div class="result-card" style="border-left: 4px solid ${statusColor}">
-      <div class="result-header"><span class="drug-name">${drug.genericName}</span><span class="route">${from} &rarr; ${to}</span></div>
-      <div class="result-status" style="color: ${statusColor}"><strong>${currentLabels.travelStatus}:</strong> ${statusLabel}</div>
-      ${isInferred ? `<div class="inferred-note">${currentLabels.inferred}</div>` : ''}
-      <div class="result-availability"><strong>${currentLabels.availability}:</strong> <span class="${destAvailable ? 'available' : 'unavailable'}">${destAvailable ? currentLabels.availableInDest : currentLabels.notAvailableInDest}</span></div>
-      ${destBrands.length > 0 ? `<div class="result-brands"><strong>${currentLabels.brandNames}:</strong> ${destBrands.join(', ')}</div>` : ''}
-      <div class="result-schedule"><strong>${currentLabels.schedule}:</strong> ${destSchedule}</div>`;
+    let html = `
+      <div class="result-card">
+        <div class="result-route">
+          <div class="route-point">
+            <span class="route-code">${from}</span>
+            <span class="route-name">${fromName}</span>
+          </div>
+          <div class="route-connector">
+            <span class="connector-line"></span>
+            <span class="connector-arrow">→</span>
+            <span class="connector-line"></span>
+          </div>
+          <div class="route-point">
+            <span class="route-code">${to}</span>
+            <span class="route-name">${toName}</span>
+          </div>
+        </div>
 
-    if (rule) {
-      if (rule.requirements?.length > 0) html += `<div class="result-requirements"><strong>${currentLabels.requirements}:</strong><ul>${rule.requirements.map(r => `<li>${r}</li>`).join('')}</ul></div>`;
-      if (rule.maxSupply) html += `<div class="result-max-supply"><strong>${currentLabels.maxSupply}:</strong> ${rule.maxSupply}</div>`;
-      if (rule.notes) html += `<div class="result-notes"><strong>${currentLabels.notes}:</strong> ${rule.notes}</div>`;
-    }
-    html += '</div>';
+        <div class="result-drug">
+          <span class="drug-name">${drug.genericName}</span>
+          <span class="drug-class" data-class="${drug.drugClass}">${drug.drugClass === 'stimulant' ? 'Stimulant' : 'Non-Stimulant'}</span>
+        </div>
+
+        <div class="result-status" data-status="${status}">
+          <div class="status-indicator" style="background: ${statusColor}"></div>
+          <div class="status-content">
+            <span class="status-label">${currentLabels.travelStatus}</span>
+            <span class="status-value" style="color: ${statusColor}">${statusLabel}</span>
+          </div>
+        </div>
+
+        ${isInferred ? `<div class="inferred-badge">${currentLabels.inferred}</div>` : ''}
+
+        <div class="result-details">
+          <div class="detail-row">
+            <span class="detail-label">${currentLabels.availability}</span>
+            <span class="detail-value ${destAvailable ? 'available' : 'unavailable'}">
+              ${destAvailable ? '● ' + currentLabels.availableInDest : '○ ' + currentLabels.notAvailableInDest}
+            </span>
+          </div>
+
+          ${destBrands.length > 0 ? `
+            <div class="detail-row">
+              <span class="detail-label">${currentLabels.brandNames}</span>
+              <span class="detail-value">${destBrands.join(', ')}</span>
+            </div>
+          ` : ''}
+
+          <div class="detail-row">
+            <span class="detail-label">${currentLabels.schedule}</span>
+            <span class="detail-value detail-mono">${destSchedule}</span>
+          </div>
+
+          ${rule?.requirements?.length ? `
+            <div class="detail-row detail-list">
+              <span class="detail-label">${currentLabels.requirements}</span>
+              <ul class="detail-requirements">
+                ${rule.requirements.map(r => `<li>${r}</li>`).join('')}
+              </ul>
+            </div>
+          ` : ''}
+
+          ${rule?.maxSupply ? `
+            <div class="detail-row">
+              <span class="detail-label">${currentLabels.maxSupply}</span>
+              <span class="detail-value detail-mono">${rule.maxSupply}</span>
+            </div>
+          ` : ''}
+
+          ${rule?.notes ? `
+            <div class="detail-row detail-notes">
+              <span class="detail-label">${currentLabels.notes}</span>
+              <span class="detail-value">${rule.notes}</span>
+            </div>
+          ` : ''}
+        </div>
+      </div>
+    `;
+
     resultsContent.innerHTML = html;
     results.classList.remove('hidden');
+    results.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 </script>
 
 <style>
-  .description { color: var(--color-text-secondary); margin-bottom: var(--space-6); }
-  .checker-form { background: var(--color-bg-secondary); border-radius: var(--radius-lg); padding: var(--space-6); margin-bottom: var(--space-6); }
-  .form-group { margin-bottom: var(--space-4); }
-  .form-group label { display: block; font-weight: var(--font-medium); margin-bottom: var(--space-2); }
-  .form-group select { width: 100%; padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-bg); font-size: var(--text-base); }
-  .form-row { display: flex; gap: var(--space-4); align-items: flex-end; flex-wrap: wrap; }
-  .form-row .form-group { flex: 1; min-width: 200px; }
-  .arrow-container { display: flex; align-items: center; padding-bottom: var(--space-4); }
-  .arrow { font-size: var(--text-2xl); color: var(--color-text-tertiary); }
-  .btn { display: inline-block; padding: var(--space-3) var(--space-6); border-radius: var(--radius-md); font-weight: var(--font-medium); cursor: pointer; border: none; font-size: var(--text-base); }
-  .btn-primary { background: var(--color-primary); color: white; }
-  .btn-primary:hover { background: var(--color-primary-600); }
-  .results { margin-bottom: var(--space-6); }
-  .hidden { display: none; }
-  .result-card { background: var(--color-bg-secondary); border-radius: var(--radius-lg); padding: var(--space-6); }
-  .result-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4); padding-bottom: var(--space-4); border-bottom: 1px solid var(--color-border); }
-  .drug-name { font-size: var(--text-xl); font-weight: var(--font-semibold); }
-  .route { background: var(--color-bg-tertiary); padding: var(--space-2) var(--space-3); border-radius: var(--radius-md); font-weight: var(--font-medium); }
-  .result-status { font-size: var(--text-lg); margin-bottom: var(--space-3); }
-  .inferred-note { background: var(--color-warning-light); color: var(--color-warning-700); padding: var(--space-2) var(--space-3); border-radius: var(--radius-md); font-size: var(--text-sm); margin-bottom: var(--space-3); }
-  .result-availability, .result-brands, .result-schedule, .result-requirements, .result-max-supply, .result-notes { margin-bottom: var(--space-2); }
-  .result-requirements ul { margin-left: var(--space-6); margin-top: var(--space-2); }
-  .result-requirements li { margin-bottom: var(--space-1); }
-  .available { color: var(--color-success); }
-  .unavailable { color: var(--color-danger); }
-  .disclaimer { background: var(--color-bg-tertiary); border-radius: var(--radius-lg); padding: var(--space-4); font-size: var(--text-sm); color: var(--color-text-secondary); }
-  .disclaimer strong { display: block; margin-bottom: var(--space-2); }
-  .disclaimer p { margin: 0; }
-  @media (max-width: 639px) { .form-row { flex-direction: column; } .arrow-container { display: none; } .result-header { flex-direction: column; gap: var(--space-2); text-align: center; } }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: #fafaf9;
+    color: #1a1a1a;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    --accent: #00a86b;
+    --accent-dark: #008f5b;
+    --accent-light: rgba(0, 168, 107, 0.1);
+    --stimulant: #dc2626;
+    --non-stimulant: #2563eb;
+    --text-primary: #1a1a1a;
+    --text-secondary: #525252;
+    --text-muted: #a3a3a3;
+    --border: #e5e5e5;
+    --surface: #ffffff;
+    --surface-alt: #f5f5f4;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --success: #22c55e;
+  }
+
+  /* Navigation */
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 4rem;
+    position: sticky;
+    top: 0;
+    background: rgba(250, 250, 249, 0.9);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .logo-mark { color: var(--accent); font-size: 1.25rem; }
+  .logo-text { font-family: 'DM Mono', monospace; font-weight: 500; font-size: 1rem; }
+
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+  .nav-lang { display: flex; gap: 0.25rem; }
+  .lang-link {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--text-muted);
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  .lang-link:hover { color: var(--accent); background: var(--accent-light); }
+  .lang-link.active { color: white; background: var(--accent); }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 4rem 2rem 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--accent-light);
+    color: var(--accent);
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  .badge-icon { font-size: 1rem; }
+
+  .hero-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 3rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* Tool Section */
+  .tool-section {
+    padding: 3rem 4rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .checker-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  /* Form */
+  .checker-form {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+  }
+
+  .form-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .form-header:not(:first-child) { margin-top: 2rem; }
+
+  .form-step {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent);
+    color: white;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 50%;
+  }
+
+  .form-header h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .form-group { margin-bottom: 1rem; }
+  .form-group label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .select-wrapper {
+    position: relative;
+  }
+
+  .select-wrapper select {
+    width: 100%;
+    appearance: none;
+    padding: 0.875rem 2.5rem 0.875rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .select-wrapper select:hover { border-color: var(--accent); }
+  .select-wrapper select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-light);
+  }
+
+  .select-wrapper .select-arrow {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+
+  .route-selector {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    align-items: end;
+  }
+
+  .route-arrow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-bottom: 1rem;
+  }
+
+  .arrow-line {
+    width: 20px;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .arrow-head {
+    font-size: 1.25rem;
+    color: var(--accent);
+  }
+
+  .check-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1.5rem;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .check-button:hover {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+  }
+
+  .check-button .btn-arrow { transition: transform 0.2s; }
+  .check-button:hover .btn-arrow { transform: translateX(4px); }
+
+  /* Results */
+  .results { animation: slideUp 0.3s ease; }
+  .results.hidden { display: none; }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .results-header h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+
+  .clear-button {
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .clear-button:hover {
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  .result-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .result-route {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: var(--surface-alt);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .route-point { text-align: center; }
+  .route-code {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .route-name {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+  }
+
+  .route-connector {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .connector-line { width: 30px; height: 1px; background: var(--border); }
+  .connector-arrow { font-size: 1.25rem; color: var(--accent); }
+
+  .result-drug {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .drug-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .drug-class {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: var(--surface-alt);
+  }
+
+  .drug-class[data-class="stimulant"] {
+    background: rgba(220, 38, 38, 0.1);
+    color: var(--stimulant);
+  }
+
+  .drug-class[data-class="non-stimulant"] {
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--non-stimulant);
+  }
+
+  .result-status {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .status-content { display: flex; flex-direction: column; }
+  .status-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .status-value { font-size: 1.1rem; font-weight: 600; }
+
+  .inferred-badge {
+    margin: 0 1.5rem;
+    padding: 0.75rem 1rem;
+    background: rgba(245, 158, 11, 0.1);
+    border-left: 3px solid var(--warning);
+    font-size: 0.8rem;
+    color: #92400e;
+  }
+
+  .result-details { padding: 1.5rem; }
+
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .detail-row:last-child { border-bottom: none; }
+  .detail-row.detail-list, .detail-row.detail-notes { flex-direction: column; gap: 0.5rem; }
+
+  .detail-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  .detail-value {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    text-align: right;
+  }
+
+  .detail-mono { font-family: 'DM Mono', monospace; }
+
+  .detail-value.available { color: var(--success); }
+  .detail-value.unavailable { color: var(--text-muted); }
+
+  .detail-requirements {
+    list-style: none;
+    padding-left: 1rem;
+  }
+
+  .detail-requirements li {
+    position: relative;
+    padding: 0.25rem 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  .detail-requirements li::before {
+    content: '•';
+    position: absolute;
+    left: -1rem;
+    color: var(--accent);
+  }
+
+  /* Disclaimer */
+  .disclaimer {
+    display: flex;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    margin-top: 2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+
+  .disclaimer-icon {
+    font-size: 1.25rem;
+    color: var(--warning);
+    flex-shrink: 0;
+  }
+
+  .disclaimer-content strong {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .disclaimer-content p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  /* Quick Links */
+  .quick-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 4rem 4rem;
+  }
+
+  .quick-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+  }
+
+  .quick-link:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  }
+
+  .quick-icon {
+    font-size: 1.5rem;
+    color: var(--accent);
+  }
+
+  .quick-content h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .quick-content p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .quick-arrow {
+    margin-left: auto;
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    transition: all 0.2s;
+  }
+
+  .quick-link:hover .quick-arrow {
+    color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  /* Footer */
+  .footer {
+    padding: 2rem 4rem;
+    background: var(--surface-alt);
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-content {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .footer-disclaimer {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--accent); }
+  .footer-sep { color: var(--text-muted); }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .nav { padding: 1rem 1.5rem; flex-wrap: wrap; gap: 1rem; }
+    .nav-links { display: none; }
+
+    .hero { padding: 3rem 1.5rem 2rem; }
+    .hero-title { font-size: 2rem; }
+
+    .tool-section { padding: 2rem 1.5rem; }
+
+    .route-selector {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+
+    .route-arrow {
+      justify-content: center;
+      padding: 0.5rem 0;
+    }
+
+    .quick-links {
+      grid-template-columns: 1fr;
+      padding: 0 1.5rem 3rem;
+    }
+
+    .footer { padding: 1.5rem; }
+  }
 </style>
