@@ -1,8 +1,8 @@
 export const languages = {
-  en: 'English',
-  zh: '简体中文',
-  'zh-TW': '繁體中文',
-  ja: '日本語',
+  en: 'EN',
+  zh: '简',
+  'zh-TW': '繁',
+  ja: '日',
 } as const;
 
 export const defaultLang = 'en' as const;
