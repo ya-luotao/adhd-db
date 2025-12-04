@@ -32,7 +32,7 @@ const alternates = [
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <meta name="generator" content={Astro.generator} />
     <title>ADHD-DB | Global ADHD Medication Database</title>
     {alternates.map(({ lang: l, path }) => (
@@ -65,6 +65,11 @@ const alternates = [
       <!-- Hero Section -->
       <header class="hero">
         <div class="hero-content">
+          <div class="hero-stamp">
+            <span class="stamp-border">
+              <span class="stamp-text">ADHD<br/>DATABASE</span>
+            </span>
+          </div>
           <p class="hero-eyebrow">Open Source Database</p>
           <h1 class="hero-title">
             <span class="title-line">Global ADHD</span>
@@ -90,22 +95,22 @@ const alternates = [
           <div class="stat-ring">
             <div class="stat-main">
               <span class="stat-value">{drugs.length}</span>
-              <span class="stat-label">Drugs</span>
+              <span class="stat-label">Medications</span>
             </div>
             <div class="stat-secondary">
-              <div class="stat-item">
+              <div class="stat-item stat-stimulant">
                 <span class="stat-num">{stimulants.length}</span>
                 <span class="stat-name">Stimulants</span>
               </div>
-              <div class="stat-item">
+              <div class="stat-item stat-nonstim">
                 <span class="stat-num">{nonStimulants.length}</span>
                 <span class="stat-name">Non-Stimulants</span>
               </div>
-              <div class="stat-item">
+              <div class="stat-item stat-regions">
                 <span class="stat-num">{regionCodes.length}</span>
                 <span class="stat-name">Regions</span>
               </div>
-              <div class="stat-item">
+              <div class="stat-item stat-approvals">
                 <span class="stat-num">{totalApprovals}</span>
                 <span class="stat-name">Approvals</span>
               </div>
@@ -117,9 +122,11 @@ const alternates = [
       <!-- Drug Matrix Section -->
       <section class="matrix-section">
         <div class="section-header">
+          <span class="section-marker"></span>
           <h2 class="section-title">Availability Matrix</h2>
-          <p class="section-desc">Regional approval status at a glance</p>
+          <span class="section-badge">{drugs.length} drugs × {regionCodes.slice(0, 7).length} regions</span>
         </div>
+        <p class="section-desc">Regional approval status at a glance</p>
 
         <div class="matrix">
           <div class="matrix-header">
@@ -162,9 +169,19 @@ const alternates = [
 
       <!-- Quick Access Cards -->
       <section class="cards-section">
+        <div class="section-header centered">
+          <span class="section-marker"></span>
+          <h2 class="section-title">Quick Access</h2>
+        </div>
+
         <div class="card-grid">
-          <a href={getLocalizedPath('/data/drugs', lang)} class="access-card card-drugs">
-            <div class="card-icon">◉</div>
+          <a href={getLocalizedPath('/data/drugs', lang)} class="access-card">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M10.5 20.5L3.5 13.5C2.1 12.1 2.1 9.9 3.5 8.5L8.5 3.5C9.9 2.1 12.1 2.1 13.5 3.5L20.5 10.5C21.9 11.9 21.9 14.1 20.5 15.5L15.5 20.5C14.1 21.9 11.9 21.9 10.5 20.5Z"></path>
+                <line x1="8.5" y1="8.5" x2="15.5" y2="15.5"></line>
+              </svg>
+            </div>
             <div class="card-content">
               <h3>Drug Database</h3>
               <p>Browse all {drugs.length} ADHD medications with detailed formulations, pharmacology, and regional data.</p>
@@ -172,29 +189,46 @@ const alternates = [
             <span class="card-arrow">→</span>
           </a>
 
-          <a href={getLocalizedPath('/meta', lang)} class="access-card card-meta">
-            <div class="card-icon">◈</div>
+          <a href={getLocalizedPath('/data/categories', lang)} class="access-card">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+            </div>
             <div class="card-content">
-              <h3>Metadata</h3>
-              <p>Region definitions, regulatory agencies, and drug classification schemas.</p>
+              <h3>Categories</h3>
+              <p>Drug classification by mechanism of action and therapeutic categories.</p>
             </div>
             <span class="card-arrow">→</span>
           </a>
 
-          <a href={getLocalizedPath('/schema', lang)} class="access-card card-schema">
-            <div class="card-icon">◇</div>
-            <div class="card-content">
-              <h3>Schema</h3>
-              <p>YAML template defining the structure for all drug entries in the database.</p>
+          <a href={getLocalizedPath('/tools/region-checker', lang)} class="access-card">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
             </div>
-            <span class="card-arrow">→</span>
-          </a>
-
-          <a href={getLocalizedPath('/tools/region-checker', lang)} class="access-card card-tools">
-            <div class="card-icon">⬡</div>
             <div class="card-content">
               <h3>Region Checker</h3>
               <p>Find which medications are available in your country or compare across regions.</p>
+            </div>
+            <span class="card-arrow">→</span>
+          </a>
+
+          <a href={getLocalizedPath('/travel', lang)} class="access-card">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+            </div>
+            <div class="card-content">
+              <h3>Travel Guide</h3>
+              <p>Cross-border medication rules and requirements for international travel.</p>
             </div>
             <span class="card-arrow">→</span>
           </a>
@@ -204,7 +238,8 @@ const alternates = [
       <!-- Contribute Section -->
       <section class="contribute-section">
         <div class="contribute-content">
-          <h2>Open Source & Community Driven</h2>
+          <span class="contribute-eyebrow">Open Source</span>
+          <h2>Community Driven</h2>
           <p>
             ADHD-DB is a free, open-source project. Help improve medication data accuracy,
             add new drugs, or expand regional coverage.
@@ -268,31 +303,28 @@ approvals:
     padding: 0;
   }
 
-  html {
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: smooth; }
 
   body {
     font-family: 'DM Sans', -apple-system, sans-serif;
-    background: #fafaf9;
-    color: #1a1a1a;
+    background: #fdfcfa;
+    color: #1a1a2e;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Variables */
+  /* Variables - Dossier Theme */
   .page {
-    --accent: #00a86b;
-    --accent-dark: #008f5b;
-    --accent-light: rgba(0, 168, 107, 0.1);
-    --stimulant: #dc2626;
-    --non-stimulant: #2563eb;
-    --text-primary: #1a1a1a;
-    --text-secondary: #525252;
-    --text-muted: #a3a3a3;
-    --border: #e5e5e5;
-    --surface: #ffffff;
-    --surface-alt: #f5f5f4;
+    --dossier-bg: #fdfcfa;
+    --dossier-paper: #fffef9;
+    --dossier-border: #e8e4dc;
+    --dossier-accent: #1a1a2e;
+    --dossier-muted: #8b8680;
+    --dossier-gold: #c4a052;
+    --dossier-cream: #f5f2eb;
+    --dossier-ink: #2c2c2c;
+    --stimulant: #ef4444;
+    --non-stimulant: #3b82f6;
   }
 
   /* Navigation */
@@ -303,10 +335,10 @@ approvals:
     padding: 1.5rem 4rem;
     position: sticky;
     top: 0;
-    background: rgba(250, 250, 249, 0.9);
+    background: rgba(253, 252, 250, 0.95);
     backdrop-filter: blur(12px);
     z-index: 100;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--dossier-border);
   }
 
   .nav-logo {
@@ -314,11 +346,11 @@ approvals:
     align-items: center;
     gap: 0.5rem;
     text-decoration: none;
-    color: var(--text-primary);
+    color: var(--dossier-accent);
   }
 
   .logo-mark {
-    color: var(--accent);
+    color: var(--dossier-gold);
     font-size: 1.25rem;
   }
 
@@ -336,14 +368,14 @@ approvals:
 
   .nav-links a {
     text-decoration: none;
-    color: var(--text-secondary);
+    color: var(--dossier-muted);
     font-size: 0.9rem;
     font-weight: 500;
     transition: color 0.2s;
   }
 
   .nav-links a:hover {
-    color: var(--accent);
+    color: var(--dossier-gold);
   }
 
   .nav-lang {
@@ -356,19 +388,19 @@ approvals:
     font-size: 0.75rem;
     font-weight: 500;
     text-decoration: none;
-    color: var(--text-muted);
+    color: var(--dossier-muted);
     border-radius: 4px;
     transition: all 0.2s;
   }
 
   .lang-link:hover {
-    color: var(--accent);
-    background: var(--accent-light);
+    color: var(--dossier-gold);
+    background: rgba(196, 160, 82, 0.1);
   }
 
   .lang-link.active {
     color: white;
-    background: var(--accent);
+    background: var(--dossier-gold);
   }
 
   /* Hero Section */
@@ -376,28 +408,56 @@ approvals:
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
-    padding: 6rem 4rem 8rem;
+    padding: 5rem 4rem 6rem;
     min-height: 80vh;
     align-items: center;
+    background: var(--dossier-paper);
+    border-bottom: 4px solid var(--dossier-gold);
+  }
+
+  .hero-stamp {
+    margin-bottom: 1.5rem;
+  }
+
+  .stamp-border {
+    display: inline-flex;
+    width: 70px;
+    height: 70px;
+    border: 2px dashed var(--dossier-gold);
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-12deg);
+    opacity: 0.8;
+  }
+
+  .stamp-border .stamp-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.45rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--dossier-gold);
+    text-align: center;
+    line-height: 1.4;
   }
 
   .hero-eyebrow {
     font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    font-weight: 500;
+    font-size: 0.7rem;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.2em;
-    color: var(--accent);
-    margin-bottom: 1.5rem;
+    color: var(--dossier-gold);
+    margin-bottom: 1rem;
   }
 
   .hero-title {
-    font-family: 'Instrument Serif', serif;
-    font-size: 4.5rem;
-    font-weight: 400;
-    line-height: 1.05;
-    margin-bottom: 2rem;
-    color: var(--text-primary);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: var(--dossier-accent);
   }
 
   .title-line {
@@ -406,14 +466,14 @@ approvals:
 
   .title-accent {
     font-style: italic;
-    color: var(--accent);
+    color: var(--dossier-gold);
   }
 
   .hero-desc {
-    font-size: 1.15rem;
-    color: var(--text-secondary);
+    font-size: 1.1rem;
+    color: var(--dossier-muted);
     max-width: 480px;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
     line-height: 1.7;
   }
 
@@ -427,17 +487,17 @@ approvals:
     align-items: center;
     gap: 0.75rem;
     padding: 1rem 1.75rem;
-    background: var(--accent);
+    background: var(--dossier-gold);
     color: white;
     text-decoration: none;
     font-weight: 600;
     font-size: 0.95rem;
-    border-radius: 6px;
+    border-radius: 4px;
     transition: all 0.2s;
   }
 
   .btn-primary:hover {
-    background: var(--accent-dark);
+    background: #b08d42;
     transform: translateY(-2px);
   }
 
@@ -454,18 +514,18 @@ approvals:
     align-items: center;
     padding: 1rem 1.75rem;
     background: transparent;
-    color: var(--text-primary);
+    color: var(--dossier-accent);
     text-decoration: none;
     font-weight: 600;
     font-size: 0.95rem;
-    border: 1px solid var(--border);
-    border-radius: 6px;
+    border: 1px solid var(--dossier-border);
+    border-radius: 4px;
     transition: all 0.2s;
   }
 
   .btn-secondary:hover {
-    border-color: var(--accent);
-    color: var(--accent);
+    border-color: var(--dossier-gold);
+    color: var(--dossier-gold);
   }
 
   /* Hero Stats */
@@ -477,22 +537,22 @@ approvals:
 
   .stat-ring {
     position: relative;
-    width: 360px;
-    height: 360px;
-    border: 1px solid var(--border);
+    width: 340px;
+    height: 340px;
+    border: 2px solid var(--dossier-border);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--surface);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
+    background: var(--dossier-paper);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.04);
   }
 
   .stat-ring::before {
     content: '';
     position: absolute;
     inset: 20px;
-    border: 1px dashed var(--border);
+    border: 1px dashed var(--dossier-border);
     border-radius: 50%;
   }
 
@@ -502,20 +562,20 @@ approvals:
 
   .stat-value {
     display: block;
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 5rem;
-    font-weight: 400;
-    color: var(--accent);
+    font-weight: 600;
+    color: var(--dossier-gold);
     line-height: 1;
   }
 
   .stat-label {
     display: block;
     font-family: 'DM Mono', monospace;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: var(--text-muted);
+    color: var(--dossier-muted);
     margin-top: 0.5rem;
   }
 
@@ -527,97 +587,131 @@ approvals:
   .stat-item {
     position: absolute;
     text-align: center;
-    background: var(--surface);
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    min-width: 90px;
+    background: var(--dossier-paper);
+    padding: 0.6rem 0.9rem;
+    border-radius: 6px;
+    border: 1px solid var(--dossier-border);
+    min-width: 85px;
   }
 
-  .stat-item:nth-child(1) { top: -20px; left: 50%; transform: translateX(-50%); }
-  .stat-item:nth-child(2) { right: -30px; top: 50%; transform: translateY(-50%); }
-  .stat-item:nth-child(3) { bottom: -20px; left: 50%; transform: translateX(-50%); }
-  .stat-item:nth-child(4) { left: -30px; top: 50%; transform: translateY(-50%); }
+  .stat-item:nth-child(1) { top: -15px; left: 50%; transform: translateX(-50%); }
+  .stat-item:nth-child(2) { right: -25px; top: 50%; transform: translateY(-50%); }
+  .stat-item:nth-child(3) { bottom: -15px; left: 50%; transform: translateX(-50%); }
+  .stat-item:nth-child(4) { left: -25px; top: 50%; transform: translateY(-50%); }
 
   .stat-num {
     display: block;
-    font-family: 'DM Mono', monospace;
-    font-size: 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--dossier-accent);
   }
+
+  .stat-stimulant .stat-num { color: var(--stimulant); }
+  .stat-nonstim .stat-num { color: var(--non-stimulant); }
+  .stat-regions .stat-num { color: var(--dossier-gold); }
+  .stat-approvals .stat-num { color: var(--dossier-gold); }
 
   .stat-name {
     display: block;
-    font-size: 0.65rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-muted);
-    margin-top: 0.25rem;
+    letter-spacing: 0.08em;
+    color: var(--dossier-muted);
+    margin-top: 0.2rem;
+  }
+
+  /* Section Headers */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-header.centered {
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+
+  .section-marker {
+    width: 4px;
+    height: 20px;
+    background: var(--dossier-gold);
+    border-radius: 2px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--dossier-accent);
+  }
+
+  .section-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    padding: 4px 10px;
+    background: var(--dossier-cream);
+    border-radius: 2px;
+    color: var(--dossier-muted);
+    margin-left: auto;
+  }
+
+  .section-desc {
+    color: var(--dossier-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
   }
 
   /* Matrix Section */
   .matrix-section {
-    padding: 6rem 4rem;
-    background: var(--surface);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .section-header {
-    text-align: center;
-    margin-bottom: 3rem;
-  }
-
-  .section-title {
-    font-family: 'Instrument Serif', serif;
-    font-size: 2.5rem;
-    font-weight: 400;
-    margin-bottom: 0.75rem;
-  }
-
-  .section-desc {
-    color: var(--text-muted);
-    font-size: 1rem;
+    padding: 4rem;
+    background: var(--dossier-bg);
+    border-bottom: 1px solid var(--dossier-border);
   }
 
   .matrix {
     max-width: 900px;
     margin: 0 auto;
-    border: 1px solid var(--border);
-    border-radius: 8px;
+    border: 1px solid var(--dossier-border);
+    border-radius: 4px;
     overflow: hidden;
+    background: var(--dossier-paper);
   }
 
   .matrix-header {
     display: grid;
     grid-template-columns: 200px repeat(7, 1fr);
-    background: var(--surface-alt);
-    border-bottom: 1px solid var(--border);
+    background: var(--dossier-cream);
+    border-bottom: 1px solid var(--dossier-border);
     padding: 0.75rem 1rem;
   }
 
   .matrix-drug-col {
+    font-family: 'DM Mono', monospace;
     font-weight: 600;
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--text-secondary);
+    color: var(--dossier-muted);
   }
 
   .matrix-region-col {
     text-align: center;
     font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 600;
-    color: var(--text-secondary);
+    color: var(--dossier-accent);
   }
 
   .matrix-row {
     display: grid;
     grid-template-columns: 200px repeat(7, 1fr);
-    padding: 0.875rem 1rem;
-    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--dossier-border);
     text-decoration: none;
     color: inherit;
     transition: background 0.15s;
@@ -630,12 +724,10 @@ approvals:
     to { opacity: 1; transform: translateY(0); }
   }
 
-  .matrix-row:last-child {
-    border-bottom: none;
-  }
+  .matrix-row:last-child { border-bottom: none; }
 
   .matrix-row:hover {
-    background: var(--accent-light);
+    background: rgba(196, 160, 82, 0.08);
   }
 
   .matrix-drug {
@@ -647,25 +739,26 @@ approvals:
   .drug-name {
     font-weight: 500;
     font-size: 0.9rem;
+    color: var(--dossier-ink);
   }
 
   .drug-class {
     font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
+    font-size: 0.55rem;
     font-weight: 600;
     padding: 2px 6px;
-    border-radius: 3px;
-    background: var(--surface-alt);
-    color: var(--text-muted);
+    border-radius: 2px;
+    background: var(--dossier-cream);
+    color: var(--dossier-muted);
   }
 
   .drug-class[data-class="stimulant"] {
-    background: rgba(220, 38, 38, 0.1);
+    background: rgba(239, 68, 68, 0.1);
     color: var(--stimulant);
   }
 
   .drug-class[data-class="non-stimulant"] {
-    background: rgba(37, 99, 235, 0.1);
+    background: rgba(59, 130, 246, 0.1);
     color: var(--non-stimulant);
   }
 
@@ -677,106 +770,107 @@ approvals:
 
   .cell-dot {
     font-size: 0.9rem;
-    color: var(--text-muted);
+    color: var(--dossier-muted);
   }
 
   .cell-dot.available {
-    color: var(--accent);
+    color: var(--dossier-gold);
   }
 
   .cell-dot.unavailable {
-    color: var(--text-muted);
-    opacity: 0.5;
+    color: var(--dossier-muted);
+    opacity: 0.4;
   }
 
   .matrix-legend {
     display: flex;
     justify-content: center;
     gap: 2rem;
-    margin-top: 1.5rem;
+    margin-top: 1.25rem;
   }
 
   .legend-item {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.8rem;
-    color: var(--text-muted);
+    font-size: 0.75rem;
+    color: var(--dossier-muted);
   }
 
-  .legend-dot {
-    font-size: 0.9rem;
-  }
-
-  .legend-dot.available {
-    color: var(--accent);
-  }
-
-  .legend-dot.unavailable {
-    opacity: 0.5;
-  }
+  .legend-dot { font-size: 0.9rem; }
+  .legend-dot.available { color: var(--dossier-gold); }
+  .legend-dot.unavailable { opacity: 0.4; }
 
   /* Cards Section */
   .cards-section {
-    padding: 6rem 4rem;
+    padding: 4rem;
+    background: var(--dossier-paper);
+    border-bottom: 1px solid var(--dossier-border);
   }
 
   .card-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    max-width: 1000px;
+    gap: 1.25rem;
+    max-width: 900px;
     margin: 0 auto;
   }
 
   .access-card {
     display: flex;
     align-items: flex-start;
-    gap: 1.25rem;
-    padding: 2rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--dossier-bg);
+    border: 1px solid var(--dossier-border);
+    border-radius: 4px;
     text-decoration: none;
     color: inherit;
-    transition: all 0.25s;
+    transition: all 0.2s;
   }
 
   .access-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    border-color: var(--dossier-gold);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(196, 160, 82, 0.12);
   }
 
   .card-icon {
-    font-size: 1.5rem;
-    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: var(--dossier-cream);
+    border-radius: 50%;
+    color: var(--dossier-gold);
     flex-shrink: 0;
   }
 
   .card-content h3 {
-    font-family: 'Instrument Serif', serif;
-    font-size: 1.35rem;
-    font-weight: 400;
-    margin-bottom: 0.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+    color: var(--dossier-accent);
   }
 
   .card-content p {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
+    font-size: 0.85rem;
+    color: var(--dossier-muted);
+    line-height: 1.5;
   }
 
   .card-arrow {
     margin-left: auto;
     font-size: 1.25rem;
-    color: var(--text-muted);
+    color: var(--dossier-muted);
     transition: all 0.2s;
     flex-shrink: 0;
   }
 
   .access-card:hover .card-arrow {
-    color: var(--accent);
+    color: var(--dossier-gold);
     transform: translateX(4px);
   }
 
@@ -785,22 +879,33 @@ approvals:
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
-    padding: 6rem 4rem;
-    background: var(--text-primary);
+    padding: 5rem 4rem;
+    background: var(--dossier-accent);
     color: white;
   }
 
+  .contribute-eyebrow {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--dossier-gold);
+    margin-bottom: 0.75rem;
+  }
+
   .contribute-content h2 {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 2.5rem;
-    font-weight: 400;
-    margin-bottom: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
   }
 
   .contribute-content p {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     line-height: 1.7;
   }
 
@@ -809,17 +914,17 @@ approvals:
     align-items: center;
     gap: 0.75rem;
     padding: 1rem 1.75rem;
-    background: var(--accent);
+    background: var(--dossier-gold);
     color: white;
     text-decoration: none;
     font-weight: 600;
     font-size: 0.95rem;
-    border-radius: 6px;
+    border-radius: 4px;
     transition: all 0.2s;
   }
 
   .contribute-btn:hover {
-    background: var(--accent-dark);
+    background: #b08d42;
   }
 
   .contribute-btn:hover .btn-arrow {
@@ -834,9 +939,9 @@ approvals:
 
   .code-block {
     width: 100%;
-    max-width: 400px;
+    max-width: 380px;
     background: #0d0d0d;
-    border-radius: 12px;
+    border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
   }
@@ -845,7 +950,7 @@ approvals:
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.875rem 1rem;
+    padding: 0.75rem 1rem;
     background: #1a1a1a;
     border-bottom: 1px solid #2a2a2a;
   }
@@ -864,15 +969,15 @@ approvals:
   .code-file {
     margin-left: auto;
     font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: #666;
   }
 
   .code-content {
-    padding: 1.25rem;
+    padding: 1rem;
     margin: 0;
     font-family: 'DM Mono', monospace;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     line-height: 1.7;
     color: #a0a0a0;
     overflow-x: auto;
@@ -885,9 +990,9 @@ approvals:
 
   /* Footer */
   .footer {
-    padding: 3rem 4rem;
-    background: var(--surface-alt);
-    border-top: 1px solid var(--border);
+    padding: 2.5rem 4rem;
+    background: var(--dossier-cream);
+    border-top: 1px solid var(--dossier-border);
   }
 
   .footer-content {
@@ -900,13 +1005,13 @@ approvals:
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
   }
 
   .footer-disclaimer {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    margin-bottom: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--dossier-muted);
+    margin-bottom: 1rem;
     line-height: 1.6;
   }
 
@@ -918,18 +1023,18 @@ approvals:
   }
 
   .footer-links a {
-    color: var(--text-secondary);
+    color: var(--dossier-muted);
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     transition: color 0.2s;
   }
 
   .footer-links a:hover {
-    color: var(--accent);
+    color: var(--dossier-gold);
   }
 
   .footer-sep {
-    color: var(--text-muted);
+    color: var(--dossier-border);
   }
 
   /* Responsive */
@@ -937,43 +1042,24 @@ approvals:
     .hero {
       grid-template-columns: 1fr;
       gap: 3rem;
-      padding: 4rem 2rem 5rem;
+      padding: 3rem 2rem 4rem;
       min-height: auto;
     }
 
-    .hero-title {
-      font-size: 3.5rem;
-    }
+    .hero-title { font-size: 3rem; }
 
-    .hero-stats {
-      order: -1;
-    }
+    .hero-stats { order: -1; }
 
-    .stat-ring {
-      width: 280px;
-      height: 280px;
-    }
+    .stat-ring { width: 280px; height: 280px; }
+    .stat-value { font-size: 4rem; }
+    .stat-item { padding: 0.5rem 0.75rem; min-width: 70px; }
+    .stat-num { font-size: 1.2rem; }
 
-    .stat-value {
-      font-size: 4rem;
-    }
-
-    .stat-item {
-      padding: 0.5rem 0.75rem;
-      min-width: 70px;
-    }
-
-    .stat-num {
-      font-size: 1.25rem;
-    }
-
-    .card-grid {
-      grid-template-columns: 1fr;
-    }
+    .card-grid { grid-template-columns: 1fr; }
 
     .contribute-section {
       grid-template-columns: 1fr;
-      gap: 3rem;
+      gap: 2.5rem;
     }
   }
 
@@ -984,69 +1070,46 @@ approvals:
       gap: 1rem;
     }
 
-    .nav-links {
-      display: none;
-    }
-
-    .nav-lang {
-      gap: 0.125rem;
-    }
+    .nav-links { display: none; }
+    .nav-lang { gap: 0.125rem; }
 
     .hero {
-      padding: 2.5rem 1.5rem 3rem;
+      padding: 2rem 1.5rem 2.5rem;
     }
 
-    .hero-title {
-      font-size: 2.5rem;
-    }
+    .hero-title { font-size: 2.2rem; }
+    .hero-desc { font-size: 0.95rem; }
+    .hero-actions { flex-direction: column; }
 
-    .hero-desc {
-      font-size: 1rem;
-    }
-
-    .hero-actions {
-      flex-direction: column;
-    }
-
-    .stat-ring {
-      width: 240px;
-      height: 240px;
-    }
-
-    .stat-value {
-      font-size: 3rem;
-    }
+    .stat-ring { width: 220px; height: 220px; }
+    .stat-value { font-size: 3rem; }
 
     .stat-item:nth-child(2),
-    .stat-item:nth-child(4) {
-      display: none;
-    }
+    .stat-item:nth-child(4) { display: none; }
 
     .matrix-section,
     .cards-section,
     .contribute-section {
-      padding: 3rem 1.5rem;
+      padding: 2.5rem 1.5rem;
     }
 
-    .section-title {
-      font-size: 2rem;
-    }
+    .section-title { font-size: 1.4rem; }
 
-    .matrix {
-      overflow-x: auto;
-    }
+    .matrix { overflow-x: auto; }
+    .matrix-header, .matrix-row { min-width: 600px; }
 
-    .matrix-header,
-    .matrix-row {
-      min-width: 600px;
-    }
+    .contribute-content h2 { font-size: 1.8rem; }
 
-    .contribute-content h2 {
-      font-size: 2rem;
-    }
+    .footer { padding: 2rem 1.5rem; }
+  }
 
-    .footer {
-      padding: 2rem 1.5rem;
-    }
+  /* Animations */
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero, .matrix-section, .cards-section {
+    animation: slideUp 0.5s ease-out;
   }
 </style>

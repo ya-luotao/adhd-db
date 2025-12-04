@@ -40,8 +40,8 @@ const regionsData = JSON.stringify(regions);
 
 const statusColors: Record<TravelStatus, string> = {
   allowed: '#22c55e',
-  restricted: '#f59e0b',
-  requires_permit: '#f59e0b',
+  restricted: '#c4a052',
+  requires_permit: '#c4a052',
   prohibited: '#ef4444',
 };
 
@@ -61,7 +61,7 @@ const alternates = [
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <meta name="generator" content={Astro.generator} />
     <title>{t('tools.regionChecker.title')} | ADHD-DB</title>
     {alternates.map(({ lang: l, path }) => (
@@ -91,14 +91,23 @@ const alternates = [
         </div>
       </nav>
 
-      <!-- Hero -->
-      <header class="hero">
-        <div class="hero-badge">
-          <span class="badge-icon">⬡</span>
-          <span>Tool</span>
+      <!-- Case File Header -->
+      <header class="case-header">
+        <div class="case-header-inner">
+          <div class="case-label">
+            <span class="label-text">TOOL</span>
+            <span class="label-divider">/</span>
+            <span class="label-code">REGION-CHECK</span>
+          </div>
+          <div class="case-title-row">
+            <h1 class="case-title">{t('tools.regionChecker.title')}</h1>
+            <div class="case-stamp">
+              <span class="stamp-text">REGULATORY</span>
+            </div>
+          </div>
+          <p class="case-desc">{t('tools.regionChecker.description')}</p>
         </div>
-        <h1 class="hero-title">{t('tools.regionChecker.title')}</h1>
-        <p class="hero-desc">{t('tools.regionChecker.description')}</p>
+        <div class="case-stripe"></div>
       </header>
 
       <!-- Checker Tool -->
@@ -106,59 +115,63 @@ const alternates = [
         <div class="checker-container">
           <!-- Form -->
           <div class="checker-form">
-            <div class="form-header">
-              <span class="form-step">1</span>
-              <h2>Select Medication</h2>
-            </div>
-            <div class="form-group">
-              <label for="drug-select">{t('tools.regionChecker.selectDrug')}</label>
-              <div class="select-wrapper">
-                <select id="drug-select">
-                  <option value="">{t('tools.regionChecker.chooseDrug')}</option>
-                  {drugs.map(drug => (
-                    <option value={drug.id} data-class={drug.drugClass}>
-                      {getLocalizedValue(drug.genericName, lang)}
-                    </option>
-                  ))}
-                </select>
-                <span class="select-arrow">▼</span>
+            <div class="form-section">
+              <div class="form-header">
+                <span class="form-step">1</span>
+                <h2>Select Medication</h2>
               </div>
-            </div>
-
-            <div class="form-header">
-              <span class="form-step">2</span>
-              <h2>Select Route</h2>
-            </div>
-            <div class="route-selector">
               <div class="form-group">
-                <label for="from-region">{t('tools.regionChecker.fromRegion')}</label>
+                <label for="drug-select">{t('tools.regionChecker.selectDrug')}</label>
                 <div class="select-wrapper">
-                  <select id="from-region">
-                    <option value="">{t('tools.regionChecker.chooseRegion')}</option>
-                    {regionCodes.map(code => (
-                      <option value={code}>{code} – {(regions as any)[code].name}</option>
+                  <select id="drug-select">
+                    <option value="">{t('tools.regionChecker.chooseDrug')}</option>
+                    {drugs.map(drug => (
+                      <option value={drug.id} data-class={drug.drugClass}>
+                        {getLocalizedValue(drug.genericName, lang)}
+                      </option>
                     ))}
                   </select>
                   <span class="select-arrow">▼</span>
                 </div>
               </div>
+            </div>
 
-              <div class="route-arrow">
-                <span class="arrow-line"></span>
-                <span class="arrow-head">→</span>
-                <span class="arrow-line"></span>
+            <div class="form-section">
+              <div class="form-header">
+                <span class="form-step">2</span>
+                <h2>Select Route</h2>
               </div>
+              <div class="route-selector">
+                <div class="form-group">
+                  <label for="from-region">{t('tools.regionChecker.fromRegion')}</label>
+                  <div class="select-wrapper">
+                    <select id="from-region">
+                      <option value="">{t('tools.regionChecker.chooseRegion')}</option>
+                      {regionCodes.map(code => (
+                        <option value={code}>{code} – {(regions as any)[code].name}</option>
+                      ))}
+                    </select>
+                    <span class="select-arrow">▼</span>
+                  </div>
+                </div>
 
-              <div class="form-group">
-                <label for="to-region">{t('tools.regionChecker.toRegion')}</label>
-                <div class="select-wrapper">
-                  <select id="to-region">
-                    <option value="">{t('tools.regionChecker.chooseRegion')}</option>
-                    {regionCodes.map(code => (
-                      <option value={code}>{code} – {(regions as any)[code].name}</option>
-                    ))}
-                  </select>
-                  <span class="select-arrow">▼</span>
+                <div class="route-arrow">
+                  <span class="arrow-line"></span>
+                  <span class="arrow-icon">✈</span>
+                  <span class="arrow-line"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="to-region">{t('tools.regionChecker.toRegion')}</label>
+                  <div class="select-wrapper">
+                    <select id="to-region">
+                      <option value="">{t('tools.regionChecker.chooseRegion')}</option>
+                      {regionCodes.map(code => (
+                        <option value={code}>{code} – {(regions as any)[code].name}</option>
+                      ))}
+                    </select>
+                    <span class="select-arrow">▼</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -172,7 +185,10 @@ const alternates = [
           <!-- Results -->
           <div id="results" class="results hidden">
             <div class="results-header">
-              <h2>Results</h2>
+              <div class="results-label">
+                <span class="results-icon">◉</span>
+                <h2>Analysis Results</h2>
+              </div>
               <button id="clear-btn" class="clear-button">Clear</button>
             </div>
             <div id="results-content"></div>
@@ -181,7 +197,9 @@ const alternates = [
 
         <!-- Disclaimer -->
         <div class="disclaimer">
-          <div class="disclaimer-icon">⚠</div>
+          <div class="disclaimer-badge">
+            <span class="disclaimer-icon">!</span>
+          </div>
           <div class="disclaimer-content">
             <strong>{t('tools.regionChecker.disclaimer.title')}</strong>
             <p>{t('tools.regionChecker.disclaimer.text')}</p>
@@ -191,22 +209,25 @@ const alternates = [
 
       <!-- Quick Links -->
       <section class="quick-links">
-        <a href={getLocalizedPath('/travel', lang)} class="quick-link">
-          <span class="quick-icon">✈</span>
-          <div class="quick-content">
-            <h3>Travel Guide</h3>
-            <p>Comprehensive travel information for ADHD medications</p>
-          </div>
-          <span class="quick-arrow">→</span>
-        </a>
-        <a href={getLocalizedPath('/data/drugs', lang)} class="quick-link">
-          <span class="quick-icon">◉</span>
-          <div class="quick-content">
-            <h3>Drug Database</h3>
-            <p>Browse all medications with detailed information</p>
-          </div>
-          <span class="quick-arrow">→</span>
-        </a>
+        <h3 class="quick-links-title">Related Resources</h3>
+        <div class="quick-links-grid">
+          <a href={getLocalizedPath('/travel', lang)} class="quick-link">
+            <span class="quick-icon">✈</span>
+            <div class="quick-content">
+              <h4>Travel Guide</h4>
+              <p>Comprehensive travel information for ADHD medications</p>
+            </div>
+            <span class="quick-arrow">→</span>
+          </a>
+          <a href={getLocalizedPath('/data/drugs', lang)} class="quick-link">
+            <span class="quick-icon">◉</span>
+            <div class="quick-content">
+              <h4>Drug Database</h4>
+              <p>Browse all medications with detailed information</p>
+            </div>
+            <span class="quick-arrow">→</span>
+          </a>
+        </div>
       </section>
 
       <!-- Footer -->
@@ -224,6 +245,9 @@ const alternates = [
           </div>
         </div>
       </footer>
+
+      <!-- Paper texture overlay -->
+      <div class="paper-texture"></div>
     </div>
   </body>
 </html>
@@ -413,27 +437,47 @@ const alternates = [
   html { scroll-behavior: smooth; }
   body {
     font-family: 'DM Sans', -apple-system, sans-serif;
-    background: #fafaf9;
+    background: var(--dossier-bg);
     color: #1a1a1a;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
 
   .page {
-    --accent: #00a86b;
-    --accent-dark: #008f5b;
-    --accent-light: rgba(0, 168, 107, 0.1);
-    --stimulant: #dc2626;
-    --non-stimulant: #2563eb;
+    --dossier-bg: #fdfcfa;
+    --dossier-paper: #fffef9;
+    --dossier-cream: #f5f2eb;
+    --dossier-border: #e8e4dc;
+    --dossier-accent: #1a1a2e;
+    --dossier-muted: #8b8680;
+    --dossier-gold: #c4a052;
+    --dossier-gold-light: rgba(196, 160, 82, 0.1);
+    --stimulant: #ef4444;
+    --non-stimulant: #3b82f6;
     --text-primary: #1a1a1a;
     --text-secondary: #525252;
-    --text-muted: #a3a3a3;
-    --border: #e5e5e5;
-    --surface: #ffffff;
-    --surface-alt: #f5f5f4;
-    --warning: #f59e0b;
+    --text-muted: #8b8680;
+    --border: #e8e4dc;
+    --surface: #fffef9;
+    --surface-alt: #f5f2eb;
+    --warning: #c4a052;
     --danger: #ef4444;
     --success: #22c55e;
+    position: relative;
+    min-height: 100vh;
+    background: var(--dossier-bg);
+  }
+
+  .paper-texture {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.02;
+    pointer-events: none;
+    z-index: 1000;
   }
 
   /* Navigation */
@@ -444,7 +488,7 @@ const alternates = [
     padding: 1.5rem 4rem;
     position: sticky;
     top: 0;
-    background: rgba(250, 250, 249, 0.9);
+    background: rgba(253, 252, 250, 0.95);
     backdrop-filter: blur(12px);
     z-index: 100;
     border-bottom: 1px solid var(--border);
@@ -458,7 +502,7 @@ const alternates = [
     color: var(--text-primary);
   }
 
-  .logo-mark { color: var(--accent); font-size: 1.25rem; }
+  .logo-mark { color: var(--dossier-gold); font-size: 1.25rem; }
   .logo-text { font-family: 'DM Mono', monospace; font-weight: 500; font-size: 1rem; }
 
   .nav-links { display: flex; gap: 2.5rem; }
@@ -469,7 +513,7 @@ const alternates = [
     font-weight: 500;
     transition: color 0.2s;
   }
-  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+  .nav-links a:hover, .nav-links a.active { color: var(--dossier-gold); }
 
   .nav-lang { display: flex; gap: 0.25rem; }
   .lang-link {
@@ -481,43 +525,78 @@ const alternates = [
     border-radius: 4px;
     transition: all 0.2s;
   }
-  .lang-link:hover { color: var(--accent); background: var(--accent-light); }
-  .lang-link.active { color: white; background: var(--accent); }
+  .lang-link:hover { color: var(--dossier-gold); background: var(--dossier-gold-light); }
+  .lang-link.active { color: white; background: var(--dossier-gold); }
 
-  /* Hero */
-  .hero {
-    text-align: center;
-    padding: 4rem 2rem 3rem;
-    border-bottom: 1px solid var(--border);
+  /* Case File Header */
+  .case-header {
+    background: var(--dossier-accent);
+    color: white;
+    position: relative;
+    overflow: hidden;
   }
 
-  .hero-badge {
-    display: inline-flex;
+  .case-header-inner {
+    padding: 2.5rem 4rem 2rem;
+  }
+
+  .case-label {
+    display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: var(--accent-light);
-    color: var(--accent);
-    border-radius: 100px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-  }
-
-  .badge-icon { font-size: 1rem; }
-
-  .hero-title {
-    font-family: 'Instrument Serif', serif;
-    font-size: 3rem;
-    font-weight: 400;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
     margin-bottom: 1rem;
   }
 
-  .hero-desc {
-    font-size: 1.1rem;
-    color: var(--text-secondary);
+  .label-divider { opacity: 0.4; }
+
+  .case-title-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .case-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .case-stamp {
+    width: 70px;
+    height: 70px;
+    border: 2px dashed rgba(196, 160, 82, 0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-12deg);
+    flex-shrink: 0;
+  }
+
+  .stamp-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.5rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--dossier-gold);
+    text-align: center;
+  }
+
+  .case-desc {
+    font-size: 1rem;
+    opacity: 0.8;
     max-width: 500px;
-    margin: 0 auto;
+  }
+
+  .case-stripe {
+    height: 4px;
+    background: linear-gradient(90deg, var(--dossier-gold) 0%, var(--dossier-gold) 30%, transparent 30%);
   }
 
   /* Tool Section */
@@ -537,8 +616,18 @@ const alternates = [
   .checker-form {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 2rem;
+    border-radius: 12px;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .form-section {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .form-section:last-of-type {
+    border-bottom: none;
   }
 
   .form-header {
@@ -548,15 +637,13 @@ const alternates = [
     margin-bottom: 1.25rem;
   }
 
-  .form-header:not(:first-child) { margin-top: 2rem; }
-
   .form-step {
     width: 28px;
     height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--accent);
+    background: var(--dossier-gold);
     color: white;
     font-family: 'DM Mono', monospace;
     font-size: 0.85rem;
@@ -565,19 +652,21 @@ const alternates = [
   }
 
   .form-header h2 {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 500;
     color: var(--text-primary);
   }
 
   .form-group { margin-bottom: 1rem; }
+  .form-group:last-child { margin-bottom: 0; }
   .form-group label {
     display: block;
-    font-size: 0.75rem;
-    font-weight: 600;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     color: var(--text-muted);
     margin-bottom: 0.5rem;
   }
@@ -600,11 +689,11 @@ const alternates = [
     transition: all 0.15s;
   }
 
-  .select-wrapper select:hover { border-color: var(--accent); }
+  .select-wrapper select:hover { border-color: var(--dossier-gold); }
   .select-wrapper select:focus {
     outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px var(--accent-light);
+    border-color: var(--dossier-gold);
+    box-shadow: 0 0 0 3px var(--dossier-gold-light);
   }
 
   .select-wrapper .select-arrow {
@@ -637,9 +726,9 @@ const alternates = [
     background: var(--border);
   }
 
-  .arrow-head {
+  .arrow-icon {
     font-size: 1.25rem;
-    color: var(--accent);
+    color: var(--dossier-gold);
   }
 
   .check-button {
@@ -647,10 +736,10 @@ const alternates = [
     align-items: center;
     justify-content: center;
     gap: 0.75rem;
-    width: 100%;
+    width: calc(100% - 4rem);
+    margin: 1.5rem 2rem 2rem;
     padding: 1rem;
-    margin-top: 1.5rem;
-    background: var(--accent);
+    background: var(--dossier-gold);
     color: white;
     border: none;
     border-radius: 8px;
@@ -662,8 +751,9 @@ const alternates = [
   }
 
   .check-button:hover {
-    background: var(--accent-dark);
+    background: #b08f42;
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(196, 160, 82, 0.3);
   }
 
   .check-button .btn-arrow { transition: transform 0.2s; }
@@ -683,12 +773,26 @@ const alternates = [
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .results-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .results-icon {
+    color: var(--dossier-gold);
+    font-size: 1rem;
   }
 
   .results-header h2 {
-    font-family: 'Instrument Serif', serif;
-    font-size: 1.5rem;
-    font-weight: 400;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: var(--text-primary);
   }
 
   .clear-button {
@@ -696,7 +800,8 @@ const alternates = [
     background: transparent;
     border: 1px solid var(--border);
     border-radius: 6px;
-    font-size: 0.85rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
     color: var(--text-secondary);
     cursor: pointer;
     transition: all 0.15s;
@@ -710,7 +815,7 @@ const alternates = [
   .result-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 12px;
     overflow: hidden;
   }
 
@@ -720,7 +825,7 @@ const alternates = [
     justify-content: center;
     gap: 1.5rem;
     padding: 1.5rem;
-    background: var(--surface-alt);
+    background: var(--dossier-cream);
     border-bottom: 1px solid var(--border);
   }
 
@@ -746,7 +851,7 @@ const alternates = [
   }
 
   .connector-line { width: 30px; height: 1px; background: var(--border); }
-  .connector-arrow { font-size: 1.25rem; color: var(--accent); }
+  .connector-arrow { font-size: 1.25rem; color: var(--dossier-gold); }
 
   .result-drug {
     display: flex;
@@ -757,26 +862,29 @@ const alternates = [
   }
 
   .drug-name {
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
   }
 
   .drug-class {
     font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 600;
     padding: 4px 10px;
     border-radius: 4px;
     background: var(--surface-alt);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
   .drug-class[data-class="stimulant"] {
-    background: rgba(220, 38, 38, 0.1);
+    background: rgba(239, 68, 68, 0.1);
     color: var(--stimulant);
   }
 
   .drug-class[data-class="non-stimulant"] {
-    background: rgba(37, 99, 235, 0.1);
+    background: rgba(59, 130, 246, 0.1);
     color: var(--non-stimulant);
   }
 
@@ -796,14 +904,20 @@ const alternates = [
   }
 
   .status-content { display: flex; flex-direction: column; }
-  .status-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .status-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
   .status-value { font-size: 1.1rem; font-weight: 600; }
 
   .inferred-badge {
     margin: 0 1.5rem;
     padding: 0.75rem 1rem;
-    background: rgba(245, 158, 11, 0.1);
-    border-left: 3px solid var(--warning);
+    background: var(--dossier-gold-light);
+    border-left: 3px solid var(--dossier-gold);
     font-size: 0.8rem;
     color: #92400e;
   }
@@ -822,9 +936,12 @@ const alternates = [
   .detail-row.detail-list, .detail-row.detail-notes { flex-direction: column; gap: 0.5rem; }
 
   .detail-label {
-    font-size: 0.8rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
     color: var(--text-muted);
     flex-shrink: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
   .detail-value {
@@ -854,7 +971,7 @@ const alternates = [
     content: '•';
     position: absolute;
     left: -1rem;
-    color: var(--accent);
+    color: var(--dossier-gold);
   }
 
   /* Disclaimer */
@@ -866,17 +983,31 @@ const alternates = [
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
+    border-left: 4px solid var(--dossier-gold);
+  }
+
+  .disclaimer-badge {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--dossier-gold);
+    color: white;
+    border-radius: 50%;
+    flex-shrink: 0;
   }
 
   .disclaimer-icon {
-    font-size: 1.25rem;
-    color: var(--warning);
-    flex-shrink: 0;
+    font-size: 0.9rem;
+    font-weight: 700;
   }
 
   .disclaimer-content strong {
     display: block;
-    font-size: 0.85rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 500;
     margin-bottom: 0.25rem;
   }
 
@@ -888,19 +1019,33 @@ const alternates = [
 
   /* Quick Links */
   .quick-links {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
     max-width: 900px;
     margin: 0 auto;
     padding: 0 4rem 4rem;
+  }
+
+  .quick-links-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
+  }
+
+  .quick-links-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
 
   .quick-link {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 1.5rem;
+    padding: 1.25rem 1.5rem;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
@@ -910,24 +1055,25 @@ const alternates = [
   }
 
   .quick-link:hover {
-    border-color: var(--accent);
+    border-color: var(--dossier-gold);
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
   }
 
   .quick-icon {
-    font-size: 1.5rem;
-    color: var(--accent);
+    font-size: 1.25rem;
+    color: var(--dossier-gold);
   }
 
-  .quick-content h3 {
-    font-size: 1rem;
-    font-weight: 600;
+  .quick-content h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 500;
     margin-bottom: 0.25rem;
   }
 
   .quick-content p {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
     margin: 0;
   }
@@ -940,14 +1086,14 @@ const alternates = [
   }
 
   .quick-link:hover .quick-arrow {
-    color: var(--accent);
+    color: var(--dossier-gold);
     transform: translateX(4px);
   }
 
   /* Footer */
   .footer {
     padding: 2rem 4rem;
-    background: var(--surface-alt);
+    background: var(--dossier-cream);
     border-top: 1px solid var(--border);
   }
 
@@ -977,7 +1123,7 @@ const alternates = [
     transition: color 0.2s;
   }
 
-  .footer-links a:hover { color: var(--accent); }
+  .footer-links a:hover { color: var(--dossier-gold); }
   .footer-sep { color: var(--text-muted); }
 
   /* Responsive */
@@ -985,10 +1131,14 @@ const alternates = [
     .nav { padding: 1rem 1.5rem; flex-wrap: wrap; gap: 1rem; }
     .nav-links { display: none; }
 
-    .hero { padding: 3rem 1.5rem 2rem; }
-    .hero-title { font-size: 2rem; }
+    .case-header-inner { padding: 2rem 1.5rem 1.5rem; }
+    .case-title { font-size: 1.75rem; }
+    .case-stamp { width: 50px; height: 50px; }
+    .stamp-text { font-size: 0.4rem; }
 
     .tool-section { padding: 2rem 1.5rem; }
+    .form-section { padding: 1.25rem 1.5rem; }
+    .check-button { width: calc(100% - 3rem); margin: 1.25rem 1.5rem 1.5rem; }
 
     .route-selector {
       grid-template-columns: 1fr;
@@ -1000,10 +1150,8 @@ const alternates = [
       padding: 0.5rem 0;
     }
 
-    .quick-links {
-      grid-template-columns: 1fr;
-      padding: 0 1.5rem 3rem;
-    }
+    .quick-links { padding: 0 1.5rem 3rem; }
+    .quick-links-grid { grid-template-columns: 1fr; }
 
     .footer { padding: 1.5rem; }
   }
