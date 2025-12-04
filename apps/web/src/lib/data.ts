@@ -309,6 +309,88 @@ export interface RxNormData {
   lastUpdated?: string;
 }
 
+// Extended Interactions Data Types
+export type InteractionSeverity = 'major' | 'moderate' | 'minor' | 'unknown';
+export type SubstanceType = 'drug' | 'drug_class' | 'food' | 'nutrient' | 'supplement' | 'beverage';
+export type NutrientType = 'vitamin' | 'mineral' | 'food' | 'supplement' | 'beverage';
+export type EvidenceLevel = 'established' | 'probable' | 'possible' | 'theoretical';
+export type TimingRecommendation = 'avoid_together' | 'separate_2hr' | 'separate_4hr' | 'monitor' | 'caution';
+
+export interface ExtendedDrugInteraction {
+  interactingSubstance: LocalizedField;
+  substanceType?: SubstanceType;
+  rxcui?: string;
+  drugBankId?: string;
+  severity: InteractionSeverity;
+  mechanism?: LocalizedField;
+  effect: LocalizedField;
+  clinicalSignificance?: LocalizedField;
+  recommendation?: LocalizedField;
+  evidenceLevel?: EvidenceLevel;
+  sources?: Array<{ url: string; name: string }>;
+}
+
+export interface NutrientInteraction {
+  nutrient: LocalizedField;
+  nutrientType?: NutrientType;
+  effect: LocalizedField;
+  severity?: InteractionSeverity;
+  mechanism?: LocalizedField;
+  timing?: TimingRecommendation;
+  recommendation?: LocalizedField;
+}
+
+export interface CoprescribedDrugClass {
+  drugClass: string;
+  drugClassLabel?: LocalizedField;
+  examples?: string[];
+  interactionSeverity?: InteractionSeverity;
+  quickNote?: LocalizedField;
+}
+
+export interface InteractionsData {
+  drugInteractions?: ExtendedDrugInteraction[];
+  nutrientInteractions?: NutrientInteraction[];
+  commonCoprescribed?: CoprescribedDrugClass[];
+  lastUpdated?: string;
+  sources?: string[];
+}
+
+// Clinical Trials Data Types
+export type TrialStatus =
+  | 'RECRUITING'
+  | 'ACTIVE_NOT_RECRUITING'
+  | 'COMPLETED'
+  | 'ENROLLING_BY_INVITATION'
+  | 'NOT_YET_RECRUITING'
+  | 'SUSPENDED'
+  | 'TERMINATED'
+  | 'WITHDRAWN';
+
+export type TrialPhase = 'EARLY_PHASE1' | 'PHASE1' | 'PHASE2' | 'PHASE3' | 'PHASE4' | 'NA';
+
+export interface NotableTrial {
+  nctId: string;
+  title: string;
+  status: TrialStatus;
+  phase?: TrialPhase;
+  sponsor?: string;
+  enrollment?: number;
+  completionDate?: string;
+}
+
+export interface ClinicalTrialsData {
+  summary?: {
+    total?: number;
+    recruiting?: number;
+    active?: number;
+    completed?: number;
+  };
+  notableTrials?: NotableTrial[];
+  searchUrl?: string;
+  lastUpdated?: string;
+}
+
 export interface Drug {
   id: string;
   genericName: string | LocalizedField;
@@ -355,6 +437,10 @@ export interface Drug {
   faersData?: FAERSData;
   // RxNorm Data
   rxnormData?: RxNormData;
+  // Extended Interactions Data
+  interactionsData?: InteractionsData;
+  // Clinical Trials Data
+  clinicalTrialsData?: ClinicalTrialsData;
   lastUpdated?: string;
   sources?: string[];
   notes?: string | LocalizedField;

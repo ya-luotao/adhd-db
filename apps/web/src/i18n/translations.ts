@@ -219,6 +219,23 @@ export const translations = {
     'travelPage.index.byDrug': 'Browse by Medication',
     'travelPage.index.byRoute': 'Popular Routes',
     'travelPage.index.allRoutes': 'All Available Routes',
+
+    // Interaction checker tool
+    'tools.interactions.title': 'Drug Interaction Checker',
+    'tools.interactions.description': 'Check for potential interactions between ADHD medications and other drugs or substances.',
+    'tools.interactions.badge': 'Tool',
+    'tools.interactions.selectMeds': 'Select ADHD Medications',
+    'tools.interactions.checkAgainst': 'Check Against Drug Class (Optional)',
+    'tools.interactions.check': 'Check Interactions',
+    'tools.interactions.results': 'Results',
+    'tools.interactions.clear': 'Clear',
+    'tools.interactions.nutrientWarnings': 'Nutrient & Food Interactions',
+    'tools.interactions.disclaimer.title': 'Disclaimer',
+    'tools.interactions.disclaimer.text': 'This information is for educational purposes only and should not replace professional medical advice. Always consult a healthcare provider before making medication changes.',
+    'drugs.stimulant': 'Stimulant',
+    'drugs.nonStimulant': 'Non-Stimulant',
+    'nav.database': 'Database',
+    'home.databaseDescription': 'Browse all medications with detailed information',
   },
 
   zh: {
@@ -430,6 +447,23 @@ export const translations = {
     'travelPage.index.byDrug': '按药物浏览',
     'travelPage.index.byRoute': '热门路线',
     'travelPage.index.allRoutes': '所有可用路线',
+
+    // Interaction checker tool
+    'tools.interactions.title': '药物相互作用检查器',
+    'tools.interactions.description': '检查 ADHD 药物与其他药物或物质之间的潜在相互作用。',
+    'tools.interactions.badge': '工具',
+    'tools.interactions.selectMeds': '选择 ADHD 药物',
+    'tools.interactions.checkAgainst': '检查药物类别（可选）',
+    'tools.interactions.check': '检查相互作用',
+    'tools.interactions.results': '结果',
+    'tools.interactions.clear': '清除',
+    'tools.interactions.nutrientWarnings': '营养素和食物相互作用',
+    'tools.interactions.disclaimer.title': '免责声明',
+    'tools.interactions.disclaimer.text': '此信息仅供教育目的，不应替代专业医疗建议。在更改药物之前，请务必咨询医疗保健提供者。',
+    'drugs.stimulant': '兴奋剂',
+    'drugs.nonStimulant': '非兴奋剂',
+    'nav.database': '数据库',
+    'home.databaseDescription': '浏览所有药物的详细信息',
   },
 
   'zh-TW': {
@@ -641,6 +675,23 @@ export const translations = {
     'travelPage.index.byDrug': '按藥物瀏覽',
     'travelPage.index.byRoute': '熱門路線',
     'travelPage.index.allRoutes': '所有可用路線',
+
+    // Interaction checker tool
+    'tools.interactions.title': '藥物交互作用檢查器',
+    'tools.interactions.description': '檢查 ADHD 藥物與其他藥物或物質之間的潛在交互作用。',
+    'tools.interactions.badge': '工具',
+    'tools.interactions.selectMeds': '選擇 ADHD 藥物',
+    'tools.interactions.checkAgainst': '檢查藥物類別（可選）',
+    'tools.interactions.check': '檢查交互作用',
+    'tools.interactions.results': '結果',
+    'tools.interactions.clear': '清除',
+    'tools.interactions.nutrientWarnings': '營養素和食物交互作用',
+    'tools.interactions.disclaimer.title': '免責聲明',
+    'tools.interactions.disclaimer.text': '此資訊僅供教育目的，不應替代專業醫療建議。在更改藥物之前，請務必諮詢醫療保健提供者。',
+    'drugs.stimulant': '興奮劑',
+    'drugs.nonStimulant': '非興奮劑',
+    'nav.database': '資料庫',
+    'home.databaseDescription': '瀏覽所有藥物的詳細資訊',
   },
 
   ja: {
@@ -852,5 +903,22 @@ export const translations = {
     'travelPage.index.byDrug': '薬物で検索',
     'travelPage.index.byRoute': '人気のルート',
     'travelPage.index.allRoutes': '利用可能なすべてのルート',
+
+    // Interaction checker tool
+    'tools.interactions.title': '薬物相互作用チェッカー',
+    'tools.interactions.description': 'ADHD薬と他の薬物や物質との潜在的な相互作用を確認します。',
+    'tools.interactions.badge': 'ツール',
+    'tools.interactions.selectMeds': 'ADHD薬を選択',
+    'tools.interactions.checkAgainst': '薬物クラスを確認（オプション）',
+    'tools.interactions.check': '相互作用を確認',
+    'tools.interactions.results': '結果',
+    'tools.interactions.clear': 'クリア',
+    'tools.interactions.nutrientWarnings': '栄養素と食品の相互作用',
+    'tools.interactions.disclaimer.title': '免責事項',
+    'tools.interactions.disclaimer.text': 'この情報は教育目的のみであり、専門的な医療アドバイスに代わるものではありません。薬を変更する前に、必ず医療提供者に相談してください。',
+    'drugs.stimulant': '刺激薬',
+    'drugs.nonStimulant': '非刺激薬',
+    'nav.database': 'データベース',
+    'home.databaseDescription': 'すべての薬の詳細情報を閲覧',
   },
 } as const;

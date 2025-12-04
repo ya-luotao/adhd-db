@@ -1,0 +1,38 @@
+{
+  "name": "@adhd-db/clinicaltrials",
+  "version": "0.0.1",
+  "description": "ClinicalTrials.gov API v2 integration for ADHD drug clinical trial tracking",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "fetch": "tsx src/cli/fetch-trials.ts"
+  },
+  "files": [
+    "dist",
+    "data"
+  ],
+  "dependencies": {
+    "yaml": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  },
+  "keywords": [
+    "clinicaltrials",
+    "clinical-trials",
+    "adhd",
+    "medication",
+    "drug-development"
+  ],
+  "license": "MIT"
+}

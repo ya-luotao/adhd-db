@@ -171,6 +171,116 @@ foodInteractions:
   ja: ""
 
 # ============================================
+# EXTENDED INTERACTIONS DATA
+# Comprehensive drug-drug and drug-nutrient interactions
+# ============================================
+
+interactionsData:
+  # Detailed drug-drug interactions from DrugBank/FDA
+  drugInteractions:
+    - interactingSubstance:
+        en: ""                    # e.g., "MAO Inhibitors"
+        zh: ""                    # e.g., "单胺氧化酶抑制剂"
+        ja: ""                    # e.g., "MAO阻害薬"
+        zh-TW: ""                 # e.g., "單胺氧化酶抑制劑"
+      substanceType: ""           # drug | drug_class | food | nutrient
+      rxcui: ""                   # RxNorm identifier if available
+      drugBankId: ""              # DrugBank identifier
+      severity: ""                # major | moderate | minor | unknown
+      mechanism:
+        en: ""                    # How the interaction works
+        zh: ""
+        ja: ""
+      effect:
+        en: ""                    # Clinical effect of interaction
+        zh: ""
+        ja: ""
+      clinicalSignificance:
+        en: ""                    # Clinical importance
+        zh: ""
+        ja: ""
+      recommendation:
+        en: ""                    # Management recommendation
+        zh: ""
+        ja: ""
+      evidenceLevel: ""           # established | probable | possible | theoretical
+      sources:
+        - url: ""
+          name: ""
+
+  # Drug-nutrient/food interactions
+  nutrientInteractions:
+    - nutrient:
+        en: ""                    # e.g., "Vitamin C (Ascorbic Acid)"
+        zh: ""
+        ja: ""
+        zh-TW: ""
+      nutrientType: ""            # vitamin | mineral | food | supplement | beverage
+      effect:
+        en: ""
+        zh: ""
+        ja: ""
+      severity: ""                # major | moderate | minor
+      mechanism:
+        en: ""
+        zh: ""
+        ja: ""
+      timing: ""                  # avoid_together | separate_2hr | separate_4hr | monitor | caution
+      recommendation:
+        en: ""
+        zh: ""
+        ja: ""
+
+  # Common co-prescribed drug classes with quick notes
+  commonCoprescribed:
+    - drugClass: ""               # e.g., "SSRI"
+      drugClassLabel:
+        en: ""                    # e.g., "SSRIs (Selective Serotonin Reuptake Inhibitors)"
+        zh: ""
+        ja: ""
+        zh-TW: ""
+      examples: []                # e.g., ["sertraline", "fluoxetine", "escitalopram"]
+      interactionSeverity: ""     # major | moderate | minor
+      quickNote:
+        en: ""                    # Brief interaction summary
+        zh: ""
+        ja: ""
+        zh-TW: ""
+
+  # Data metadata
+  lastUpdated: ""                 # Date when interaction data was last updated
+  sources: []                     # e.g., ["DrugBank Open Data", "FDA DailyMed"]
+
+# ============================================
+# CLINICAL TRIALS DATA
+# From ClinicalTrials.gov API
+# ============================================
+
+clinicalTrialsData:
+  # Summary statistics
+  summary:
+    total: 0                      # Total number of trials
+    recruiting: 0                 # Currently recruiting
+    active: 0                     # Active but not recruiting
+    completed: 0                  # Completed trials
+
+  # Notable/highlighted trials
+  notableTrials:
+    - nctId: ""                   # e.g., "NCT12345678"
+      title: ""                   # Brief title
+      status: ""                  # RECRUITING | ACTIVE_NOT_RECRUITING | COMPLETED
+      phase: ""                   # PHASE1 | PHASE2 | PHASE3 | PHASE4
+      sponsor: ""                 # Lead sponsor
+      enrollment: 0               # Enrollment count
+      completionDate: ""          # Expected/actual completion
+
+  # Link to search more trials
+  searchUrl: ""                   # ClinicalTrials.gov search URL
+
+  # Data freshness
+  lastUpdated: ""
+
+# ============================================
 # PRACTICAL INFORMATION
 # ============================================
 
