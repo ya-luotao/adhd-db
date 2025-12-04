@@ -15,13 +15,39 @@ const l = (value: any) => getLocalizedValue(value, lang);
 // Calculate stats
 const stimulants = drugs.filter(d => d.drugClass === 'stimulant');
 const nonStimulants = drugs.filter(d => d.drugClass === 'non-stimulant');
-const allRegions = [...new Set(drugs.flatMap(d => d.approvals?.map((a: any) => a.region) || []))];
+const allRegions = [...new Set(drugs.flatMap(d => d.approvals?.map((a: any) => a.region) || []))].sort();
 const totalApprovals = drugs.reduce((acc, d) => acc + (d.approvals?.filter((a: any) => a.available).length || 0), 0);
 
 // Drug class colors
 const classColors = {
   stimulant: '#ef4444',
   'non-stimulant': '#3b82f6'
+};
+
+// Region availability data - count drugs available per region
+const regionStats = allRegions.map(region => {
+  const available = drugs.filter(d =>
+    d.approvals?.some((a: any) => a.region === region && a.available)
+  ).length;
+  return { region, available, total: drugs.length };
+});
+
+// Find most widely approved drug
+const drugsByApprovals = drugs.map(d => ({
+  drug: d,
+  approvalCount: d.approvals?.filter((a: any) => a.available).length || 0
+})).sort((a, b) => b.approvalCount - a.approvalCount);
+const mostApproved = drugsByApprovals[0];
+
+// Region flags/labels
+const regionLabels: Record<string, string> = {
+  US: '🇺🇸',
+  CN: '🇨🇳',
+  EU: '🇪🇺',
+  JP: '🇯🇵',
+  UK: '🇬🇧',
+  AU: '🇦🇺',
+  CA: '🇨🇦'
 };
 ---
 
@@ -62,68 +88,101 @@ const classColors = {
       <div class="case-file-stripe"></div>
     </header>
 
-    <!-- STATS GRID -->
-    <section class="stats-section">
-      <div class="stats-grid">
-        <div class="stat-card stat-primary">
-          <div class="stat-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-              <polyline points="17 21 17 13 7 13 7 21"></polyline>
-              <polyline points="7 3 7 8 15 8"></polyline>
-            </svg>
-          </div>
-          <div class="stat-content">
-            <span class="stat-value">{drugs.length}</span>
-            <span class="stat-label">Total Drugs</span>
-          </div>
-        </div>
-        <div class="stat-card stat-stimulant">
-          <div class="stat-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-            </svg>
-          </div>
-          <div class="stat-content">
-            <span class="stat-value">{stimulants.length}</span>
-            <span class="stat-label">Stimulants</span>
-          </div>
-        </div>
-        <div class="stat-card stat-nonstim">
-          <div class="stat-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"></circle>
-              <path d="M12 6v6l4 2"></path>
-            </svg>
-          </div>
-          <div class="stat-content">
-            <span class="stat-value">{nonStimulants.length}</span>
-            <span class="stat-label">Non-Stimulants</span>
+    <!-- REGISTRY BRIEF -->
+    <section class="registry-brief">
+      <div class="brief-header">
+        <span class="brief-label">REGISTRY BRIEF</span>
+        <span class="brief-date">{new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}</span>
+      </div>
+
+      <div class="brief-content">
+        <!-- Regional Coverage Matrix -->
+        <div class="brief-panel region-panel">
+          <h3 class="panel-title">Regional Coverage</h3>
+          <div class="region-matrix">
+            {regionStats.map(({ region, available, total }) => {
+              const pct = Math.round((available / total) * 100);
+              const level = pct >= 80 ? 'high' : pct >= 50 ? 'medium' : 'low';
+              return (
+                <div class={`region-cell level-${level}`}>
+                  <span class="region-flag">{regionLabels[region] || region}</span>
+                  <span class="region-code">{region}</span>
+                  <span class="region-count">{available}/{total}</span>
+                  <div class="region-bar">
+                    <div class="region-fill" style={`--pct: ${pct}%`}></div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="2" y1="12" x2="22" y2="12"></line>
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-            </svg>
-          </div>
-          <div class="stat-content">
-            <span class="stat-value">{allRegions.length}</span>
-            <span class="stat-label">Regions</span>
+
+        <!-- Class Distribution -->
+        <div class="brief-panel class-panel">
+          <h3 class="panel-title">Class Distribution</h3>
+          <div class="class-viz">
+            <div class="class-bar">
+              <div class="class-segment stimulant" style={`--width: ${(stimulants.length / drugs.length) * 100}%`}>
+                <span class="segment-label">{stimulants.length}</span>
+              </div>
+              <div class="class-segment non-stimulant" style={`--width: ${(nonStimulants.length / drugs.length) * 100}%`}>
+                <span class="segment-label">{nonStimulants.length}</span>
+              </div>
+            </div>
+            <div class="class-legend">
+              <span class="legend-item stimulant">
+                <span class="legend-dot"></span>
+                Stimulant
+              </span>
+              <span class="legend-item non-stimulant">
+                <span class="legend-dot"></span>
+                Non-Stimulant
+              </span>
+            </div>
           </div>
         </div>
-        <div class="stat-card stat-approvals">
-          <div class="stat-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-              <polyline points="22 4 12 14.01 9 11.01"></polyline>
-            </svg>
+
+        <!-- Key Insight -->
+        <div class="brief-panel insight-panel">
+          <h3 class="panel-title">Key Insight</h3>
+          <div class="insight-card">
+            <div class="insight-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 16v-4"></path>
+                <path d="M12 8h.01"></path>
+              </svg>
+            </div>
+            <div class="insight-content">
+              <span class="insight-label">Most Widely Approved</span>
+              <a href={getLocalizedPath(`/data/drugs/${mostApproved.drug.id}`, lang)} class="insight-value">
+                {l(mostApproved.drug.genericName)}
+              </a>
+              <span class="insight-detail">Available in {mostApproved.approvalCount} of {allRegions.length} regions</span>
+            </div>
           </div>
-          <div class="stat-content">
-            <span class="stat-value">{totalApprovals}</span>
-            <span class="stat-label">Approvals</span>
+        </div>
+
+        <!-- Summary Stats -->
+        <div class="brief-panel summary-panel">
+          <h3 class="panel-title">Summary</h3>
+          <div class="summary-grid">
+            <div class="summary-item">
+              <span class="summary-value">{drugs.length}</span>
+              <span class="summary-label">Total Entries</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-value">{allRegions.length}</span>
+              <span class="summary-label">Regions Tracked</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-value">{totalApprovals}</span>
+              <span class="summary-label">Active Approvals</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-value">{Math.round((totalApprovals / (drugs.length * allRegions.length)) * 100)}%</span>
+              <span class="summary-label">Coverage Rate</span>
+            </div>
           </div>
         </div>
       </div>
@@ -432,88 +491,303 @@ const classColors = {
   }
 
   /* ============================================
-     STATS GRID
+     REGISTRY BRIEF
      ============================================ */
 
-  .stats-section {
+  .registry-brief {
     margin-bottom: var(--space-8);
-  }
-
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: var(--space-3);
-  }
-
-  .stat-card {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-4);
     background: var(--dossier-paper);
     border: 1px solid var(--dossier-border);
     border-radius: 4px;
-    transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   }
 
-  .stat-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  .brief-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-3) var(--space-4);
+    background: var(--dossier-accent);
+    color: var(--dossier-cream);
   }
 
-  .stat-icon {
+  .brief-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+  }
+
+  .brief-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    opacity: 0.7;
+  }
+
+  .brief-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--dossier-border);
+  }
+
+  .brief-panel {
+    padding: var(--space-4);
+    background: var(--dossier-paper);
+  }
+
+  .panel-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--dossier-muted);
+    margin: 0 0 var(--space-3);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px dashed var(--dossier-border);
+  }
+
+  /* Regional Coverage Matrix */
+  .region-matrix {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    gap: var(--space-2);
+  }
+
+  .region-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: var(--space-2);
+    background: var(--dossier-cream);
+    border-radius: 3px;
+    border: 1px solid transparent;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .region-cell:hover {
+    transform: translateY(-1px);
+  }
+
+  .region-cell.level-high {
+    border-color: rgba(39, 103, 73, 0.3);
+  }
+
+  .region-cell.level-medium {
+    border-color: rgba(196, 160, 82, 0.4);
+  }
+
+  .region-cell.level-low {
+    border-color: rgba(197, 48, 48, 0.2);
+  }
+
+  .region-flag {
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+
+  .region-code {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: var(--dossier-accent);
+    letter-spacing: 0.05em;
+  }
+
+  .region-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--dossier-muted);
+  }
+
+  .region-bar {
+    width: 100%;
+    height: 3px;
+    background: var(--dossier-border);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 2px;
+  }
+
+  .region-fill {
+    height: 100%;
+    width: var(--pct);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+
+  .level-high .region-fill {
+    background: var(--dossier-green);
+  }
+
+  .level-medium .region-fill {
+    background: var(--dossier-gold);
+  }
+
+  .level-low .region-fill {
+    background: var(--dossier-red);
+  }
+
+  /* Class Distribution */
+  .class-viz {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .class-bar {
+    display: flex;
+    height: 28px;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .class-segment {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: var(--dossier-cream);
-    border-radius: 50%;
-    color: var(--dossier-gold);
-    flex-shrink: 0;
+    width: var(--width);
+    min-width: 40px;
+    transition: filter 0.2s;
   }
 
-  .stat-content {
+  .class-segment:hover {
+    filter: brightness(1.1);
+  }
+
+  .class-segment.stimulant {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  }
+
+  .class-segment.non-stimulant {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  }
+
+  .segment-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .class-legend {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--dossier-muted);
+  }
+
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+  }
+
+  .legend-item.stimulant .legend-dot {
+    background: #ef4444;
+  }
+
+  .legend-item.non-stimulant .legend-dot {
+    background: #3b82f6;
+  }
+
+  /* Key Insight */
+  .insight-card {
+    display: flex;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    background: linear-gradient(135deg, var(--dossier-cream) 0%, rgba(196, 160, 82, 0.1) 100%);
+    border-radius: 4px;
+    border-left: 3px solid var(--dossier-gold);
+  }
+
+  .insight-icon {
+    display: flex;
+    align-items: flex-start;
+    color: var(--dossier-gold);
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .insight-content {
     display: flex;
     flex-direction: column;
     gap: 2px;
   }
 
-  .stat-value {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.75rem;
-    font-weight: 700;
-    line-height: 1;
-    color: var(--dossier-accent);
-  }
-
-  .stat-label {
+  .insight-label {
     font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
+    font-size: 0.55rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--dossier-muted);
   }
 
-  .stat-primary .stat-icon {
-    background: rgba(196, 160, 82, 0.15);
+  .insight-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--dossier-accent);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .insight-value:hover {
     color: var(--dossier-gold);
   }
 
-  .stat-stimulant .stat-icon {
-    background: rgba(239, 68, 68, 0.1);
-    color: #ef4444;
+  .insight-detail {
+    font-size: 0.7rem;
+    color: var(--dossier-muted);
   }
 
-  .stat-nonstim .stat-icon {
-    background: rgba(59, 130, 246, 0.1);
-    color: #3b82f6;
+  /* Summary Stats */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
   }
 
-  .stat-approvals .stat-icon {
-    background: rgba(39, 103, 73, 0.1);
-    color: var(--dossier-green);
+  .summary-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: var(--space-2);
+    background: var(--dossier-cream);
+    border-radius: 3px;
+  }
+
+  .summary-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--dossier-accent);
+  }
+
+  .summary-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--dossier-muted);
+    text-align: center;
   }
 
   /* ============================================
@@ -841,26 +1115,17 @@ const classColors = {
       border-top: 1px dashed var(--dossier-border);
     }
 
-    .stats-grid {
-      grid-template-columns: repeat(2, 1fr);
+    /* Registry Brief Responsive */
+    .brief-content {
+      grid-template-columns: 1fr;
     }
 
-    .stat-card {
-      padding: var(--space-3);
+    .region-matrix {
+      grid-template-columns: repeat(4, 1fr);
     }
 
-    .stat-icon {
-      width: 32px;
-      height: 32px;
-    }
-
-    .stat-icon svg {
-      width: 16px;
-      height: 16px;
-    }
-
-    .stat-value {
-      font-size: 1.5rem;
+    .summary-grid {
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 
@@ -880,12 +1145,22 @@ const classColors = {
       font-size: 1.8rem;
     }
 
-    .stats-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-
     .schema-grid {
       grid-template-columns: 1fr;
+    }
+
+    .region-matrix {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .summary-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .class-legend {
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
     }
   }
 
@@ -905,13 +1180,13 @@ const classColors = {
   }
 
   .case-file,
-  .stats-section,
+  .registry-brief,
   .records-section,
   .archive-section {
     animation: slideUp 0.5s ease-out;
   }
 
-  .stats-section { animation-delay: 0.05s; }
+  .registry-brief { animation-delay: 0.05s; }
   .records-section { animation-delay: 0.1s; }
   .archive-section { animation-delay: 0.15s; }
 </style>
