@@ -506,6 +506,61 @@ rxnormData:
   lastUpdated: ""                  # Date when RxNorm data was last fetched
 
 # ============================================
+# PACKAGE INSERT / INSTRUCTIONS (说明书)
+# Official prescribing information
+# ============================================
+
+instructions:
+  indicationsAndUsage:            # What the drug is used for
+    en: ""
+    zh: ""
+    ja: ""
+  dosageAndAdministration:        # How to take the medication
+    en: ""
+    zh: ""
+    ja: ""
+  dosageForms:                    # Available forms and strengths
+    en: ""
+    zh: ""
+    ja: ""
+  contraindications:              # When NOT to use
+    en: ""
+    zh: ""
+    ja: ""
+  warningsAndPrecautions:         # Important safety information
+    en: ""
+    zh: ""
+    ja: ""
+  adverseReactions:               # Side effects
+    en: ""
+    zh: ""
+    ja: ""
+  drugInteractions:               # Interactions with other drugs
+    en: ""
+    zh: ""
+    ja: ""
+  useInSpecificPopulations:       # Pregnancy, nursing, pediatric, geriatric
+    en: ""
+    zh: ""
+    ja: ""
+  overdosage:                     # What to do in case of overdose
+    en: ""
+    zh: ""
+    ja: ""
+  clinicalPharmacology:           # How the drug works
+    en: ""
+    zh: ""
+    ja: ""
+  howSupplied:                    # Packaging and storage
+    en: ""
+    zh: ""
+    ja: ""
+  patientCounselingInfo:          # Information for patients
+    en: ""
+    zh: ""
+    ja: ""
+
+# ============================================
 # METADATA
 # ============================================
 

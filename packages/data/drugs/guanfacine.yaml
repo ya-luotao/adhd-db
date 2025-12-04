@@ -671,6 +671,193 @@ rxnormData:
       tty: SCDF
       relationship: drug_form
   lastUpdated: 2025-12-04
+instructions:
+  indicationsAndUsage:
+    en: |
+      Guanfacine extended-release (Intuniv) is a selective alpha2A-adrenergic receptor agonist indicated for the treatment of:
+      - Attention Deficit Hyperactivity Disorder (ADHD) in patients 6-17 years of age as monotherapy or adjunctive therapy to stimulants
+
+      Note: Immediate-release guanfacine (Tenex) is FDA-approved only for hypertension; ADHD use is off-label. Intuniv is specifically formulated for once-daily ADHD treatment.
+  dosageAndAdministration:
+    en: |
+      ADHD (INTUNIV):
+      - Starting dose: 1 mg once daily
+      - Titration: Increase by increments of no more than 1 mg/week
+      - Target dose: 1-4 mg once daily
+      - Maximum dose: 4 mg/day (children 6-12); 7 mg/day (adolescents 13-17)
+
+      Weight-Based Dosing:
+      - 25-33 kg: 2 mg/day recommended
+      - 34-41 kg: 3 mg/day recommended
+      - 42-49 kg: 4 mg/day recommended
+      - 50-58 kg: 5 mg/day recommended
+      - 59-91 kg: 6 mg/day recommended
+      - ≥91 kg: 7 mg/day recommended
+
+      ADJUNCTIVE THERAPY WITH STIMULANTS:
+      - Same dosing as monotherapy
+      - If discontinuing stimulant, maintain guanfacine dose
+
+      General Instructions:
+      - Take once daily in the morning or evening at same time each day
+      - Do NOT crush, chew, or break tablets (compromises extended-release)
+      - May be taken with or without food
+      - Avoid high-fat meals (increases absorption)
+
+      DISCONTINUATION:
+      - Taper dose gradually over 3-7 days to avoid rebound hypertension
+      - Do NOT stop abruptly
+  dosageForms:
+    en: |
+      Extended-Release Tablets (Intuniv): 1 mg, 2 mg, 3 mg, 4 mg
+      Immediate-Release Tablets (Tenex): 1 mg, 2 mg (not FDA-approved for ADHD)
+  contraindications:
+    en: |
+      Guanfacine is contraindicated in patients with:
+      - Known hypersensitivity to guanfacine or any ingredients in the formulation
+
+      CAUTIONS:
+      - Hypotension
+      - Bradycardia
+      - Syncope
+      - Sedation
+  warningsAndPrecautions:
+    en: |
+      HYPOTENSION, BRADYCARDIA, AND SYNCOPE:
+      - Can cause dose-dependent decreases in blood pressure and heart rate
+      - Syncope has been reported
+      - Use caution in patients at risk: dehydration, hypotension, heart block, bradycardia, cardiovascular disease, or taking antihypertensives
+      - Monitor blood pressure and heart rate before and during treatment
+
+      SEDATION AND SOMNOLENCE:
+      - Common adverse reaction, especially early in treatment
+      - More pronounced with higher doses
+      - Caution patients about driving or operating machinery until effects are known
+      - Sedation may decrease with continued treatment
+
+      CARDIAC CONDUCTION ABNORMALITIES:
+      - May increase risk of QT prolongation with other QT-prolonging drugs
+
+      ABRUPT DISCONTINUATION:
+      - Rebound hypertension may occur
+      - Taper dose gradually (decrease by no more than 1 mg every 3-7 days)
+  adverseReactions:
+    en: |
+      Most Common Adverse Reactions (≥5%):
+      Monotherapy:
+      - Somnolence (38%)
+      - Headache (24%)
+      - Fatigue (14%)
+      - Upper abdominal pain (10%)
+      - Nausea (6%)
+      - Lethargy (6%)
+      - Dizziness (6%)
+      - Irritability (6%)
+      - Hypotension/decreased blood pressure (6%)
+      - Decreased appetite (5%)
+
+      Adjunctive Therapy with Stimulants:
+      - Headache
+      - Insomnia
+      - Somnolence
+      - Fatigue
+      - Dizziness
+      - Abdominal pain
+  drugInteractions:
+    en: |
+      USE WITH CAUTION:
+      - CYP3A4 Inhibitors (ketoconazole, ritonavir): Increase guanfacine plasma concentrations; consider dose reduction
+      - CYP3A4 Inducers (rifampin): Decrease guanfacine plasma concentrations; consider dose increase
+      - Antihypertensives: Additive effects on blood pressure and heart rate
+      - CNS Depressants: Additive sedative effects
+      - Alcohol: Additive sedation and CNS depression
+      - Valproic acid: May increase valproic acid levels
+
+      NO SIGNIFICANT INTERACTIONS:
+      - No clinically significant interaction with methylphenidate or lisdexamfetamine when used as adjunctive therapy
+  useInSpecificPopulations:
+    en: |
+      PREGNANCY:
+      - Category B (animal studies showed no risk; no adequate human studies)
+      - Use only if clearly needed
+
+      LACTATION:
+      - Unknown if excreted in human milk
+      - Consider benefits vs. risks before use during breastfeeding
+
+      PEDIATRIC USE:
+      - Safety and efficacy established for patients 6-17 years
+      - Not studied in children under 6 years
+
+      GERIATRIC USE:
+      - Clinical studies did not include sufficient patients 65 and older
+
+      RENAL IMPAIRMENT:
+      - Consider dose reduction in patients with significant renal impairment
+
+      HEPATIC IMPAIRMENT:
+      - Consider dose reduction in patients with hepatic impairment
+  overdosage:
+    en: |
+      SIGNS AND SYMPTOMS:
+      - Drowsiness, lethargy
+      - Bradycardia
+      - Hypotension
+      - Initial hypertensive response possible
+
+      TREATMENT:
+      - Provide supportive care
+      - Monitor vital signs
+      - Gastric lavage if recent ingestion
+      - Guanfacine is not dialyzable in clinically significant amounts
+  clinicalPharmacology:
+    en: |
+      MECHANISM OF ACTION:
+      Guanfacine is a selective alpha2A-adrenergic receptor agonist. It is thought to work in ADHD by:
+      - Strengthening prefrontal cortex function
+      - Enhancing working memory
+      - Reducing distractibility
+      - Improving impulse control
+      - Reducing sympathetic nervous system activity
+
+      Unlike stimulants, guanfacine does not increase dopamine in the nucleus accumbens, which may explain its lack of abuse potential.
+
+      PHARMACOKINETICS:
+      - Absorption: Peak plasma concentration at 5 hours (extended-release)
+      - Distribution: 70% protein bound; moderate volume of distribution
+      - Metabolism: Hepatic via CYP3A4
+      - Half-life: 17 hours (extended-release); allows once-daily dosing
+      - Excretion: 80% renal (50% unchanged)
+  howSupplied:
+    en: |
+      STORAGE AND HANDLING:
+      - Store at 25°C (77°F); excursions permitted to 15-30°C (59-86°F)
+      - Protect from light and moisture
+
+      Not a Controlled Substance - No DEA Schedule
+  patientCounselingInfo:
+    en: |
+      IMPORTANT PATIENT INFORMATION:
+
+      1. DOSING: Take at the same time each day (morning or evening). Swallow tablets whole - do NOT crush, chew, or break.
+
+      2. DO NOT STOP SUDDENLY: This medication must be tapered gradually to avoid rebound high blood pressure. Talk to your doctor before stopping.
+
+      3. DROWSINESS: This medication commonly causes drowsiness, especially when starting. Avoid driving or operating machinery until you know how it affects you.
+
+      4. LOW BLOOD PRESSURE: You may feel dizzy when standing up quickly. Rise slowly from sitting or lying positions.
+
+      5. AVOID ALCOHOL: Alcohol increases drowsiness and can worsen side effects.
+
+      6. FOOD: May be taken with or without food. Avoid high-fat meals as they increase absorption.
+
+      7. HEART MONITORING: Blood pressure and heart rate will be checked regularly during treatment.
+
+      8. MISSED DOSE: If you miss a dose, skip it if more than 2 consecutive doses are missed; consult your doctor about restarting.
+
+      9. NOT A STIMULANT: This is a non-stimulant medication. It may take 2-3 weeks to see full effect.
+
+      10. ADJUNCTIVE USE: This medication can be used alone or with stimulant medications.
 lastUpdated: 2025-12-04
 sources:
   - https://www.goodrx.com/conditions/adhd/non-stimulant-adhd-meds

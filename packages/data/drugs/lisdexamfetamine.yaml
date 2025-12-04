@@ -816,6 +816,198 @@ rxnormData:
       name: lisdexamfetamine Oral Capsule
       tty: SCDF
       description: Ingredient + dose form
+instructions:
+  indicationsAndUsage:
+    en: |
+      Lisdexamfetamine dimesylate is a central nervous system (CNS) stimulant indicated for the treatment of:
+      - Attention Deficit Hyperactivity Disorder (ADHD) in patients 6 years of age and older
+      - Moderate to severe Binge Eating Disorder (BED) in adults
+
+      Lisdexamfetamine is a prodrug of dextroamphetamine. It is converted to the active drug dextroamphetamine in the body. ADHD should be diagnosed according to DSM criteria based upon a complete history and evaluation of the patient.
+  dosageAndAdministration:
+    en: |
+      ADHD:
+      - Initial dose: 30 mg once daily in the morning
+      - May increase in increments of 10 mg or 20 mg at weekly intervals
+      - Maximum dose: 70 mg/day
+
+      Dosing by Age:
+      - Children (6-12 years): Start 30 mg, max 70 mg/day
+      - Adolescents (13-17 years): Start 30 mg, max 70 mg/day
+      - Adults: Start 30 mg, max 70 mg/day
+
+      BINGE EATING DISORDER:
+      - Initial dose: 30 mg once daily in the morning
+      - Increase by 20 mg at weekly intervals
+      - Target dose: 50-70 mg/day
+      - Maximum dose: 70 mg/day
+
+      General Instructions:
+      - Take in the morning with or without food
+      - Avoid afternoon doses to prevent insomnia
+      - Capsules may be swallowed whole OR opened and contents dissolved in water, yogurt, or orange juice
+      - If dissolved, consume entire contents immediately
+      - Chewable tablets: chew thoroughly before swallowing
+  dosageForms:
+    en: |
+      Capsules: 10 mg, 20 mg, 30 mg, 40 mg, 50 mg, 60 mg, 70 mg
+      Chewable Tablets: 10 mg, 20 mg, 30 mg, 40 mg, 50 mg, 60 mg
+      Oral Solution: Available in some markets
+  contraindications:
+    en: |
+      Lisdexamfetamine is contraindicated in patients with:
+      - Known hypersensitivity to amphetamine products or any components (angioedema and anaphylaxis reported)
+      - Concurrent treatment with monoamine oxidase inhibitors (MAOIs), or within 14 days of discontinuing MAOI treatment
+      - Not indicated or recommended for weight loss (serious cardiovascular events reported)
+  warningsAndPrecautions:
+    en: |
+      SERIOUS CARDIOVASCULAR REACTIONS:
+      - Sudden death in patients with pre-existing structural cardiac abnormalities or other serious heart problems has been reported
+      - Sudden death, stroke, and myocardial infarction reported in adults
+      - Avoid use in patients with known serious structural cardiac abnormalities, cardiomyopathy, serious heart rhythm abnormalities, coronary artery disease, or other serious cardiac problems
+
+      BLOOD PRESSURE AND HEART RATE INCREASES:
+      - Monitor blood pressure and pulse during treatment
+      - Use with caution in patients for whom blood pressure increases may be problematic
+
+      PSYCHIATRIC ADVERSE REACTIONS:
+      - May exacerbate symptoms of behavior disturbance and thought disorder in patients with pre-existing psychotic disorder
+      - May induce a mixed/manic episode in patients with bipolar disorder
+      - May cause treatment-emergent psychotic or manic symptoms (hallucinations, delusional thinking, mania) in children and adolescents without prior history
+
+      SUPPRESSION OF GROWTH:
+      - Monitor height and weight in pediatric patients during treatment
+
+      PERIPHERAL VASCULOPATHY (Raynaud's Phenomenon):
+      - Monitor for digital changes during treatment
+
+      SEROTONIN SYNDROME:
+      - Risk when co-administered with serotonergic drugs; discontinue if occurs
+  adverseReactions:
+    en: |
+      Most Common Adverse Reactions in ADHD (≥5%):
+      - Decreased appetite
+      - Insomnia
+      - Dry mouth
+      - Upper abdominal pain
+      - Irritability
+      - Nausea
+      - Weight loss
+      - Dizziness
+      - Diarrhea
+      - Affect lability
+
+      Most Common Adverse Reactions in BED (≥5%):
+      - Dry mouth
+      - Insomnia
+      - Decreased appetite
+      - Increased heart rate
+      - Constipation
+      - Feeling jittery
+      - Anxiety
+  drugInteractions:
+    en: |
+      CONTRAINDICATED:
+      - MAO Inhibitors: Do not use during or within 14 days of MAOI treatment. Risk of hypertensive crisis.
+
+      USE WITH CAUTION:
+      - Serotonergic drugs: Risk of serotonin syndrome
+      - Antihypertensive drugs: May decrease effectiveness
+      - Acidifying agents (urinary): May decrease amphetamine blood levels
+      - Alkalinizing agents: May increase amphetamine blood levels
+      - CYP2D6 inhibitors: May potentiate amphetamine effects
+      - Tricyclic antidepressants: Enhanced activity of TCAs
+  useInSpecificPopulations:
+    en: |
+      PREGNANCY:
+      - Category C. May cause fetal harm. Use only if potential benefit justifies risk to fetus.
+      - Amphetamines may cause premature delivery, low birth weight, and withdrawal symptoms in infants.
+
+      LACTATION:
+      - Amphetamines are excreted in human milk. Advise to avoid breastfeeding or use alternative treatment.
+
+      PEDIATRIC USE:
+      - ADHD: Safety and efficacy established in patients 6 years and older
+      - Not recommended for children under 6
+      - Long-term growth effects should be monitored
+
+      GERIATRIC USE:
+      - Clinical studies did not include sufficient patients 65 and older
+
+      RENAL IMPAIRMENT:
+      - Severe impairment (GFR <30): Maximum dose 50 mg/day
+      - ESRD: Maximum dose 30 mg/day
+
+      HEPATIC IMPAIRMENT:
+      - No dose adjustment required for mild to moderate impairment
+  overdosage:
+    en: |
+      SIGNS AND SYMPTOMS:
+      - Restlessness, tremor, hyperreflexia
+      - Rapid respiration, confusion
+      - Assaultiveness, hallucinations, panic states
+      - Hyperpyrexia, rhabdomyolysis
+      - Cardiovascular: arrhythmias, hypertension or hypotension
+      - Gastrointestinal: nausea, vomiting, diarrhea, abdominal cramps
+      - Fatigue and depression following CNS stimulation
+      - Convulsions, coma (may be fatal)
+
+      TREATMENT:
+      - Consult Poison Control Center (1-800-222-1222)
+      - Provide symptomatic and supportive care
+      - Administer activated charcoal if ingestion recent
+      - Maintain adequate circulation and respiratory exchange
+      - Treat hyperpyrexia with cooling measures
+      - Monitor cardiac status
+  clinicalPharmacology:
+    en: |
+      MECHANISM OF ACTION:
+      Lisdexamfetamine is a prodrug of dextroamphetamine. After oral administration, lisdexamfetamine is converted to dextroamphetamine. Dextroamphetamine is thought to block the reuptake of norepinephrine and dopamine into the presynaptic neuron and increase the release of these monoamines into the extraneuronal space. The prodrug design provides:
+      - Smoother onset of action
+      - Longer duration of effect
+      - Reduced potential for abuse
+
+      PHARMACOKINETICS:
+      - Absorption: Rapidly absorbed; peak plasma concentration 3.5 hours (d-amphetamine)
+      - Distribution: Does not bind to plasma proteins
+      - Metabolism: Converted to dextroamphetamine and L-lysine primarily in blood
+      - Half-life: Less than 1 hour (lisdexamfetamine); approximately 10 hours (d-amphetamine)
+      - Excretion: 96% recovered in urine; 42% as amphetamine
+  howSupplied:
+    en: |
+      STORAGE AND HANDLING:
+      - Store at 25°C (77°F); excursions permitted to 15-30°C (59-86°F)
+      - Protect from light
+      - Keep container tightly closed
+      - Dispense in tight, light-resistant container
+
+      DEA SCHEDULE:
+      - Schedule II Controlled Substance
+
+      Keep out of reach of children. Store in a secure place.
+  patientCounselingInfo:
+    en: |
+      IMPORTANT PATIENT INFORMATION:
+
+      1. ABUSE AND DEPENDENCE: This medicine has potential for abuse. Keep in a safe place to prevent misuse and abuse. Selling or giving away this medication is against the law.
+
+      2. CARDIOVASCULAR RISKS: Report immediately any chest pain, shortness of breath, fainting, or rapid heartbeat.
+
+      3. PSYCHIATRIC EFFECTS: Report any new or worsening mental symptoms including hallucinations, aggressive behavior, paranoia, or mood changes.
+
+      4. CIRCULATION PROBLEMS: Report any unexplained wounds on fingers or toes, or changes in skin color.
+
+      5. SUPPRESSED GROWTH: Height and weight will be monitored during treatment in children.
+
+      6. PREGNANCY: Tell your doctor if you are pregnant, planning to become pregnant, or breastfeeding.
+
+      7. DOSING: Take in the morning. Capsules may be opened and dissolved in water. Avoid afternoon doses.
+
+      8. MEDICATION GUIDE: Read the Medication Guide before starting and with each refill.
+
+      9. DRIVING: May cause dizziness; use caution until effects are known.
+
+      10. BINGE EATING: This medication is not for weight loss. Serious cardiovascular events have occurred in adults using CNS stimulants for weight loss.
   brandMappings:
     - brandName: Arynta
       rxcui: "2726049"

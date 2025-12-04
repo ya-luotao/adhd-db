@@ -1003,6 +1003,199 @@ rxnormData:
       name: amphetamine / dextroamphetamine Extended Release Oral Capsule
       tty: SCDF
       description: Ingredient + dose form
+instructions:
+  indicationsAndUsage:
+    en: |
+      Mixed amphetamine salts (Adderall/Adderall XR) is a central nervous system (CNS) stimulant indicated for the treatment of:
+      - Attention Deficit Hyperactivity Disorder (ADHD) in patients 3 years of age and older (IR) or 6 years and older (XR)
+      - Narcolepsy (IR formulation only)
+
+      The drug contains a combination of amphetamine and dextroamphetamine salts (75% dextroamphetamine, 25% levoamphetamine). ADHD should be diagnosed according to DSM criteria based upon a complete history and evaluation.
+  dosageAndAdministration:
+    en: |
+      IMMEDIATE-RELEASE (ADDERALL):
+      - Children 3-5 years: Start 2.5 mg daily; increase by 2.5 mg weekly
+      - Children 6+ years: Start 5 mg once or twice daily; increase by 5 mg weekly
+      - Adults: Start 5 mg once or twice daily; maximum 40 mg/day in divided doses
+      - Usually given in 2-3 divided doses, 4-6 hours apart
+      - First dose upon awakening
+
+      EXTENDED-RELEASE (ADDERALL XR):
+      - Children 6-12 years: Start 5-10 mg once daily in morning; increase by 5-10 mg weekly; maximum 30 mg/day
+      - Adolescents 13-17 years: Start 10 mg once daily; maximum 20 mg/day
+      - Adults: Start 20 mg once daily in morning; maximum 60 mg/day
+
+      MYDAYIS (Triple-Bead XR):
+      - Adults: Start 12.5 mg once daily in morning; maximum 50 mg/day
+      - For 16-hour coverage
+
+      General Instructions:
+      - Take in the morning to avoid insomnia
+      - Extended-release capsules may be opened and sprinkled on applesauce
+      - Swallow applesauce mixture immediately without chewing
+      - Avoid afternoon doses
+  dosageForms:
+    en: |
+      Immediate-Release Tablets (Adderall): 5 mg, 7.5 mg, 10 mg, 12.5 mg, 15 mg, 20 mg, 30 mg
+      Extended-Release Capsules (Adderall XR): 5 mg, 10 mg, 15 mg, 20 mg, 25 mg, 30 mg
+      Triple-Bead Extended-Release Capsules (Mydayis): 12.5 mg, 25 mg, 37.5 mg, 50 mg
+  contraindications:
+    en: |
+      Mixed amphetamine salts are contraindicated in patients with:
+      - Known hypersensitivity or idiosyncrasy to sympathomimetic amines
+      - Advanced arteriosclerosis, symptomatic cardiovascular disease
+      - Moderate to severe hypertension
+      - Hyperthyroidism
+      - Known hypersensitivity or idiosyncrasy to the amphetamines
+      - Glaucoma
+      - Agitated states
+      - History of drug abuse
+      - During or within 14 days of treatment with MAOIs
+  warningsAndPrecautions:
+    en: |
+      SERIOUS CARDIOVASCULAR REACTIONS:
+      - Sudden death in children and adolescents with structural cardiac abnormalities or other serious heart problems
+      - Sudden death, stroke, and myocardial infarction in adults
+      - Avoid in patients with known structural cardiac abnormalities, cardiomyopathy, serious heart rhythm abnormalities, or other serious cardiac problems
+
+      BLOOD PRESSURE AND HEART RATE INCREASES:
+      - May cause modest increases in average blood pressure (2-4 mmHg) and heart rate (3-6 bpm)
+      - Monitor blood pressure and pulse at appropriate intervals
+
+      PSYCHIATRIC ADVERSE REACTIONS:
+      - Exacerbation of Pre-existing Psychosis: May worsen symptoms
+      - Induction of Manic Episode in Bipolar Patients: Screen for bipolar disorder
+      - New Psychotic or Manic Symptoms: May occur at recommended doses
+
+      LONG-TERM SUPPRESSION OF GROWTH:
+      - Monitor growth in children; consider treatment interruption if growth is not as expected
+
+      SEIZURES:
+      - May lower convulsive threshold; use caution in patients with history of seizures
+  adverseReactions:
+    en: |
+      Most Common Adverse Reactions (≥5%):
+      - Loss of appetite
+      - Difficulty falling asleep
+      - Abdominal pain
+      - Emotional lability
+      - Vomiting
+      - Nervousness
+      - Nausea
+      - Fever
+
+      Other Notable Adverse Reactions:
+      - Weight loss
+      - Tachycardia
+      - Dry mouth
+      - Headache
+      - Dizziness
+      - Palpitations
+      - Diarrhea or constipation
+      - Restlessness
+      - Erectile dysfunction (adults)
+  drugInteractions:
+    en: |
+      CONTRAINDICATED:
+      - MAO Inhibitors: Do not use during or within 14 days of MAOI treatment
+
+      USE WITH CAUTION:
+      - Acidifying agents (GI and urinary): Lower blood levels of amphetamine
+      - Alkalinizing agents: Increase blood levels of amphetamine
+      - Tricyclic antidepressants: Enhanced activity; monitor closely
+      - CYP2D6 inhibitors: May increase exposure to dextroamphetamine
+      - Proton pump inhibitors: May alter absorption of Adderall XR
+      - Antihypertensives: Amphetamines may antagonize effects
+      - Haloperidol: Blocks dopamine receptors, inhibiting stimulant effects
+      - Lithium: May inhibit anorectic and stimulatory effects
+      - Norepinephrine: Enhanced adrenergic effects
+      - Phenobarbital, phenytoin: May delay absorption
+  useInSpecificPopulations:
+    en: |
+      PREGNANCY:
+      - Category C. May cause fetal harm. Use only if benefit justifies risk.
+      - Infants born to mothers dependent on amphetamines have increased risk of premature delivery and low birth weight.
+
+      LACTATION:
+      - Amphetamines are excreted in human milk. Not recommended during breastfeeding.
+
+      PEDIATRIC USE:
+      - IR: Safety established for children 3 years and older
+      - XR: Safety established for children 6 years and older
+      - Long-term effects on growth should be monitored
+
+      GERIATRIC USE:
+      - Clinical studies did not include sufficient patients 65 and older
+
+      RENAL IMPAIRMENT:
+      - Prolonged exposure may occur; use with caution
+  overdosage:
+    en: |
+      SIGNS AND SYMPTOMS:
+      - Restlessness, tremor, hyperreflexia, rapid respiration
+      - Confusion, assaultiveness, hallucinations, panic states
+      - Hyperpyrexia, rhabdomyolysis
+      - Cardiovascular effects: arrhythmias, hypertension, hypotension, circulatory collapse
+      - Gastrointestinal symptoms: nausea, vomiting, diarrhea, abdominal cramps
+      - Fatigue, depression (following initial stimulation)
+      - Convulsions, coma (fatal poisoning usually preceded by convulsions and coma)
+
+      TREATMENT:
+      - Consult Poison Control Center (1-800-222-1222)
+      - Manage symptoms and administer supportive care
+      - Gastric lavage or activated charcoal if recent ingestion
+      - External cooling for hyperpyrexia
+      - Maintain adequate circulation and respiratory exchange
+  clinicalPharmacology:
+    en: |
+      MECHANISM OF ACTION:
+      Amphetamines are non-catecholamine sympathomimetic amines with CNS stimulant activity. The mode of therapeutic action in ADHD is not known. Amphetamines are thought to block the reuptake of norepinephrine and dopamine into the presynaptic neuron and increase the release of these monoamines into the extraneuronal space.
+
+      COMPOSITION:
+      - 75% dextroamphetamine salts (d-amphetamine)
+      - 25% levoamphetamine salts (l-amphetamine)
+      This ratio provides both rapid onset and extended duration.
+
+      PHARMACOKINETICS:
+      - Absorption: Well absorbed; peak concentration 3 hours (IR) or 7 hours (XR)
+      - Distribution: Widely distributed; crosses blood-brain barrier
+      - Metabolism: Hepatic via CYP2D6; produces active metabolite norephedrine
+      - Half-life: 9-11 hours (d-amphetamine); 11-14 hours (l-amphetamine)
+      - Excretion: Primarily renal; pH-dependent
+  howSupplied:
+    en: |
+      STORAGE AND HANDLING:
+      - Store at 20-25°C (68-77°F); excursions permitted to 15-30°C (59-86°F)
+      - Protect from light and moisture
+      - Dispense in tight, light-resistant container
+
+      DEA SCHEDULE:
+      - Schedule II Controlled Substance
+
+      Keep out of reach of children. Store in a secure place.
+  patientCounselingInfo:
+    en: |
+      IMPORTANT PATIENT INFORMATION:
+
+      1. ABUSE POTENTIAL: This medicine has high potential for abuse and dependence. Keep secure to prevent misuse. Selling or giving away is illegal and dangerous.
+
+      2. CARDIOVASCULAR RISKS: Report immediately any chest pain, shortness of breath, or fainting. This is especially important if you have known heart problems.
+
+      3. PSYCHIATRIC EFFECTS: Report any new or worsening mental symptoms including hallucinations, delusions, mania, or aggressive behavior.
+
+      4. GROWTH MONITORING: Height and weight will be monitored in children during treatment.
+
+      5. DOSING: Take exactly as prescribed. First dose upon awakening. Avoid late afternoon/evening doses. Do not crush or chew extended-release capsules.
+
+      6. PREGNANCY/NURSING: Tell your doctor if you are pregnant, planning to become pregnant, or breastfeeding.
+
+      7. GENERIC SUBSTITUTION: Extended-release generics may have different release characteristics. Discuss any changes with your doctor.
+
+      8. DRIVING: May cause dizziness; use caution until effects are known.
+
+      9. MISSED DOSE: If missed in morning, do not take in afternoon/evening. Resume next morning.
+
+      10. SUPPLY ISSUES: There have been recurring shortages. Plan ahead for refills.
   brandMappings:
     - brandName: Evekeo
       rxcui: "1600688"
