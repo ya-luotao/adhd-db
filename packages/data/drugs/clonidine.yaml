@@ -535,8 +535,95 @@ travelRules:
         zh: "可乐定在欧盟可用。无特殊进口要求。"
         ja: "クロニジンはEUで入手可能です。特別な輸入要件はありません。"
 
+# RxNorm Data (from NLM RxNorm/RxNav)
+# Drug name normalization and relationship mapping
+rxnormData:
+  # Primary ingredient-level RxCUI
+  ingredientRxcui: "2599"
+  ingredientName: "clonidine"
+
+  # RxCUI mappings at different term type levels
+  rxcuiMappings:
+    - rxcui: "2599"
+      name: "clonidine"
+      tty: "IN"
+      description: "Base ingredient"
+    - rxcui: "2600"
+      name: "clonidine hydrochloride"
+      tty: "PIN"
+      description: "Precise ingredient (salt form)"
+    - rxcui: "884057"
+      name: "clonidine Oral Tablet"
+      tty: "SCDF"
+      description: "Ingredient + dose form"
+    - rxcui: "884064"
+      name: "clonidine Extended Release Oral Tablet"
+      tty: "SCDF"
+      description: "Ingredient + dose form (ER for ADHD)"
+    - rxcui: "884070"
+      name: "clonidine Transdermal System"
+      tty: "SCDF"
+      description: "Ingredient + dose form (patch)"
+
+  # Brand name to RxCUI mappings
+  brandMappings:
+    - brandName: "Kapvay"
+      rxcui: "884921"
+      manufacturer: "Concordia"
+      region: "US"
+    - brandName: "Catapres"
+      rxcui: "202352"
+      manufacturer: "Boehringer"
+      region: "US"
+    - brandName: "Catapres-TTS"
+      rxcui: "884068"
+      manufacturer: "Boehringer"
+      region: "US"
+
+  # Drug synonyms and alternative names
+  synonyms:
+    - name: "clonidine"
+      type: "generic"
+      source: "RxNorm"
+    - name: "clonidine hydrochloride"
+      type: "chemical"
+      source: "RxNorm"
+    - name: "Kapvay"
+      type: "brand"
+      source: "RxNorm"
+    - name: "Catapres"
+      type: "brand"
+      source: "RxNorm"
+    - name: "可乐定"
+      type: "generic"
+      source: "Chinese"
+    - name: "クロニジン"
+      type: "generic"
+      source: "Japanese"
+
+  # Related drugs
+  relatedDrugs:
+    - rxcui: "884057"
+      name: "clonidine Oral Tablet"
+      tty: "SCDF"
+      relationship: "drug_form"
+    - rxcui: "884064"
+      name: "clonidine Extended Release Oral Tablet"
+      tty: "SCDF"
+      relationship: "drug_form"
+    - rxcui: "884070"
+      name: "clonidine Transdermal System"
+      tty: "SCDF"
+      relationship: "drug_form"
+    - rxcui: "5176"
+      name: "guanfacine"
+      tty: "IN"
+      relationship: "related_class"
+
+  lastUpdated: "2025-12-04"
+
 # Metadata
-lastUpdated: 2025-12-02
+lastUpdated: 2025-12-04
 
 sources:
   - "https://www.goodrx.com/conditions/adhd/non-stimulant-adhd-meds"

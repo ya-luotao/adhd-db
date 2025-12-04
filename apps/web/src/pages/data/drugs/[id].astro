@@ -362,6 +362,127 @@ const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().get
     )}
 
     <!-- ============================================
+         RXNORM DRUG IDENTIFIERS
+         ============================================ -->
+    {drug.rxnormData && (
+      <section class="rxnorm-section">
+        <h2 class="section-title">
+          <span class="title-marker"></span>
+          {t('drugs.rxnormData')}
+        </h2>
+
+        <div class="rxnorm-content">
+          <!-- Primary Ingredient -->
+          <div class="rxnorm-primary">
+            <div class="rxnorm-ingredient">
+              <span class="rxnorm-label">RxNorm Ingredient</span>
+              <div class="rxnorm-value">
+                <span class="ingredient-name">{drug.rxnormData.ingredientName}</span>
+                <a
+                  href={`https://mor.nlm.nih.gov/RxNav/search?searchBy=RXCUI&searchTerm=${drug.rxnormData.ingredientRxcui}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="rxcui-badge"
+                  title="View in RxNav"
+                >
+                  RxCUI: {drug.rxnormData.ingredientRxcui}
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Synonyms/Alternative Names -->
+          {drug.rxnormData.synonyms && drug.rxnormData.synonyms.length > 0 && (
+            <div class="rxnorm-synonyms">
+              <span class="rxnorm-label">{t('drugs.synonyms')}</span>
+              <div class="synonym-chips">
+                {drug.rxnormData.synonyms.map((syn: any) => (
+                  <span class="synonym-chip" data-type={syn.type}>
+                    {syn.name}
+                    <span class="chip-type">{syn.type}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <!-- Brand Mappings -->
+          {drug.rxnormData.brandMappings && drug.rxnormData.brandMappings.length > 0 && (
+            <div class="rxnorm-brands">
+              <span class="rxnorm-label">{t('drugs.brandMappings')}</span>
+              <div class="brand-cards">
+                {drug.rxnormData.brandMappings.map((brand: any) => (
+                  <div class="brand-card">
+                    <span class="brand-name">{brand.brandName}</span>
+                    <div class="brand-meta">
+                      {brand.rxcui && (
+                        <a
+                          href={`https://mor.nlm.nih.gov/RxNav/search?searchBy=RXCUI&searchTerm=${brand.rxcui}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="brand-rxcui"
+                        >
+                          {brand.rxcui}
+                        </a>
+                      )}
+                      {brand.manufacturer && <span class="brand-mfr">{brand.manufacturer}</span>}
+                      {brand.region && <span class="brand-region">{brand.region}</span>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <!-- Related Drug Forms -->
+          {drug.rxnormData.relatedDrugs && drug.rxnormData.relatedDrugs.length > 0 && (
+            <div class="rxnorm-related">
+              <span class="rxnorm-label">{t('drugs.relatedDrugs')}</span>
+              <div class="related-list">
+                {drug.rxnormData.relatedDrugs.slice(0, 8).map((rel: any) => (
+                  <a
+                    href={`https://mor.nlm.nih.gov/RxNav/search?searchBy=RXCUI&searchTerm=${rel.rxcui}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="related-item"
+                  >
+                    <span class="related-name">{rel.name}</span>
+                    <span class="related-meta">
+                      <span class="related-tty">{rel.tty}</span>
+                      <span class="related-rel">{rel.relationship.replace('_', ' ')}</span>
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div class="rxnorm-source">
+            <span class="source-text">{t('drugs.rxnormSource')}</span>
+            <a
+              href="https://www.nlm.nih.gov/research/umls/rxnorm/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="source-link"
+            >
+              NLM RxNorm
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- ============================================
          REGIONAL APPROVALS
          ============================================ -->
     <section class="approvals-section">
@@ -1552,6 +1673,288 @@ const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().get
       width: 100%;
       height: 180px;
     }
+  }
+
+  /* ============================================
+     RXNORM SECTION
+     ============================================ */
+
+  .rxnorm-section {
+    margin-bottom: var(--space-8);
+  }
+
+  .rxnorm-content {
+    background: var(--dossier-paper);
+    border: 1px solid var(--dossier-border);
+    border-radius: 4px;
+    padding: var(--space-5);
+  }
+
+  .rxnorm-primary {
+    margin-bottom: var(--space-5);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--dossier-border);
+  }
+
+  .rxnorm-ingredient {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .rxnorm-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--dossier-muted);
+  }
+
+  .rxnorm-value {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .ingredient-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--dossier-accent);
+    text-transform: capitalize;
+  }
+
+  .rxcui-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--dossier-blue);
+    background: rgba(43, 108, 176, 0.1);
+    padding: var(--space-1) var(--space-3);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+
+  .rxcui-badge:hover {
+    background: var(--dossier-blue);
+    color: #fff;
+  }
+
+  .rxnorm-synonyms,
+  .rxnorm-brands,
+  .rxnorm-related {
+    margin-bottom: var(--space-5);
+  }
+
+  .synonym-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+  }
+
+  .synonym-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-3);
+    background: var(--dossier-cream);
+    border: 1px solid var(--dossier-border);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: var(--dossier-ink);
+    transition: border-color 0.15s;
+  }
+
+  .synonym-chip:hover {
+    border-color: var(--dossier-gold);
+  }
+
+  .synonym-chip[data-type="brand"] {
+    background: rgba(43, 108, 176, 0.08);
+  }
+
+  .synonym-chip[data-type="abbreviation"] {
+    background: rgba(168, 85, 247, 0.1);
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+  }
+
+  .synonym-chip[data-type="chemical"] {
+    background: rgba(34, 197, 94, 0.08);
+  }
+
+  .chip-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--dossier-muted);
+    padding: 1px 4px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 2px;
+  }
+
+  .brand-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--space-3);
+    margin-top: var(--space-2);
+  }
+
+  .brand-card {
+    padding: var(--space-3);
+    background: var(--dossier-cream);
+    border: 1px solid var(--dossier-border);
+    border-radius: 4px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .brand-card:hover {
+    border-color: var(--dossier-gold);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .brand-name {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--dossier-accent);
+    margin-bottom: var(--space-2);
+  }
+
+  .brand-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    align-items: center;
+  }
+
+  .brand-rxcui {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--dossier-blue);
+    text-decoration: none;
+    padding: 2px 6px;
+    background: rgba(43, 108, 176, 0.1);
+    border-radius: 3px;
+    transition: all 0.15s;
+  }
+
+  .brand-rxcui:hover {
+    background: var(--dossier-blue);
+    color: #fff;
+  }
+
+  .brand-mfr,
+  .brand-region {
+    font-size: 0.65rem;
+    color: var(--dossier-muted);
+  }
+
+  .brand-region {
+    padding: 1px 4px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 2px;
+  }
+
+  .related-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+  }
+
+  .related-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-3);
+    background: var(--dossier-cream);
+    border: 1px solid var(--dossier-border);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+
+  .related-item:hover {
+    border-color: var(--dossier-gold);
+    background: var(--dossier-paper);
+  }
+
+  .related-name {
+    font-size: 0.75rem;
+    color: var(--dossier-ink);
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .related-meta {
+    display: flex;
+    gap: var(--space-2);
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .related-tty,
+  .related-rel {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    padding: 2px 4px;
+    border-radius: 2px;
+  }
+
+  .related-tty {
+    color: var(--dossier-blue);
+    background: rgba(43, 108, 176, 0.1);
+  }
+
+  .related-rel {
+    color: var(--dossier-muted);
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  .rxnorm-source {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding-top: var(--space-4);
+    margin-top: var(--space-4);
+    border-top: 1px dashed var(--dossier-border);
+  }
+
+  .rxnorm-source .source-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--dossier-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .rxnorm-source .source-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--dossier-blue);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .rxnorm-source .source-link:hover {
+    color: var(--dossier-accent);
   }
 
   /* ============================================

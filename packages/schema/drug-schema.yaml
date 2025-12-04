@@ -342,6 +342,60 @@ faersData:
   lastUpdated: ""
 
 # ============================================
+# RXNORM DATA (from NLM RxNorm/RxNav API)
+# Drug name normalization and relationship mapping
+# @see https://www.nlm.nih.gov/research/umls/rxnorm/overview.html
+# ============================================
+
+rxnormData:
+  # Primary ingredient-level RxCUI (base substance)
+  ingredientRxcui: ""              # e.g., "6887" for methylphenidate
+
+  # Human-readable ingredient name from RxNorm
+  ingredientName: ""               # e.g., "methylphenidate"
+
+  # RxCUI mappings at different term type levels
+  # TTY (Term Type) Reference:
+  #   IN  = Ingredient (base substance)
+  #   PIN = Precise Ingredient (includes salt form)
+  #   SCD = Semantic Clinical Drug (ingredient + strength + form)
+  #   SBD = Semantic Branded Drug (brand + strength + form)
+  #   SCDF = Semantic Clinical Drug Form (ingredient + form)
+  #   SBDF = Semantic Branded Drug Form (brand + form)
+  #   BN  = Brand Name
+  rxcuiMappings:
+    - rxcui: ""                    # RxNorm Concept Unique Identifier
+      name: ""                     # Drug name at this level
+      tty: ""                      # Term Type (IN, PIN, SCD, SBD, BN, etc.)
+      description: ""              # Human-readable description
+
+  # Brand name to RxCUI mappings
+  # Links brand names to their specific RxCUI for precise identification
+  brandMappings:
+    - brandName: ""                # e.g., "Concerta"
+      rxcui: ""                    # RxCUI for this brand
+      manufacturer: ""             # Optional: manufacturer name
+      region: ""                   # Optional: region (US, EU, etc.)
+
+  # Drug synonyms and alternative names
+  # Used for search normalization - any of these names should find this drug
+  synonyms:
+    - name: ""                     # Alternative name
+      type: ""                     # generic | brand | abbreviation | chemical | common
+      source: ""                   # Optional: source of this synonym
+
+  # Related drugs (same ingredient, different forms/brands)
+  # Shows the drug relationship graph
+  relatedDrugs:
+    - rxcui: ""                    # RxCUI of related drug
+      name: ""                     # Drug name
+      tty: ""                      # Term type
+      relationship: ""             # Relationship type (clinical_drug, branded_drug, drug_form)
+
+  # Data freshness
+  lastUpdated: ""                  # Date when RxNorm data was last fetched
+
+# ============================================
 # METADATA
 # ============================================
 

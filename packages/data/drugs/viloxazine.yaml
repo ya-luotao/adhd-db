@@ -511,8 +511,68 @@ travelRules:
         zh: "维洛沙嗪在欧盟未获批准。20世纪70-80年代曾作为抗抑郁药销售但已撤市。旅行携带个人使用量应该被允许。"
         ja: "ビロキサジンはEUでは未承認です。1970〜80年代にうつ病薬として販売されていましたが撤退。旅行用の個人使用分は許可されるはずです。"
 
+# RxNorm Data (from NLM RxNorm/RxNav)
+# Drug name normalization and relationship mapping
+rxnormData:
+  # Primary ingredient-level RxCUI
+  ingredientRxcui: "11149"
+  ingredientName: "viloxazine"
+
+  # RxCUI mappings at different term type levels
+  rxcuiMappings:
+    - rxcui: "11149"
+      name: "viloxazine"
+      tty: "IN"
+      description: "Base ingredient"
+    - rxcui: "11150"
+      name: "viloxazine hydrochloride"
+      tty: "PIN"
+      description: "Precise ingredient (salt form)"
+    - rxcui: "2477687"
+      name: "viloxazine Extended Release Oral Capsule"
+      tty: "SCDF"
+      description: "Ingredient + dose form"
+
+  # Brand name to RxCUI mappings
+  brandMappings:
+    - brandName: "Qelbree"
+      rxcui: "2477693"
+      manufacturer: "Supernus"
+      region: "US"
+
+  # Drug synonyms and alternative names
+  synonyms:
+    - name: "viloxazine"
+      type: "generic"
+      source: "RxNorm"
+    - name: "viloxazine hydrochloride"
+      type: "chemical"
+      source: "RxNorm"
+    - name: "Qelbree"
+      type: "brand"
+      source: "RxNorm"
+    - name: "维洛沙嗪"
+      type: "generic"
+      source: "Chinese"
+    - name: "ビロキサジン"
+      type: "generic"
+      source: "Japanese"
+
+  # Related drugs (same class - norepinephrine modulators)
+  relatedDrugs:
+    - rxcui: "2477687"
+      name: "viloxazine Extended Release Oral Capsule"
+      tty: "SCDF"
+      relationship: "drug_form"
+    - rxcui: "38400"
+      name: "atomoxetine"
+      tty: "IN"
+      relationship: "related_class"
+
+  lastUpdated: "2025-12-04"
+
 # Metadata
-lastUpdated: 2025-12-02
+lastUpdated: 2025-12-04
 
 sources:
   - "https://www.goodrx.com/conditions/adhd/non-stimulant-adhd-meds"

@@ -565,8 +565,81 @@ travelRules:
         zh: "非管制药物无特殊要求。托莫西汀在欧盟广泛可用。"
         ja: "非規制薬物には特別な要件はありません。アトモキセチンはEUで広く入手可能です。"
 
+# RxNorm Data (from NLM RxNorm/RxNav)
+# Drug name normalization and relationship mapping
+rxnormData:
+  # Primary ingredient-level RxCUI
+  ingredientRxcui: "38400"
+  ingredientName: "atomoxetine"
+
+  # RxCUI mappings at different term type levels
+  rxcuiMappings:
+    - rxcui: "38400"
+      name: "atomoxetine"
+      tty: "IN"
+      description: "Base ingredient"
+    - rxcui: "38401"
+      name: "atomoxetine hydrochloride"
+      tty: "PIN"
+      description: "Precise ingredient (salt form)"
+    - rxcui: "884398"
+      name: "atomoxetine Oral Capsule"
+      tty: "SCDF"
+      description: "Ingredient + dose form"
+    - rxcui: "1996254"
+      name: "atomoxetine Oral Solution"
+      tty: "SCDF"
+      description: "Ingredient + dose form"
+
+  # Brand name to RxCUI mappings
+  brandMappings:
+    - brandName: "Strattera"
+      rxcui: "349591"
+      manufacturer: "Eli Lilly"
+      region: "US"
+
+  # Drug synonyms and alternative names
+  synonyms:
+    - name: "atomoxetine"
+      type: "generic"
+      source: "RxNorm"
+    - name: "atomoxetine hydrochloride"
+      type: "chemical"
+      source: "RxNorm"
+    - name: "ATX"
+      type: "abbreviation"
+      source: "Clinical"
+    - name: "Strattera"
+      type: "brand"
+      source: "RxNorm"
+    - name: "托莫西汀"
+      type: "generic"
+      source: "Chinese"
+    - name: "择思达"
+      type: "brand"
+      source: "Chinese"
+    - name: "アトモキセチン"
+      type: "generic"
+      source: "Japanese"
+    - name: "ストラテラ"
+      type: "brand"
+      source: "Japanese"
+
+  # Related drugs
+  relatedDrugs:
+    - rxcui: "884398"
+      name: "atomoxetine Oral Capsule"
+      tty: "SCDF"
+      relationship: "drug_form"
+    - rxcui: "1996254"
+      name: "atomoxetine Oral Solution"
+      tty: "SCDF"
+      relationship: "drug_form"
+
+  lastUpdated: "2025-12-04"
+
 # Metadata
-lastUpdated: 2025-12-02
+lastUpdated: 2025-12-04
 
 sources:
   - "https://www.goodrx.com/conditions/adhd/non-stimulant-adhd-meds"

@@ -254,6 +254,61 @@ export interface FAERSData {
   lastUpdated?: string;
 }
 
+// RxNorm Data Types
+// RxNorm Term Types
+export type RxNormTermType =
+  | 'IN'      // Ingredient
+  | 'PIN'     // Precise Ingredient
+  | 'MIN'     // Multiple Ingredients
+  | 'SCDC'    // Semantic Clinical Drug Component
+  | 'SCDF'    // Semantic Clinical Drug Form
+  | 'SCDG'    // Semantic Clinical Drug Group
+  | 'SCD'     // Semantic Clinical Drug
+  | 'SBDC'    // Semantic Branded Drug Component
+  | 'SBDF'    // Semantic Branded Drug Form
+  | 'SBDG'    // Semantic Branded Drug Group
+  | 'SBD'     // Semantic Branded Drug
+  | 'BN'      // Brand Name
+  | 'GPCK'    // Generic Pack
+  | 'BPCK';   // Brand Pack
+
+export interface RxNormRxcuiMapping {
+  rxcui: string;
+  name: string;
+  tty: RxNormTermType;
+  description?: string;
+}
+
+export interface RxNormBrandMapping {
+  brandName: string;
+  rxcui: string;
+  manufacturer?: string;
+  region?: string;
+}
+
+export interface RxNormSynonym {
+  name: string;
+  type: 'generic' | 'brand' | 'abbreviation' | 'chemical' | 'common';
+  source?: string;
+}
+
+export interface RxNormRelatedDrug {
+  rxcui: string;
+  name: string;
+  tty: RxNormTermType;
+  relationship: string;
+}
+
+export interface RxNormData {
+  ingredientRxcui: string;
+  ingredientName: string;
+  rxcuiMappings?: RxNormRxcuiMapping[];
+  brandMappings?: RxNormBrandMapping[];
+  synonyms?: RxNormSynonym[];
+  relatedDrugs?: RxNormRelatedDrug[];
+  lastUpdated?: string;
+}
+
 export interface Drug {
   id: string;
   genericName: string | LocalizedField;
@@ -298,6 +353,8 @@ export interface Drug {
   // OpenFDA Data
   fdaData?: FDAData;
   faersData?: FAERSData;
+  // RxNorm Data
+  rxnormData?: RxNormData;
   lastUpdated?: string;
   sources?: string[];
   notes?: string | LocalizedField;
@@ -447,4 +504,99 @@ export function getTerm(id: string): Term | undefined {
 export function getTermsMap(): Map<string, Term> {
   const terms = getTerms();
   return new Map(terms.map(t => [t.id, t]));
+}
+
+// RxNorm Helpers
+
+/**
+ * Search drugs by RxNorm synonym (brand name, generic name, or abbreviation)
+ */
+export function searchDrugBySynonym(query: string): Drug[] {
+  const drugs = getDrugs();
+  const normalizedQuery = query.toLowerCase().trim();
+
+  return drugs.filter(drug => {
+    // Check synonyms
+    const synonyms = drug.rxnormData?.synonyms || [];
+    const synonymMatch = synonyms.some(
+      syn => syn.name.toLowerCase().includes(normalizedQuery)
+    );
+    if (synonymMatch) return true;
+
+    // Check brand mappings
+    const brandMappings = drug.rxnormData?.brandMappings || [];
+    const brandMatch = brandMappings.some(
+      b => b.brandName.toLowerCase().includes(normalizedQuery)
+    );
+    if (brandMatch) return true;
+
+    // Check generic name
+    const genericName = typeof drug.genericName === 'string'
+      ? drug.genericName
+      : drug.genericName.en || '';
+    if (genericName.toLowerCase().includes(normalizedQuery)) return true;
+
+    // Check ingredient name
+    const ingredientName = drug.rxnormData?.ingredientName || '';
+    if (ingredientName.toLowerCase().includes(normalizedQuery)) return true;
+
+    return false;
+  });
+}
+
+/**
+ * Get related drugs for an ingredient (drugs with same ingredient RxCUI)
+ */
+export function getRelatedDrugsByIngredient(ingredientRxcui: string): Drug[] {
+  const drugs = getDrugs();
+  return drugs.filter(
+    drug => drug.rxnormData?.ingredientRxcui === ingredientRxcui
+  );
+}
+
+/**
+ * Get brand names mapped to RxCUI for a drug
+ */
+export function getBrandMappingsForDrug(drug: Drug): RxNormBrandMapping[] {
+  return drug.rxnormData?.brandMappings || [];
+}
+
+/**
+ * Get all drug synonyms grouped by type
+ */
+export function getSynonymsByType(drug: Drug): Record<string, string[]> {
+  const synonyms = drug.rxnormData?.synonyms || [];
+  const grouped: Record<string, string[]> = {};
+
+  for (const syn of synonyms) {
+    if (!grouped[syn.type]) {
+      grouped[syn.type] = [];
+    }
+    grouped[syn.type].push(syn.name);
+  }
+
+  return grouped;
+}
+
+/**
+ * Get human-readable description for RxNorm term type
+ */
+export function getRxNormTermTypeDescription(tty: RxNormTermType): string {
+  const descriptions: Record<RxNormTermType, string> = {
+    'IN': 'Base ingredient',
+    'PIN': 'Precise ingredient (with salt form)',
+    'MIN': 'Multiple ingredients',
+    'SCDC': 'Ingredient + strength',
+    'SCDF': 'Ingredient + dose form',
+    'SCDG': 'Dose form group',
+    'SCD': 'Clinical drug (ingredient + strength + form)',
+    'SBDC': 'Branded ingredient + strength',
+    'SBDF': 'Branded ingredient + dose form',
+    'SBDG': 'Branded dose form group',
+    'SBD': 'Branded drug (brand + strength + form)',
+    'BN': 'Brand name',
+    'GPCK': 'Generic pack',
+    'BPCK': 'Brand pack',
+  };
+  return descriptions[tty] || tty;
 }
