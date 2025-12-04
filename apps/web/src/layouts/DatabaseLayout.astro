@@ -731,6 +731,16 @@ const alternates = [
     color: var(--accent-bold);
   }
 
+  /* Bionic Reading Global Styles */
+  :global(body.bionic-reading) .content {
+    word-spacing: 0.05em;
+    letter-spacing: 0.01em;
+  }
+
+  :global(body.bionic-reading) b.br {
+    font-weight: 700;
+  }
+
   /* MAIN CONTENT */
   .content {
     flex: 1;
@@ -1080,41 +1090,79 @@ const alternates = [
     const bionicToggle = document.getElementById('bionic-toggle');
     const BIONIC_STORAGE_KEY = 'adhd-db-bionic-reading';
 
+    // Selectors for content that should have bionic reading applied
+    const BIONIC_SELECTORS = [
+      '.content p',
+      '.content li',
+      '.content td',
+      '.content .mechanism-text',
+      '.content .warning-text-content',
+      '.content .advisory-text',
+      '.content .instruction-body p',
+      '.content .blackbox-warning p',
+      '.content .faers-disclaimer span',
+      '.content .detail-notes',
+      '.content .check-label',
+      '.content .check-note',
+    ].join(', ');
+
     // Function to apply bionic reading to text content
     function applyBionicReading(enabled: boolean) {
       if (enabled) {
         document.body.classList.add('bionic-reading');
-        // Process all bionic-content elements
-        document.querySelectorAll('.bionic-content p').forEach((p) => {
-          if (!p.getAttribute('data-original')) {
-            p.setAttribute('data-original', p.innerHTML);
+        // Process all content elements
+        document.querySelectorAll(BIONIC_SELECTORS).forEach((el) => {
+          if (!el.getAttribute('data-bionic-original')) {
+            el.setAttribute('data-bionic-original', el.innerHTML);
           }
-          const text = p.getAttribute('data-original') || p.textContent || '';
-          p.innerHTML = convertToBionic(text);
+          const text = el.getAttribute('data-bionic-original') || '';
+          el.innerHTML = convertToBionic(text);
         });
       } else {
         document.body.classList.remove('bionic-reading');
         // Restore original content
-        document.querySelectorAll('.bionic-content p').forEach((p) => {
-          const original = p.getAttribute('data-original');
+        document.querySelectorAll('[data-bionic-original]').forEach((el) => {
+          const original = el.getAttribute('data-bionic-original');
           if (original) {
-            p.innerHTML = original;
+            el.innerHTML = original;
           }
         });
       }
     }
 
     // Convert text to bionic reading format
-    function convertToBionic(text: string): string {
-      // Split into words and process each
-      return text.replace(/\b(\w+)\b/g, (word) => {
-        if (word.length <= 1) return word;
-        // Bold the first half of the word (roughly)
-        const boldLength = Math.ceil(word.length / 2);
-        const boldPart = word.slice(0, boldLength);
-        const normalPart = word.slice(boldLength);
-        return `<strong>${boldPart}</strong>${normalPart}`;
-      });
+    function convertToBionic(html: string): string {
+      // Create a temporary element to parse HTML
+      const temp = document.createElement('div');
+      temp.innerHTML = html;
+
+      // Process text nodes recursively
+      function processNode(node: Node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const text = node.textContent || '';
+          if (text.trim()) {
+            const span = document.createElement('span');
+            span.innerHTML = text.replace(/\b([a-zA-Z\u00C0-\u024F\u1E00-\u1EFF]+)\b/g, (word) => {
+              if (word.length <= 1) return word;
+              // Bold the first half of the word (roughly)
+              const boldLength = Math.ceil(word.length * 0.4);
+              const boldPart = word.slice(0, boldLength);
+              const normalPart = word.slice(boldLength);
+              return `<b class="br">${boldPart}</b>${normalPart}`;
+            });
+            node.parentNode?.replaceChild(span, node);
+          }
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          // Skip certain elements
+          const tagName = (node as Element).tagName.toLowerCase();
+          if (!['script', 'style', 'code', 'pre', 'b', 'strong'].includes(tagName)) {
+            Array.from(node.childNodes).forEach(processNode);
+          }
+        }
+      }
+
+      Array.from(temp.childNodes).forEach(processNode);
+      return temp.innerHTML;
     }
 
     // Initialize bionic reading state from localStorage
@@ -1142,7 +1190,7 @@ const alternates = [
     // Initialize on page load
     initBionicReading();
 
-    // Re-apply bionic reading when new content is loaded (for SPA-like behavior)
+    // Re-apply bionic reading when new content is loaded (for dynamic content)
     const observer = new MutationObserver((mutations) => {
       const stored = localStorage.getItem(BIONIC_STORAGE_KEY);
       if (stored === 'true') {
@@ -1150,10 +1198,10 @@ const alternates = [
           mutation.addedNodes.forEach((node) => {
             if (node.nodeType === Node.ELEMENT_NODE) {
               const el = node as Element;
-              el.querySelectorAll('.bionic-content p').forEach((p) => {
-                if (!p.getAttribute('data-original')) {
-                  p.setAttribute('data-original', p.innerHTML);
-                  p.innerHTML = convertToBionic(p.innerHTML);
+              el.querySelectorAll(BIONIC_SELECTORS).forEach((contentEl) => {
+                if (!contentEl.getAttribute('data-bionic-original')) {
+                  contentEl.setAttribute('data-bionic-original', contentEl.innerHTML);
+                  contentEl.innerHTML = convertToBionic(contentEl.innerHTML);
                 }
               });
             }
