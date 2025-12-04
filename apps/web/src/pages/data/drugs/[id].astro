@@ -731,49 +731,6 @@ const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().get
     )}
 
     <!-- ============================================
-         FORMULATIONS TABLE
-         Clean table with ℞ header
-         ============================================ -->
-    {drug.forms && drug.forms.length > 0 && (
-      <section class="forms-section">
-        <div class="forms-header">
-          <span class="rx-symbol">℞</span>
-          <h2 class="section-title">
-            <span class="title-marker"></span>
-            {t('drugs.forms')}
-          </h2>
-        </div>
-
-        <div class="forms-table">
-          <div class="forms-table-header">
-            <span class="col-form">Form</span>
-            <span class="col-release">Release</span>
-            <span class="col-duration">Duration</span>
-            <span class="col-strengths">Strengths</span>
-          </div>
-          {drug.forms.map((form: any) => (
-            <div class="form-row">
-              <span class="col-form">
-                <span class="form-name">{form.brandName || l(form.typeLabel) || form.type}</span>
-              </span>
-              <span class="col-release">{l(form.releaseTypeLabel) || form.releaseType}</span>
-              <span class="col-duration">{form.durationHours}h</span>
-              <span class="col-strengths">
-                {form.strengths ? (
-                  <span class="strengths-list">
-                    {form.strengths.map((s: string) => (
-                      <span class="strength-pill">{s}</span>
-                    ))}
-                  </span>
-                ) : '—'}
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
-    )}
-
-    <!-- ============================================
          SIDE EFFECTS: HAZMAT WARNING LABELS
          Caution tape stripes, warning triangles
          ============================================ -->
@@ -2766,136 +2723,6 @@ const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().get
   }
 
   /* ============================================
-     FORMS TABLE (Dosage Forms)
-     ============================================ */
-
-  .forms-section {
-    margin-bottom: var(--space-8);
-  }
-
-  .forms-header {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    margin-bottom: var(--space-4);
-  }
-
-  .forms-header .rx-symbol {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--dossier-blue);
-    line-height: 1;
-  }
-
-  .forms-header .section-title {
-    margin: 0;
-    padding-bottom: 0;
-    border-bottom: none;
-  }
-
-  .forms-table {
-    border: 1px solid var(--dossier-border);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .forms-table-header {
-    display: grid;
-    grid-template-columns: 1fr 100px 80px 1fr;
-    gap: var(--space-3);
-    padding: var(--space-3) var(--space-4);
-    background: var(--dossier-cream);
-    border-bottom: 1px solid var(--dossier-border);
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--dossier-muted);
-  }
-
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 100px 80px 1fr;
-    gap: var(--space-3);
-    padding: var(--space-3) var(--space-4);
-    border-bottom: 1px solid var(--dossier-border);
-    font-size: 0.8rem;
-    transition: background 0.15s;
-  }
-
-  .form-row:last-child {
-    border-bottom: none;
-  }
-
-  .form-row:hover {
-    background: var(--dossier-cream);
-  }
-
-  .form-name {
-    font-weight: 600;
-    color: var(--dossier-accent);
-  }
-
-  .col-release {
-    font-size: 0.75rem;
-    color: var(--dossier-muted);
-  }
-
-  .col-duration {
-    font-family: 'DM Mono', monospace;
-    font-weight: 600;
-    color: var(--dossier-blue);
-  }
-
-  .col-strengths .strengths-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-  }
-
-  .strength-pill {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    font-weight: 600;
-    padding: 2px 6px;
-    background: var(--dossier-cream);
-    border: 1px solid var(--dossier-border);
-    border-radius: 10px;
-    color: var(--dossier-accent);
-  }
-
-  @media (max-width: 600px) {
-    .forms-table-header {
-      display: none;
-    }
-
-    .form-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-2);
-    }
-
-    .form-row .col-form {
-      flex: 1;
-      min-width: 120px;
-    }
-
-    .col-release,
-    .col-duration {
-      font-size: 0.7rem;
-    }
-
-    .col-strengths {
-      width: 100%;
-      margin-top: var(--space-1);
-      padding-top: var(--space-2);
-      border-top: 1px dashed var(--dossier-border);
-    }
-  }
-
-  /* ============================================
      HAZMAT SECTION (Side Effects)
      ============================================ */
 
@@ -3340,7 +3167,6 @@ const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().get
   .mechanism-section,
   .structure-section,
   .approvals-section,
-  .forms-section,
   .hazmat-section,
   .archive-section {
     animation: slideUp 0.5s ease-out;
@@ -3349,9 +3175,8 @@ const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().get
   .mechanism-section { animation-delay: 0.05s; }
   .structure-section { animation-delay: 0.08s; }
   .approvals-section { animation-delay: 0.1s; }
-  .forms-section { animation-delay: 0.15s; }
-  .hazmat-section { animation-delay: 0.2s; }
-  .archive-section { animation-delay: 0.25s; }
+  .hazmat-section { animation-delay: 0.15s; }
+  .archive-section { animation-delay: 0.2s; }
 
 </style>
 
