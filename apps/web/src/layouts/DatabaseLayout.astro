@@ -200,6 +200,19 @@ const alternates = [
             </div>
           </div>
 
+          <!-- Bionic Reading Toggle -->
+          <div class="footer-section">
+            <label class="footer-label">{t('bionicReading.label')}</label>
+            <div class="bionic-toggle-wrapper">
+              <button type="button" class="bionic-toggle" id="bionic-toggle" title={t('bionicReading.tooltip')}>
+                <span class="toggle-track">
+                  <span class="toggle-thumb"></span>
+                </span>
+                <span class="toggle-label">{t('bionicReading.toggle')}</span>
+              </button>
+            </div>
+          </div>
+
           <!-- Quick Links -->
           <div class="footer-section">
             <label class="footer-label">TOOLS</label>
@@ -654,6 +667,70 @@ const alternates = [
     color: #fff;
   }
 
+  /* Bionic Reading Toggle */
+  .bionic-toggle-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .bionic-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 12px;
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .bionic-toggle:hover {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+  }
+
+  .toggle-track {
+    position: relative;
+    width: 32px;
+    height: 18px;
+    background: var(--border);
+    border-radius: 9px;
+    transition: background 0.2s;
+  }
+
+  .toggle-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 14px;
+    height: 14px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+  }
+
+  .bionic-toggle.active .toggle-track {
+    background: var(--accent);
+  }
+
+  .bionic-toggle.active .toggle-thumb {
+    transform: translateX(14px);
+  }
+
+  .toggle-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 0.03em;
+  }
+
+  .bionic-toggle.active .toggle-label {
+    color: var(--accent-bold);
+  }
+
   /* MAIN CONTENT */
   .content {
     flex: 1;
@@ -988,6 +1065,7 @@ const alternates = [
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    // Table select functionality
     const tableSelect = document.getElementById('table-select') as HTMLSelectElement;
     if (tableSelect) {
       tableSelect.addEventListener('change', (e) => {
@@ -997,5 +1075,93 @@ const alternates = [
         }
       });
     }
+
+    // Bionic Reading Toggle
+    const bionicToggle = document.getElementById('bionic-toggle');
+    const BIONIC_STORAGE_KEY = 'adhd-db-bionic-reading';
+
+    // Function to apply bionic reading to text content
+    function applyBionicReading(enabled: boolean) {
+      if (enabled) {
+        document.body.classList.add('bionic-reading');
+        // Process all bionic-content elements
+        document.querySelectorAll('.bionic-content p').forEach((p) => {
+          if (!p.getAttribute('data-original')) {
+            p.setAttribute('data-original', p.innerHTML);
+          }
+          const text = p.getAttribute('data-original') || p.textContent || '';
+          p.innerHTML = convertToBionic(text);
+        });
+      } else {
+        document.body.classList.remove('bionic-reading');
+        // Restore original content
+        document.querySelectorAll('.bionic-content p').forEach((p) => {
+          const original = p.getAttribute('data-original');
+          if (original) {
+            p.innerHTML = original;
+          }
+        });
+      }
+    }
+
+    // Convert text to bionic reading format
+    function convertToBionic(text: string): string {
+      // Split into words and process each
+      return text.replace(/\b(\w+)\b/g, (word) => {
+        if (word.length <= 1) return word;
+        // Bold the first half of the word (roughly)
+        const boldLength = Math.ceil(word.length / 2);
+        const boldPart = word.slice(0, boldLength);
+        const normalPart = word.slice(boldLength);
+        return `<strong>${boldPart}</strong>${normalPart}`;
+      });
+    }
+
+    // Initialize bionic reading state from localStorage
+    function initBionicReading() {
+      const stored = localStorage.getItem(BIONIC_STORAGE_KEY);
+      const isEnabled = stored === 'true';
+
+      if (bionicToggle) {
+        if (isEnabled) {
+          bionicToggle.classList.add('active');
+        }
+        applyBionicReading(isEnabled);
+      }
+    }
+
+    // Toggle bionic reading
+    if (bionicToggle) {
+      bionicToggle.addEventListener('click', () => {
+        const isActive = bionicToggle.classList.toggle('active');
+        localStorage.setItem(BIONIC_STORAGE_KEY, String(isActive));
+        applyBionicReading(isActive);
+      });
+    }
+
+    // Initialize on page load
+    initBionicReading();
+
+    // Re-apply bionic reading when new content is loaded (for SPA-like behavior)
+    const observer = new MutationObserver((mutations) => {
+      const stored = localStorage.getItem(BIONIC_STORAGE_KEY);
+      if (stored === 'true') {
+        mutations.forEach((mutation) => {
+          mutation.addedNodes.forEach((node) => {
+            if (node.nodeType === Node.ELEMENT_NODE) {
+              const el = node as Element;
+              el.querySelectorAll('.bionic-content p').forEach((p) => {
+                if (!p.getAttribute('data-original')) {
+                  p.setAttribute('data-original', p.innerHTML);
+                  p.innerHTML = convertToBionic(p.innerHTML);
+                }
+              });
+            }
+          });
+        });
+      }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
   });
 </script>
