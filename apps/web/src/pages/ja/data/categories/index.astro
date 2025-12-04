@@ -28,257 +28,602 @@ const nonStimulantCategories = categories.filter(c => c.drugClass === 'non-stimu
 const getDrugCountForCategory = (categoryId: string) => {
   return drugs.filter(d => d.category === categoryId).length;
 };
+
+// Drug class colors
+const classColors = {
+  stimulant: '#ef4444',
+  'non-stimulant': '#3b82f6'
+};
 ---
 
 <DatabaseLayout title={t('categories.title')} activeTable="categories">
-  <div class="categories-page">
-    <header class="page-header">
-      <h1 class="page-title">categories</h1>
-      <p class="page-desc">{t('categories.description')}</p>
+  <article class="dossier">
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+      <a href={getLocalizedPath('/data', lang)} class="crumb">data</a>
+      <span class="crumb-sep">/</span>
+      <span class="crumb-current">categories</span>
+    </nav>
+
+    <!-- CASE FILE HEADER -->
+    <header class="case-file">
+      <div class="case-file-band">
+        <div class="case-file-left">
+          <span class="case-label">DATABASE</span>
+          <span class="case-number">CATEGORY-REGISTRY</span>
+        </div>
+        <div class="case-file-right">
+          <span class="registry-stamp">
+            <span class="stamp-border">
+              <span class="stamp-text">DRUG<br/>CLASSES</span>
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="case-file-body">
+        <div class="specimen-id">
+          <span class="specimen-label">PHARMACEUTICAL DATABASE</span>
+          <h1 class="specimen-name">{t('categories.title')}</h1>
+        </div>
+
+        <p class="registry-desc">{t('categories.description')}</p>
+      </div>
+
+      <div class="case-file-stripe"></div>
     </header>
 
-    <!-- Stats Grid -->
-    <div class="stats-grid">
-      <div class="stat-card">
-        <span class="stat-value">{categories.length}</span>
-        <span class="stat-label">Total Categories</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-value">{stimulantCategories.length}</span>
-        <span class="stat-label">{t('drugs.stimulants')}</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-value">{nonStimulantCategories.length}</span>
-        <span class="stat-label">{t('drugs.nonStimulants')}</span>
-      </div>
-    </div>
-
-    <!-- Drug Classes Section -->
-    {Object.entries(drugClasses).map(([classId, drugClass]) => (
-      <section class="class-section">
-        <div class="class-header">
-          <h2 class="class-title">
-            <span class="class-badge" data-class={classId}>{l(drugClass.name)}</span>
-          </h2>
-          <p class="class-desc">{l(drugClass.description)}</p>
-          {getWikiUrl(drugClass.wikipediaUrl) && (
-            <a href={getWikiUrl(drugClass.wikipediaUrl)} target="_blank" rel="noopener" class="wiki-link">
-              {t('categories.learnMore')} →
-            </a>
-          )}
+    <!-- STATS GRID -->
+    <section class="stats-section">
+      <div class="stats-grid">
+        <div class="stat-card stat-primary">
+          <div class="stat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <span class="stat-value">{categories.length}</span>
+            <span class="stat-label">Total Categories</span>
+          </div>
         </div>
+        <div class="stat-card stat-stimulant">
+          <div class="stat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <span class="stat-value">{stimulantCategories.length}</span>
+            <span class="stat-label">{t('drugs.stimulants')}</span>
+          </div>
+        </div>
+        <div class="stat-card stat-nonstim">
+          <div class="stat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 6v6l4 2"></path>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <span class="stat-value">{nonStimulantCategories.length}</span>
+            <span class="stat-label">{t('drugs.nonStimulants')}</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <div class="categories-grid">
-          {categories.filter(c => c.drugClass === classId).map(category => (
-            <div class="category-card">
-              <div class="card-header">
-                <h3 class="card-title">{l(category.name)}</h3>
-                <span class="drug-count">{getDrugCountForCategory(category.id)} drugs</span>
-              </div>
-
-              <p class="card-desc">{l(category.description)}</p>
-
-              <div class="card-meta">
-                <div class="meta-row">
-                  <span class="meta-label">{t('categories.mechanism')}</span>
-                  <span class="meta-value">{l(category.mechanism)}</span>
-                </div>
-
-                {category.commonBrands && category.commonBrands.length > 0 && (
-                  <div class="meta-row">
-                    <span class="meta-label">{t('categories.commonBrands')}</span>
-                    <span class="meta-value brands">{category.commonBrands.join(', ')}</span>
-                  </div>
-                )}
-              </div>
-
-              {category.notes && (
-                <div class="card-notes">
-                  {l(category.notes)}
-                </div>
-              )}
-
-              <div class="card-footer">
-                {getWikiUrl(category.wikipediaUrl) && (
-                  <a href={getWikiUrl(category.wikipediaUrl)} target="_blank" rel="noopener" class="card-link wiki">
-                    Wikipedia →
-                  </a>
-                )}
-                <a href={getLocalizedPath('/data/drugs', lang)} class="card-link">
-                  {t('categories.viewAll')} →
-                </a>
-              </div>
+    <!-- DRUG CLASSES -->
+    {Object.entries(drugClasses).map(([classId, drugClass]) => {
+      const classColor = classColors[classId as keyof typeof classColors] || '#888';
+      const classCategories = categories.filter(c => c.drugClass === classId);
+      return (
+        <section class="class-section">
+          <div class="class-header">
+            <div class="class-title-row">
+              <span class="class-marker" style={`--class-color: ${classColor}`}></span>
+              <h2 class="class-title">{l(drugClass.name)}</h2>
+              <span class="class-badge" style={`--class-color: ${classColor}`}>
+                {classCategories.length} categories
+              </span>
             </div>
-          ))}
-        </div>
-      </section>
-    ))}
-  </div>
+            <p class="class-desc">{l(drugClass.description)}</p>
+            {getWikiUrl(drugClass.wikipediaUrl) && (
+              <a href={getWikiUrl(drugClass.wikipediaUrl)} target="_blank" rel="noopener" class="wiki-link">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                {t('categories.learnMore')}
+              </a>
+            )}
+          </div>
+
+          <div class="categories-grid">
+            {classCategories.map((category, idx) => (
+              <div class="category-card" data-idx={idx}>
+                <div class="card-band" style={`--class-color: ${classColor}`}>
+                  <span class="card-id">{category.id}</span>
+                  <span class="drug-count">{getDrugCountForCategory(category.id)} drugs</span>
+                </div>
+
+                <div class="card-body">
+                  <h3 class="card-title">{l(category.name)}</h3>
+                  <p class="card-desc">{l(category.description)}</p>
+
+                  <div class="card-meta">
+                    <div class="meta-item">
+                      <span class="meta-label">{t('categories.mechanism')}</span>
+                      <span class="meta-value">{l(category.mechanism)}</span>
+                    </div>
+
+                    {category.commonBrands && category.commonBrands.length > 0 && (
+                      <div class="meta-item">
+                        <span class="meta-label">{t('categories.commonBrands')}</span>
+                        <div class="brand-tags">
+                          {category.commonBrands.map((brand: string) => (
+                            <span class="brand-tag">{brand}</span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {category.notes && (
+                    <div class="card-notes">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                      </svg>
+                      <span>{l(category.notes)}</span>
+                    </div>
+                  )}
+                </div>
+
+                <div class="card-footer">
+                  {getWikiUrl(category.wikipediaUrl) && (
+                    <a href={getWikiUrl(category.wikipediaUrl)} target="_blank" rel="noopener" class="footer-link wiki">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                      </svg>
+                      Wikipedia
+                    </a>
+                  )}
+                  <a href={getLocalizedPath('/data/drugs', lang)} class="footer-link primary">
+                    {t('categories.viewAll')}
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      );
+    })}
+  </article>
 </DatabaseLayout>
 
 <style>
-  .categories-page {
+  /* ===========================================
+   * PHARMACEUTICAL DOSSIER DESIGN SYSTEM
+   * =========================================== */
+
+  .dossier {
+    --dossier-bg: #fdfcfa;
+    --dossier-paper: #fffef9;
+    --dossier-border: #e8e4dc;
+    --dossier-accent: #1a1a2e;
+    --dossier-muted: #8b8680;
+    --dossier-gold: #c4a052;
+    --dossier-cream: #f5f2eb;
+    --dossier-ink: #2c2c2c;
+    --dossier-green: #276749;
+
     max-width: 1000px;
+    color: var(--dossier-ink);
   }
 
-  .page-header {
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid #e5e7eb;
+  /* Paper texture overlay */
+  .dossier::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.015;
+    pointer-events: none;
+    z-index: -1;
   }
 
-  .page-title {
-    font-family: 'DM Mono', monospace;
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: #111827;
-  }
-
-  .page-desc {
-    color: #6b7280;
-    font-size: 0.95rem;
-  }
-
-  /* Stats Grid */
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2.5rem;
-  }
-
-  .stat-card {
-    background: #f8f9fa;
-    border: 1px solid #e5e7eb;
-    border-radius: 6px;
-    padding: 1rem;
+  /* BREADCRUMB */
+  .breadcrumb {
     display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .stat-value {
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
     font-family: 'DM Mono', monospace;
-    font-size: 1.75rem;
-    font-weight: 600;
-    color: #00a86b;
-  }
-
-  .stat-label {
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: #6b7280;
-    text-transform: uppercase;
+    font-size: 0.7rem;
     letter-spacing: 0.05em;
   }
 
-  /* Class Section */
+  .crumb {
+    color: var(--dossier-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .crumb:hover {
+    color: var(--dossier-gold);
+  }
+
+  .crumb-sep {
+    color: var(--dossier-border);
+  }
+
+  .crumb-current {
+    color: var(--dossier-accent);
+    font-weight: 500;
+  }
+
+  /* ============================================
+     CASE FILE HEADER
+     ============================================ */
+
+  .case-file {
+    background: var(--dossier-paper);
+    border: 2px solid var(--dossier-border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: var(--space-8);
+    box-shadow:
+      0 4px 6px rgba(0, 0, 0, 0.02),
+      0 10px 20px rgba(0, 0, 0, 0.03),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    position: relative;
+  }
+
+  .case-file-band {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-3) var(--space-5);
+    background: var(--dossier-cream);
+    border-bottom: 1px solid var(--dossier-border);
+  }
+
+  .case-file-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .case-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--dossier-muted);
+  }
+
+  .case-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--dossier-accent);
+  }
+
+  .case-file-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .registry-stamp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stamp-border {
+    width: 52px;
+    height: 52px;
+    border: 2px dashed var(--dossier-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-12deg);
+    opacity: 0.7;
+  }
+
+  .stamp-border .stamp-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.35rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--dossier-gold);
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .case-file-body {
+    padding: var(--space-6);
+  }
+
+  .specimen-id {
+    margin-bottom: var(--space-3);
+  }
+
+  .specimen-label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--dossier-muted);
+    margin-bottom: var(--space-2);
+  }
+
+  .specimen-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 6vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--dossier-accent);
+    margin: 0;
+  }
+
+  .registry-desc {
+    font-size: 0.9rem;
+    color: var(--dossier-muted);
+    margin: 0;
+  }
+
+  .case-file-stripe {
+    height: 4px;
+    background: linear-gradient(90deg,
+      var(--dossier-gold) 0%,
+      #e8d5a3 50%,
+      var(--dossier-gold) 100%
+    );
+  }
+
+  /* ============================================
+     STATS GRID
+     ============================================ */
+
+  .stats-section {
+    margin-bottom: var(--space-8);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--space-3);
+  }
+
+  .stat-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background: var(--dossier-paper);
+    border: 1px solid var(--dossier-border);
+    border-radius: 4px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  .stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--dossier-cream);
+    border-radius: 50%;
+    color: var(--dossier-gold);
+    flex-shrink: 0;
+  }
+
+  .stat-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .stat-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--dossier-accent);
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--dossier-muted);
+  }
+
+  .stat-primary .stat-icon {
+    background: rgba(196, 160, 82, 0.15);
+    color: var(--dossier-gold);
+  }
+
+  .stat-stimulant .stat-icon {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+  }
+
+  .stat-nonstim .stat-icon {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+  }
+
+  /* ============================================
+     CLASS SECTIONS
+     ============================================ */
+
   .class-section {
-    margin-bottom: 3rem;
+    margin-bottom: var(--space-10);
   }
 
   .class-header {
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: var(--space-5);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--dossier-border);
+  }
+
+  .class-title-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+  }
+
+  .class-marker {
+    width: 4px;
+    height: 24px;
+    background: var(--class-color);
+    border-radius: 2px;
   }
 
   .class-title {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--dossier-accent);
+    margin: 0;
   }
 
   .class-badge {
     font-family: 'DM Mono', monospace;
-    font-size: 1rem;
+    font-size: 0.6rem;
     font-weight: 600;
-    padding: 6px 14px;
-    border-radius: 4px;
-    background: #f3f4f6;
-    color: #4b5563;
-  }
-
-  .class-badge[data-class="stimulant"] {
-    background: rgba(239, 68, 68, 0.1);
-    color: #dc2626;
-  }
-
-  .class-badge[data-class="non-stimulant"] {
-    background: rgba(59, 130, 246, 0.1);
-    color: #2563eb;
+    letter-spacing: 0.05em;
+    padding: 4px 10px;
+    background: transparent;
+    border: 1px solid var(--class-color);
+    color: var(--class-color);
+    border-radius: 2px;
+    margin-left: auto;
   }
 
   .class-desc {
-    color: #6b7280;
     font-size: 0.9rem;
+    color: var(--dossier-muted);
     line-height: 1.6;
-    margin-bottom: 0.5rem;
+    margin: 0 0 var(--space-2);
   }
 
   .wiki-link {
-    font-size: 0.8rem;
-    color: #00a86b;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--dossier-gold);
     text-decoration: none;
+    transition: color 0.15s;
   }
 
   .wiki-link:hover {
-    text-decoration: underline;
+    color: var(--dossier-accent);
   }
 
-  /* Categories Grid */
+  /* ============================================
+     CATEGORIES GRID
+     ============================================ */
+
   .categories-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.25rem;
+    gap: var(--space-4);
   }
 
   .category-card {
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 1.25rem;
+    background: var(--dossier-paper);
+    border: 1px solid var(--dossier-border);
+    border-radius: 4px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
     transition: box-shadow 0.2s, border-color 0.2s;
   }
 
   .category-card:hover {
-    border-color: #00a86b;
-    box-shadow: 0 4px 12px rgba(0, 168, 107, 0.1);
+    border-color: var(--dossier-gold);
+    box-shadow: 0 4px 12px rgba(196, 160, 82, 0.12);
   }
 
-  .card-header {
+  .card-band {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    gap: 0.75rem;
+    align-items: center;
+    padding: var(--space-2) var(--space-4);
+    background: var(--dossier-cream);
+    border-bottom: 1px solid var(--dossier-border);
+    border-left: 3px solid var(--class-color);
   }
 
-  .card-title {
-    font-size: 1.1rem;
+  .card-id {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
     font-weight: 600;
-    color: #111827;
-    margin: 0;
+    letter-spacing: 0.08em;
+    color: var(--dossier-muted);
+    text-transform: uppercase;
   }
 
   .drug-count {
     font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    font-weight: 500;
-    color: #00a86b;
-    background: rgba(0, 168, 107, 0.1);
-    padding: 3px 8px;
-    border-radius: 3px;
-    white-space: nowrap;
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: var(--dossier-gold);
+    background: rgba(196, 160, 82, 0.12);
+    padding: 2px 8px;
+    border-radius: 2px;
+  }
+
+  .card-body {
+    padding: var(--space-4);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--dossier-accent);
+    margin: 0;
   }
 
   .card-desc {
     font-size: 0.85rem;
-    color: #6b7280;
+    color: var(--dossier-muted);
     line-height: 1.6;
     margin: 0;
   }
@@ -286,76 +631,176 @@ const getDrugCountForCategory = (categoryId: string) => {
   .card-meta {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    padding: 0.75rem;
-    background: #f8f9fa;
-    border-radius: 6px;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    background: var(--dossier-cream);
+    border-radius: 4px;
+    border: 1px solid var(--dossier-border);
   }
 
-  .meta-row {
+  .meta-item {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
   }
 
   .meta-label {
-    font-size: 0.65rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #9ca3af;
+    letter-spacing: 0.1em;
+    color: var(--dossier-muted);
   }
 
   .meta-value {
     font-size: 0.8rem;
-    color: #4b5563;
+    color: var(--dossier-ink);
+    line-height: 1.5;
   }
 
-  .meta-value.brands {
+  .brand-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+  }
+
+  .brand-tag {
     font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    color: #6b7280;
+    font-size: 0.65rem;
+    font-weight: 500;
+    padding: 2px 6px;
+    background: var(--dossier-paper);
+    border: 1px solid var(--dossier-border);
+    border-radius: 2px;
+    color: var(--dossier-ink);
   }
 
   .card-notes {
-    font-size: 0.8rem;
-    color: #d97706;
-    background: rgba(217, 119, 6, 0.1);
-    padding: 0.5rem 0.75rem;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    background: rgba(217, 119, 6, 0.08);
     border-radius: 4px;
     border-left: 3px solid #d97706;
+    font-size: 0.8rem;
+    color: #92400e;
+    line-height: 1.5;
+  }
+
+  .card-notes svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: #d97706;
   }
 
   .card-footer {
     display: flex;
-    gap: 1rem;
-    margin-top: auto;
-    padding-top: 0.75rem;
-    border-top: 1px solid #f3f4f6;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-3) var(--space-4);
+    border-top: 1px solid var(--dossier-border);
+    background: var(--dossier-cream);
   }
 
-  .card-link {
-    font-size: 0.8rem;
-    color: #00a86b;
-    text-decoration: none;
+  .footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
     font-weight: 500;
+    text-decoration: none;
+    transition: color 0.15s;
   }
 
-  .card-link:hover {
-    text-decoration: underline;
+  .footer-link.wiki {
+    color: var(--dossier-muted);
   }
 
-  .card-link.wiki {
-    color: #6b7280;
+  .footer-link.wiki:hover {
+    color: var(--dossier-accent);
   }
+
+  .footer-link.primary {
+    color: var(--dossier-gold);
+  }
+
+  .footer-link.primary:hover {
+    color: var(--dossier-accent);
+  }
+
+  /* ============================================
+     RESPONSIVE
+     ============================================ */
 
   @media (max-width: 768px) {
+    .stats-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
     .categories-grid {
       grid-template-columns: 1fr;
     }
 
-    .card-header {
-      flex-direction: column;
+    .class-title-row {
+      flex-wrap: wrap;
+    }
+
+    .class-badge {
+      margin-left: 0;
+      margin-top: var(--space-2);
     }
   }
+
+  @media (max-width: 480px) {
+    .case-file-band {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-3);
+    }
+
+    .case-file-right {
+      width: 100%;
+      justify-content: flex-end;
+    }
+
+    .specimen-name {
+      font-size: 1.8rem;
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .stat-card:last-child {
+      grid-column: span 2;
+    }
+  }
+
+  /* ============================================
+     ANIMATIONS
+     ============================================ */
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .case-file,
+  .stats-section,
+  .class-section {
+    animation: slideUp 0.5s ease-out;
+  }
+
+  .stats-section { animation-delay: 0.05s; }
+  .class-section:nth-child(4) { animation-delay: 0.1s; }
+  .class-section:nth-child(5) { animation-delay: 0.15s; }
 </style>
