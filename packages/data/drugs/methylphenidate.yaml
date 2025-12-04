@@ -1667,6 +1667,198 @@ rxnormData:
       tty: SBD
       relationship: branded_drug
   lastUpdated: 2025-12-04
+instructions:
+  indicationsAndUsage:
+    en: |
+      Methylphenidate hydrochloride is a central nervous system (CNS) stimulant indicated for the treatment of:
+      - Attention Deficit Hyperactivity Disorder (ADHD) in patients 6 years of age and older
+      - Narcolepsy
+
+      ADHD should be diagnosed according to DSM criteria and should include consideration of information from multiple sources. A comprehensive treatment program typically includes psychological, educational, and social measures.
+  dosageAndAdministration:
+    en: |
+      ADHD:
+      - Immediate-Release (IR): Start with 5 mg twice daily (before breakfast and lunch). Increase gradually in increments of 5-10 mg weekly. Maximum dose: 60 mg/day in divided doses.
+      - Extended-Release (ER): Start with 18 mg once daily in the morning. May increase in 18 mg increments at weekly intervals. Maximum dose: 72 mg/day (adults) or 54 mg/day (children 6-12).
+
+      General Instructions:
+      - Administer orally in the morning to avoid insomnia
+      - Extended-release tablets should be swallowed whole; do not crush, chew, or divide
+      - May be taken with or without food
+      - Periodically reassess the need for treatment
+
+      Narcolepsy:
+      - 10-60 mg/day in divided doses (2-3 times daily), 30-45 minutes before meals
+  dosageForms:
+    en: |
+      Immediate-Release Tablets: 5 mg, 10 mg, 20 mg
+      Extended-Release Tablets (Concerta): 18 mg, 27 mg, 36 mg, 54 mg, 72 mg
+      Extended-Release Capsules (Ritalin LA): 10 mg, 20 mg, 30 mg, 40 mg
+      Extended-Release Capsules (Metadate CD): 10 mg, 20 mg, 30 mg, 40 mg, 50 mg, 60 mg
+      Chewable Tablets: 2.5 mg, 5 mg, 10 mg
+      Oral Solution: 5 mg/5 mL, 10 mg/5 mL
+      Extended-Release Oral Suspension (Quillivant XR): 25 mg/5 mL
+      Transdermal Patch (Daytrana): 10 mg/9hr, 15 mg/9hr, 20 mg/9hr, 30 mg/9hr
+  contraindications:
+    en: |
+      Methylphenidate is contraindicated in patients with:
+      - Known hypersensitivity to methylphenidate or other components
+      - Concurrent treatment with monoamine oxidase inhibitors (MAOIs), or within 14 days of discontinuing MAOI treatment
+      - Glaucoma
+      - Motor tics or family history or diagnosis of Tourette's syndrome
+      - Severe anxiety, tension, or agitation (may aggravate these conditions)
+  warningsAndPrecautions:
+    en: |
+      SERIOUS CARDIOVASCULAR REACTIONS:
+      - Sudden death has been reported in patients with structural cardiac abnormalities or other serious heart problems
+      - Sudden death, stroke, and myocardial infarction have been reported in adults
+      - Avoid use in patients with known structural cardiac abnormalities, cardiomyopathy, serious heart rhythm abnormalities, coronary artery disease, or other serious cardiac problems
+      - Obtain cardiac evaluation if symptoms of cardiac disease develop
+
+      BLOOD PRESSURE AND HEART RATE INCREASES:
+      - Monitor pulse and blood pressure before and during treatment
+      - Use with caution in patients for whom blood pressure increases may be problematic
+
+      PSYCHIATRIC ADVERSE REACTIONS:
+      - May cause treatment-emergent psychotic or manic symptoms in patients without prior history
+      - May exacerbate symptoms of behavior disturbance and thought disorder in patients with pre-existing psychotic disorder
+      - Monitor for aggressive behavior or hostility
+
+      PRIAPISM:
+      - Prolonged and painful erections have been reported; seek immediate medical attention if this occurs
+
+      PERIPHERAL VASCULOPATHY (Raynaud's phenomenon):
+      - Symptoms include digital changes (fingers/toes) - monitor for these effects
+
+      LONG-TERM SUPPRESSION OF GROWTH:
+      - Monitor height and weight during treatment; consider treatment interruption in patients not growing or gaining height/weight as expected
+
+      SEIZURES:
+      - May lower seizure threshold; discontinue if seizures occur
+  adverseReactions:
+    en: |
+      Most Common Adverse Reactions (≥5%):
+      - Decreased appetite
+      - Insomnia
+      - Nausea
+      - Vomiting
+      - Dyspepsia
+      - Abdominal pain
+      - Weight loss
+      - Anxiety
+      - Dizziness
+      - Irritability
+      - Affect lability
+      - Tachycardia
+      - Blood pressure increased
+
+      Other Notable Adverse Reactions:
+      - Headache
+      - Dry mouth
+      - Nervousness
+      - Hyperhidrosis
+      - Palpitations
+      - Tremor
+      - Blurred vision
+      - Dyskinesia
+  drugInteractions:
+    en: |
+      CONTRAINDICATED:
+      - MAO Inhibitors: Do not use during or within 14 days of MAOI treatment. Risk of hypertensive crisis.
+
+      USE WITH CAUTION:
+      - Antihypertensive drugs: May decrease effectiveness of antihypertensives
+      - Coumarin anticoagulants, anticonvulsants, tricyclic drugs: Methylphenidate may inhibit metabolism; downward dose adjustment may be required
+      - Pressor agents: Caution when used concomitantly (additive effects on blood pressure)
+      - Dopaminergic drugs (including antipsychotics): Pharmacodynamic interactions may occur
+      - Risperidone: When co-administered, no effect on pharmacokinetics of either drug
+      - Halogenated anesthetics: Risk of sudden blood pressure increase during surgery; avoid on day of surgery if possible
+  useInSpecificPopulations:
+    en: |
+      PREGNANCY:
+      - Category C. No adequate studies in pregnant women. Use only if potential benefit justifies risk to fetus.
+
+      LACTATION:
+      - Methylphenidate is present in human milk. Consider developmental and health benefits of breastfeeding along with mother's clinical need and potential effects on infant.
+
+      PEDIATRIC USE:
+      - Safety and efficacy established in patients 6 years and older. Not recommended for children under 6.
+      - Long-term effects on growth should be monitored.
+
+      GERIATRIC USE:
+      - Clinical studies did not include sufficient numbers of patients 65 and older. Use with caution.
+
+      RENAL IMPAIRMENT:
+      - No dose adjustment required but monitor for adverse effects.
+
+      HEPATIC IMPAIRMENT:
+      - No specific studies; use with caution in patients with hepatic impairment.
+  overdosage:
+    en: |
+      SIGNS AND SYMPTOMS:
+      - Vomiting, agitation, tremors, hyperreflexia, muscle twitching
+      - Convulsions (may be followed by coma)
+      - Euphoria, confusion, hallucinations, delirium
+      - Sweating, flushing, headache, hyperpyrexia
+      - Tachycardia, palpitations, cardiac arrhythmias, hypertension
+      - Mydriasis, dryness of mucous membranes
+
+      TREATMENT:
+      - Provide symptomatic and supportive care
+      - Protect against self-injury and external stimuli
+      - Gastric lavage may be indicated if ingestion is recent
+      - Administer a cathartic if delayed absorption is suspected
+      - Intensive care to maintain adequate circulation and respiratory exchange
+      - External cooling procedures for hyperpyrexia
+      - Efficacy of dialysis is not established
+  clinicalPharmacology:
+    en: |
+      MECHANISM OF ACTION:
+      Methylphenidate is a CNS stimulant. The mode of therapeutic action in ADHD is not known. Methylphenidate blocks the reuptake of norepinephrine and dopamine into the presynaptic neuron and increases the release of these monoamines into the extraneuronal space.
+
+      PHARMACODYNAMICS:
+      Methylphenidate is a racemic mixture. The d-threo enantiomer is more pharmacologically active than the l-threo enantiomer.
+
+      PHARMACOKINETICS:
+      - Absorption: Readily absorbed; peak plasma concentration in 1-2 hours (IR) or 6-8 hours (ER)
+      - Distribution: Plasma protein binding is low (10-33%)
+      - Metabolism: Primarily metabolized via de-esterification to ritalinic acid (inactive)
+      - Excretion: Mainly excreted in urine; mean plasma half-life is 2-3 hours (IR)
+  howSupplied:
+    en: |
+      STORAGE AND HANDLING:
+      - Store at 20°C to 25°C (68°F to 77°F); excursions permitted to 15°C to 30°C (59°F to 86°F)
+      - Protect from moisture
+      - Keep in original container
+      - Dispense in tight, light-resistant container
+
+      DEA SCHEDULE:
+      - Schedule II Controlled Substance
+
+      Keep out of reach of children. Store in a secure place.
+  patientCounselingInfo:
+    en: |
+      IMPORTANT PATIENT INFORMATION:
+
+      1. ABUSE AND DEPENDENCE: This medicine has potential for abuse. Keep in a safe place to prevent misuse and abuse. Selling or giving away this medication is against the law.
+
+      2. CARDIOVASCULAR RISKS: Report immediately any chest pain, shortness of breath, or fainting during treatment.
+
+      3. PSYCHIATRIC EFFECTS: Report any new or worsening mental symptoms including hallucinations, aggressive behavior, or mood changes.
+
+      4. CIRCULATION PROBLEMS: Report any unexplained wounds on fingers or toes, or changes in skin color (fingers/toes becoming pale, blue, or red).
+
+      5. PRIAPISM: Seek immediate medical attention for erections lasting more than 4 hours.
+
+      6. GROWTH IN CHILDREN: Height and weight will be monitored during treatment.
+
+      7. DRIVING AND OPERATING MACHINERY: May cause dizziness; use caution until effects are known.
+
+      8. DOSING: Take as prescribed. Do not change the dose without consulting your healthcare provider. Extended-release forms should be swallowed whole.
+
+      9. MISSED DOSE: Take as soon as remembered unless it's late in the day (to avoid insomnia). Never double the dose.
+
+      10. DRUG INTERACTIONS: Inform your healthcare provider of all medications you are taking, especially MAO inhibitors.
 lastUpdated: 2025-12-04
 sources:
   - https://chadd.org/about-adhd/adhd-medications-approved-by-the-us-fda/

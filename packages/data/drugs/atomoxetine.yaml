@@ -705,6 +705,230 @@ rxnormData:
       tty: SCDF
       relationship: drug_form
   lastUpdated: 2025-12-04
+instructions:
+  indicationsAndUsage:
+    en: |
+      Atomoxetine hydrochloride is a selective norepinephrine reuptake inhibitor indicated for the treatment of:
+      - Attention Deficit Hyperactivity Disorder (ADHD) in patients 6 years of age and older
+
+      ADHD should be diagnosed according to DSM criteria based upon a complete history and evaluation of the patient. Atomoxetine may be used as part of a comprehensive treatment program that includes other measures (psychological, educational, social).
+  dosageAndAdministration:
+    en: |
+      CHILDREN AND ADOLESCENTS UP TO 70 KG:
+      - Initial: 0.5 mg/kg/day
+      - Target dose: Increase after minimum of 3 days to approximately 1.2 mg/kg/day
+      - Maximum: 1.4 mg/kg/day or 100 mg/day, whichever is less
+      - May be given as single daily dose in morning or as evenly divided doses in morning and late afternoon/early evening
+
+      CHILDREN AND ADOLESCENTS OVER 70 KG AND ADULTS:
+      - Initial: 40 mg/day
+      - Target dose: Increase after minimum of 3 days to approximately 80 mg/day
+      - Maximum: 100 mg/day
+      - May be given as single daily dose in morning or as evenly divided doses
+
+      HEPATIC IMPAIRMENT:
+      - Moderate (Child-Pugh Class B): Reduce to 50% of normal dose
+      - Severe (Child-Pugh Class C): Reduce to 25% of normal dose
+
+      STRONG CYP2D6 INHIBITORS:
+      - In patients receiving strong CYP2D6 inhibitors (e.g., paroxetine, fluoxetine, quinidine): Initiate at 0.5 mg/kg/day and only increase to usual target dose if symptoms fail to improve after 4 weeks and initial dose is well tolerated
+
+      General Instructions:
+      - May be taken with or without food
+      - Capsules should be swallowed whole; do not open capsules
+      - If capsule is accidentally opened, wash hands and any exposed surfaces immediately
+      - Full therapeutic effect may take 4-6 weeks to achieve
+  dosageForms:
+    en: |
+      Capsules: 10 mg, 18 mg, 25 mg, 40 mg, 60 mg, 80 mg, 100 mg
+      Oral Solution: 4 mg/mL (available in some markets)
+  contraindications:
+    en: |
+      Atomoxetine is contraindicated in patients with:
+      - Known hypersensitivity to atomoxetine or other constituents of the product
+      - Use of monoamine oxidase inhibitors (MAOIs) concurrently or within 2 weeks of discontinuing atomoxetine
+      - Narrow-angle glaucoma (increased risk of mydriasis)
+      - Pheochromocytoma or history of pheochromocytoma
+      - Severe cardiovascular disorders in which the condition might be expected to deteriorate if clinically significant increases in blood pressure or heart rate occur
+  warningsAndPrecautions:
+    en: |
+      SUICIDAL IDEATION (BLACK BOX WARNING):
+      - Increased risk of suicidal ideation in children and adolescents with ADHD
+      - Pooled analyses showed: atomoxetine 0.4% (5/1357 patients) vs placebo 0% (0/851 patients)
+      - All events were suicidal ideation; no suicides occurred
+      - Closely monitor all patients for clinical worsening, suicidality, or unusual changes in behavior, especially during initial months of therapy or dose changes
+      - Families/caregivers should observe patient closely and communicate with prescriber
+
+      SEVERE LIVER INJURY:
+      - Postmarketing reports of severe liver injury including acute liver failure
+      - Discontinue and do not restart if jaundice or laboratory evidence of liver injury develops
+      - Perform liver tests at first symptom/sign of liver dysfunction
+
+      SERIOUS CARDIOVASCULAR EVENTS:
+      - Sudden death reported in patients with structural cardiac abnormalities or other serious heart problems
+      - Avoid in patients with known serious structural cardiac abnormalities, cardiomyopathy, serious heart rhythm abnormalities, or other serious cardiac problems
+
+      EFFECTS ON BLOOD PRESSURE AND HEART RATE:
+      - Can cause increased blood pressure and heart rate
+      - Monitor blood pressure and pulse at baseline and periodically during treatment
+      - Use caution in patients with hypertension, tachycardia, or cardiovascular disease
+
+      PSYCHIATRIC EVENTS:
+      - May cause treatment-emergent psychotic or manic symptoms in patients without prior history
+      - Consider discontinuation if such symptoms occur
+
+      EFFECTS ON URINARY SYSTEM:
+      - Urinary hesitancy and urinary retention have been reported
+      - Consider atomoxetine as possible cause of urinary retention
+
+      PRIAPISM:
+      - Rare reports of prolonged penile erections; seek immediate medical attention if occurs
+
+      GROWTH EFFECTS:
+      - Monitor growth during treatment; treatment interruption may be considered if growth is not as expected
+  adverseReactions:
+    en: |
+      Most Common Adverse Reactions in Children and Adolescents (≥5% and greater than placebo):
+      - Dyspepsia
+      - Nausea
+      - Vomiting
+      - Fatigue
+      - Decreased appetite
+      - Dizziness
+      - Mood swings
+
+      Most Common Adverse Reactions in Adults (≥5% and greater than placebo):
+      - Constipation
+      - Dry mouth
+      - Nausea
+      - Decreased appetite
+      - Dizziness
+      - Erectile dysfunction
+      - Urinary hesitation/retention
+      - Dysmenorrhea
+      - Hot flush
+      - Insomnia
+      - Hyperhidrosis
+
+      Other Notable Adverse Reactions:
+      - Abdominal pain
+      - Somnolence
+      - Irritability
+      - Weight loss
+      - Increased heart rate
+      - Increased blood pressure
+  drugInteractions:
+    en: |
+      CONTRAINDICATED:
+      - MAO Inhibitors: Do not use during or within 2 weeks of MAOI treatment. Serious, potentially fatal reactions may occur.
+
+      USE WITH CAUTION:
+      - Strong CYP2D6 Inhibitors (paroxetine, fluoxetine, quinidine): Increase atomoxetine exposure 6-8 fold; dose adjustment required
+      - Albuterol or other beta2-agonists: Cardiovascular effects may be potentiated; use with caution
+      - Pressor Agents: Because of effects on norepinephrine, use caution with drugs that affect blood pressure
+      - Antihypertensives: Effects may be diminished
+
+      NO SIGNIFICANT INTERACTIONS:
+      - Methylphenidate: No clinically significant pharmacokinetic interaction
+      - Desipramine: Atomoxetine did not affect desipramine pharmacokinetics in CYP2D6 extensive metabolizers
+  useInSpecificPopulations:
+    en: |
+      PREGNANCY:
+      - Category C. No adequate studies in pregnant women. Use only if potential benefit justifies risk to fetus.
+
+      LACTATION:
+      - Unknown if atomoxetine is excreted in human milk. Caution advised when administering to nursing women.
+
+      PEDIATRIC USE:
+      - Safety and efficacy established in patients 6 years and older
+      - Not studied in children younger than 6 years
+      - Long-term effects on growth should be monitored
+
+      GERIATRIC USE:
+      - Safety and efficacy in geriatric patients have not been established
+
+      HEPATIC IMPAIRMENT:
+      - Moderate impairment (Child-Pugh Class B): Reduce dose to 50%
+      - Severe impairment (Child-Pugh Class C): Reduce dose to 25%
+
+      CYP2D6 POOR METABOLIZERS:
+      - Approximately 7% of Caucasians and 2% of African Americans are poor metabolizers
+      - These patients have higher plasma concentrations; may need dose adjustment
+  overdosage:
+    en: |
+      SIGNS AND SYMPTOMS:
+      - Somnolence
+      - Agitation
+      - Hyperactivity
+      - Abnormal behavior
+      - Gastrointestinal symptoms
+      - Tachycardia
+      - Mydriasis
+      - Dry mouth
+      - Prolonged QT interval
+      - Seizures (rarely reported)
+
+      TREATMENT:
+      - No specific antidote
+      - An airway should be established
+      - Monitor cardiac and vital signs
+      - Provide symptomatic and supportive care
+      - Gastric lavage may be indicated if performed soon after ingestion
+      - Activated charcoal may be useful to limit absorption
+      - Due to high protein binding, dialysis is not likely to be useful
+  clinicalPharmacology:
+    en: |
+      MECHANISM OF ACTION:
+      The precise mechanism by which atomoxetine produces its therapeutic effects in ADHD is unknown, but is thought to be related to selective inhibition of the pre-synaptic norepinephrine transporter. Atomoxetine has minimal affinity for other noradrenergic receptors or for other neurotransmitter transporters or receptors.
+
+      PHARMACODYNAMICS:
+      - Increases norepinephrine concentrations in the prefrontal cortex
+      - Does not significantly affect dopamine in the nucleus accumbens (unlike stimulants), contributing to its low abuse potential
+      - No significant affinity for dopamine transporter
+
+      PHARMACOKINETICS:
+      - Absorption: Well absorbed with bioavailability of 63% (extensive metabolizers) to 94% (poor metabolizers)
+      - Peak plasma concentration: 1-2 hours
+      - Distribution: Volume of distribution is 0.85 L/kg; 98% protein bound
+      - Metabolism: Primarily by CYP2D6 to 4-hydroxyatomoxetine; also by CYP2C19
+      - Half-life: 5 hours (extensive metabolizers); 21 hours (poor metabolizers)
+      - Excretion: Greater than 80% excreted in urine (mainly as 4-hydroxyatomoxetine-O-glucuronide)
+  howSupplied:
+    en: |
+      STORAGE AND HANDLING:
+      - Store at 25°C (77°F); excursions permitted to 15-30°C (59-86°F)
+      - Protect from light and moisture
+      - Keep capsules in original container
+
+      CAPSULE HANDLING:
+      - Atomoxetine is an eye irritant
+      - If capsule contents contact the eye, flush with water immediately and seek medical advice
+      - Wash hands and any surfaces that contact capsule contents
+
+      Not a Controlled Substance - No DEA Schedule
+  patientCounselingInfo:
+    en: |
+      IMPORTANT PATIENT INFORMATION:
+
+      1. SUICIDAL THOUGHTS: Watch for worsening symptoms of depression, suicidal thoughts, or unusual changes in behavior, especially at the start of treatment or when the dose is changed. Report any concerning symptoms immediately.
+
+      2. LIVER PROBLEMS: Stop taking and call your doctor immediately if you develop itching, dark urine, yellow skin/eyes, right upper belly pain, or unexplained flu-like symptoms.
+
+      3. HEART EFFECTS: Report any chest pain, shortness of breath, or fainting. Your blood pressure and heart rate will be monitored.
+
+      4. FULL EFFECT: This medication may take 4-6 weeks to show full benefit. Do not stop taking without consulting your doctor.
+
+      5. DOSING: Take as prescribed. May be taken with or without food. Swallow capsules whole - do not open or crush.
+
+      6. MISSED DOSE: Take as soon as remembered. If almost time for next dose, skip the missed dose. Never double doses.
+
+      7. CAPSULE HANDLING: Avoid contact with eyes. Wash hands immediately if capsule contents are touched.
+
+      8. PREGNANCY/NURSING: Tell your doctor if you are pregnant, planning to become pregnant, or breastfeeding.
+
+      9. GROWTH IN CHILDREN: Height and weight will be monitored during treatment.
+
+      10. DRUG INTERACTIONS: Tell your doctor about all medications you take, especially MAO inhibitors, as serious interactions can occur.
 lastUpdated: 2025-12-04
 sources:
   - https://www.goodrx.com/conditions/adhd/non-stimulant-adhd-meds

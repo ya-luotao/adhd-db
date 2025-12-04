@@ -562,6 +562,200 @@ rxnormData:
       tty: SCDF
       relationship: drug_form
   lastUpdated: 2025-12-04
+instructions:
+  indicationsAndUsage:
+    en: |
+      Viloxazine extended-release (Qelbree) is a selective norepinephrine reuptake inhibitor indicated for the treatment of:
+      - Attention Deficit Hyperactivity Disorder (ADHD) in patients 6 years of age and older
+
+      Viloxazine is a non-stimulant medication with additional serotonergic activity. It was previously used in Europe for depression in the 1970s-1980s and has been repurposed for ADHD.
+  dosageAndAdministration:
+    en: |
+      CHILDREN (6-11 YEARS):
+      - Starting dose: 100 mg once daily in the morning
+      - May increase by 100 mg weekly to optimal response
+      - Maximum dose: 400 mg/day
+
+      ADOLESCENTS (12-17 YEARS):
+      - Starting dose: 200 mg once daily in the morning
+      - May increase by 200 mg weekly to optimal response
+      - Maximum dose: 400 mg/day
+
+      ADULTS (18+ YEARS):
+      - Starting dose: 200 mg once daily in the morning
+      - May increase by 200 mg weekly to optimal response
+      - Target dose: 200-600 mg/day
+      - Maximum dose: 600 mg/day
+
+      General Instructions:
+      - Take once daily in the morning with or without food
+      - Capsules may be opened and entire contents sprinkled on applesauce
+      - If sprinkled: consume immediately, do not chew, do not store
+      - Swallow whole if possible
+
+      HEPATIC IMPAIRMENT:
+      - Severe (Child-Pugh C): Maximum dose reduced by 50%
+
+      RENAL IMPAIRMENT:
+      - Severe (eGFR <30): Maximum dose reduced by 50%
+      - ESRD: Maximum dose reduced by 50%
+  dosageForms:
+    en: |
+      Extended-Release Capsules (Qelbree):
+      - Children/Adolescents: 100 mg, 150 mg, 200 mg
+      - Adults: 200 mg, 400 mg, 600 mg
+  contraindications:
+    en: |
+      Viloxazine is contraindicated in patients:
+      - With known hypersensitivity to viloxazine or any components
+      - Receiving concomitant treatment with monoamine oxidase inhibitors (MAOIs) or within 14 days of stopping an MAOI
+      - Starting MAOIs within 14 days of stopping viloxazine
+      - Receiving concomitant treatment with sensitive CYP1A2 substrates or substrates with narrow therapeutic range
+  warningsAndPrecautions:
+    en: |
+      SUICIDAL THOUGHTS AND BEHAVIORS:
+      - Antidepressants increase risk of suicidal thinking and behavior in children, adolescents, and young adults
+      - Monitor closely for clinical worsening and suicidality
+      - Consider changing or discontinuing if significant changes occur
+      - Note: Viloxazine was originally developed as an antidepressant
+
+      BLOOD PRESSURE AND HEART RATE INCREASES:
+      - Can cause increases in diastolic blood pressure and heart rate
+      - Assess heart rate and blood pressure before treatment and periodically during treatment
+      - Use caution in patients for whom increases may be problematic
+
+      ACTIVATION OF MANIA/HYPOMANIA:
+      - May precipitate mixed/manic episode in patients with bipolar disorder
+      - Screen for bipolar disorder before initiating treatment
+
+      SOMNOLENCE AND FATIGUE:
+      - Common adverse reactions
+      - May impair ability to drive or operate machinery
+      - Assess before patients engage in potentially hazardous activities
+  adverseReactions:
+    en: |
+      Most Common Adverse Reactions in Pediatric Patients (≥5%):
+      - Somnolence (16-17%)
+      - Decreased appetite (10-13%)
+      - Fatigue (6-9%)
+      - Nausea (6-8%)
+      - Vomiting (4-7%)
+      - Insomnia (4-6%)
+      - Irritability (5%)
+
+      Most Common Adverse Reactions in Adults (≥5%):
+      - Insomnia (11%)
+      - Fatigue (11%)
+      - Nausea (10%)
+      - Dry mouth (6%)
+      - Constipation (6%)
+      - Decreased appetite (6%)
+      - Headache (5%)
+
+      Other Notable Adverse Reactions:
+      - Dizziness
+      - Weight loss
+      - Upper abdominal pain
+      - Increased heart rate
+  drugInteractions:
+    en: |
+      CONTRAINDICATED:
+      - MAO Inhibitors: Do not use during or within 14 days of MAOI treatment
+      - Sensitive CYP1A2 Substrates: May significantly increase exposure (e.g., alosetron, duloxetine, ramelteon, tasimelteon, theophylline, tizanidine)
+
+      SIGNIFICANT INTERACTIONS:
+      - CYP1A2 Substrates: Viloxazine is a strong CYP1A2 inhibitor; avoid or reduce dose of CYP1A2 substrates
+      - Theophylline: Exposure increased 2-fold; consider dose reduction
+      - Caffeine: Exposure may be increased; consider reducing caffeine intake
+
+      USE WITH CAUTION:
+      - Drugs affecting blood pressure or heart rate
+      - Other serotonergic drugs (risk of serotonin syndrome)
+  useInSpecificPopulations:
+    en: |
+      PREGNANCY:
+      - Limited data in pregnant women
+      - Based on animal studies, may cause fetal harm
+      - Use only if potential benefit justifies risk
+
+      LACTATION:
+      - Unknown if excreted in human milk
+      - Consider developmental benefits of breastfeeding along with mother's clinical need
+
+      PEDIATRIC USE:
+      - Safety and efficacy established for patients 6 years and older
+      - Not studied in children under 6 years
+
+      GERIATRIC USE:
+      - Clinical studies did not include sufficient patients 65 and older
+
+      HEPATIC IMPAIRMENT:
+      - Severe impairment (Child-Pugh C): Maximum dose reduced by 50%
+
+      RENAL IMPAIRMENT:
+      - Severe impairment (eGFR <30 mL/min): Maximum dose reduced by 50%
+      - ESRD: Maximum dose reduced by 50%
+  overdosage:
+    en: |
+      SIGNS AND SYMPTOMS:
+      - Limited information available
+      - Expected symptoms based on pharmacology: somnolence, drowsiness, increased heart rate, elevated blood pressure
+
+      TREATMENT:
+      - No specific antidote
+      - Provide supportive care
+      - Monitor cardiac and vital signs
+      - Consider gastric lavage if recent ingestion
+      - Activated charcoal may be useful
+      - Contact Poison Control Center (1-800-222-1222)
+  clinicalPharmacology:
+    en: |
+      MECHANISM OF ACTION:
+      The mechanism by which viloxazine produces therapeutic effects in ADHD is unclear. Viloxazine is:
+      - A selective norepinephrine reuptake inhibitor (SNRI)
+      - A 5-HT2B receptor antagonist
+      - A 5-HT2C receptor modulator
+
+      This combination of actions distinguishes it from atomoxetine and may contribute to its efficacy profile.
+
+      Note: Viloxazine was originally marketed in Europe as an antidepressant (1970s-1980s) but was withdrawn and later repurposed for ADHD.
+
+      PHARMACOKINETICS:
+      - Absorption: Well absorbed; peak concentration at 5 hours
+      - Distribution: Plasma protein binding approximately 76-82%
+      - Metabolism: Primarily hepatic via UGT1A9 and UGT2B15; CYP2D6 minor pathway
+      - Half-life: Approximately 7 hours
+      - Excretion: ~90% in urine (mainly as metabolites)
+  howSupplied:
+    en: |
+      STORAGE AND HANDLING:
+      - Store at 20-25°C (68-77°F); excursions permitted to 15-30°C (59-86°F)
+      - Protect from moisture
+
+      Not a Controlled Substance - No DEA Schedule
+  patientCounselingInfo:
+    en: |
+      IMPORTANT PATIENT INFORMATION:
+
+      1. SUICIDAL THOUGHTS: Watch for and report immediately any new or worsening depression, anxiety, agitation, panic attacks, irritability, hostility, or thoughts of self-harm.
+
+      2. DOSING: Take once daily in the morning. Capsules may be opened and sprinkled on applesauce if needed. Consume immediately.
+
+      3. DROWSINESS: This medication may cause drowsiness or fatigue. Avoid driving or operating machinery until you know how it affects you.
+
+      4. HEART MONITORING: Blood pressure and heart rate will be checked regularly during treatment.
+
+      5. CAFFEINE: This medication can increase the effects of caffeine. You may need to reduce caffeine intake.
+
+      6. OTHER MEDICATIONS: Tell your doctor about all medications, especially MAO inhibitors, theophylline, and certain antidepressants.
+
+      7. NOT A STIMULANT: This is a non-stimulant medication. It may take 1-2 weeks to notice effects and several weeks for full benefit.
+
+      8. PREGNANCY/NURSING: Tell your doctor if you are pregnant, planning to become pregnant, or breastfeeding.
+
+      9. US ONLY: This medication is currently only available in the United States. It is not approved in Europe, Japan, or China.
+
+      10. MISSED DOSE: If you miss a dose in the morning, skip it. Do not take in the afternoon/evening. Resume the next morning.
 lastUpdated: 2025-12-04
 sources:
   - https://www.goodrx.com/conditions/adhd/non-stimulant-adhd-meds

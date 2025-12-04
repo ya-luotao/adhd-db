@@ -892,6 +892,215 @@ rxnormData:
       tty: SCDF
       relationship: drug_form
   lastUpdated: 2025-12-04
+instructions:
+  indicationsAndUsage:
+    en: |
+      Clonidine extended-release (Kapvay) is an alpha2-adrenergic agonist indicated for the treatment of:
+      - Attention Deficit Hyperactivity Disorder (ADHD) in patients 6-17 years of age as monotherapy or adjunctive therapy to stimulants
+
+      Note: Immediate-release clonidine (Catapres) is FDA-approved for hypertension, not ADHD. ADHD use of IR formulations is off-label. Clonidine patches are also for hypertension only.
+  dosageAndAdministration:
+    en: |
+      ADHD (KAPVAY EXTENDED-RELEASE):
+      - Starting dose: 0.1 mg at bedtime
+      - Week 2: 0.1 mg twice daily (morning and bedtime)
+      - Week 3: 0.1 mg in morning, 0.2 mg at bedtime
+      - Week 4+: 0.2 mg twice daily
+      - Maximum dose: 0.4 mg/day (0.2 mg twice daily)
+
+      ADJUNCTIVE THERAPY WITH STIMULANTS:
+      - Same dosing as monotherapy
+      - Total daily dose can be given as twice daily
+
+      General Instructions:
+      - Take twice daily (morning and bedtime)
+      - Equal or higher split dosage should be given at bedtime
+      - May be taken with or without food
+      - Swallow tablets whole; do NOT crush, chew, or break (extended-release)
+
+      DISCONTINUATION:
+      - CRITICAL: Taper gradually over 3-7 days
+      - Reduce dose by no more than 0.1 mg every 3-7 days
+      - Abrupt discontinuation can cause severe rebound hypertension
+
+      OFF-LABEL IR DOSING (CATAPRES):
+      - Typically 0.05-0.1 mg 2-4 times daily
+      - Often used at bedtime for sleep issues
+      - Must also be tapered when discontinuing
+  dosageForms:
+    en: |
+      Extended-Release Tablets (Kapvay): 0.1 mg, 0.2 mg (FDA-approved for ADHD)
+      Immediate-Release Tablets (Catapres): 0.1 mg, 0.2 mg, 0.3 mg (off-label for ADHD)
+      Transdermal Patch (Catapres-TTS): 0.1 mg/day, 0.2 mg/day, 0.3 mg/day (hypertension only)
+  contraindications:
+    en: |
+      Clonidine is contraindicated in patients with:
+      - Known hypersensitivity to clonidine or any components of the formulation
+
+      CAUTIONS (Use with Extreme Care):
+      - Patients with severe cardiovascular disease
+      - History of syncope
+      - Conditions predisposing to syncope (hypotension, dehydration)
+      - Patients on other antihypertensives or drugs affecting blood pressure
+  warningsAndPrecautions:
+    en: |
+      HYPOTENSION AND BRADYCARDIA:
+      - Can cause dose-dependent decreases in blood pressure and heart rate
+      - Syncope has been reported
+      - Measure blood pressure and heart rate before initiation and periodically during treatment
+      - Titrate slowly and monitor during dose adjustments
+
+      SEDATION AND SOMNOLENCE:
+      - Common adverse reaction
+      - Patients should avoid activities requiring mental alertness until effects are known
+      - May be more pronounced when combined with CNS depressants
+
+      REBOUND HYPERTENSION (CRITICAL):
+      - Sudden discontinuation can cause nervous system hyperactivity resulting in:
+        • Rapid rise in blood pressure
+        • Headache
+        • Agitation
+        • Tremor
+        • Confusion
+      - Always taper dose gradually
+      - If switching from patch to oral: overlap for 1-2 days
+
+      CARDIAC CONDUCTION ABNORMALITIES:
+      - Use caution in patients with conduction disturbances
+      - May worsen sinus node dysfunction and AV block
+      - Caution with other drugs affecting heart rate/rhythm
+
+      ALLERGIC REACTIONS:
+      - Patches may cause localized skin reactions and rarely systemic allergic reactions
+  adverseReactions:
+    en: |
+      Most Common Adverse Reactions (≥5%):
+      - Somnolence (31-38%)
+      - Fatigue (16%)
+      - Irritability (9%)
+      - Insomnia (less common with bedtime dosing)
+      - Nightmares
+      - Emotional disorder
+      - Constipation
+      - Dry mouth
+      - Upper abdominal pain
+
+      Other Notable Adverse Reactions:
+      - Hypotension
+      - Bradycardia
+      - Dizziness
+      - Headache
+      - Nausea
+      - Decreased appetite
+
+      Patch-Specific (Transdermal):
+      - Localized skin reactions (erythema, pruritus)
+      - Contact dermatitis
+  drugInteractions:
+    en: |
+      USE WITH CAUTION:
+      - Antihypertensives: Additive hypotensive effects
+      - CNS Depressants (sedatives, hypnotics, alcohol): Enhanced CNS depression
+      - Tricyclic Antidepressants: May reduce clonidine's antihypertensive effect
+      - Beta-blockers: Additive bradycardia; if stopping both, taper beta-blocker first, then clonidine
+      - Digitalis: Additive effects on AV conduction and heart rate
+      - Calcium channel blockers: Additive bradycardia and hypotension
+      - Drugs affecting renal function: May affect clonidine elimination
+
+      IMPORTANT:
+      - Abrupt withdrawal of beta-blockers while on clonidine can cause severe hypertension
+      - Always discontinue beta-blockers several days before clonidine taper
+  useInSpecificPopulations:
+    en: |
+      PREGNANCY:
+      - Category C. Use only if potential benefit justifies risk to fetus.
+      - Crosses placenta
+
+      LACTATION:
+      - Clonidine is excreted in human milk
+      - Consider benefits of breastfeeding vs. potential risks
+
+      PEDIATRIC USE:
+      - Kapvay: Safety and efficacy established for patients 6-17 years
+      - Not recommended for children under 6 years
+
+      GERIATRIC USE:
+      - Clinical studies did not include sufficient patients 65 and older
+      - May be more sensitive to hypotensive effects
+
+      RENAL IMPAIRMENT:
+      - Clonidine is primarily renally excreted
+      - Consider dose reduction; monitor closely
+      - Adjust dose according to renal function
+  overdosage:
+    en: |
+      SIGNS AND SYMPTOMS:
+      - Hypotension
+      - Bradycardia
+      - Lethargy/drowsiness
+      - Diminished or absent reflexes
+      - Weakness, irritability
+      - Miosis (constricted pupils)
+      - Hypothermia
+      - Respiratory depression (large doses)
+      - Reversible cardiac conduction abnormalities/arrhythmias
+      - Apnea, seizures (rarely, in children)
+
+      TREATMENT:
+      - Supportive treatment as primary therapy
+      - Monitor cardiac and respiratory function
+      - Atropine for symptomatic bradycardia
+      - Intravenous fluids and/or vasopressors for hypotension
+      - Tolazoline has been used to treat clonidine overdose
+      - Dialysis is not effective
+  clinicalPharmacology:
+    en: |
+      MECHANISM OF ACTION:
+      Clonidine is a centrally acting alpha2-adrenergic agonist. It works by:
+      - Stimulating alpha2-adrenergic receptors in the brain stem
+      - Reducing sympathetic outflow from the CNS
+      - Decreasing peripheral resistance, heart rate, and blood pressure
+      - In ADHD: thought to improve prefrontal cortex function and reduce hyperactivity/impulsivity
+
+      Unlike guanfacine, clonidine is less selective for alpha2A receptors, which may explain its more pronounced sedative effects.
+
+      PHARMACOKINETICS:
+      - Absorption: Well absorbed; bioavailability ~70%
+      - Peak concentration: 7-8 hours (extended-release); 1-3 hours (immediate-release)
+      - Distribution: Widely distributed; crosses blood-brain barrier
+      - Metabolism: Hepatic (minor); 50% excreted unchanged
+      - Half-life: 12-16 hours (allows twice-daily dosing for ER)
+      - Excretion: 72% renal (50% unchanged); 22% fecal
+  howSupplied:
+    en: |
+      STORAGE AND HANDLING:
+      - Store at 25°C (77°F); excursions permitted to 15-30°C (59-86°F)
+      - Protect from light
+
+      Not a Controlled Substance - No DEA Schedule
+  patientCounselingInfo:
+    en: |
+      IMPORTANT PATIENT INFORMATION:
+
+      1. DO NOT STOP SUDDENLY (CRITICAL): Stopping this medication abruptly can cause dangerous spikes in blood pressure. Always taper gradually as directed by your doctor.
+
+      2. DROWSINESS: This medication causes significant drowsiness, especially at first. Avoid driving or operating machinery until you know how it affects you.
+
+      3. DOSING: Take twice daily. Take the larger dose at bedtime. Swallow extended-release tablets whole.
+
+      4. LOW BLOOD PRESSURE: Rise slowly from sitting or lying positions to avoid dizziness.
+
+      5. AVOID ALCOHOL: Alcohol increases drowsiness and may worsen blood pressure effects.
+
+      6. MISSED DOSES: If you miss two or more doses, contact your doctor before restarting - you may need to restart at a lower dose.
+
+      7. SURGERY: Tell your surgeon you take this medication. It may interact with anesthesia.
+
+      8. HEAT EXPOSURE: If using the patch, be aware that heat can increase drug absorption.
+
+      9. NOT A STIMULANT: This is a non-stimulant medication. It may take several weeks to see full effect.
+
+      10. MONITORING: Blood pressure and heart rate will be checked regularly during treatment.
 lastUpdated: 2025-12-04
 sources:
   - https://www.goodrx.com/conditions/adhd/non-stimulant-adhd-meds
