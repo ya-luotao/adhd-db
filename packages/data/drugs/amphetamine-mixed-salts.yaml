@@ -653,8 +653,105 @@ travelRules:
       sources:
         - "https://www.cbsa-asfc.gc.ca/"
 
+# RxNorm Data (from NLM RxNorm/RxNav)
+# Drug name normalization and relationship mapping
+rxnormData:
+  # Primary ingredient-level RxCUI
+  ingredientRxcui: "713"
+  ingredientName: "amphetamine"
+
+  # RxCUI mappings at different term type levels
+  rxcuiMappings:
+    - rxcui: "713"
+      name: "amphetamine"
+      tty: "IN"
+      description: "Base ingredient"
+    - rxcui: "725"
+      name: "dextroamphetamine"
+      tty: "IN"
+      description: "Base ingredient (d-enantiomer)"
+    - rxcui: "7238"
+      name: "amphetamine aspartate"
+      tty: "PIN"
+      description: "Precise ingredient (salt form)"
+    - rxcui: "7239"
+      name: "amphetamine sulfate"
+      tty: "PIN"
+      description: "Precise ingredient (salt form)"
+    - rxcui: "36567"
+      name: "dextroamphetamine saccharate"
+      tty: "PIN"
+      description: "Precise ingredient (salt form)"
+    - rxcui: "36568"
+      name: "dextroamphetamine sulfate"
+      tty: "PIN"
+      description: "Precise ingredient (salt form)"
+    - rxcui: "725"
+      name: "dextroamphetamine sulfate / amphetamine aspartate / amphetamine sulfate / dextroamphetamine saccharate"
+      tty: "MIN"
+      description: "Multiple ingredients (mixed amphetamine salts)"
+
+  # Brand name to RxCUI mappings
+  brandMappings:
+    - brandName: "Adderall"
+      rxcui: "205761"
+      manufacturer: "Teva"
+      region: "US"
+    - brandName: "Adderall XR"
+      rxcui: "312942"
+      manufacturer: "Shire"
+      region: "US"
+    - brandName: "Mydayis"
+      rxcui: "1999593"
+      manufacturer: "Shire"
+      region: "US"
+
+  # Drug synonyms and alternative names
+  synonyms:
+    - name: "amphetamine"
+      type: "generic"
+      source: "RxNorm"
+    - name: "mixed amphetamine salts"
+      type: "generic"
+      source: "Clinical"
+    - name: "amphetamine salts"
+      type: "generic"
+      source: "Clinical"
+    - name: "MAS"
+      type: "abbreviation"
+      source: "Clinical"
+    - name: "Adderall"
+      type: "brand"
+      source: "RxNorm"
+    - name: "Mydayis"
+      type: "brand"
+      source: "RxNorm"
+    - name: "苯丙胺"
+      type: "generic"
+      source: "Chinese"
+    - name: "アンフェタミン"
+      type: "generic"
+      source: "Japanese"
+
+  # Related drugs (same ingredient family)
+  relatedDrugs:
+    - rxcui: "884221"
+      name: "amphetamine aspartate / amphetamine sulfate / dextroamphetamine saccharate / dextroamphetamine sulfate Oral Tablet"
+      tty: "SCDF"
+      relationship: "drug_form"
+    - rxcui: "884227"
+      name: "amphetamine aspartate / amphetamine sulfate / dextroamphetamine saccharate / dextroamphetamine sulfate Extended Release Oral Capsule"
+      tty: "SCDF"
+      relationship: "drug_form"
+    - rxcui: "725"
+      name: "dextroamphetamine"
+      tty: "IN"
+      relationship: "related_ingredient"
+
+  lastUpdated: "2025-12-04"
+
 # Metadata
-lastUpdated: 2025-12-02
+lastUpdated: 2025-12-04
 
 sources:
   - "https://www.additudemag.com/adhd-medications-list-chart-stimulants-nonstimulants/"

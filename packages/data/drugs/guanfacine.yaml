@@ -551,8 +551,93 @@ travelRules:
         zh: "胍法辛在欧盟已获批。无特殊进口要求。"
         ja: "グアンファシンはEUで承認されています。特別な輸入要件はありません。"
 
+# RxNorm Data (from NLM RxNorm/RxNav)
+# Drug name normalization and relationship mapping
+rxnormData:
+  # Primary ingredient-level RxCUI
+  ingredientRxcui: "5176"
+  ingredientName: "guanfacine"
+
+  # RxCUI mappings at different term type levels
+  rxcuiMappings:
+    - rxcui: "5176"
+      name: "guanfacine"
+      tty: "IN"
+      description: "Base ingredient"
+    - rxcui: "5177"
+      name: "guanfacine hydrochloride"
+      tty: "PIN"
+      description: "Precise ingredient (salt form)"
+    - rxcui: "884178"
+      name: "guanfacine Oral Tablet"
+      tty: "SCDF"
+      description: "Ingredient + dose form"
+    - rxcui: "884187"
+      name: "guanfacine Extended Release Oral Tablet"
+      tty: "SCDF"
+      description: "Ingredient + dose form (ER for ADHD)"
+
+  # Brand name to RxCUI mappings
+  brandMappings:
+    - brandName: "Intuniv"
+      rxcui: "854875"
+      manufacturer: "Shire"
+      region: "US"
+    - brandName: "Tenex"
+      rxcui: "208071"
+      manufacturer: "Promius"
+      region: "US"
+    - brandName: "インチュニブ"
+      rxcui: "854875"
+      manufacturer: "Shionogi"
+      region: "JP"
+
+  # Drug synonyms and alternative names
+  synonyms:
+    - name: "guanfacine"
+      type: "generic"
+      source: "RxNorm"
+    - name: "guanfacine hydrochloride"
+      type: "chemical"
+      source: "RxNorm"
+    - name: "GXR"
+      type: "abbreviation"
+      source: "Clinical"
+    - name: "Intuniv"
+      type: "brand"
+      source: "RxNorm"
+    - name: "Tenex"
+      type: "brand"
+      source: "RxNorm"
+    - name: "胍法辛"
+      type: "generic"
+      source: "Chinese"
+    - name: "グアンファシン"
+      type: "generic"
+      source: "Japanese"
+    - name: "インチュニブ"
+      type: "brand"
+      source: "Japanese"
+
+  # Related drugs
+  relatedDrugs:
+    - rxcui: "884178"
+      name: "guanfacine Oral Tablet"
+      tty: "SCDF"
+      relationship: "drug_form"
+    - rxcui: "884187"
+      name: "guanfacine Extended Release Oral Tablet"
+      tty: "SCDF"
+      relationship: "drug_form"
+    - rxcui: "2599"
+      name: "clonidine"
+      tty: "IN"
+      relationship: "related_class"
+
+  lastUpdated: "2025-12-04"
+
 # Metadata
-lastUpdated: 2025-12-02
+lastUpdated: 2025-12-04
 
 sources:
   - "https://www.goodrx.com/conditions/adhd/non-stimulant-adhd-meds"

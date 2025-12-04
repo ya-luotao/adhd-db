@@ -115,6 +115,13 @@ export const translations = {
     'drugs.bySex': 'By Sex',
     'drugs.outcomes': 'Outcomes',
 
+    // RxNorm Data
+    'drugs.rxnormData': 'Drug Identifiers (RxNorm)',
+    'drugs.synonyms': 'Alternative Names',
+    'drugs.brandMappings': 'Brand Name Mappings',
+    'drugs.relatedDrugs': 'Related Drug Forms',
+    'drugs.rxnormSource': 'Source:',
+
     // Drug class short labels
     'class.stimulantShort': 'STM',
     'class.nonStimulantShort': 'NON',
@@ -318,6 +325,13 @@ export const translations = {
     'drugs.byAge': '按年龄组',
     'drugs.bySex': '按性别',
     'drugs.outcomes': '结局',
+
+    // RxNorm Data
+    'drugs.rxnormData': '药物标识符 (RxNorm)',
+    'drugs.synonyms': '别名',
+    'drugs.brandMappings': '品牌名映射',
+    'drugs.relatedDrugs': '相关剂型',
+    'drugs.rxnormSource': '数据来源:',
 
     // Drug class short labels
     'class.stimulantShort': '兴奋剂',
@@ -523,6 +537,13 @@ export const translations = {
     'drugs.bySex': '按性別',
     'drugs.outcomes': '結局',
 
+    // RxNorm Data
+    'drugs.rxnormData': '藥物標識符 (RxNorm)',
+    'drugs.synonyms': '別名',
+    'drugs.brandMappings': '品牌名映射',
+    'drugs.relatedDrugs': '相關劑型',
+    'drugs.rxnormSource': '數據來源:',
+
     // Drug class short labels
     'class.stimulantShort': '興奮劑',
     'class.nonStimulantShort': '非興奮劑',
@@ -726,6 +747,13 @@ export const translations = {
     'drugs.byAge': '年齢層別',
     'drugs.bySex': '性別',
     'drugs.outcomes': '転帰',
+
+    // RxNorm Data
+    'drugs.rxnormData': '薬物識別子 (RxNorm)',
+    'drugs.synonyms': '別名',
+    'drugs.brandMappings': '商品名マッピング',
+    'drugs.relatedDrugs': '関連剤形',
+    'drugs.rxnormSource': 'データソース:',
 
     // Drug class short labels
     'class.stimulantShort': '刺',

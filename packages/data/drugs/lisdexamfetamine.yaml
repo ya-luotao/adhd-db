@@ -675,8 +675,93 @@ travelRules:
       sources:
         - "https://www.cbsa-asfc.gc.ca/"
 
+# RxNorm Data (from NLM RxNorm/RxNav)
+# Drug name normalization and relationship mapping
+rxnormData:
+  # Primary ingredient-level RxCUI
+  ingredientRxcui: "608139"
+  ingredientName: "lisdexamfetamine"
+
+  # RxCUI mappings at different term type levels
+  rxcuiMappings:
+    - rxcui: "608139"
+      name: "lisdexamfetamine"
+      tty: "IN"
+      description: "Base ingredient"
+    - rxcui: "608134"
+      name: "lisdexamfetamine dimesylate"
+      tty: "PIN"
+      description: "Precise ingredient (salt form)"
+    - rxcui: "884527"
+      name: "lisdexamfetamine dimesylate Oral Capsule"
+      tty: "SCDF"
+      description: "Ingredient + dose form"
+    - rxcui: "1860485"
+      name: "lisdexamfetamine dimesylate Chewable Tablet"
+      tty: "SCDF"
+      description: "Ingredient + dose form"
+
+  # Brand name to RxCUI mappings
+  brandMappings:
+    - brandName: "Vyvanse"
+      rxcui: "608142"
+      manufacturer: "Shire/Takeda"
+      region: "US"
+    - brandName: "Elvanse"
+      rxcui: "608142"
+      manufacturer: "Shire/Takeda"
+      region: "EU"
+    - brandName: "ビバンセ"
+      rxcui: "608142"
+      manufacturer: "Shionogi/Takeda"
+      region: "JP"
+
+  # Drug synonyms and alternative names
+  synonyms:
+    - name: "lisdexamfetamine"
+      type: "generic"
+      source: "RxNorm"
+    - name: "lisdexamfetamine dimesylate"
+      type: "chemical"
+      source: "RxNorm"
+    - name: "LDX"
+      type: "abbreviation"
+      source: "Clinical"
+    - name: "Vyvanse"
+      type: "brand"
+      source: "RxNorm"
+    - name: "Elvanse"
+      type: "brand"
+      source: "EU"
+    - name: "赖右苯丙胺"
+      type: "generic"
+      source: "Chinese"
+    - name: "リスデキサンフェタミン"
+      type: "generic"
+      source: "Japanese"
+    - name: "ビバンセ"
+      type: "brand"
+      source: "Japanese"
+
+  # Related drugs (same ingredient family)
+  relatedDrugs:
+    - rxcui: "884527"
+      name: "lisdexamfetamine dimesylate Oral Capsule"
+      tty: "SCDF"
+      relationship: "drug_form"
+    - rxcui: "1860485"
+      name: "lisdexamfetamine dimesylate Chewable Tablet"
+      tty: "SCDF"
+      relationship: "drug_form"
+    - rxcui: "725"
+      name: "dextroamphetamine"
+      tty: "IN"
+      relationship: "active_metabolite"
+
+  lastUpdated: "2025-12-04"
+
 # Metadata
-lastUpdated: 2025-12-02
+lastUpdated: 2025-12-04
 
 sources:
   - "https://pharmacyportal.eu/elvanse-europe/"
