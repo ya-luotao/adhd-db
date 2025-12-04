@@ -1,817 +1,835 @@
-# Methylphenidate - Most widely used ADHD medication globally
-# Approved in US, China, EU, Japan, and many other countries
-
-id: "methylphenidate"
-
+id: methylphenidate
 brandNames:
-  US: ["Concerta", "Ritalin", "Ritalin LA", "Metadate CD", "Metadate ER", "Methylin", "Quillivant XR", "Quillichew ER", "Jornay PM", "Aptensio XR", "Cotempla XR-ODT", "Daytrana"]
-  CN: ["专注达 (Concerta)"]
-  EU: ["Concerta", "Ritalin", "Equasym", "Medikinet", "Rubifen", "Tuzulby"]
-  JP: ["コンサータ (Concerta)", "リタリン (Ritalin)"]
-  UK: ["Concerta XL", "Ritalin", "Equasym XL", "Medikinet XL", "Xaggitin XL"]
-  AU: ["Concerta", "Ritalin", "Ritalin LA"]
-  CA: ["Concerta", "Ritalin", "Biphentin"]
-
+  US:
+    - Concerta
+    - Ritalin
+    - Ritalin LA
+    - Metadate CD
+    - Metadate ER
+    - Methylin
+    - Quillivant XR
+    - Quillichew ER
+    - Jornay PM
+    - Aptensio XR
+    - Cotempla XR-ODT
+    - Daytrana
+  CN:
+    - 专注达 (Concerta)
+  EU:
+    - Concerta
+    - Ritalin
+    - Equasym
+    - Medikinet
+    - Rubifen
+    - Tuzulby
+  JP:
+    - コンサータ (Concerta)
+    - リタリン (Ritalin)
+  UK:
+    - Concerta XL
+    - Ritalin
+    - Equasym XL
+    - Medikinet XL
+    - Xaggitin XL
+  AU:
+    - Concerta
+    - Ritalin
+    - Ritalin LA
+  CA:
+    - Concerta
+    - Ritalin
+    - Biphentin
 genericName:
-  en: "methylphenidate hydrochloride"
-  zh: "盐酸哌甲酯"
-  ja: "塩酸メチルフェニデート"
-
+  en: methylphenidate hydrochloride
+  zh: 盐酸哌甲酯
+  ja: 塩酸メチルフェニデート
 manufacturers:
-  - name: "Janssen (Johnson & Johnson)"
-    region: "US"
-    product: "Concerta"
-  - name: "Novartis"
-    region: "US"
-    product: "Ritalin"
-  - name: "西安杨森 (Janssen China)"
-    region: "CN"
-    product: "专注达"
-  - name: "ヤンセンファーマ"
-    region: "JP"
-    product: "コンサータ"
-
-# Chemical Structure
+  - name: Janssen (Johnson & Johnson)
+    region: US
+    product: Concerta
+  - name: Novartis
+    region: US
+    product: Ritalin
+  - name: 西安杨森 (Janssen China)
+    region: CN
+    product: 专注达
+  - name: ヤンセンファーマ
+    region: JP
+    product: コンサータ
 chemicalStructure:
-  smiles: "COC(=O)C(C1CCCCN1)C2=CC=CC=C2"
+  smiles: COC(=O)C(C1CCCCN1)C2=CC=CC=C2
   pubchemCid: 4158
-  molecularFormula: "C14H19NO2"
-  imageUrl: "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4158/PNG"
-  wikipediaUrl: "https://en.wikipedia.org/wiki/File:Methylphenidate-2D-skeletal.svg"
-
-# Classification
-drugClass: "stimulant"
-
+  molecularFormula: C14H19NO2
+  imageUrl: https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4158/PNG
+  wikipediaUrl: https://en.wikipedia.org/wiki/File:Methylphenidate-2D-skeletal.svg
+drugClass: stimulant
 drugClassLabel:
-  en: "Stimulant"
-  zh: "兴奋剂"
-  ja: "中枢刺激薬"
-
-category: "methylphenidate"
-
+  en: Stimulant
+  zh: 兴奋剂
+  ja: 中枢刺激薬
+category: methylphenidate
 categoryLabel:
-  en: "Methylphenidate"
-  zh: "哌甲酯类"
-  ja: "メチルフェニデート系"
-
+  en: Methylphenidate
+  zh: 哌甲酯类
+  ja: メチルフェニデート系
 controlledSubstance: true
-
 schedule:
-  US: "Schedule II"
-  CN: "第一类精神药品"
-  EU: "Varies by country"
-  JP: "第一種向精神薬"
-  UK: "Class B, Schedule 2"
-
-# Mechanism
+  US: Schedule II
+  CN: 第一类精神药品
+  EU: Varies by country
+  JP: 第一種向精神薬
+  UK: Class B, Schedule 2
 activeIngredient:
-  en: "methylphenidate hydrochloride"
-  zh: "盐酸哌甲酯"
-  ja: "塩酸メチルフェニデート"
-
+  en: methylphenidate hydrochloride
+  zh: 盐酸哌甲酯
+  ja: 塩酸メチルフェニデート
 mechanismOfAction:
-  en: "Blocks reuptake of dopamine and norepinephrine, increasing their concentration in the synaptic cleft. Primarily affects the prefrontal cortex to improve attention and executive function."
-  zh: "阻断多巴胺和去甲肾上腺素的再摄取，增加突触间隙中这些神经递质的浓度。主要作用于前额叶皮层，改善注意力和执行功能。"
-  ja: "ドーパミンとノルエピネフリンの再取り込みを阻害し、シナプス間隙でのこれらの濃度を増加させます。主に前頭前皮質に作用し、注意力と実行機能を改善します。"
-
+  en: Blocks reuptake of dopamine and norepinephrine, increasing their concentration in the synaptic cleft. Primarily affects the prefrontal cortex to improve attention and executive function.
+  zh: 阻断多巴胺和去甲肾上腺素的再摄取，增加突触间隙中这些神经递质的浓度。主要作用于前额叶皮层，改善注意力和执行功能。
+  ja: ドーパミンとノルエピネフリンの再取り込みを阻害し、シナプス間隙でのこれらの濃度を増加させます。主に前頭前皮質に作用し、注意力と実行機能を改善します。
 neurotransmittersAffected:
   - dopamine
   - norepinephrine
-
-# Dosage & Forms
 forms:
-  - type: "tablet"
+  - type: tablet
     typeLabel:
-      en: "Tablet"
-      zh: "片剂"
-      ja: "錠剤"
-    releaseType: "immediate"
+      en: Tablet
+      zh: 片剂
+      ja: 錠剤
+    releaseType: immediate
     releaseTypeLabel:
-      en: "Immediate Release"
-      zh: "速释"
-      ja: "即放性"
-    brandName: "Ritalin"
-    strengths: ["5mg", "10mg", "20mg"]
+      en: Immediate Release
+      zh: 速释
+      ja: 即放性
+    brandName: Ritalin
+    strengths:
+      - 5mg
+      - 10mg
+      - 20mg
     durationHours: 4
     notes:
-      en: "Usually taken 2-3 times daily"
-      zh: "通常每日服用2-3次"
-      ja: "通常1日2〜3回服用"
-
-  - type: "tablet"
+      en: Usually taken 2-3 times daily
+      zh: 通常每日服用2-3次
+      ja: 通常1日2〜3回服用
+  - type: tablet
     typeLabel:
-      en: "Tablet"
-      zh: "片剂"
-      ja: "錠剤"
-    releaseType: "extended"
+      en: Tablet
+      zh: 片剂
+      ja: 錠剤
+    releaseType: extended
     releaseTypeLabel:
-      en: "Extended Release"
-      zh: "缓释"
-      ja: "徐放性"
-    brandName: "Concerta"
-    strengths: ["18mg", "27mg", "36mg", "54mg"]
+      en: Extended Release
+      zh: 缓释
+      ja: 徐放性
+    brandName: Concerta
+    strengths:
+      - 18mg
+      - 27mg
+      - 36mg
+      - 54mg
     durationHours: 12
     notes:
-      en: "OROS technology, once daily dosing"
-      zh: "OROS技术，每日一次给药"
-      ja: "OROS技術、1日1回投与"
-
-  - type: "capsule"
+      en: OROS technology, once daily dosing
+      zh: OROS技术，每日一次给药
+      ja: OROS技術、1日1回投与
+  - type: capsule
     typeLabel:
-      en: "Capsule"
-      zh: "胶囊"
-      ja: "カプセル"
-    releaseType: "extended"
+      en: Capsule
+      zh: 胶囊
+      ja: カプセル
+    releaseType: extended
     releaseTypeLabel:
-      en: "Extended Release"
-      zh: "缓释"
-      ja: "徐放性"
-    brandName: "Ritalin LA"
-    strengths: ["10mg", "20mg", "30mg", "40mg"]
+      en: Extended Release
+      zh: 缓释
+      ja: 徐放性
+    brandName: Ritalin LA
+    strengths:
+      - 10mg
+      - 20mg
+      - 30mg
+      - 40mg
     durationHours: 8
     notes:
-      en: "Can be opened and sprinkled on food"
-      zh: "可打开撒在食物上服用"
-      ja: "カプセルを開けて食べ物にふりかけることができます"
-
-  - type: "patch"
+      en: Can be opened and sprinkled on food
+      zh: 可打开撒在食物上服用
+      ja: カプセルを開けて食べ物にふりかけることができます
+  - type: patch
     typeLabel:
-      en: "Transdermal Patch"
-      zh: "透皮贴剂"
-      ja: "経皮パッチ"
-    releaseType: "extended"
+      en: Transdermal Patch
+      zh: 透皮贴剂
+      ja: 経皮パッチ
+    releaseType: extended
     releaseTypeLabel:
-      en: "Extended Release"
-      zh: "缓释"
-      ja: "徐放性"
-    brandName: "Daytrana"
-    strengths: ["10mg/9hr", "15mg/9hr", "20mg/9hr", "30mg/9hr"]
+      en: Extended Release
+      zh: 缓释
+      ja: 徐放性
+    brandName: Daytrana
+    strengths:
+      - 10mg/9hr
+      - 15mg/9hr
+      - 20mg/9hr
+      - 30mg/9hr
     durationHours: 12
     notes:
-      en: "Transdermal patch, wear for 9 hours"
-      zh: "透皮贴剂，佩戴9小时"
-      ja: "経皮パッチ、9時間装着"
-
-  - type: "liquid"
+      en: Transdermal patch, wear for 9 hours
+      zh: 透皮贴剂，佩戴9小时
+      ja: 経皮パッチ、9時間装着
+  - type: liquid
     typeLabel:
-      en: "Liquid Suspension"
-      zh: "口服液"
-      ja: "液剤"
-    releaseType: "extended"
+      en: Liquid Suspension
+      zh: 口服液
+      ja: 液剤
+    releaseType: extended
     releaseTypeLabel:
-      en: "Extended Release"
-      zh: "缓释"
-      ja: "徐放性"
-    brandName: "Quillivant XR"
-    strengths: ["25mg/5mL"]
+      en: Extended Release
+      zh: 缓释
+      ja: 徐放性
+    brandName: Quillivant XR
+    strengths:
+      - 25mg/5mL
     durationHours: 12
     notes:
-      en: "Liquid suspension for those who can't swallow pills"
-      zh: "适用于不能吞服药片者"
-      ja: "錠剤を飲み込めない方のための液体懸濁液"
-
-# Efficacy
+      en: Liquid suspension for those who can't swallow pills
+      zh: 适用于不能吞服药片者
+      ja: 錠剤を飲み込めない方のための液体懸濁液
 onsetMinutes: 30
 peakEffectHours: 2
 durationHours: 12
-
-# Side Effects
 sideEffects:
   common:
     - name:
-        en: "decreased appetite"
-        zh: "食欲下降"
-        ja: "食欲減退"
-      frequency: "25-40%"
+        en: decreased appetite
+        zh: 食欲下降
+        ja: 食欲減退
+      frequency: 25-40%
     - name:
-        en: "insomnia"
-        zh: "失眠"
-        ja: "不眠"
-      frequency: "20-30%"
+        en: insomnia
+        zh: 失眠
+        ja: 不眠
+      frequency: 20-30%
     - name:
-        en: "headache"
-        zh: "头痛"
-        ja: "頭痛"
-      frequency: "15-25%"
+        en: headache
+        zh: 头痛
+        ja: 頭痛
+      frequency: 15-25%
     - name:
-        en: "stomach ache"
-        zh: "胃痛"
-        ja: "腹痛"
-      frequency: "10-20%"
+        en: stomach ache
+        zh: 胃痛
+        ja: 腹痛
+      frequency: 10-20%
     - name:
-        en: "irritability"
-        zh: "易怒"
-        ja: "易刺激性"
-      frequency: "10-15%"
+        en: irritability
+        zh: 易怒
+        ja: 易刺激性
+      frequency: 10-15%
     - name:
-        en: "weight loss"
-        zh: "体重减轻"
-        ja: "体重減少"
-      frequency: "10-15%"
-
+        en: weight loss
+        zh: 体重减轻
+        ja: 体重減少
+      frequency: 10-15%
   uncommon:
     - name:
-        en: "increased heart rate"
-        zh: "心率加快"
-        ja: "心拍数増加"
-      frequency: "5-10%"
+        en: increased heart rate
+        zh: 心率加快
+        ja: 心拍数増加
+      frequency: 5-10%
     - name:
-        en: "increased blood pressure"
-        zh: "血压升高"
-        ja: "血圧上昇"
-      frequency: "5-10%"
+        en: increased blood pressure
+        zh: 血压升高
+        ja: 血圧上昇
+      frequency: 5-10%
     - name:
-        en: "anxiety"
-        zh: "焦虑"
-        ja: "不安"
-      frequency: "5-8%"
+        en: anxiety
+        zh: 焦虑
+        ja: 不安
+      frequency: 5-8%
     - name:
-        en: "dizziness"
-        zh: "头晕"
-        ja: "めまい"
-      frequency: "5%"
-
+        en: dizziness
+        zh: 头晕
+        ja: めまい
+      frequency: 5%
   serious:
     - name:
-        en: "cardiovascular events"
-        zh: "心血管事件"
-        ja: "心血管イベント"
+        en: cardiovascular events
+        zh: 心血管事件
+        ja: 心血管イベント
       notes:
-        en: "Rare; increased risk in those with pre-existing heart conditions"
-        zh: "罕见；既往有心脏病者风险增加"
-        ja: "まれ；既存の心臓疾患がある場合リスク増加"
+        en: Rare; increased risk in those with pre-existing heart conditions
+        zh: 罕见；既往有心脏病者风险增加
+        ja: まれ；既存の心臓疾患がある場合リスク増加
     - name:
-        en: "psychiatric symptoms"
-        zh: "精神症状"
-        ja: "精神症状"
+        en: psychiatric symptoms
+        zh: 精神症状
+        ja: 精神症状
       notes:
-        en: "May exacerbate psychosis or mania in susceptible individuals"
-        zh: "可能加重易感个体的精神病或躁狂症状"
-        ja: "感受性の高い人では精神病や躁病を悪化させる可能性"
+        en: May exacerbate psychosis or mania in susceptible individuals
+        zh: 可能加重易感个体的精神病或躁狂症状
+        ja: 感受性の高い人では精神病や躁病を悪化させる可能性
     - name:
-        en: "growth suppression"
-        zh: "生长抑制"
-        ja: "成長抑制"
+        en: growth suppression
+        zh: 生长抑制
+        ja: 成長抑制
       notes:
-        en: "May slow growth in children; effect usually temporary"
-        zh: "可能减缓儿童生长；通常是暂时的"
-        ja: "小児の成長を遅らせる可能性；通常一時的"
-
-# Safety
+        en: May slow growth in children; effect usually temporary
+        zh: 可能减缓儿童生长；通常是暂时的
+        ja: 小児の成長を遅らせる可能性；通常一時的
 contraindications:
   en:
-    - "Hypersensitivity to methylphenidate"
-    - "MAO inhibitor use within 14 days"
-    - "Glaucoma"
-    - "Severe anxiety, tension, or agitation"
-    - "Motor tics or family history of Tourette's syndrome"
+    - Hypersensitivity to methylphenidate
+    - MAO inhibitor use within 14 days
+    - Glaucoma
+    - Severe anxiety, tension, or agitation
+    - Motor tics or family history of Tourette's syndrome
   zh:
-    - "对哌甲酯过敏"
-    - "14天内使用过MAO抑制剂"
-    - "青光眼"
-    - "严重焦虑、紧张或激动"
-    - "运动性抽动或有图雷特综合征家族史"
+    - 对哌甲酯过敏
+    - 14天内使用过MAO抑制剂
+    - 青光眼
+    - 严重焦虑、紧张或激动
+    - 运动性抽动或有图雷特综合征家族史
   ja:
-    - "メチルフェニデートに対する過敏症"
-    - "14日以内のMAO阻害剤使用"
-    - "緑内障"
-    - "重度の不安、緊張、または興奮"
-    - "運動性チックまたはトゥレット症候群の家族歴"
-
+    - メチルフェニデートに対する過敏症
+    - 14日以内のMAO阻害剤使用
+    - 緑内障
+    - 重度の不安、緊張、または興奮
+    - 運動性チックまたはトゥレット症候群の家族歴
 drugInteractions:
   - drug:
-      en: "MAO inhibitors"
-      zh: "MAO抑制剂"
-      ja: "MAO阻害剤"
-    severity: "major"
+      en: MAO inhibitors
+      zh: MAO抑制剂
+      ja: MAO阻害剤
+    severity: major
     effect:
-      en: "Hypertensive crisis risk"
-      zh: "高血压危象风险"
-      ja: "高血圧クリーゼのリスク"
+      en: Hypertensive crisis risk
+      zh: 高血压危象风险
+      ja: 高血圧クリーゼのリスク
   - drug:
-      en: "Antihypertensives"
-      zh: "降压药"
-      ja: "降圧薬"
-    severity: "moderate"
+      en: Antihypertensives
+      zh: 降压药
+      ja: 降圧薬
+    severity: moderate
     effect:
-      en: "May reduce effectiveness of blood pressure medications"
-      zh: "可能降低降压药的疗效"
-      ja: "降圧薬の効果を低下させる可能性"
-
+      en: May reduce effectiveness of blood pressure medications
+      zh: 可能降低降压药的疗效
+      ja: 降圧薬の効果を低下させる可能性
 blackBoxWarnings:
   en:
-    - "High potential for abuse and dependence"
-    - "Sudden death reported in patients with pre-existing structural cardiac abnormalities"
+    - High potential for abuse and dependence
+    - Sudden death reported in patients with pre-existing structural cardiac abnormalities
   zh:
-    - "高度滥用和依赖风险"
-    - "既往有心脏结构异常的患者中有猝死报告"
+    - 高度滥用和依赖风险
+    - 既往有心脏结构异常的患者中有猝死报告
   ja:
-    - "乱用および依存の可能性が高い"
-    - "既存の心臓構造異常のある患者で突然死が報告されている"
-
-pregnancyCategory: "C"
-
+    - 乱用および依存の可能性が高い
+    - 既存の心臓構造異常のある患者で突然死が報告されている
+pregnancyCategory: C
 foodInteractions:
-  en: "Avoid high-fat meals with some formulations; acidic foods/drinks may reduce absorption"
-  zh: "某些制剂应避免与高脂肪餐同服；酸性食物/饮料可能降低吸收"
-  ja: "一部の製剤では高脂肪食を避ける；酸性の食品/飲料は吸収を低下させる可能性"
-
-# Practical Information
+  en: Avoid high-fat meals with some formulations; acidic foods/drinks may reduce absorption
+  zh: 某些制剂应避免与高脂肪餐同服；酸性食物/饮料可能降低吸收
+  ja: 一部の製剤では高脂肪食を避ける；酸性の食品/飲料は吸収を低下させる可能性
 typicalDosing:
   children:
-    startingDose: "5mg BID (IR) / 18mg QD (ER)"
-    maxDose: "60mg/day"
+    startingDose: 5mg BID (IR) / 18mg QD (ER)
+    maxDose: 60mg/day
     notes:
-      en: "Start low, titrate weekly"
-      zh: "从低剂量开始，每周调整"
-      ja: "低用量から開始し、毎週調整"
+      en: Start low, titrate weekly
+      zh: 从低剂量开始，每周调整
+      ja: 低用量から開始し、毎週調整
   adults:
-    startingDose: "10mg BID (IR) / 18-36mg QD (ER)"
-    maxDose: "72mg/day"
+    startingDose: 10mg BID (IR) / 18-36mg QD (ER)
+    maxDose: 72mg/day
     notes:
-      en: "May need higher doses than children"
-      zh: "可能需要比儿童更高的剂量"
-      ja: "小児より高用量が必要な場合がある"
-
+      en: May need higher doses than children
+      zh: 可能需要比儿童更高的剂量
+      ja: 小児より高用量が必要な場合がある
 costEstimate:
   US:
-    brand: "$300-500/month"
-    generic: "$30-80/month"
+    brand: $300-500/month
+    generic: $30-80/month
   CN:
-    brand: "¥300-600/month"
-    generic: "Limited"
-
+    brand: ¥300-600/month
+    generic: Limited
 storageRequirements:
-  en: "Room temperature (20-25°C), protect from moisture and light"
-  zh: "室温保存（20-25°C），避免潮湿和光照"
-  ja: "室温（20-25°C）で保存、湿気と光を避ける"
-
-# Approval & Availability
+  en: Room temperature (20-25°C), protect from moisture and light
+  zh: 室温保存（20-25°C），避免潮湿和光照
+  ja: 室温（20-25°C）で保存、湿気と光を避ける
 approvals:
-  - region: "US"
-    agency: "FDA"
+  - region: US
+    agency: FDA
     year: 1955
     approvedAges:
-      en: "6 years and older"
-      zh: "6岁及以上"
-      ja: "6歳以上"
+      en: 6 years and older
+      zh: 6岁及以上
+      ja: 6歳以上
     indications:
-      en: ["ADHD", "Narcolepsy"]
-      zh: ["注意缺陷多动障碍", "发作性睡病"]
-      ja: ["ADHD", "ナルコレプシー"]
+      en:
+        - ADHD
+        - Narcolepsy
+      zh:
+        - 注意缺陷多动障碍
+        - 发作性睡病
+      ja:
+        - ADHD
+        - ナルコレプシー
     available: true
     notes:
-      en: "Original Ritalin; Concerta approved 2000"
-      zh: "利他林原研药；专注达2000年获批"
-      ja: "オリジナルのリタリン；コンサータは2000年承認"
-
-  - region: "CN"
-    agency: "NMPA"
+      en: Original Ritalin; Concerta approved 2000
+      zh: 利他林原研药；专注达2000年获批
+      ja: オリジナルのリタリン；コンサータは2000年承認
+  - region: CN
+    agency: NMPA
     year: 2005
     approvedAges:
-      en: "6 years and older"
-      zh: "6岁及以上"
-      ja: "6歳以上"
+      en: 6 years and older
+      zh: 6岁及以上
+      ja: 6歳以上
     indications:
-      en: ["ADHD"]
-      zh: ["注意缺陷多动障碍"]
-      ja: ["ADHD"]
+      en:
+        - ADHD
+      zh:
+        - 注意缺陷多动障碍
+      ja:
+        - ADHD
     available: true
     notes:
-      en: "Only extended-release available; supply shortages reported 2024-2025"
-      zh: "仅有缓释制剂；2024-2025年报告供应短缺"
-      ja: "徐放製剤のみ利用可能；2024-2025年に供給不足が報告"
-
-  - region: "EU"
-    agency: "EMA"
+      en: Only extended-release available; supply shortages reported 2024-2025
+      zh: 仅有缓释制剂；2024-2025年报告供应短缺
+      ja: 徐放製剤のみ利用可能；2024-2025年に供給不足が報告
+  - region: EU
+    agency: EMA
     year: 1954
     approvedAges:
-      en: "6-17 years (varies by country for adults)"
-      zh: "6-17岁（成人因国家而异）"
-      ja: "6〜17歳（成人は国によって異なる）"
+      en: 6-17 years (varies by country for adults)
+      zh: 6-17岁（成人因国家而异）
+      ja: 6〜17歳（成人は国によって異なる）
     indications:
-      en: ["ADHD"]
-      zh: ["注意缺陷多动障碍"]
-      ja: ["ADHD"]
+      en:
+        - ADHD
+      zh:
+        - 注意缺陷多动障碍
+      ja:
+        - ADHD
     available: true
     notes:
-      en: "Adult approval varies by EU member state"
-      zh: "成人适应症因欧盟成员国而异"
-      ja: "成人への承認はEU加盟国によって異なる"
-
-  - region: "JP"
-    agency: "PMDA"
+      en: Adult approval varies by EU member state
+      zh: 成人适应症因欧盟成员国而异
+      ja: 成人への承認はEU加盟国によって異なる
+  - region: JP
+    agency: PMDA
     year: 2007
     approvedAges:
-      en: "6 years and older"
-      zh: "6岁及以上"
-      ja: "6歳以上"
+      en: 6 years and older
+      zh: 6岁及以上
+      ja: 6歳以上
     indications:
-      en: ["ADHD"]
-      zh: ["注意缺陷多动障碍"]
-      ja: ["ADHD"]
+      en:
+        - ADHD
+      zh:
+        - 注意缺陷多动障碍
+      ja:
+        - ADHD
     available: true
     notes:
-      en: "Requires registration in ADHD Proper Distribution Management System since 2019"
-      zh: "自2019年起需在ADHD适当流通管理系统注册"
-      ja: "2019年以降、ADHD適正流通管理システムへの登録が必要"
-
-  - region: "UK"
-    agency: "MHRA"
+      en: Requires registration in ADHD Proper Distribution Management System since 2019
+      zh: 自2019年起需在ADHD适当流通管理系统注册
+      ja: 2019年以降、ADHD適正流通管理システムへの登録が必要
+  - region: UK
+    agency: MHRA
     year: 1955
     approvedAges:
-      en: "6 years and older"
-      zh: "6岁及以上"
-      ja: "6歳以上"
+      en: 6 years and older
+      zh: 6岁及以上
+      ja: 6歳以上
     indications:
-      en: ["ADHD"]
-      zh: ["注意缺陷多动障碍"]
-      ja: ["ADHD"]
+      en:
+        - ADHD
+      zh:
+        - 注意缺陷多动障碍
+      ja:
+        - ADHD
     available: true
     notes:
       en: ""
       zh: ""
       ja: ""
-
-  - region: "AU"
-    agency: "TGA"
+  - region: AU
+    agency: TGA
     year: 1966
     approvedAges:
-      en: "6 years and older"
-      zh: "6岁及以上"
-      ja: "6歳以上"
+      en: 6 years and older
+      zh: 6岁及以上
+      ja: 6歳以上
     indications:
-      en: ["ADHD", "Narcolepsy"]
-      zh: ["注意缺陷多动障碍", "发作性睡病"]
-      ja: ["ADHD", "ナルコレプシー"]
+      en:
+        - ADHD
+        - Narcolepsy
+      zh:
+        - 注意缺陷多动障碍
+        - 发作性睡病
+      ja:
+        - ADHD
+        - ナルコレプシー
     available: true
     notes:
       en: ""
       zh: ""
       ja: ""
-
-  - region: "CA"
-    agency: "Health Canada"
+  - region: CA
+    agency: Health Canada
     year: 1979
     approvedAges:
-      en: "6 years and older"
-      zh: "6岁及以上"
-      ja: "6歳以上"
+      en: 6 years and older
+      zh: 6岁及以上
+      ja: 6歳以上
     indications:
-      en: ["ADHD", "Narcolepsy"]
-      zh: ["注意缺陷多动障碍", "发作性睡病"]
-      ja: ["ADHD", "ナルコレプシー"]
+      en:
+        - ADHD
+        - Narcolepsy
+      zh:
+        - 注意缺陷多动障碍
+        - 发作性睡病
+      ja:
+        - ADHD
+        - ナルコレプシー
     available: true
     notes:
       en: ""
       zh: ""
       ja: ""
-
-# Special Considerations
 specialConsiderations:
   cardiacRisk:
-    en: "Cardiovascular evaluation recommended before starting; caution in patients with heart conditions"
-    zh: "开始治疗前建议进行心血管评估；有心脏病患者需谨慎"
-    ja: "開始前に心血管評価を推奨；心臓疾患のある患者には注意"
+    en: Cardiovascular evaluation recommended before starting; caution in patients with heart conditions
+    zh: 开始治疗前建议进行心血管评估；有心脏病患者需谨慎
+    ja: 開始前に心血管評価を推奨；心臓疾患のある患者には注意
   abuseRisk:
-    en: "Schedule II controlled substance; high abuse potential, especially IR formulations"
-    zh: "二类管制药物；滥用风险高，尤其是速释制剂"
-    ja: "スケジュールII規制物質；特に即放性製剤で乱用の可能性が高い"
+    en: Schedule II controlled substance; high abuse potential, especially IR formulations
+    zh: 二类管制药物；滥用风险高，尤其是速释制剂
+    ja: スケジュールII規制物質；特に即放性製剤で乱用の可能性が高い
   withdrawalNotes:
-    en: "No significant physical withdrawal; may experience fatigue and depression when stopping"
-    zh: "无明显身体戒断症状；停药时可能出现疲劳和抑郁"
-    ja: "重大な身体的離脱症状はない；中止時に疲労やうつを経験する可能性"
+    en: No significant physical withdrawal; may experience fatigue and depression when stopping
+    zh: 无明显身体戒断症状；停药时可能出现疲劳和抑郁
+    ja: 重大な身体的離脱症状はない；中止時に疲労やうつを経験する可能性
   monitoringRequired:
-    en: "Height, weight, blood pressure, heart rate; periodic cardiovascular assessment"
-    zh: "身高、体重、血压、心率；定期心血管评估"
-    ja: "身長、体重、血圧、心拍数；定期的な心血管評価"
-
-# Travel Rules
+    en: Height, weight, blood pressure, heart rate; periodic cardiovascular assessment
+    zh: 身高、体重、血压、心率；定期心血管评估
+    ja: 身長、体重、血圧、心拍数；定期的な心血管評価
 travelRules:
   generalAdvice:
-    en: "Methylphenidate is available in most countries but is a controlled substance everywhere. Carry proper documentation when traveling internationally."
-    zh: "哌甲酯在大多数国家可用，但在所有国家都是管制药物。国际旅行时请携带适当文件。"
-    ja: "メチルフェニデートはほとんどの国で入手可能ですが、どこでも規制物質です。海外旅行時は適切な書類を携帯してください。"
-
+    en: Methylphenidate is available in most countries but is a controlled substance everywhere. Carry proper documentation when traveling internationally.
+    zh: 哌甲酯在大多数国家可用，但在所有国家都是管制药物。国际旅行时请携带适当文件。
+    ja: メチルフェニデートはほとんどの国で入手可能ですが、どこでも規制物質です。海外旅行時は適切な書類を携帯してください。
   requiredDocumentation:
-    - type: "prescription"
+    - type: prescription
       typeLabel:
-        en: "Valid prescription"
-        zh: "有效处方"
-        ja: "有効な処方箋"
+        en: Valid prescription
+        zh: 有效处方
+        ja: 有効な処方箋
       notes:
-        en: "Original prescription in original packaging"
-        zh: "原始处方和原包装"
-        ja: "元の処方箋と元のパッケージ"
-    - type: "medical_letter"
+        en: Original prescription in original packaging
+        zh: 原始处方和原包装
+        ja: 元の処方箋と元のパッケージ
+    - type: medical_letter
       typeLabel:
-        en: "Doctor's letter"
-        zh: "医生证明信"
-        ja: "医師の診断書"
+        en: Doctor's letter
+        zh: 医生证明信
+        ja: 医師の診断書
       notes:
-        en: "Recommended for longer trips"
-        zh: "长途旅行建议携带"
-        ja: "長期旅行の場合は推奨"
-
+        en: Recommended for longer trips
+        zh: 长途旅行建议携带
+        ja: 長期旅行の場合は推奨
   maxPersonalSupply:
-    default: "90 days"
+    default: 90 days
     byRegion:
-      JP: "30 days"
-      EU: "30 days"
-      UK: "3 months"
-      AU: "3 months"
-
+      JP: 30 days
+      EU: 30 days
+      UK: 3 months
+      AU: 3 months
   crossBorderRules:
-    - fromRegion: "US"
-      toRegion: "JP"
-      status: "requires_permit"
+    - fromRegion: US
+      toRegion: JP
+      status: requires_permit
       statusLabel:
-        en: "Requires Import Permit"
-        zh: "需要进口许可"
-        ja: "輸入許可が必要"
+        en: Requires Import Permit
+        zh: 需要进口许可
+        ja: 輸入許可が必要
       requirements:
         en:
-          - "Apply to Japanese Narcotics Control Department"
-          - "Obtain Yakkan Shoumei (import certificate)"
-          - "Maximum 30-day supply"
+          - Apply to Japanese Narcotics Control Department
+          - Obtain Yakkan Shoumei (import certificate)
+          - Maximum 30-day supply
         zh:
-          - "向日本麻药取缔部门申请"
-          - "获得药监证明（Yakkan Shoumei）"
-          - "最多30天用量"
+          - 向日本麻药取缔部门申请
+          - 获得药监证明（Yakkan Shoumei）
+          - 最多30天用量
         ja:
-          - "麻薬取締部への申請"
-          - "薬監証明の取得"
-          - "最大30日分"
-      maxSupply: "30 days"
+          - 麻薬取締部への申請
+          - 薬監証明の取得
+          - 最大30日分
+      maxSupply: 30 days
       notes:
-        en: "Methylphenidate is legal in Japan but requires advance permission. Apply 2+ weeks before travel."
-        zh: "哌甲酯在日本合法，但需要提前许可。请在旅行前2周以上申请。"
-        ja: "メチルフェニデートは日本で合法ですが、事前の許可が必要です。旅行の2週間以上前に申請してください。"
+        en: Methylphenidate is legal in Japan but requires advance permission. Apply 2+ weeks before travel.
+        zh: 哌甲酯在日本合法，但需要提前许可。请在旅行前2周以上申请。
+        ja: メチルフェニデートは日本で合法ですが、事前の許可が必要です。旅行の2週間以上前に申請してください。
       sources:
-        - "https://www.ncd.mhlw.go.jp/en/application.html"
-
-    - fromRegion: "US"
-      toRegion: "CN"
-      status: "restricted"
+        - https://www.ncd.mhlw.go.jp/en/application.html
+    - fromRegion: US
+      toRegion: CN
+      status: restricted
       statusLabel:
-        en: "Restricted"
-        zh: "受限"
-        ja: "制限あり"
+        en: Restricted
+        zh: 受限
+        ja: 制限あり
       requirements:
         en:
-          - "Carry original prescription"
-          - "Doctor's letter explaining medical necessity"
-          - "Keep in original packaging"
-          - "Declare at customs if asked"
+          - Carry original prescription
+          - Doctor's letter explaining medical necessity
+          - Keep in original packaging
+          - Declare at customs if asked
         zh:
-          - "携带原始处方"
-          - "医生证明信说明医疗必要性"
-          - "保持原包装"
-          - "如被询问在海关申报"
+          - 携带原始处方
+          - 医生证明信说明医疗必要性
+          - 保持原包装
+          - 如被询问在海关申报
         ja:
-          - "元の処方箋を携帯"
-          - "医学的必要性を説明する医師の手紙"
-          - "元のパッケージを維持"
-          - "求められた場合は税関で申告"
-      maxSupply: "30 days"
+          - 元の処方箋を携帯
+          - 医学的必要性を説明する医師の手紙
+          - 元のパッケージを維持
+          - 求められた場合は税関で申告
+      maxSupply: 30 days
       notes:
-        en: "Methylphenidate is a Class I psychotropic substance in China. Personal use amounts may be allowed with proper documentation, but regulations are strict."
-        zh: "哌甲酯在中国属于第一类精神药品。携带适当文件的个人使用量可能被允许，但规定严格。"
-        ja: "メチルフェニデートは中国で第一類精神薬品です。適切な書類があれば個人使用量は許可される場合がありますが、規制は厳格です。"
+        en: Methylphenidate is a Class I psychotropic substance in China. Personal use amounts may be allowed with proper documentation, but regulations are strict.
+        zh: 哌甲酯在中国属于第一类精神药品。携带适当文件的个人使用量可能被允许，但规定严格。
+        ja: メチルフェニデートは中国で第一類精神薬品です。適切な書類があれば個人使用量は許可される場合がありますが、規制は厳格です。
       sources:
-        - "http://www.nhc.gov.cn/"
-
-    - fromRegion: "US"
-      toRegion: "EU"
-      status: "restricted"
+        - http://www.nhc.gov.cn/
+    - fromRegion: US
+      toRegion: EU
+      status: restricted
       statusLabel:
-        en: "Restricted - Schengen Certificate"
-        zh: "受限 - 需申根证明"
-        ja: "制限あり - シェンゲン証明書"
+        en: Restricted - Schengen Certificate
+        zh: 受限 - 需申根证明
+        ja: 制限あり - シェンゲン証明書
       requirements:
         en:
-          - "Obtain Schengen certificate from your health authority"
-          - "Certificate valid for 30 days"
-          - "Carry original prescription"
+          - Obtain Schengen certificate from your health authority
+          - Certificate valid for 30 days
+          - Carry original prescription
         zh:
-          - "从您的卫生部门获取申根证明"
-          - "证明有效期30天"
-          - "携带原始处方"
+          - 从您的卫生部门获取申根证明
+          - 证明有效期30天
+          - 携带原始处方
         ja:
-          - "保健当局からシェンゲン証明書を取得"
-          - "証明書の有効期間は30日"
-          - "元の処方箋を携帯"
-      maxSupply: "30 days"
+          - 保健当局からシェンゲン証明書を取得
+          - 証明書の有効期間は30日
+          - 元の処方箋を携帯
+      maxSupply: 30 days
       notes:
-        en: "Schengen countries require a standardized medical certificate for controlled substances. Non-Schengen EU countries may have different requirements."
-        zh: "申根国家对管制药物需要标准化医疗证明。非申根欧盟国家可能有不同要求。"
-        ja: "シェンゲン加盟国では規制物質に対して標準化された医療証明書が必要です。非シェンゲンEU諸国には異なる要件がある場合があります。"
+        en: Schengen countries require a standardized medical certificate for controlled substances. Non-Schengen EU countries may have different requirements.
+        zh: 申根国家对管制药物需要标准化医疗证明。非申根欧盟国家可能有不同要求。
+        ja: シェンゲン加盟国では規制物質に対して標準化された医療証明書が必要です。非シェンゲンEU諸国には異なる要件がある場合があります。
       sources:
-        - "https://www.emcdda.europa.eu/"
-
-    - fromRegion: "US"
-      toRegion: "UK"
-      status: "allowed"
+        - https://www.emcdda.europa.eu/
+    - fromRegion: US
+      toRegion: UK
+      status: allowed
       statusLabel:
-        en: "Allowed with Documentation"
-        zh: "凭文件允许"
-        ja: "書類があれば許可"
+        en: Allowed with Documentation
+        zh: 凭文件允许
+        ja: 書類があれば許可
       requirements:
         en:
-          - "Carry prescription in original packaging"
-          - "Letter from prescribing doctor recommended"
+          - Carry prescription in original packaging
+          - Letter from prescribing doctor recommended
         zh:
-          - "携带原包装处方药"
-          - "建议携带开药医生的证明信"
+          - 携带原包装处方药
+          - 建议携带开药医生的证明信
         ja:
-          - "処方箋を元のパッケージで携帯"
-          - "処方医の手紙を推奨"
-      maxSupply: "3 months"
+          - 処方箋を元のパッケージで携帯
+          - 処方医の手紙を推奨
+      maxSupply: 3 months
       notes:
-        en: "UK allows personal import of controlled medicines. No special permit needed for personal use amounts."
-        zh: "英国允许个人进口管制药物。个人使用量无需特别许可。"
-        ja: "英国は規制薬の個人輸入を許可しています。個人使用量であれば特別な許可は不要です。"
+        en: UK allows personal import of controlled medicines. No special permit needed for personal use amounts.
+        zh: 英国允许个人进口管制药物。个人使用量无需特别许可。
+        ja: 英国は規制薬の個人輸入を許可しています。個人使用量であれば特別な許可は不要です。
       sources:
-        - "https://www.gov.uk/travelling-controlled-drugs"
-
-    - fromRegion: "US"
-      toRegion: "AU"
-      status: "restricted"
+        - https://www.gov.uk/travelling-controlled-drugs
+    - fromRegion: US
+      toRegion: AU
+      status: restricted
       statusLabel:
-        en: "Restricted - Declaration Required"
-        zh: "受限 - 需要申报"
-        ja: "制限あり - 申告が必要"
+        en: Restricted - Declaration Required
+        zh: 受限 - 需要申报
+        ja: 制限あり - 申告が必要
       requirements:
         en:
-          - "Declare medication at customs"
-          - "Carry prescription and doctor's letter"
-          - "Maximum 3 months supply"
+          - Declare medication at customs
+          - Carry prescription and doctor's letter
+          - Maximum 3 months supply
         zh:
-          - "在海关申报药物"
-          - "携带处方和医生证明信"
-          - "最多3个月用量"
+          - 在海关申报药物
+          - 携带处方和医生证明信
+          - 最多3个月用量
         ja:
-          - "税関で薬物を申告"
-          - "処方箋と医師の手紙を携帯"
-          - "最大3ヶ月分"
-      maxSupply: "3 months"
+          - 税関で薬物を申告
+          - 処方箋と医師の手紙を携帯
+          - 最大3ヶ月分
+      maxSupply: 3 months
       notes:
-        en: "Australia classifies methylphenidate as Schedule 8. Must be declared at customs."
-        zh: "澳大利亚将哌甲酯列为Schedule 8药物。必须在海关申报。"
-        ja: "オーストラリアではメチルフェニデートはSchedule 8に分類されています。税関での申告が必要です。"
+        en: Australia classifies methylphenidate as Schedule 8. Must be declared at customs.
+        zh: 澳大利亚将哌甲酯列为Schedule 8药物。必须在海关申报。
+        ja: オーストラリアではメチルフェニデートはSchedule 8に分類されています。税関での申告が必要です。
       sources:
-        - "https://www.tga.gov.au/entering-australia"
-
-    - fromRegion: "US"
-      toRegion: "CA"
-      status: "allowed"
+        - https://www.tga.gov.au/entering-australia
+    - fromRegion: US
+      toRegion: CA
+      status: allowed
       statusLabel:
-        en: "Allowed with Prescription"
-        zh: "凭处方允许"
-        ja: "処方箋があれば許可"
+        en: Allowed with Prescription
+        zh: 凭处方允许
+        ja: 処方箋があれば許可
       requirements:
         en:
-          - "Carry medication in original labeled container"
-          - "Bring copy of prescription"
+          - Carry medication in original labeled container
+          - Bring copy of prescription
         zh:
-          - "携带原标签容器中的药物"
-          - "携带处方副本"
+          - 携带原标签容器中的药物
+          - 携带处方副本
         ja:
-          - "元のラベル付き容器で薬を携帯"
-          - "処方箋のコピーを持参"
-      maxSupply: "90 days"
+          - 元のラベル付き容器で薬を携帯
+          - 処方箋のコピーを持参
+      maxSupply: 90 days
       notes:
-        en: "Straightforward crossing for personal use with proper documentation."
-        zh: "携带适当文件的个人使用量过境较为简单。"
-        ja: "適切な書類があれば、個人使用での国境通過は簡単です。"
+        en: Straightforward crossing for personal use with proper documentation.
+        zh: 携带适当文件的个人使用量过境较为简单。
+        ja: 適切な書類があれば、個人使用での国境通過は簡単です。
       sources:
-        - "https://www.cbsa-asfc.gc.ca/"
-
-# OpenFDA Data
+        - https://www.cbsa-asfc.gc.ca/
 fdaData:
-  applicationNumbers: ["NDA010187", "NDA021121"]  # Ritalin, Concerta
-  splSetId: "b30c6af2-1f71-4a99-a73e-1a6c6bdc40e1"
-  rxcui: ["4158", "83366", "250467", "310380"]
+  applicationNumbers:
+    - NDA010187
+    - NDA021121
+  splSetId: b30c6af2-1f71-4a99-a73e-1a6c6bdc40e1
+  rxcui:
+    - "4158"
+    - "83366"
+    - "250467"
+    - "310380"
   pharmacologicClass:
     mechanismOfAction:
-      - "Dopamine Uptake Inhibitors [MoA]"
-      - "Norepinephrine Uptake Inhibitors [MoA]"
+      - Dopamine Uptake Inhibitors [MoA]
+      - Norepinephrine Uptake Inhibitors [MoA]
     establishedClass:
-      - "Central Nervous System Stimulant [EPC]"
+      - Central Nervous System Stimulant [EPC]
     physiologicEffect:
-      - "Increased Dopaminergic Transmission [PE]"
-      - "Increased Norepinephrine Transmission [PE]"
+      - Increased Dopaminergic Transmission [PE]
+      - Increased Norepinephrine Transmission [PE]
   boxedWarning:
-    en: "CNS stimulants, including methylphenidate products, have a high potential for abuse and dependence. Assess the risk of abuse prior to prescribing and monitor for signs of abuse and dependence while on therapy. Sudden death has been reported in patients with structural cardiac abnormalities or other serious heart problems."
-    zh: "包括哌甲酯产品在内的中枢神经系统兴奋剂具有高度的滥用和依赖风险。在开处方前评估滥用风险，并在治疗期间监测滥用和依赖的迹象。有报告显示结构性心脏异常或其他严重心脏问题的患者出现猝死。"
-    ja: "メチルフェニデート製品を含むCNS刺激薬は、乱用と依存の可能性が高いです。処方前に乱用のリスクを評価し、治療中は乱用と依存の兆候を監視してください。構造的な心臓異常またはその他の重篤な心臓疾患を持つ患者で突然死が報告されています。"
+    en: CNS stimulants, including methylphenidate products, have a high potential for abuse and dependence. Assess the risk of abuse prior to prescribing and monitor for signs of abuse and dependence while on therapy. Sudden death has been reported in patients with structural cardiac abnormalities or other serious heart problems.
+    zh: 包括哌甲酯产品在内的中枢神经系统兴奋剂具有高度的滥用和依赖风险。在开处方前评估滥用风险，并在治疗期间监测滥用和依赖的迹象。有报告显示结构性心脏异常或其他严重心脏问题的患者出现猝死。
+    ja: メチルフェニデート製品を含むCNS刺激薬は、乱用と依存の可能性が高いです。処方前に乱用のリスクを評価し、治療中は乱用と依存の兆候を監視してください。構造的な心臓異常またはその他の重篤な心臓疾患を持つ患者で突然死が報告されています。
   fdaIndications:
-    en: "Treatment of Attention Deficit Hyperactivity Disorder (ADHD) and Narcolepsy in patients 6 years of age and older."
-    zh: "治疗6岁及以上患者的注意缺陷多动障碍（ADHD）和发作性睡病。"
-    ja: "6歳以上の患者における注意欠陥多動性障害（ADHD）およびナルコレプシーの治療。"
+    en: Treatment of Attention Deficit Hyperactivity Disorder (ADHD) and Narcolepsy in patients 6 years of age and older.
+    zh: 治疗6岁及以上患者的注意缺陷多动障碍（ADHD）和发作性睡病。
+    ja: 6歳以上の患者における注意欠陥多動性障害（ADHD）およびナルコレプシーの治療。
   abuseAndDependence:
-    controlledSubstanceClass: "CII"
+    controlledSubstanceClass: CII
     abuse:
-      en: "Methylphenidate is a Schedule II controlled substance. Signs of abuse include increased dosing, drug-seeking behavior, and use despite harm. Patients with history of drug abuse may be at higher risk."
-      zh: "哌甲酯是二类管制物质。滥用迹象包括增加剂量、寻药行为以及尽管有害仍继续使用。有药物滥用史的患者风险可能更高。"
-      ja: "メチルフェニデートはスケジュールII規制物質です。乱用の兆候には、投与量の増加、薬物探索行動、害にもかかわらず使用が含まれます。薬物乱用歴のある患者はリスクが高い可能性があります。"
+      en: Methylphenidate is a Schedule II controlled substance. Signs of abuse include increased dosing, drug-seeking behavior, and use despite harm. Patients with history of drug abuse may be at higher risk.
+      zh: 哌甲酯是二类管制物质。滥用迹象包括增加剂量、寻药行为以及尽管有害仍继续使用。有药物滥用史的患者风险可能更高。
+      ja: メチルフェニデートはスケジュールII規制物質です。乱用の兆候には、投与量の増加、薬物探索行動、害にもかかわらず使用が含まれます。薬物乱用歴のある患者はリスクが高い可能性があります。
     dependence:
-      en: "Psychological dependence may develop with chronic use. Abrupt cessation following prolonged use may result in fatigue, depression, and sleep disturbances."
-      zh: "慢性使用可能产生心理依赖。长期使用后突然停药可能导致疲劳、抑郁和睡眠障碍。"
-      ja: "慢性的な使用により心理的依存が発生する可能性があります。長期使用後の突然の中止は、疲労、うつ病、睡眠障害を引き起こす可能性があります。"
+      en: Psychological dependence may develop with chronic use. Abrupt cessation following prolonged use may result in fatigue, depression, and sleep disturbances.
+      zh: 慢性使用可能产生心理依赖。长期使用后突然停药可能导致疲劳、抑郁和睡眠障碍。
+      ja: 慢性的な使用により心理的依存が発生する可能性があります。長期使用後の突然の中止は、疲労、うつ病、睡眠障害を引き起こす可能性があります。
   labelEffectiveDate: "20241115"
-  fdaLabelUrl: "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=b30c6af2-1f71-4a99-a73e-1a6c6bdc40e1"
-
-# FAERS Adverse Events Data (from OpenFDA FAERS)
-# Note: These are reported adverse events, not incidence rates
+  fdaLabelUrl: https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=b30c6af2-1f71-4a99-a73e-1a6c6bdc40e1
 faersData:
   totalReports: 48500
   seriousReports: 28200
   topReactions:
     - reaction:
-        en: "drug ineffective"
-        zh: "药物无效"
-        ja: "薬効なし"
+        en: drug ineffective
+        zh: 药物无效
+        ja: 薬効なし
       reportCount: 4120
       percentage: 8.5
     - reaction:
-        en: "anxiety"
-        zh: "焦虑"
-        ja: "不安"
+        en: anxiety
+        zh: 焦虑
+        ja: 不安
       reportCount: 3650
       percentage: 7.5
     - reaction:
-        en: "insomnia"
-        zh: "失眠"
-        ja: "不眠"
+        en: insomnia
+        zh: 失眠
+        ja: 不眠
       reportCount: 3200
       percentage: 6.6
     - reaction:
-        en: "depression"
-        zh: "抑郁"
-        ja: "うつ病"
+        en: depression
+        zh: 抑郁
+        ja: うつ病
       reportCount: 2850
       percentage: 5.9
     - reaction:
-        en: "weight decreased"
-        zh: "体重减轻"
-        ja: "体重減少"
+        en: weight decreased
+        zh: 体重减轻
+        ja: 体重減少
       reportCount: 2640
       percentage: 5.4
     - reaction:
-        en: "headache"
-        zh: "头痛"
-        ja: "頭痛"
+        en: headache
+        zh: 头痛
+        ja: 頭痛
       reportCount: 2480
       percentage: 5.1
     - reaction:
-        en: "decreased appetite"
-        zh: "食欲下降"
-        ja: "食欲減退"
+        en: decreased appetite
+        zh: 食欲下降
+        ja: 食欲減退
       reportCount: 2350
       percentage: 4.8
     - reaction:
-        en: "irritability"
-        zh: "易怒"
-        ja: "易刺激性"
+        en: irritability
+        zh: 易怒
+        ja: 易刺激性
       reportCount: 2100
       percentage: 4.3
     - reaction:
-        en: "nausea"
-        zh: "恶心"
-        ja: "悪心"
+        en: nausea
+        zh: 恶心
+        ja: 悪心
       reportCount: 1950
-      percentage: 4.0
+      percentage: 4
     - reaction:
-        en: "aggression"
-        zh: "攻击性"
-        ja: "攻撃性"
+        en: aggression
+        zh: 攻击性
+        ja: 攻撃性
       reportCount: 1820
       percentage: 3.8
   demographics:
     byAge:
-      - ageGroup: "6-11"
+      - ageGroup: 6-11
         count: 12800
-      - ageGroup: "12-17"
+      - ageGroup: 12-17
         count: 14200
-      - ageGroup: "18-24"
+      - ageGroup: 18-24
         count: 8500
-      - ageGroup: "25-34"
+      - ageGroup: 25-34
         count: 6200
-      - ageGroup: "35-44"
+      - ageGroup: 35-44
         count: 4100
-      - ageGroup: "45-54"
+      - ageGroup: 45-54
         count: 1800
-      - ageGroup: "55-64"
+      - ageGroup: 55-64
         count: 700
-      - ageGroup: "65+"
+      - ageGroup: 65+
         count: 200
     bySex:
-      - sex: "Male"
+      - sex: Male
         count: 31200
-      - sex: "Female"
+      - sex: Female
         count: 16100
-      - sex: "Unknown"
+      - sex: Unknown
         count: 1200
   outcomes:
     recovered: 18500
@@ -820,174 +838,842 @@ faersData:
     fatal: 180
     unknown: 16720
   dataRange:
-    from: "2004-01-01"
-    to: "2025-12-01"
-  lastUpdated: "2025-12-03"
-
-# RxNorm Data (from NLM RxNorm/RxNav)
-# Drug name normalization and relationship mapping
+    from: 2004-01-01
+    to: 2025-12-01
+  lastUpdated: 2025-12-03
 rxnormData:
-  # Primary ingredient-level RxCUI
-  ingredientRxcui: "6887"
-  ingredientName: "methylphenidate"
-
-  # RxCUI mappings at different term type levels
+  ingredientRxcui: "6901"
+  ingredientName: methylphenidate
   rxcuiMappings:
-    - rxcui: "6887"
-      name: "methylphenidate"
-      tty: "IN"
-      description: "Base ingredient"
-    - rxcui: "6888"
-      name: "methylphenidate hydrochloride"
-      tty: "PIN"
-      description: "Precise ingredient (includes salt form)"
-    - rxcui: "1091127"
-      name: "methylphenidate hydrochloride 10 MG"
-      tty: "SCDC"
-      description: "Ingredient + strength"
-    - rxcui: "1091129"
-      name: "methylphenidate hydrochloride 10 MG Oral Tablet"
-      tty: "SCD"
-      description: "Clinical drug (ingredient + strength + form)"
-    - rxcui: "884520"
-      name: "methylphenidate Oral Tablet"
-      tty: "SCDF"
-      description: "Ingredient + dose form"
-    - rxcui: "884385"
-      name: "methylphenidate Extended Release Oral Capsule"
-      tty: "SCDF"
-      description: "Ingredient + dose form"
-    - rxcui: "884386"
-      name: "methylphenidate Extended Release Oral Tablet"
-      tty: "SCDF"
-      description: "Ingredient + dose form"
-
-  # Brand name to RxCUI mappings
+    - rxcui: "6901"
+      name: methylphenidate
+      tty: IN
+      description: Base ingredient
+    - rxcui: "1312584"
+      name: Quillivant
+      tty: BN
+      description: Brand name
+    - rxcui: "1648175"
+      name: Aptensio
+      tty: BN
+      description: Brand name
+    - rxcui: "1727444"
+      name: QuilliChew
+      tty: BN
+      description: Brand name
+    - rxcui: "1926841"
+      name: Cotempla
+      tty: BN
+      description: Brand name
+    - rxcui: "2052821"
+      name: Relexxii
+      tty: BN
+      description: Brand name
+    - rxcui: "2119550"
+      name: Adhansia
+      tty: BN
+      description: Brand name
+    - rxcui: "2168839"
+      name: Jornay
+      tty: BN
+      description: Brand name
+    - rxcui: "224917"
+      name: Ritalin
+      tty: BN
+      description: Brand name
+    - rxcui: "261572"
+      name: Methylin
+      tty: BN
+      description: Brand name
+    - rxcui: "284704"
+      name: Concerta
+      tty: BN
+      description: Brand name
+    - rxcui: "594111"
+      name: Metadate
+      tty: BN
+      description: Brand name
+    - rxcui: "631252"
+      name: Daytrana
+      tty: BN
+      description: Brand name
+    - rxcui: "203188"
+      name: methylphenidate hydrochloride
+      tty: PIN
+      description: Precise ingredient (includes salt form)
+    - rxcui: "1091135"
+      name: methylphenidate hydrochloride 2 MG/ML Oral Solution [Methylin]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1091139"
+      name: 30/70 Release 24 HR methylphenidate hydrochloride 10 MG Extended Release Oral Capsule [Metadate]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1091143"
+      name: 50/50 Release 24 HR methylphenidate hydrochloride 10 MG Extended Release Oral Capsule [Ritalin]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1091153"
+      name: methylphenidate hydrochloride 10 MG Chewable Tablet [Methylin]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1091157"
+      name: 24 HR methylphenidate hydrochloride 18 MG Extended Release Oral Tablet [Concerta]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1091163"
+      name: 30/70 Release 24 HR methylphenidate hydrochloride 20 MG Extended Release Oral Capsule [Metadate]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1091167"
+      name: 50/50 Release 24 HR methylphenidate hydrochloride 20 MG Extended Release Oral Capsule [Ritalin]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1091172"
+      name: 24 HR methylphenidate hydrochloride 27 MG Extended Release Oral Tablet [Concerta]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1091178"
+      name: 30/70 Release 24 HR methylphenidate hydrochloride 30 MG Extended Release Oral Capsule [Metadate]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1091182"
+      name: 50/50 Release 24 HR methylphenidate hydrochloride 30 MG Extended Release Oral Capsule [Ritalin]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1091187"
+      name: 24 HR methylphenidate hydrochloride 36 MG Extended Release Oral Tablet [Concerta]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1091193"
+      name: 30/70 Release 24 HR methylphenidate hydrochloride 40 MG Extended Release Oral Capsule [Metadate]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1091197"
+      name: 50/50 Release 24 HR methylphenidate hydrochloride 40 MG Extended Release Oral Capsule [Ritalin]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1091204"
+      name: 30/70 Release 24 HR methylphenidate hydrochloride 50 MG Extended Release Oral Capsule [Metadate]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1091212"
+      name: 24 HR methylphenidate hydrochloride 54 MG Extended Release Oral Tablet [Concerta]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1091220"
+      name: 30/70 Release 24 HR methylphenidate hydrochloride 60 MG Extended Release Oral Capsule [Metadate]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1091324"
+      name: methylphenidate hydrochloride 5 MG Chewable Tablet [Methylin]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1091343"
+      name: methylphenidate hydrochloride 1 MG/ML Oral Solution [Methylin]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1091379"
+      name: methylphenidate hydrochloride 10 MG Oral Tablet [Ritalin]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1091391"
+      name: methylphenidate hydrochloride 2.5 MG Chewable Tablet [Methylin]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1091395"
+      name: methylphenidate hydrochloride 20 MG Oral Tablet [Ritalin]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1091488"
+      name: 8 HR methylphenidate hydrochloride 20 MG Extended Release Oral Tablet [Metadate]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1091500"
+      name: methylphenidate hydrochloride 5 MG Oral Tablet [Ritalin]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1312589"
+      name: 24 HR methylphenidate hydrochloride 5 MG/ML Extended Release Suspension [Quillivant]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1648180"
+      name: 40/60 Release 24 HR methylphenidate hydrochloride 10 MG Extended Release Oral Capsule [Aptensio]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1648185"
+      name: 40/60 Release 24 HR methylphenidate hydrochloride 15 MG Extended Release Oral Capsule [Aptensio]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1648189"
+      name: 40/60 Release 24 HR methylphenidate hydrochloride 20 MG Extended Release Oral Capsule [Aptensio]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1648192"
+      name: 40/60 Release 24 HR methylphenidate hydrochloride 30 MG Extended Release Oral Capsule [Aptensio]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1648195"
+      name: 40/60 Release 24 HR methylphenidate hydrochloride 40 MG Extended Release Oral Capsule [Aptensio]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1648198"
+      name: 40/60 Release 24 HR methylphenidate hydrochloride 50 MG Extended Release Oral Capsule [Aptensio]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1648201"
+      name: 40/60 Release 24 HR methylphenidate hydrochloride 60 MG Extended Release Oral Capsule [Aptensio]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1727450"
+      name: 24 HR methylphenidate hydrochloride 20 MG Chewable Extended Release Oral Tablet [QuilliChew]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1734930"
+      name: 24 HR methylphenidate hydrochloride 30 MG Chewable Extended Release Oral Tablet [QuilliChew]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1734953"
+      name: 24 HR methylphenidate hydrochloride 40 MG Chewable Extended Release Oral Tablet [QuilliChew]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1926847"
+      name: methylphenidate 17.3 MG Disintegrating Oral Tablet [Cotempla]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1926851"
+      name: methylphenidate 25.9 MG Disintegrating Oral Tablet [Cotempla]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1926855"
+      name: methylphenidate 8.6 MG Disintegrating Oral Tablet [Cotempla]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "2052826"
+      name: 24 HR methylphenidate hydrochloride 72 MG Extended Release Oral Tablet [Relexxii]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "2119565"
+      name: 20/80 Release 24 HR methylphenidate hydrochloride 35 MG Extended Release Oral Capsule [Adhansia]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "2168859"
+      name: Evening Dosing 24 HR methylphenidate hydrochloride 60 MG Extended Release Oral Capsule [Jornay]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "2168863"
+      name: Evening Dosing 24 HR methylphenidate hydrochloride 80 MG Extended Release Oral Capsule [Jornay]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "2168865"
+      name: Evening Dosing 24 HR methylphenidate hydrochloride 100 MG Extended Release Oral Capsule [Jornay]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "2168867"
+      name: Evening Dosing 24 HR methylphenidate hydrochloride 20 MG Extended Release Oral Capsule [Jornay]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "2168869"
+      name: Evening Dosing 24 HR methylphenidate hydrochloride 40 MG Extended Release Oral Capsule [Jornay]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "2605943"
+      name: 24 HR methylphenidate hydrochloride 45 MG Extended Release Oral Tablet [Relexxii]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "2605946"
+      name: 24 HR methylphenidate hydrochloride 63 MG Extended Release Oral Tablet [Relexxii]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "2668496"
+      name: 24 HR methylphenidate hydrochloride 18 MG Extended Release Oral Tablet [Relexxii]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "2668499"
+      name: 24 HR methylphenidate hydrochloride 27 MG Extended Release Oral Tablet [Relexxii]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "2668502"
+      name: 24 HR methylphenidate hydrochloride 36 MG Extended Release Oral Tablet [Relexxii]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "2668505"
+      name: 24 HR methylphenidate hydrochloride 54 MG Extended Release Oral Tablet [Relexxii]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "753437"
+      name: 9 HR methylphenidate 1.11 MG/HR Transdermal System [Daytrana]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "753439"
+      name: 9 HR methylphenidate 1.67 MG/HR Transdermal System [Daytrana]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "753442"
+      name: 9 HR methylphenidate 2.22 MG/HR Transdermal System [Daytrana]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "753443"
+      name: 9 HR methylphenidate 3.33 MG/HR Transdermal System [Daytrana]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1312586"
+      name: methylphenidate Extended Release Suspension [Quillivant]
+      tty: SBDF
+      description: Branded ingredient + dose form
+    - rxcui: "1648177"
+      name: methylphenidate Extended Release Oral Capsule [Aptensio]
+      tty: SBDF
+      description: Branded ingredient + dose form
+    - rxcui: "1805914"
+      name: methylphenidate Transdermal System [Daytrana]
+      tty: SBDF
+      description: Branded ingredient + dose form
+    - rxcui: "1926843"
+      name: methylphenidate Disintegrating Oral Tablet [Cotempla]
+      tty: SBDF
+      description: Branded ingredient + dose form
+    - rxcui: "2052823"
+      name: methylphenidate Extended Release Oral Tablet [Relexxii]
+      tty: SBDF
+      description: Branded ingredient + dose form
+    - rxcui: "2119552"
+      name: methylphenidate Extended Release Oral Capsule [Adhansia]
+      tty: SBDF
+      description: Branded ingredient + dose form
+    - rxcui: "2168841"
+      name: methylphenidate Extended Release Oral Capsule [Jornay]
+      tty: SBDF
+      description: Branded ingredient + dose form
+    - rxcui: "2270758"
+      name: methylphenidate Chewable Extended Release Oral Tablet [QuilliChew]
+      tty: SBDF
+      description: Branded ingredient + dose form
+    - rxcui: "368776"
+      name: methylphenidate Oral Tablet [Ritalin]
+      tty: SBDF
+      description: Branded ingredient + dose form
+    - rxcui: "370331"
+      name: methylphenidate Extended Release Oral Tablet [Concerta]
+      tty: SBDF
+      description: Branded ingredient + dose form
+    - rxcui: "542367"
+      name: methylphenidate Chewable Tablet [Methylin]
+      tty: SBDF
+      description: Branded ingredient + dose form
+    - rxcui: "543272"
+      name: methylphenidate Oral Solution [Methylin]
+      tty: SBDF
+      description: Branded ingredient + dose form
+    - rxcui: "608682"
+      name: methylphenidate Extended Release Oral Capsule [Ritalin]
+      tty: SBDF
+      description: Branded ingredient + dose form
+    - rxcui: "630810"
+      name: methylphenidate Extended Release Oral Capsule [Metadate]
+      tty: SBDF
+      description: Branded ingredient + dose form
+    - rxcui: "885414"
+      name: methylphenidate Extended Release Oral Tablet [Metadate]
+      tty: SBDF
+      description: Branded ingredient + dose form
+    - rxcui: "1091133"
+      name: methylphenidate hydrochloride 2 MG/ML Oral Solution
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1091145"
+      name: 8 HR methylphenidate hydrochloride 10 MG Extended Release Oral Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1091150"
+      name: methylphenidate hydrochloride 10 MG Oral Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1091152"
+      name: methylphenidate hydrochloride 10 MG Chewable Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1091155"
+      name: 24 HR methylphenidate hydrochloride 18 MG Extended Release Oral Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1091170"
+      name: 24 HR methylphenidate hydrochloride 27 MG Extended Release Oral Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1091185"
+      name: 24 HR methylphenidate hydrochloride 36 MG Extended Release Oral Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1091210"
+      name: 24 HR methylphenidate hydrochloride 54 MG Extended Release Oral Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1091225"
+      name: 8 HR methylphenidate hydrochloride 20 MG Extended Release Oral Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1091322"
+      name: methylphenidate hydrochloride 5 MG Chewable Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1091341"
+      name: methylphenidate hydrochloride 1 MG/ML Oral Solution
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1091389"
+      name: methylphenidate hydrochloride 2.5 MG Chewable Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1091392"
+      name: methylphenidate hydrochloride 20 MG Oral Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1091497"
+      name: methylphenidate hydrochloride 5 MG Oral Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1091501"
+      name: methylphenidate hydrochloride 2.5 MG Oral Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1312583"
+      name: 24 HR methylphenidate hydrochloride 5 MG/ML Extended Release Suspension
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1648183"
+      name: 40/60 Release 24 HR methylphenidate hydrochloride 15 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1727443"
+      name: 24 HR methylphenidate hydrochloride 20 MG Chewable Extended Release Oral Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1734928"
+      name: 24 HR methylphenidate hydrochloride 30 MG Chewable Extended Release Oral Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1734951"
+      name: 24 HR methylphenidate hydrochloride 40 MG Chewable Extended Release Oral Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1806177"
+      name: 50/50 Release 24 HR methylphenidate hydrochloride 20 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1806179"
+      name: 50/50 Release 24 HR methylphenidate hydrochloride 30 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1806181"
+      name: 30/70 Release 24 HR methylphenidate hydrochloride 10 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1806183"
+      name: 50/50 Release 24 HR methylphenidate hydrochloride 40 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1806185"
+      name: 50/50 Release 24 HR methylphenidate hydrochloride 60 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1806187"
+      name: 30/70 Release 24 HR methylphenidate hydrochloride 20 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1806189"
+      name: 30/70 Release 24 HR methylphenidate hydrochloride 30 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1806191"
+      name: 30/70 Release 24 HR methylphenidate hydrochloride 40 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1806193"
+      name: 30/70 Release 24 HR methylphenidate hydrochloride 50 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1806195"
+      name: 50/50 Release 24 HR methylphenidate hydrochloride 10 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1806197"
+      name: 30/70 Release 24 HR methylphenidate hydrochloride 60 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1806200"
+      name: 40/60 Release 24 HR methylphenidate hydrochloride 10 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1806202"
+      name: 40/60 Release 24 HR methylphenidate hydrochloride 20 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1806204"
+      name: 40/60 Release 24 HR methylphenidate hydrochloride 50 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1806206"
+      name: 40/60 Release 24 HR methylphenidate hydrochloride 30 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1806208"
+      name: 40/60 Release 24 HR methylphenidate hydrochloride 60 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1806210"
+      name: 40/60 Release 24 HR methylphenidate hydrochloride 40 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1926840"
+      name: methylphenidate 17.3 MG Disintegrating Oral Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1926849"
+      name: methylphenidate 25.9 MG Disintegrating Oral Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1926853"
+      name: methylphenidate 8.6 MG Disintegrating Oral Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1995461"
+      name: 24 HR methylphenidate hydrochloride 72 MG Extended Release Oral Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "2001564"
+      name: BX Rating 24 HR methylphenidate hydrochloride 18 MG Extended Release Oral Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "2001565"
+      name: BX Rating 24 HR methylphenidate hydrochloride 27 MG Extended Release Oral Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "2001566"
+      name: BX Rating 24 HR methylphenidate hydrochloride 36 MG Extended Release Oral Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "2001568"
+      name: BX Rating 24 HR methylphenidate hydrochloride 54 MG Extended Release Oral Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "2119563"
+      name: 20/80 Release 24 HR methylphenidate hydrochloride 35 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "2168857"
+      name: Evening Dosing 24 HR methylphenidate hydrochloride 60 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "2168861"
+      name: Evening Dosing 24 HR methylphenidate hydrochloride 80 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "2168864"
+      name: Evening Dosing 24 HR methylphenidate hydrochloride 100 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "2168866"
+      name: Evening Dosing 24 HR methylphenidate hydrochloride 20 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "2168868"
+      name: Evening Dosing 24 HR methylphenidate hydrochloride 40 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "2605796"
+      name: 24 HR methylphenidate hydrochloride 63 MG Extended Release Oral Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "2605798"
+      name: 24 HR methylphenidate hydrochloride 45 MG Extended Release Oral Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "753436"
+      name: 9 HR methylphenidate 1.11 MG/HR Transdermal System
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "753438"
+      name: 9 HR methylphenidate 1.67 MG/HR Transdermal System
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "753440"
+      name: 9 HR methylphenidate 2.22 MG/HR Transdermal System
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "753441"
+      name: 9 HR methylphenidate 3.33 MG/HR Transdermal System
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1312582"
+      name: methylphenidate Extended Release Suspension
+      tty: SCDF
+      description: Ingredient + dose form
+    - rxcui: "1805912"
+      name: methylphenidate Transdermal System
+      tty: SCDF
+      description: Ingredient + dose form
+    - rxcui: "1926839"
+      name: methylphenidate Disintegrating Oral Tablet
+      tty: SCDF
+      description: Ingredient + dose form
+    - rxcui: "2270756"
+      name: methylphenidate Chewable Extended Release Oral Tablet
+      tty: SCDF
+      description: Ingredient + dose form
+    - rxcui: "372861"
+      name: methylphenidate Oral Tablet
+      tty: SCDF
+      description: Ingredient + dose form
+    - rxcui: "372862"
+      name: methylphenidate Extended Release Oral Tablet
+      tty: SCDF
+      description: Ingredient + dose form
+    - rxcui: "374655"
+      name: methylphenidate Extended Release Oral Capsule
+      tty: SCDF
+      description: Ingredient + dose form
+    - rxcui: "476365"
+      name: methylphenidate Chewable Tablet
+      tty: SCDF
+      description: Ingredient + dose form
+    - rxcui: "476368"
+      name: methylphenidate Oral Solution
+      tty: SCDF
+      description: Ingredient + dose form
   brandMappings:
-    - brandName: "Concerta"
-      rxcui: "203084"
-      manufacturer: "Janssen"
-      region: "US"
-    - brandName: "Ritalin"
-      rxcui: "206911"
-      manufacturer: "Novartis"
-      region: "US"
-    - brandName: "Ritalin LA"
-      rxcui: "349308"
-      manufacturer: "Novartis"
-      region: "US"
-    - brandName: "Metadate CD"
-      rxcui: "283637"
-      manufacturer: "UCB"
-      region: "US"
-    - brandName: "Metadate ER"
-      rxcui: "197867"
-      manufacturer: "UCB"
-      region: "US"
-    - brandName: "Methylin"
-      rxcui: "203086"
-      manufacturer: "Mallinckrodt"
-      region: "US"
-    - brandName: "Quillivant XR"
-      rxcui: "1310133"
-      manufacturer: "Tris Pharma"
-      region: "US"
-    - brandName: "Quillichew ER"
-      rxcui: "1795592"
-      manufacturer: "Tris Pharma"
-      region: "US"
-    - brandName: "Jornay PM"
-      rxcui: "2058840"
-      manufacturer: "Ironshore"
-      region: "US"
-    - brandName: "Aptensio XR"
-      rxcui: "1606279"
-      manufacturer: "Rhodes"
-      region: "US"
-    - brandName: "Cotempla XR-ODT"
-      rxcui: "1860488"
-      manufacturer: "Neos"
-      region: "US"
-    - brandName: "Daytrana"
-      rxcui: "668362"
-      manufacturer: "Noven"
-      region: "US"
-
-  # Drug synonyms and alternative names
+    - brandName: Quillivant
+      rxcui: "1312584"
+      region: US
+    - brandName: Aptensio
+      rxcui: "1648175"
+      region: US
+    - brandName: QuilliChew
+      rxcui: "1727444"
+      region: US
+    - brandName: Cotempla
+      rxcui: "1926841"
+      region: US
+    - brandName: Relexxii
+      rxcui: "2052821"
+      region: US
+    - brandName: Adhansia
+      rxcui: "2119550"
+      region: US
+    - brandName: Jornay
+      rxcui: "2168839"
+      region: US
+    - brandName: Ritalin
+      rxcui: "224917"
+      region: US
+    - brandName: Methylin
+      rxcui: "261572"
+      region: US
+    - brandName: Concerta
+      rxcui: "284704"
+      region: US
+    - brandName: Metadate
+      rxcui: "594111"
+      region: US
+    - brandName: Daytrana
+      rxcui: "631252"
+      region: US
+    - brandName: Ritalin LA
+      rxcui: ""
+      region: US
+    - brandName: Metadate CD
+      rxcui: ""
+      region: US
+    - brandName: Metadate ER
+      rxcui: ""
+      region: US
+    - brandName: Quillivant XR
+      rxcui: "1312584"
+      region: US
+    - brandName: Quillichew ER
+      rxcui: ""
+      region: US
+    - brandName: Jornay PM
+      rxcui: ""
+      region: US
+    - brandName: Aptensio XR
+      rxcui: ""
+      region: US
+    - brandName: Cotempla XR-ODT
+      rxcui: ""
+      region: US
   synonyms:
-    - name: "methylphenidate"
-      type: "generic"
-      source: "RxNorm"
-    - name: "methylphenidate hydrochloride"
-      type: "chemical"
-      source: "RxNorm"
-    - name: "MPH"
-      type: "abbreviation"
-      source: "Clinical"
-    - name: "Ritalin"
-      type: "brand"
-      source: "RxNorm"
-    - name: "Concerta"
-      type: "brand"
-      source: "RxNorm"
-    - name: "哌甲酯"
-      type: "generic"
-      source: "Chinese"
-    - name: "利他林"
-      type: "brand"
-      source: "Chinese"
-    - name: "专注达"
-      type: "brand"
-      source: "Chinese"
-    - name: "メチルフェニデート"
-      type: "generic"
-      source: "Japanese"
-    - name: "リタリン"
-      type: "brand"
-      source: "Japanese"
-    - name: "コンサータ"
-      type: "brand"
-      source: "Japanese"
-
-  # Related drugs (same ingredient, different forms/brands)
+    - name: methylphenidate hydrochloride
+      type: chemical
+      source: RxNorm
+    - name: Quillivant
+      type: brand
+      source: RxNorm
+    - name: Aptensio
+      type: brand
+      source: RxNorm
+    - name: QuilliChew
+      type: brand
+      source: RxNorm
+    - name: Cotempla
+      type: brand
+      source: RxNorm
+    - name: Relexxii
+      type: brand
+      source: RxNorm
+    - name: Adhansia
+      type: brand
+      source: RxNorm
+    - name: Jornay
+      type: brand
+      source: RxNorm
+    - name: Ritalin
+      type: brand
+      source: RxNorm
+    - name: Methylin
+      type: brand
+      source: RxNorm
+    - name: Concerta
+      type: brand
+      source: RxNorm
+    - name: Metadate
+      type: brand
+      source: RxNorm
+    - name: Daytrana
+      type: brand
+      source: RxNorm
+    - name: methylphenidate
+      type: generic
+      source: RxNorm
   relatedDrugs:
-    - rxcui: "884520"
-      name: "methylphenidate Oral Tablet"
-      tty: "SCDF"
-      relationship: "drug_form"
-    - rxcui: "884385"
-      name: "methylphenidate Extended Release Oral Capsule"
-      tty: "SCDF"
-      relationship: "drug_form"
-    - rxcui: "884386"
-      name: "methylphenidate Extended Release Oral Tablet"
-      tty: "SCDF"
-      relationship: "drug_form"
-    - rxcui: "884389"
-      name: "methylphenidate Oral Solution"
-      tty: "SCDF"
-      relationship: "drug_form"
-    - rxcui: "884387"
-      name: "methylphenidate Chewable Tablet"
-      tty: "SCDF"
-      relationship: "drug_form"
-    - rxcui: "668361"
-      name: "methylphenidate Transdermal System"
-      tty: "SCDF"
-      relationship: "drug_form"
-
-  lastUpdated: "2025-12-04"
-
-# Metadata
+    - rxcui: "1091133"
+      name: methylphenidate hydrochloride 2 MG/ML Oral Solution
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1091145"
+      name: 8 HR methylphenidate hydrochloride 10 MG Extended Release Oral Tablet
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1091150"
+      name: methylphenidate hydrochloride 10 MG Oral Tablet
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1091152"
+      name: methylphenidate hydrochloride 10 MG Chewable Tablet
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1091155"
+      name: 24 HR methylphenidate hydrochloride 18 MG Extended Release Oral Tablet
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1091170"
+      name: 24 HR methylphenidate hydrochloride 27 MG Extended Release Oral Tablet
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1091185"
+      name: 24 HR methylphenidate hydrochloride 36 MG Extended Release Oral Tablet
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1091210"
+      name: 24 HR methylphenidate hydrochloride 54 MG Extended Release Oral Tablet
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1091225"
+      name: 8 HR methylphenidate hydrochloride 20 MG Extended Release Oral Tablet
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1091322"
+      name: methylphenidate hydrochloride 5 MG Chewable Tablet
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1091341"
+      name: methylphenidate hydrochloride 1 MG/ML Oral Solution
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1091389"
+      name: methylphenidate hydrochloride 2.5 MG Chewable Tablet
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1091392"
+      name: methylphenidate hydrochloride 20 MG Oral Tablet
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1091497"
+      name: methylphenidate hydrochloride 5 MG Oral Tablet
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1091501"
+      name: methylphenidate hydrochloride 2.5 MG Oral Tablet
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1312583"
+      name: 24 HR methylphenidate hydrochloride 5 MG/ML Extended Release Suspension
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1648183"
+      name: 40/60 Release 24 HR methylphenidate hydrochloride 15 MG Extended Release Oral Capsule
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1727443"
+      name: 24 HR methylphenidate hydrochloride 20 MG Chewable Extended Release Oral Tablet
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1734928"
+      name: 24 HR methylphenidate hydrochloride 30 MG Chewable Extended Release Oral Tablet
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1734951"
+      name: 24 HR methylphenidate hydrochloride 40 MG Chewable Extended Release Oral Tablet
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1091135"
+      name: methylphenidate hydrochloride 2 MG/ML Oral Solution [Methylin]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "1091139"
+      name: 30/70 Release 24 HR methylphenidate hydrochloride 10 MG Extended Release Oral Capsule [Metadate]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "1091143"
+      name: 50/50 Release 24 HR methylphenidate hydrochloride 10 MG Extended Release Oral Capsule [Ritalin]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "1091153"
+      name: methylphenidate hydrochloride 10 MG Chewable Tablet [Methylin]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "1091157"
+      name: 24 HR methylphenidate hydrochloride 18 MG Extended Release Oral Tablet [Concerta]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "1091163"
+      name: 30/70 Release 24 HR methylphenidate hydrochloride 20 MG Extended Release Oral Capsule [Metadate]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "1091167"
+      name: 50/50 Release 24 HR methylphenidate hydrochloride 20 MG Extended Release Oral Capsule [Ritalin]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "1091172"
+      name: 24 HR methylphenidate hydrochloride 27 MG Extended Release Oral Tablet [Concerta]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "1091178"
+      name: 30/70 Release 24 HR methylphenidate hydrochloride 30 MG Extended Release Oral Capsule [Metadate]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "1091182"
+      name: 50/50 Release 24 HR methylphenidate hydrochloride 30 MG Extended Release Oral Capsule [Ritalin]
+      tty: SBD
+      relationship: branded_drug
+  lastUpdated: 2025-12-04
 lastUpdated: 2025-12-04
-
 sources:
-  - "https://chadd.org/about-adhd/adhd-medications-approved-by-the-us-fda/"
-  - "https://www.ema.europa.eu/en/medicines/human/referrals/methylphenidate"
-  - "https://zhuanlan.zhihu.com/p/699401044"
-  - "https://h-navi.jp/column/article/35028853"
-
+  - https://chadd.org/about-adhd/adhd-medications-approved-by-the-us-fda/
+  - https://www.ema.europa.eu/en/medicines/human/referrals/methylphenidate
+  - https://zhuanlan.zhihu.com/p/699401044
+  - https://h-navi.jp/column/article/35028853
 notes:
-  en: "Most widely prescribed ADHD medication globally. Multiple formulations available to suit different needs. China experiencing supply shortages as of 2024-2025."
-  zh: "全球处方量最大的ADHD药物。有多种制剂可供选择以满足不同需求。中国2024-2025年出现供应短缺。"
-  ja: "世界で最も広く処方されているADHD薬。さまざまなニーズに対応する複数の製剤があります。中国では2024-2025年に供給不足が発生。"
+  en: Most widely prescribed ADHD medication globally. Multiple formulations available to suit different needs. China experiencing supply shortages as of 2024-2025.
+  zh: 全球处方量最大的ADHD药物。有多种制剂可供选择以满足不同需求。中国2024-2025年出现供应短缺。
+  ja: 世界で最も広く処方されているADHD薬。さまざまなニーズに対応する複数の製剤があります。中国では2024-2025年に供給不足が発生。

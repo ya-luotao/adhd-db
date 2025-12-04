@@ -1,329 +1,301 @@
-# Viloxazine - Newer non-stimulant (SNRI)
-# Currently US-only
-
-id: "viloxazine"
-
+id: viloxazine
 brandNames:
-  US: ["Qelbree"]
+  US:
+    - Qelbree
   CN: []
   EU: []
   JP: []
   UK: []
   AU: []
   CA: []
-
 genericName:
-  en: "viloxazine hydrochloride"
-  zh: "盐酸维洛沙嗪"
-  ja: "ビロキサジン塩酸塩"
-
+  en: viloxazine hydrochloride
+  zh: 盐酸维洛沙嗪
+  ja: ビロキサジン塩酸塩
 manufacturers:
-  - name: "Supernus Pharmaceuticals"
-    region: "US"
-    product: "Qelbree"
-
-# Chemical Structure
+  - name: Supernus Pharmaceuticals
+    region: US
+    product: Qelbree
 chemicalStructure:
-  smiles: "CCOC1=CC=CC=C1OCC2CNCCO2"
+  smiles: CCOC1=CC=CC=C1OCC2CNCCO2
   pubchemCid: 5666
-  molecularFormula: "C13H19NO3"
-  imageUrl: "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5666/PNG"
-  wikipediaUrl: "https://en.wikipedia.org/wiki/File:Viloxazine.svg"
-
-# Classification
-drugClass: "non-stimulant"
-
+  molecularFormula: C13H19NO3
+  imageUrl: https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/5666/PNG
+  wikipediaUrl: https://en.wikipedia.org/wiki/File:Viloxazine.svg
+drugClass: non-stimulant
 drugClassLabel:
-  en: "Non-Stimulant"
-  zh: "非兴奋剂"
-  ja: "非中枢刺激薬"
-
-category: "SNRI (selective norepinephrine reuptake inhibitor)"
-
+  en: Non-Stimulant
+  zh: 非兴奋剂
+  ja: 非中枢刺激薬
+category: SNRI (selective norepinephrine reuptake inhibitor)
 categoryLabel:
-  en: "Selective Norepinephrine Reuptake Inhibitor"
-  zh: "选择性去甲肾上腺素再摄取抑制剂"
-  ja: "選択的ノルエピネフリン再取り込み阻害薬"
+  en: Selective Norepinephrine Reuptake Inhibitor
+  zh: 选择性去甲肾上腺素再摄取抑制剂
+  ja: 選択的ノルエピネフリン再取り込み阻害薬
 controlledSubstance: false
 schedule:
-  US: "Not scheduled"
-  CN: "Not approved"
-  EU: "Not approved"
-  JP: "Not approved"
-  UK: "Not approved"
-
-# Mechanism
+  US: Not scheduled
+  CN: Not approved
+  EU: Not approved
+  JP: Not approved
+  UK: Not approved
 activeIngredient:
-  en: "viloxazine hydrochloride"
-  zh: "盐酸维洛沙嗪"
-  ja: "ビロキサジン塩酸塩"
-
+  en: viloxazine hydrochloride
+  zh: 盐酸维洛沙嗪
+  ja: ビロキサジン塩酸塩
 mechanismOfAction:
-  en: "Selective norepinephrine reuptake inhibitor with additional serotonergic activity (5-HT2B receptor antagonism and 5-HT2C receptor modulation). Increases norepinephrine levels in the prefrontal cortex to improve attention and executive function."
-  zh: "选择性去甲肾上腺素再摄取抑制剂，具有额外的血清素能活性（5-HT2B受体拮抗和5-HT2C受体调节）。增加前额叶皮层去甲肾上腺素水平，改善注意力和执行功能。"
-  ja: "選択的ノルエピネフリン再取り込み阻害薬で、セロトニン作動活性も有する（5-HT2B受容体拮抗および5-HT2C受容体調節）。前頭前皮質のノルエピネフリン濃度を上昇させ、注意力と実行機能を改善します。"
+  en: Selective norepinephrine reuptake inhibitor with additional serotonergic activity (5-HT2B receptor antagonism and 5-HT2C receptor modulation). Increases norepinephrine levels in the prefrontal cortex to improve attention and executive function.
+  zh: 选择性去甲肾上腺素再摄取抑制剂，具有额外的血清素能活性（5-HT2B受体拮抗和5-HT2C受体调节）。增加前额叶皮层去甲肾上腺素水平，改善注意力和执行功能。
+  ja: 選択的ノルエピネフリン再取り込み阻害薬で、セロトニン作動活性も有する（5-HT2B受容体拮抗および5-HT2C受容体調節）。前頭前皮質のノルエピネフリン濃度を上昇させ、注意力と実行機能を改善します。
 neurotransmittersAffected:
   - norepinephrine
   - serotonin
-
-# Dosage & Forms
 forms:
-  - type: "capsule"
+  - type: capsule
     typeLabel:
-      en: "Capsule"
-      zh: "胶囊"
-      ja: "カプセル"
-    releaseType: "extended"
+      en: Capsule
+      zh: 胶囊
+      ja: カプセル
+    releaseType: extended
     releaseTypeLabel:
-      en: "Extended Release"
-      zh: "缓释"
-      ja: "徐放性"
-    brandName: "Qelbree"
-    strengths: ["100mg", "150mg", "200mg"]
+      en: Extended Release
+      zh: 缓释
+      ja: 徐放性
+    brandName: Qelbree
+    strengths:
+      - 100mg
+      - 150mg
+      - 200mg
     durationHours: 24
     notes:
       en: "Children 6-11: 100-400mg; can be opened and sprinkled on applesauce"
-      zh: "6-11岁儿童：100-400mg；可打开撒在苹果酱上"
-      ja: "6〜11歳の小児：100〜400mg；カプセルを開けてアップルソースにふりかけることができます"
-
-  - type: "capsule"
+      zh: 6-11岁儿童：100-400mg；可打开撒在苹果酱上
+      ja: 6〜11歳の小児：100〜400mg；カプセルを開けてアップルソースにふりかけることができます
+  - type: capsule
     typeLabel:
-      en: "Capsule"
-      zh: "胶囊"
-      ja: "カプセル"
-    releaseType: "extended"
+      en: Capsule
+      zh: 胶囊
+      ja: カプセル
+    releaseType: extended
     releaseTypeLabel:
-      en: "Extended Release"
-      zh: "缓释"
-      ja: "徐放性"
-    brandName: "Qelbree"
-    strengths: ["200mg", "400mg", "600mg"]
+      en: Extended Release
+      zh: 缓释
+      ja: 徐放性
+    brandName: Qelbree
+    strengths:
+      - 200mg
+      - 400mg
+      - 600mg
     durationHours: 24
     notes:
       en: "Adolescents 12-17 and adults: 200-600mg"
-      zh: "12-17岁青少年和成人：200-600mg"
-      ja: "12〜17歳の青年および成人：200〜600mg"
-
-# Efficacy
-onsetMinutes: null  # Gradual onset
+      zh: 12-17岁青少年和成人：200-600mg
+      ja: 12〜17歳の青年および成人：200〜600mg
+onsetMinutes:
 peakEffectHours: 5
 durationHours: 24
-
-# Side Effects
 sideEffects:
   common:
     - name:
-        en: "somnolence/fatigue"
-        zh: "嗜睡/疲劳"
-        ja: "傾眠/疲労"
-      frequency: "15-20%"
+        en: somnolence/fatigue
+        zh: 嗜睡/疲劳
+        ja: 傾眠/疲労
+      frequency: 15-20%
     - name:
-        en: "decreased appetite"
-        zh: "食欲下降"
-        ja: "食欲減退"
-      frequency: "10-15%"
+        en: decreased appetite
+        zh: 食欲下降
+        ja: 食欲減退
+      frequency: 10-15%
     - name:
-        en: "nausea"
-        zh: "恶心"
-        ja: "悪心"
-      frequency: "10-15%"
+        en: nausea
+        zh: 恶心
+        ja: 悪心
+      frequency: 10-15%
     - name:
-        en: "headache"
-        zh: "头痛"
-        ja: "頭痛"
-      frequency: "10%"
+        en: headache
+        zh: 头痛
+        ja: 頭痛
+      frequency: 10%
     - name:
-        en: "irritability"
-        zh: "易怒"
-        ja: "易刺激性"
-      frequency: "5-10%"
+        en: irritability
+        zh: 易怒
+        ja: 易刺激性
+      frequency: 5-10%
     - name:
-        en: "vomiting"
-        zh: "呕吐"
-        ja: "嘔吐"
-      frequency: "5-10%"
+        en: vomiting
+        zh: 呕吐
+        ja: 嘔吐
+      frequency: 5-10%
     - name:
-        en: "insomnia"
-        zh: "失眠"
-        ja: "不眠"
-      frequency: "5%"
-
+        en: insomnia
+        zh: 失眠
+        ja: 不眠
+      frequency: 5%
   uncommon:
     - name:
-        en: "abdominal pain"
-        zh: "腹痛"
-        ja: "腹痛"
-      frequency: "5%"
+        en: abdominal pain
+        zh: 腹痛
+        ja: 腹痛
+      frequency: 5%
     - name:
-        en: "tachycardia"
-        zh: "心动过速"
-        ja: "頻脈"
-      frequency: "<5%"
+        en: tachycardia
+        zh: 心动过速
+        ja: 頻脈
+      frequency: <5%
     - name:
-        en: "increased blood pressure"
-        zh: "血压升高"
-        ja: "血圧上昇"
-      frequency: "<5%"
+        en: increased blood pressure
+        zh: 血压升高
+        ja: 血圧上昇
+      frequency: <5%
     - name:
-        en: "weight loss"
-        zh: "体重减轻"
-        ja: "体重減少"
-      frequency: "<5%"
-
+        en: weight loss
+        zh: 体重减轻
+        ja: 体重減少
+      frequency: <5%
   serious:
     - name:
-        en: "suicidal ideation"
-        zh: "自杀意念"
-        ja: "自殺念慮"
+        en: suicidal ideation
+        zh: 自杀意念
+        ja: 自殺念慮
       notes:
-        en: "Black box warning; monitor closely, especially early in treatment"
-        zh: "黑框警告；需密切监测，尤其是治疗初期"
-        ja: "ブラックボックス警告；特に治療初期は注意深くモニタリングが必要"
+        en: Black box warning; monitor closely, especially early in treatment
+        zh: 黑框警告；需密切监测，尤其是治疗初期
+        ja: ブラックボックス警告；特に治療初期は注意深くモニタリングが必要
     - name:
-        en: "activation of mania/hypomania"
-        zh: "诱发躁狂/轻躁狂"
-        ja: "躁病/軽躁病の誘発"
+        en: activation of mania/hypomania
+        zh: 诱发躁狂/轻躁狂
+        ja: 躁病/軽躁病の誘発
       notes:
-        en: "Can trigger in susceptible patients"
-        zh: "易感患者可能诱发"
-        ja: "感受性の高い患者で誘発される可能性"
+        en: Can trigger in susceptible patients
+        zh: 易感患者可能诱发
+        ja: 感受性の高い患者で誘発される可能性
     - name:
-        en: "serotonin syndrome"
-        zh: "血清素综合征"
-        ja: "セロトニン症候群"
+        en: serotonin syndrome
+        zh: 血清素综合征
+        ja: セロトニン症候群
       notes:
-        en: "When combined with serotonergic medications"
-        zh: "与血清素能药物联用时"
-        ja: "セロトニン作動薬との併用時"
+        en: When combined with serotonergic medications
+        zh: 与血清素能药物联用时
+        ja: セロトニン作動薬との併用時
     - name:
-        en: "hypertensive crisis"
-        zh: "高血压危象"
-        ja: "高血圧クリーゼ"
+        en: hypertensive crisis
+        zh: 高血压危象
+        ja: 高血圧クリーゼ
       notes:
-        en: "Avoid with MAOIs"
-        zh: "避免与MAO抑制剂联用"
-        ja: "MAOIとの併用を避ける"
-
-# Safety
+        en: Avoid with MAOIs
+        zh: 避免与MAO抑制剂联用
+        ja: MAOIとの併用を避ける
 contraindications:
   en:
-    - "Hypersensitivity to viloxazine"
-    - "MAO inhibitor use within 14 days"
-    - "Concomitant use of sensitive CYP1A2 substrates (e.g., tizanidine, alosetron)"
+    - Hypersensitivity to viloxazine
+    - MAO inhibitor use within 14 days
+    - Concomitant use of sensitive CYP1A2 substrates (e.g., tizanidine, alosetron)
   zh:
-    - "对维洛沙嗪过敏"
-    - "14天内使用过MAO抑制剂"
-    - "同时使用敏感的CYP1A2底物（如替扎尼定、阿洛司琼）"
+    - 对维洛沙嗪过敏
+    - 14天内使用过MAO抑制剂
+    - 同时使用敏感的CYP1A2底物（如替扎尼定、阿洛司琼）
   ja:
-    - "ビロキサジンに対する過敏症"
-    - "14日以内のMAO阻害剤使用"
-    - "感受性の高いCYP1A2基質との併用（例：チザニジン、アロセトロン）"
-
+    - ビロキサジンに対する過敏症
+    - 14日以内のMAO阻害剤使用
+    - 感受性の高いCYP1A2基質との併用（例：チザニジン、アロセトロン）
 drugInteractions:
   - drug:
-      en: "MAO inhibitors"
-      zh: "MAO抑制剂"
-      ja: "MAO阻害剤"
-    severity: "major"
+      en: MAO inhibitors
+      zh: MAO抑制剂
+      ja: MAO阻害剤
+    severity: major
     effect:
-      en: "Risk of serotonin syndrome and hypertensive crisis"
-      zh: "血清素综合征和高血压危象风险"
-      ja: "セロトニン症候群および高血圧クリーゼのリスク"
+      en: Risk of serotonin syndrome and hypertensive crisis
+      zh: 血清素综合征和高血压危象风险
+      ja: セロトニン症候群および高血圧クリーゼのリスク
   - drug:
-      en: "CYP1A2 substrates (theophylline, duloxetine)"
-      zh: "CYP1A2底物（茶碱、度洛西汀）"
-      ja: "CYP1A2基質（テオフィリン、デュロキセチン）"
-    severity: "major"
+      en: CYP1A2 substrates (theophylline, duloxetine)
+      zh: CYP1A2底物（茶碱、度洛西汀）
+      ja: CYP1A2基質（テオフィリン、デュロキセチン）
+    severity: major
     effect:
-      en: "Significantly increases levels of CYP1A2 substrates"
-      zh: "显著增加CYP1A2底物血药浓度"
-      ja: "CYP1A2基質の濃度を著しく上昇させる"
+      en: Significantly increases levels of CYP1A2 substrates
+      zh: 显著增加CYP1A2底物血药浓度
+      ja: CYP1A2基質の濃度を著しく上昇させる
   - drug:
-      en: "Serotonergic drugs"
-      zh: "血清素能药物"
-      ja: "セロトニン作動薬"
-    severity: "moderate"
+      en: Serotonergic drugs
+      zh: 血清素能药物
+      ja: セロトニン作動薬
+    severity: moderate
     effect:
-      en: "Increased serotonin syndrome risk"
-      zh: "血清素综合征风险增加"
-      ja: "セロトニン症候群リスクの増加"
+      en: Increased serotonin syndrome risk
+      zh: 血清素综合征风险增加
+      ja: セロトニン症候群リスクの増加
   - drug:
-      en: "Seizure threshold-lowering drugs"
-      zh: "降低癫痫阈值的药物"
-      ja: "発作閾値を下げる薬物"
-    severity: "moderate"
+      en: Seizure threshold-lowering drugs
+      zh: 降低癫痫阈值的药物
+      ja: 発作閾値を下げる薬物
+    severity: moderate
     effect:
-      en: "May increase seizure risk"
-      zh: "可能增加癫痫发作风险"
-      ja: "発作リスクを増加させる可能性"
-
+      en: May increase seizure risk
+      zh: 可能增加癫痫发作风险
+      ja: 発作リスクを増加させる可能性
 blackBoxWarnings:
   en:
-    - "Increased risk of suicidal thoughts and behavior in children, adolescents, and young adults"
+    - Increased risk of suicidal thoughts and behavior in children, adolescents, and young adults
   zh:
-    - "儿童、青少年和年轻成人自杀想法和行为风险增加"
+    - 儿童、青少年和年轻成人自杀想法和行为风险增加
   ja:
-    - "小児、青年、若年成人における自殺念慮および自殺行動のリスク増加"
-
-pregnancyCategory: "C"
-
+    - 小児、青年、若年成人における自殺念慮および自殺行動のリスク増加
+pregnancyCategory: C
 foodInteractions:
-  en: "Can be taken with or without food"
-  zh: "可随餐或空腹服用"
-  ja: "食事の有無にかかわらず服用可能"
-
-# Practical Information
+  en: Can be taken with or without food
+  zh: 可随餐或空腹服用
+  ja: 食事の有無にかかわらず服用可能
 typicalDosing:
   children:
-    startingDose: "100mg once daily in morning"
-    maxDose: "400mg/day (ages 6-11)"
+    startingDose: 100mg once daily in morning
+    maxDose: 400mg/day (ages 6-11)
     notes:
-      en: "May increase by 100mg weekly"
-      zh: "可每周增加100mg"
-      ja: "毎週100mgずつ増量可能"
+      en: May increase by 100mg weekly
+      zh: 可每周增加100mg
+      ja: 毎週100mgずつ増量可能
   adults:
-    startingDose: "200mg once daily in morning"
-    maxDose: "600mg/day"
+    startingDose: 200mg once daily in morning
+    maxDose: 600mg/day
     notes:
-      en: "May increase by 200mg weekly"
-      zh: "可每周增加200mg"
-      ja: "毎週200mgずつ増量可能"
-
+      en: May increase by 200mg weekly
+      zh: 可每周增加200mg
+      ja: 毎週200mgずつ増量可能
 costEstimate:
   US:
-    brand: "$350-450/month"
-    generic: "Not yet available"
+    brand: $350-450/month
+    generic: Not yet available
   CN:
-    brand: "Not available"
-    generic: "Not available"
-
+    brand: Not available
+    generic: Not available
 storageRequirements:
-  en: "Room temperature (20-25°C)"
-  zh: "室温保存（20-25°C）"
-  ja: "室温（20-25°C）で保存"
-
-# Approval & Availability
+  en: Room temperature (20-25°C)
+  zh: 室温保存（20-25°C）
+  ja: 室温（20-25°C）で保存
 approvals:
-  - region: "US"
-    agency: "FDA"
+  - region: US
+    agency: FDA
     year: 2021
     approvedAges:
-      en: "6 years and older (children and adults)"
-      zh: "6岁及以上（儿童和成人）"
-      ja: "6歳以上（小児および成人）"
+      en: 6 years and older (children and adults)
+      zh: 6岁及以上（儿童和成人）
+      ja: 6歳以上（小児および成人）
     indications:
-      en: ["ADHD"]
-      zh: ["注意缺陷多动障碍"]
-      ja: ["ADHD"]
+      en:
+        - ADHD
+      zh:
+        - 注意缺陷多动障碍
+      ja:
+        - ADHD
     available: true
     notes:
-      en: "Children ages 6-11 approved April 2021; adults approved April 2022"
-      zh: "6-11岁儿童于2021年4月获批；成人于2022年4月获批"
-      ja: "6〜11歳の小児は2021年4月承認；成人は2022年4月承認"
-
-  - region: "CN"
-    agency: "NMPA"
-    year: null
+      en: Children ages 6-11 approved April 2021; adults approved April 2022
+      zh: 6-11岁儿童于2021年4月获批；成人于2022年4月获批
+      ja: 6〜11歳の小児は2021年4月承認；成人は2022年4月承認
+  - region: CN
+    agency: NMPA
+    year:
     approvedAges:
       en: ""
       zh: ""
@@ -334,13 +306,12 @@ approvals:
       ja: []
     available: false
     notes:
-      en: "Not approved"
-      zh: "未批准"
-      ja: "未承認"
-
-  - region: "EU"
-    agency: "EMA"
-    year: null
+      en: Not approved
+      zh: 未批准
+      ja: 未承認
+  - region: EU
+    agency: EMA
+    year:
     approvedAges:
       en: ""
       zh: ""
@@ -351,13 +322,12 @@ approvals:
       ja: []
     available: false
     notes:
-      en: "Not approved (was previously marketed for depression in EU in 1970s-1980s)"
-      zh: "未批准（20世纪70-80年代曾在欧盟作为抗抑郁药销售）"
-      ja: "未承認（1970〜1980年代にEUでうつ病薬として販売されていた）"
-
-  - region: "JP"
-    agency: "PMDA"
-    year: null
+      en: Not approved (was previously marketed for depression in EU in 1970s-1980s)
+      zh: 未批准（20世纪70-80年代曾在欧盟作为抗抑郁药销售）
+      ja: 未承認（1970〜1980年代にEUでうつ病薬として販売されていた）
+  - region: JP
+    agency: PMDA
+    year:
     approvedAges:
       en: ""
       zh: ""
@@ -368,13 +338,12 @@ approvals:
       ja: []
     available: false
     notes:
-      en: "Not approved"
-      zh: "未批准"
-      ja: "未承認"
-
-  - region: "UK"
-    agency: "MHRA"
-    year: null
+      en: Not approved
+      zh: 未批准
+      ja: 未承認
+  - region: UK
+    agency: MHRA
+    year:
     approvedAges:
       en: ""
       zh: ""
@@ -385,201 +354,220 @@ approvals:
       ja: []
     available: false
     notes:
-      en: "Not approved"
-      zh: "未批准"
-      ja: "未承認"
-
-# Special Considerations
+      en: Not approved
+      zh: 未批准
+      ja: 未承認
 specialConsiderations:
   cardiacRisk:
-    en: "Can increase heart rate and blood pressure; monitor"
-    zh: "可增加心率和血压；需监测"
-    ja: "心拍数と血圧を上昇させる可能性；モニタリングが必要"
+    en: Can increase heart rate and blood pressure; monitor
+    zh: 可增加心率和血压；需监测
+    ja: 心拍数と血圧を上昇させる可能性；モニタリングが必要
   abuseRisk:
-    en: "No abuse potential; not a controlled substance"
-    zh: "无滥用风险；非管制药物"
-    ja: "乱用の可能性なし；規制物質ではない"
+    en: No abuse potential; not a controlled substance
+    zh: 无滥用风险；非管制药物
+    ja: 乱用の可能性なし；規制物質ではない
   withdrawalNotes:
-    en: "No significant withdrawal; can be stopped without tapering"
-    zh: "无明显戒断症状；可直接停药无需减量"
-    ja: "重大な離脱症状なし；漸減なしで中止可能"
+    en: No significant withdrawal; can be stopped without tapering
+    zh: 无明显戒断症状；可直接停药无需减量
+    ja: 重大な離脱症状なし；漸減なしで中止可能
   monitoringRequired:
-    en: "Monitor for suicidality, especially early; blood pressure; heart rate"
-    zh: "监测自杀倾向（尤其是初期）；血压；心率"
-    ja: "自殺傾向のモニタリング（特に初期）；血圧；心拍数"
-
-# Travel Rules
+    en: Monitor for suicidality, especially early; blood pressure; heart rate
+    zh: 监测自杀倾向（尤其是初期）；血压；心率
+    ja: 自殺傾向のモニタリング（特に初期）；血圧；心拍数
 travelRules:
   generalAdvice:
-    en: "Viloxazine is NOT a controlled substance. However, it is currently ONLY approved in the US, so availability abroad is very limited. Plan accordingly for longer trips."
-    zh: "维洛沙嗪不是管制药物。但目前仅在美国获批，国外供应非常有限。长途旅行请提前规划。"
-    ja: "ビロキサジンは規制物質ではありません。ただし、現在は米国でのみ承認されているため、海外での入手可能性は非常に限られています。長期旅行の場合は事前に計画してください。"
-
+    en: Viloxazine is NOT a controlled substance. However, it is currently ONLY approved in the US, so availability abroad is very limited. Plan accordingly for longer trips.
+    zh: 维洛沙嗪不是管制药物。但目前仅在美国获批，国外供应非常有限。长途旅行请提前规划。
+    ja: ビロキサジンは規制物質ではありません。ただし、現在は米国でのみ承認されているため、海外での入手可能性は非常に限られています。長期旅行の場合は事前に計画してください。
   requiredDocumentation:
-    - type: "prescription"
+    - type: prescription
       typeLabel:
-        en: "Valid prescription"
-        zh: "有效处方"
-        ja: "有効な処方箋"
+        en: Valid prescription
+        zh: 有效处方
+        ja: 有効な処方箋
       notes:
-        en: "Carry prescription as viloxazine is not recognized in most countries"
-        zh: "携带处方，因为维洛沙嗪在大多数国家不被认可"
-        ja: "ビロキサジンはほとんどの国で認知されていないため、処方箋を携帯"
-    - type: "medical_letter"
+        en: Carry prescription as viloxazine is not recognized in most countries
+        zh: 携带处方，因为维洛沙嗪在大多数国家不被认可
+        ja: ビロキサジンはほとんどの国で認知されていないため、処方箋を携帯
+    - type: medical_letter
       typeLabel:
-        en: "Doctor's letter"
-        zh: "医生证明信"
-        ja: "医師の診断書"
+        en: Doctor's letter
+        zh: 医生证明信
+        ja: 医師の診断書
       notes:
-        en: "Explaining the medication since it's US-only"
-        zh: "说明药物用途，因为仅在美国上市"
-        ja: "米国のみで利用可能な薬であることを説明"
-
+        en: Explaining the medication since it's US-only
+        zh: 说明药物用途，因为仅在美国上市
+        ja: 米国のみで利用可能な薬であることを説明
   maxPersonalSupply:
-    default: "90 days"
-
+    default: 90 days
   crossBorderRules:
-    - fromRegion: "US"
-      toRegion: "JP"
-      status: "restricted"
+    - fromRegion: US
+      toRegion: JP
+      status: restricted
       statusLabel:
-        en: "Restricted - Not Available Locally"
-        zh: "受限 - 当地不可用"
-        ja: "制限あり - 現地で入手不可"
+        en: Restricted - Not Available Locally
+        zh: 受限 - 当地不可用
+        ja: 制限あり - 現地で入手不可
       requirements:
         en:
-          - "Carry prescription and doctor's letter"
-          - "Keep in original packaging"
-          - "Bring sufficient supply"
+          - Carry prescription and doctor's letter
+          - Keep in original packaging
+          - Bring sufficient supply
         zh:
-          - "携带处方和医生证明信"
-          - "保持原包装"
-          - "携带充足的供应量"
+          - 携带处方和医生证明信
+          - 保持原包装
+          - 携带充足的供应量
         ja:
-          - "処方箋と医師の手紙を携帯"
-          - "元のパッケージを維持"
-          - "十分な量を持参"
-      maxSupply: "90 days"
+          - 処方箋と医師の手紙を携帯
+          - 元のパッケージを維持
+          - 十分な量を持参
+      maxSupply: 90 days
       notes:
-        en: "Viloxazine is NOT approved in Japan. You can bring personal supply but cannot obtain refills. Consider this for longer stays."
-        zh: "维洛沙嗪在日本未获批准。可以携带个人使用量，但无法补充。长期停留请考虑此问题。"
-        ja: "ビロキサジンは日本では未承認です。個人使用分は持ち込めますが、補充はできません。長期滞在の場合はご注意ください。"
-
-    - fromRegion: "US"
-      toRegion: "CN"
-      status: "restricted"
+        en: Viloxazine is NOT approved in Japan. You can bring personal supply but cannot obtain refills. Consider this for longer stays.
+        zh: 维洛沙嗪在日本未获批准。可以携带个人使用量，但无法补充。长期停留请考虑此问题。
+        ja: ビロキサジンは日本では未承認です。個人使用分は持ち込めますが、補充はできません。長期滞在の場合はご注意ください。
+    - fromRegion: US
+      toRegion: CN
+      status: restricted
       statusLabel:
-        en: "Restricted - Not Available Locally"
-        zh: "受限 - 当地不可用"
-        ja: "制限あり - 現地で入手不可"
+        en: Restricted - Not Available Locally
+        zh: 受限 - 当地不可用
+        ja: 制限あり - 現地で入手不可
       requirements:
         en:
-          - "Carry prescription and doctor's letter"
-          - "Keep in original packaging"
+          - Carry prescription and doctor's letter
+          - Keep in original packaging
         zh:
-          - "携带处方和医生证明信"
-          - "保持原包装"
+          - 携带处方和医生证明信
+          - 保持原包装
         ja:
-          - "処方箋と医師の手紙を携帯"
-          - "元のパッケージを維持"
-      maxSupply: "90 days"
+          - 処方箋と医師の手紙を携帯
+          - 元のパッケージを維持
+      maxSupply: 90 days
       notes:
-        en: "Viloxazine is NOT approved in China. Personal import for personal use may be allowed with documentation."
-        zh: "维洛沙嗪在中国未获批准。携带文件的个人使用进口可能被允许。"
-        ja: "ビロキサジンは中国では未承認です。書類があれば個人使用の輸入は許可される場合があります。"
-
-    - fromRegion: "US"
-      toRegion: "EU"
-      status: "restricted"
+        en: Viloxazine is NOT approved in China. Personal import for personal use may be allowed with documentation.
+        zh: 维洛沙嗪在中国未获批准。携带文件的个人使用进口可能被允许。
+        ja: ビロキサジンは中国では未承認です。書類があれば個人使用の輸入は許可される場合があります。
+    - fromRegion: US
+      toRegion: EU
+      status: restricted
       statusLabel:
-        en: "Restricted - Not Available Locally"
-        zh: "受限 - 当地不可用"
-        ja: "制限あり - 現地で入手不可"
+        en: Restricted - Not Available Locally
+        zh: 受限 - 当地不可用
+        ja: 制限あり - 現地で入手不可
       requirements:
         en:
-          - "Carry prescription and doctor's letter"
-          - "Keep in original packaging"
+          - Carry prescription and doctor's letter
+          - Keep in original packaging
         zh:
-          - "携带处方和医生证明信"
-          - "保持原包装"
+          - 携带处方和医生证明信
+          - 保持原包装
         ja:
-          - "処方箋と医師の手紙を携帯"
-          - "元のパッケージを維持"
-      maxSupply: "90 days"
+          - 処方箋と医師の手紙を携帯
+          - 元のパッケージを維持
+      maxSupply: 90 days
       notes:
-        en: "Viloxazine is NOT approved in EU. Was previously marketed for depression in 1970s-80s but withdrawn. Personal supply for travel should be allowed."
-        zh: "维洛沙嗪在欧盟未获批准。20世纪70-80年代曾作为抗抑郁药销售但已撤市。旅行携带个人使用量应该被允许。"
-        ja: "ビロキサジンはEUでは未承認です。1970〜80年代にうつ病薬として販売されていましたが撤退。旅行用の個人使用分は許可されるはずです。"
-
-# RxNorm Data (from NLM RxNorm/RxNav)
-# Drug name normalization and relationship mapping
+        en: Viloxazine is NOT approved in EU. Was previously marketed for depression in 1970s-80s but withdrawn. Personal supply for travel should be allowed.
+        zh: 维洛沙嗪在欧盟未获批准。20世纪70-80年代曾作为抗抑郁药销售但已撤市。旅行携带个人使用量应该被允许。
+        ja: ビロキサジンはEUでは未承認です。1970〜80年代にうつ病薬として販売されていましたが撤退。旅行用の個人使用分は許可されるはずです。
 rxnormData:
-  # Primary ingredient-level RxCUI
-  ingredientRxcui: "11149"
-  ingredientName: "viloxazine"
-
-  # RxCUI mappings at different term type levels
+  ingredientRxcui: "11196"
+  ingredientName: viloxazine
   rxcuiMappings:
-    - rxcui: "11149"
-      name: "viloxazine"
-      tty: "IN"
-      description: "Base ingredient"
-    - rxcui: "11150"
-      name: "viloxazine hydrochloride"
-      tty: "PIN"
-      description: "Precise ingredient (salt form)"
-    - rxcui: "2477687"
-      name: "viloxazine Extended Release Oral Capsule"
-      tty: "SCDF"
-      description: "Ingredient + dose form"
-
-  # Brand name to RxCUI mappings
+    - rxcui: "11196"
+      name: viloxazine
+      tty: IN
+      description: Base ingredient
+    - rxcui: "2536549"
+      name: Qelbree
+      tty: BN
+      description: Brand name
+    - rxcui: "142143"
+      name: viloxazine hydrochloride
+      tty: PIN
+      description: Precise ingredient (includes salt form)
+    - rxcui: "2536554"
+      name: 24 HR viloxazine 100 MG Extended Release Oral Capsule [Qelbree]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "2536752"
+      name: 24 HR viloxazine 150 MG Extended Release Oral Capsule [Qelbree]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "2536758"
+      name: 24 HR viloxazine 200 MG Extended Release Oral Capsule [Qelbree]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "2536551"
+      name: viloxazine Extended Release Oral Capsule [Qelbree]
+      tty: SBDF
+      description: Branded ingredient + dose form
+    - rxcui: "2536548"
+      name: 24 HR viloxazine 100 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "2536750"
+      name: 24 HR viloxazine 150 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "2536756"
+      name: 24 HR viloxazine 200 MG Extended Release Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "2536547"
+      name: viloxazine Extended Release Oral Capsule
+      tty: SCDF
+      description: Ingredient + dose form
   brandMappings:
-    - brandName: "Qelbree"
-      rxcui: "2477693"
-      manufacturer: "Supernus"
-      region: "US"
-
-  # Drug synonyms and alternative names
+    - brandName: Qelbree
+      rxcui: "2536549"
+      region: US
   synonyms:
-    - name: "viloxazine"
-      type: "generic"
-      source: "RxNorm"
-    - name: "viloxazine hydrochloride"
-      type: "chemical"
-      source: "RxNorm"
-    - name: "Qelbree"
-      type: "brand"
-      source: "RxNorm"
-    - name: "维洛沙嗪"
-      type: "generic"
-      source: "Chinese"
-    - name: "ビロキサジン"
-      type: "generic"
-      source: "Japanese"
-
-  # Related drugs (same class - norepinephrine modulators)
+    - name: viloxazine hydrochloride
+      type: chemical
+      source: RxNorm
+    - name: Qelbree
+      type: brand
+      source: RxNorm
+    - name: viloxazine
+      type: generic
+      source: RxNorm
   relatedDrugs:
-    - rxcui: "2477687"
-      name: "viloxazine Extended Release Oral Capsule"
-      tty: "SCDF"
-      relationship: "drug_form"
-    - rxcui: "38400"
-      name: "atomoxetine"
-      tty: "IN"
-      relationship: "related_class"
-
-  lastUpdated: "2025-12-04"
-
-# Metadata
+    - rxcui: "2536548"
+      name: 24 HR viloxazine 100 MG Extended Release Oral Capsule
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "2536750"
+      name: 24 HR viloxazine 150 MG Extended Release Oral Capsule
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "2536756"
+      name: 24 HR viloxazine 200 MG Extended Release Oral Capsule
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "2536554"
+      name: 24 HR viloxazine 100 MG Extended Release Oral Capsule [Qelbree]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "2536752"
+      name: 24 HR viloxazine 150 MG Extended Release Oral Capsule [Qelbree]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "2536758"
+      name: 24 HR viloxazine 200 MG Extended Release Oral Capsule [Qelbree]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "2536547"
+      name: viloxazine Extended Release Oral Capsule
+      tty: SCDF
+      relationship: drug_form
+  lastUpdated: 2025-12-04
 lastUpdated: 2025-12-04
-
 sources:
-  - "https://www.goodrx.com/conditions/adhd/non-stimulant-adhd-meds"
-  - "https://www.additudemag.com/adhd-medications-list-chart-stimulants-nonstimulants/"
-  - "https://medx.it.com/what-are-the-new-adhd-medications-in-2025-an-overview-of-treatments-and-innovations"
-
+  - https://www.goodrx.com/conditions/adhd/non-stimulant-adhd-meds
+  - https://www.additudemag.com/adhd-medications-list-chart-stimulants-nonstimulants/
+  - https://medx.it.com/what-are-the-new-adhd-medications-in-2025-an-overview-of-treatments-and-innovations
 notes:
-  en: "Newest non-stimulant option (2021). Structurally different from atomoxetine despite similar mechanism. Was previously used for depression in Europe (1970s-1980s) but withdrawn. Repurposed and FDA-approved for ADHD. Currently only available in US."
-  zh: "最新的非兴奋剂选择（2021年）。尽管作用机制相似，但结构与托莫西汀不同。曾在20世纪70-80年代在欧洲用于抗抑郁但已撤市。重新定位并获FDA批准用于ADHD。目前仅在美国上市。"
-  ja: "最新の非刺激薬オプション（2021年）。同様の作用機序にもかかわらず、アトモキセチンとは構造が異なる。1970〜1980年代にヨーロッパでうつ病に使用されていたが撤退。ADHDに再利用されFDA承認。現在は米国でのみ利用可能。"
+  en: Newest non-stimulant option (2021). Structurally different from atomoxetine despite similar mechanism. Was previously used for depression in Europe (1970s-1980s) but withdrawn. Repurposed and FDA-approved for ADHD. Currently only available in US.
+  zh: 最新的非兴奋剂选择（2021年）。尽管作用机制相似，但结构与托莫西汀不同。曾在20世纪70-80年代在欧洲用于抗抑郁但已撤市。重新定位并获FDA批准用于ADHD。目前仅在美国上市。
+  ja: 最新の非刺激薬オプション（2021年）。同様の作用機序にもかかわらず、アトモキセチンとは構造が異なる。1970〜1980年代にヨーロッパでうつ病に使用されていたが撤退。ADHDに再利用されFDA承認。現在は米国でのみ利用可能。

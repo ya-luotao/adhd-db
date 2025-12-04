@@ -1,653 +1,717 @@
-# Atomoxetine - First non-stimulant ADHD medication
-# Approved in US, China, EU, Japan
-
-id: "atomoxetine"
-
+id: atomoxetine
 brandNames:
-  US: ["Strattera"]
-  CN: ["择思达 (Strattera)"]
-  EU: ["Strattera", "Atomoxetine generics"]
-  JP: ["ストラテラ (Strattera)"]
-  UK: ["Strattera"]
-  AU: ["Strattera"]
-  CA: ["Strattera"]
-
+  US:
+    - Strattera
+  CN:
+    - 择思达 (Strattera)
+  EU:
+    - Strattera
+    - Atomoxetine generics
+  JP:
+    - ストラテラ (Strattera)
+  UK:
+    - Strattera
+  AU:
+    - Strattera
+  CA:
+    - Strattera
 genericName:
-  en: "atomoxetine hydrochloride"
-  zh: "盐酸托莫西汀"
-  ja: "アトモキセチン塩酸塩"
-
+  en: atomoxetine hydrochloride
+  zh: 盐酸托莫西汀
+  ja: アトモキセチン塩酸塩
 manufacturers:
-  - name: "Eli Lilly"
-    region: "US"
-    product: "Strattera"
-  - name: "礼来 (Eli Lilly China)"
-    region: "CN"
-    product: "择思达"
-  - name: "日本イーライリリー"
-    region: "JP"
-    product: "ストラテラ"
-
-# Chemical Structure
+  - name: Eli Lilly
+    region: US
+    product: Strattera
+  - name: 礼来 (Eli Lilly China)
+    region: CN
+    product: 择思达
+  - name: 日本イーライリリー
+    region: JP
+    product: ストラテラ
 chemicalStructure:
-  smiles: "CC1=CC=CC=C1O[C@H](CCNC)C2=CC=CC=C2"
+  smiles: CC1=CC=CC=C1O[C@H](CCNC)C2=CC=CC=C2
   pubchemCid: 54841
-  molecularFormula: "C17H21NO"
-  imageUrl: "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/54841/PNG"
-  wikipediaUrl: "https://en.wikipedia.org/wiki/File:Atomoxetine_structure.svg"
-
-# Classification
-drugClass: "non-stimulant"
-
+  molecularFormula: C17H21NO
+  imageUrl: https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/54841/PNG
+  wikipediaUrl: https://en.wikipedia.org/wiki/File:Atomoxetine_structure.svg
+drugClass: non-stimulant
 drugClassLabel:
-  en: "Non-Stimulant"
-  zh: "非兴奋剂"
-  ja: "非中枢刺激薬"
-
-category: "SNRI"
-
+  en: Non-Stimulant
+  zh: 非兴奋剂
+  ja: 非中枢刺激薬
+category: SNRI
 categoryLabel:
-  en: "Selective Norepinephrine Reuptake Inhibitor"
-  zh: "选择性去甲肾上腺素再摄取抑制剂"
-  ja: "選択的ノルエピネフリン再取り込み阻害薬"
-
+  en: Selective Norepinephrine Reuptake Inhibitor
+  zh: 选择性去甲肾上腺素再摄取抑制剂
+  ja: 選択的ノルエピネフリン再取り込み阻害薬
 controlledSubstance: false
-
 schedule:
-  US: "Not scheduled"
-  CN: "Not scheduled (prescription only)"
-  EU: "Not scheduled"
-  JP: "Not scheduled"
-  UK: "Not scheduled"
-
-# Mechanism
+  US: Not scheduled
+  CN: Not scheduled (prescription only)
+  EU: Not scheduled
+  JP: Not scheduled
+  UK: Not scheduled
 activeIngredient:
-  en: "atomoxetine hydrochloride"
-  zh: "盐酸托莫西汀"
-  ja: "アトモキセチン塩酸塩"
-
+  en: atomoxetine hydrochloride
+  zh: 盐酸托莫西汀
+  ja: アトモキセチン塩酸塩
 mechanismOfAction:
-  en: "Selectively inhibits the presynaptic norepinephrine transporter, increasing norepinephrine levels in the prefrontal cortex. Unlike stimulants, does not significantly affect dopamine in the nucleus accumbens, resulting in lower abuse potential."
-  zh: "选择性抑制突触前去甲肾上腺素转运体，增加前额叶皮层中去甲肾上腺素的水平。与兴奋剂不同，不会显著影响伏隔核中的多巴胺，因此滥用风险较低。"
-  ja: "シナプス前のノルエピネフリントランスポーターを選択的に阻害し、前頭前皮質のノルエピネフリン濃度を上昇させます。刺激薬とは異なり、側坐核のドーパミンに大きな影響を与えないため、乱用の可能性が低くなります。"
-
+  en: Selectively inhibits the presynaptic norepinephrine transporter, increasing norepinephrine levels in the prefrontal cortex. Unlike stimulants, does not significantly affect dopamine in the nucleus accumbens, resulting in lower abuse potential.
+  zh: 选择性抑制突触前去甲肾上腺素转运体，增加前额叶皮层中去甲肾上腺素的水平。与兴奋剂不同，不会显著影响伏隔核中的多巴胺，因此滥用风险较低。
+  ja: シナプス前のノルエピネフリントランスポーターを選択的に阻害し、前頭前皮質のノルエピネフリン濃度を上昇させます。刺激薬とは異なり、側坐核のドーパミンに大きな影響を与えないため、乱用の可能性が低くなります。
 neurotransmittersAffected:
   - norepinephrine
-
-# Dosage & Forms
 forms:
-  - type: "capsule"
+  - type: capsule
     typeLabel:
-      en: "Capsule"
-      zh: "胶囊"
-      ja: "カプセル"
-    releaseType: "immediate"
+      en: Capsule
+      zh: 胶囊
+      ja: カプセル
+    releaseType: immediate
     releaseTypeLabel:
-      en: "Immediate Release"
-      zh: "速释"
-      ja: "即放性"
-    brandName: "Strattera"
-    strengths: ["10mg", "18mg", "25mg", "40mg", "60mg", "80mg", "100mg"]
+      en: Immediate Release
+      zh: 速释
+      ja: 即放性
+    brandName: Strattera
+    strengths:
+      - 10mg
+      - 18mg
+      - 25mg
+      - 40mg
+      - 60mg
+      - 80mg
+      - 100mg
     durationHours: 24
     notes:
-      en: "Once or twice daily dosing; do not open capsules"
-      zh: "每日一次或两次给药；请勿打开胶囊"
-      ja: "1日1回または2回投与；カプセルを開けないでください"
-
-  - type: "liquid"
+      en: Once or twice daily dosing; do not open capsules
+      zh: 每日一次或两次给药；请勿打开胶囊
+      ja: 1日1回または2回投与；カプセルを開けないでください
+  - type: liquid
     typeLabel:
-      en: "Oral Solution"
-      zh: "口服溶液"
-      ja: "内用液"
-    releaseType: "immediate"
+      en: Oral Solution
+      zh: 口服溶液
+      ja: 内用液
+    releaseType: immediate
     releaseTypeLabel:
-      en: "Immediate Release"
-      zh: "速释"
-      ja: "即放性"
-    brandName: "Strattera"
-    strengths: ["4mg/mL"]
+      en: Immediate Release
+      zh: 速释
+      ja: 即放性
+    brandName: Strattera
+    strengths:
+      - 4mg/mL
     durationHours: 24
     notes:
-      en: "Available in US and some markets for those who can't swallow capsules"
-      zh: "适用于不能吞服胶囊者，在美国和部分市场有售"
-      ja: "カプセルを飲み込めない方のために、米国および一部の市場で入手可能"
-
-# Efficacy
-onsetMinutes: null
+      en: Available in US and some markets for those who can't swallow capsules
+      zh: 适用于不能吞服胶囊者，在美国和部分市场有售
+      ja: カプセルを飲み込めない方のために、米国および一部の市場で入手可能
+onsetMinutes:
 peakEffectHours: 2
 durationHours: 24
-
-# Side Effects
 sideEffects:
   common:
     - name:
-        en: "nausea"
-        zh: "恶心"
-        ja: "悪心"
-      frequency: "20-30%"
+        en: nausea
+        zh: 恶心
+        ja: 悪心
+      frequency: 20-30%
     - name:
-        en: "decreased appetite"
-        zh: "食欲下降"
-        ja: "食欲減退"
-      frequency: "15-25%"
+        en: decreased appetite
+        zh: 食欲下降
+        ja: 食欲減退
+      frequency: 15-25%
     - name:
-        en: "fatigue/somnolence"
-        zh: "疲劳/嗜睡"
-        ja: "疲労/傾眠"
-      frequency: "10-20%"
+        en: fatigue/somnolence
+        zh: 疲劳/嗜睡
+        ja: 疲労/傾眠
+      frequency: 10-20%
     - name:
-        en: "dry mouth"
-        zh: "口干"
-        ja: "口渇"
-      frequency: "15-20%"
+        en: dry mouth
+        zh: 口干
+        ja: 口渇
+      frequency: 15-20%
     - name:
-        en: "headache"
-        zh: "头痛"
-        ja: "頭痛"
-      frequency: "15-20%"
+        en: headache
+        zh: 头痛
+        ja: 頭痛
+      frequency: 15-20%
     - name:
-        en: "abdominal pain"
-        zh: "腹痛"
-        ja: "腹痛"
-      frequency: "10-20%"
+        en: abdominal pain
+        zh: 腹痛
+        ja: 腹痛
+      frequency: 10-20%
     - name:
-        en: "vomiting"
-        zh: "呕吐"
-        ja: "嘔吐"
-      frequency: "10-15%"
+        en: vomiting
+        zh: 呕吐
+        ja: 嘔吐
+      frequency: 10-15%
     - name:
-        en: "constipation"
-        zh: "便秘"
-        ja: "便秘"
-      frequency: "10%"
-
+        en: constipation
+        zh: 便秘
+        ja: 便秘
+      frequency: 10%
   uncommon:
     - name:
-        en: "dizziness"
-        zh: "头晕"
-        ja: "めまい"
-      frequency: "5-10%"
+        en: dizziness
+        zh: 头晕
+        ja: めまい
+      frequency: 5-10%
     - name:
-        en: "mood swings"
-        zh: "情绪波动"
-        ja: "気分変動"
-      frequency: "5%"
+        en: mood swings
+        zh: 情绪波动
+        ja: 気分変動
+      frequency: 5%
     - name:
-        en: "insomnia"
-        zh: "失眠"
-        ja: "不眠"
-      frequency: "5%"
+        en: insomnia
+        zh: 失眠
+        ja: 不眠
+      frequency: 5%
     - name:
-        en: "erectile dysfunction (adults)"
-        zh: "勃起功能障碍（成人）"
-        ja: "勃起不全（成人）"
-      frequency: "5-10%"
+        en: erectile dysfunction (adults)
+        zh: 勃起功能障碍（成人）
+        ja: 勃起不全（成人）
+      frequency: 5-10%
     - name:
-        en: "urinary retention"
-        zh: "尿潴留"
-        ja: "尿閉"
-      frequency: "5%"
-
+        en: urinary retention
+        zh: 尿潴留
+        ja: 尿閉
+      frequency: 5%
   serious:
     - name:
-        en: "suicidal ideation"
-        zh: "自杀意念"
-        ja: "自殺念慮"
+        en: suicidal ideation
+        zh: 自杀意念
+        ja: 自殺念慮
       notes:
-        en: "Black box warning; monitor closely, especially early in treatment"
-        zh: "黑框警告；需密切监测，尤其是治疗初期"
-        ja: "ブラックボックス警告；特に治療初期は注意深くモニタリングが必要"
+        en: Black box warning; monitor closely, especially early in treatment
+        zh: 黑框警告；需密切监测，尤其是治疗初期
+        ja: ブラックボックス警告；特に治療初期は注意深くモニタリングが必要
     - name:
-        en: "hepatotoxicity"
-        zh: "肝毒性"
-        ja: "肝毒性"
+        en: hepatotoxicity
+        zh: 肝毒性
+        ja: 肝毒性
       notes:
-        en: "Rare but serious; discontinue if jaundice or liver damage signs"
-        zh: "罕见但严重；如出现黄疸或肝损伤迹象应停药"
-        ja: "まれだが重篤；黄疸や肝障害の兆候があれば中止"
+        en: Rare but serious; discontinue if jaundice or liver damage signs
+        zh: 罕见但严重；如出现黄疸或肝损伤迹象应停药
+        ja: まれだが重篤；黄疸や肝障害の兆候があれば中止
     - name:
-        en: "severe allergic reactions"
-        zh: "严重过敏反应"
-        ja: "重度アレルギー反応"
+        en: severe allergic reactions
+        zh: 严重过敏反应
+        ja: 重度アレルギー反応
       notes:
-        en: "Angioedema, urticaria reported"
-        zh: "有血管性水肿、荨麻疹报告"
-        ja: "血管性浮腫、蕁麻疹の報告あり"
+        en: Angioedema, urticaria reported
+        zh: 有血管性水肿、荨麻疹报告
+        ja: 血管性浮腫、蕁麻疹の報告あり
     - name:
-        en: "cardiovascular effects"
-        zh: "心血管影响"
-        ja: "心血管への影響"
+        en: cardiovascular effects
+        zh: 心血管影响
+        ja: 心血管への影響
       notes:
-        en: "Increased heart rate and blood pressure"
-        zh: "心率和血压升高"
-        ja: "心拍数と血圧の上昇"
+        en: Increased heart rate and blood pressure
+        zh: 心率和血压升高
+        ja: 心拍数と血圧の上昇
     - name:
-        en: "priapism"
-        zh: "阴茎异常勃起"
-        ja: "持続勃起症"
+        en: priapism
+        zh: 阴茎异常勃起
+        ja: 持続勃起症
       notes:
-        en: "Rare; requires immediate medical attention"
-        zh: "罕见；需立即就医"
-        ja: "まれ；直ちに医療処置が必要"
-
-# Safety
+        en: Rare; requires immediate medical attention
+        zh: 罕见；需立即就医
+        ja: まれ；直ちに医療処置が必要
 contraindications:
   en:
-    - "Hypersensitivity to atomoxetine"
-    - "MAO inhibitor use within 14 days"
-    - "Narrow-angle glaucoma"
-    - "Pheochromocytoma"
-    - "Severe cardiovascular disorders"
+    - Hypersensitivity to atomoxetine
+    - MAO inhibitor use within 14 days
+    - Narrow-angle glaucoma
+    - Pheochromocytoma
+    - Severe cardiovascular disorders
   zh:
-    - "对托莫西汀过敏"
-    - "14天内使用过MAO抑制剂"
-    - "窄角型青光眼"
-    - "嗜铬细胞瘤"
-    - "严重心血管疾病"
+    - 对托莫西汀过敏
+    - 14天内使用过MAO抑制剂
+    - 窄角型青光眼
+    - 嗜铬细胞瘤
+    - 严重心血管疾病
   ja:
-    - "アトモキセチンに対する過敏症"
-    - "14日以内のMAO阻害剤使用"
-    - "閉塞隅角緑内障"
-    - "褐色細胞腫"
-    - "重度の心血管疾患"
-
+    - アトモキセチンに対する過敏症
+    - 14日以内のMAO阻害剤使用
+    - 閉塞隅角緑内障
+    - 褐色細胞腫
+    - 重度の心血管疾患
 drugInteractions:
   - drug:
-      en: "MAO inhibitors"
-      zh: "MAO抑制剂"
-      ja: "MAO阻害剤"
-    severity: "major"
+      en: MAO inhibitors
+      zh: MAO抑制剂
+      ja: MAO阻害剤
+    severity: major
     effect:
-      en: "Serious, potentially fatal reactions"
-      zh: "严重的、可能致命的反应"
-      ja: "重篤で致命的な可能性のある反応"
+      en: Serious, potentially fatal reactions
+      zh: 严重的、可能致命的反应
+      ja: 重篤で致命的な可能性のある反応
   - drug:
-      en: "CYP2D6 inhibitors (fluoxetine, paroxetine)"
-      zh: "CYP2D6抑制剂（氟西汀、帕罗西汀）"
-      ja: "CYP2D6阻害剤（フルオキセチン、パロキセチン）"
-    severity: "moderate"
+      en: CYP2D6 inhibitors (fluoxetine, paroxetine)
+      zh: CYP2D6抑制剂（氟西汀、帕罗西汀）
+      ja: CYP2D6阻害剤（フルオキセチン、パロキセチン）
+    severity: moderate
     effect:
-      en: "Increased atomoxetine levels"
-      zh: "托莫西汀血药浓度升高"
-      ja: "アトモキセチン濃度の上昇"
+      en: Increased atomoxetine levels
+      zh: 托莫西汀血药浓度升高
+      ja: アトモキセチン濃度の上昇
   - drug:
-      en: "Albuterol (salbutamol)"
-      zh: "沙丁胺醇"
-      ja: "サルブタモール"
-    severity: "moderate"
+      en: Albuterol (salbutamol)
+      zh: 沙丁胺醇
+      ja: サルブタモール
+    severity: moderate
     effect:
-      en: "Enhanced cardiovascular effects"
-      zh: "心血管作用增强"
-      ja: "心血管作用の増強"
+      en: Enhanced cardiovascular effects
+      zh: 心血管作用增强
+      ja: 心血管作用の増強
   - drug:
-      en: "Antihypertensives"
-      zh: "降压药"
-      ja: "降圧薬"
-    severity: "moderate"
+      en: Antihypertensives
+      zh: 降压药
+      ja: 降圧薬
+    severity: moderate
     effect:
-      en: "May reduce effectiveness"
-      zh: "可能降低疗效"
-      ja: "効果を低下させる可能性"
-
+      en: May reduce effectiveness
+      zh: 可能降低疗效
+      ja: 効果を低下させる可能性
 blackBoxWarnings:
   en:
-    - "Increased risk of suicidal ideation in children and adolescents; monitor closely"
+    - Increased risk of suicidal ideation in children and adolescents; monitor closely
   zh:
-    - "儿童和青少年自杀意念风险增加；需密切监测"
+    - 儿童和青少年自杀意念风险增加；需密切监测
   ja:
-    - "小児および青年における自殺念慮のリスク増加；注意深くモニタリングが必要"
-
-pregnancyCategory: "C"
-
+    - 小児および青年における自殺念慮のリスク増加；注意深くモニタリングが必要
+pregnancyCategory: C
 foodInteractions:
-  en: "Can be taken with or without food; food may reduce GI side effects"
-  zh: "可随餐或空腹服用；进食可减少胃肠道副作用"
-  ja: "食事の有無にかかわらず服用可能；食事により消化器系副作用が軽減される可能性"
-
-# Practical Information
+  en: Can be taken with or without food; food may reduce GI side effects
+  zh: 可随餐或空腹服用；进食可减少胃肠道副作用
+  ja: 食事の有無にかかわらず服用可能；食事により消化器系副作用が軽減される可能性
 typicalDosing:
   children:
-    startingDose: "0.5mg/kg/day"
-    maxDose: "1.4mg/kg/day or 100mg/day"
+    startingDose: 0.5mg/kg/day
+    maxDose: 1.4mg/kg/day or 100mg/day
     notes:
-      en: "Increase to target of 1.2mg/kg/day after 1 week; full effect takes 4-6 weeks"
-      zh: "1周后增加至目标剂量1.2mg/kg/天；完全起效需4-6周"
-      ja: "1週間後に1.2mg/kg/日の目標用量に増量；完全な効果発現には4〜6週間"
+      en: Increase to target of 1.2mg/kg/day after 1 week; full effect takes 4-6 weeks
+      zh: 1周后增加至目标剂量1.2mg/kg/天；完全起效需4-6周
+      ja: 1週間後に1.2mg/kg/日の目標用量に増量；完全な効果発現には4〜6週間
   adults:
-    startingDose: "40mg/day"
-    maxDose: "100mg/day"
+    startingDose: 40mg/day
+    maxDose: 100mg/day
     notes:
-      en: "Target dose 80mg/day; can be once daily or divided"
-      zh: "目标剂量80mg/天；可每日一次或分次服用"
-      ja: "目標用量80mg/日；1日1回または分割投与可能"
-
+      en: Target dose 80mg/day; can be once daily or divided
+      zh: 目标剂量80mg/天；可每日一次或分次服用
+      ja: 目標用量80mg/日；1日1回または分割投与可能
 costEstimate:
   US:
-    brand: "$350-400/month"
-    generic: "$50-150/month"
+    brand: $350-400/month
+    generic: $50-150/month
   CN:
-    brand: "¥400-800/month"
-    generic: "¥200-400/month"
-
+    brand: ¥400-800/month
+    generic: ¥200-400/month
 storageRequirements:
-  en: "Room temperature (25°C), protect from moisture"
-  zh: "室温保存（25°C），避免潮湿"
-  ja: "室温（25°C）で保存、湿気を避ける"
-
-# Approval & Availability
+  en: Room temperature (25°C), protect from moisture
+  zh: 室温保存（25°C），避免潮湿
+  ja: 室温（25°C）で保存、湿気を避ける
 approvals:
-  - region: "US"
-    agency: "FDA"
+  - region: US
+    agency: FDA
     year: 2002
     approvedAges:
-      en: "6 years and older"
-      zh: "6岁及以上"
-      ja: "6歳以上"
+      en: 6 years and older
+      zh: 6岁及以上
+      ja: 6歳以上
     indications:
-      en: ["ADHD"]
-      zh: ["注意缺陷多动障碍"]
-      ja: ["ADHD"]
+      en:
+        - ADHD
+      zh:
+        - 注意缺陷多动障碍
+      ja:
+        - ADHD
     available: true
     notes:
-      en: "First non-stimulant approved for ADHD"
-      zh: "首个获批用于ADHD的非兴奋剂药物"
-      ja: "ADHDに承認された最初の非刺激薬"
-
-  - region: "CN"
-    agency: "NMPA"
+      en: First non-stimulant approved for ADHD
+      zh: 首个获批用于ADHD的非兴奋剂药物
+      ja: ADHDに承認された最初の非刺激薬
+  - region: CN
+    agency: NMPA
     year: 2007
     approvedAges:
-      en: "6 years and older"
-      zh: "6岁及以上"
-      ja: "6歳以上"
+      en: 6 years and older
+      zh: 6岁及以上
+      ja: 6歳以上
     indications:
-      en: ["ADHD"]
-      zh: ["注意缺陷多动障碍"]
-      ja: ["ADHD"]
+      en:
+        - ADHD
+      zh:
+        - 注意缺陷多动障碍
+      ja:
+        - ADHD
     available: true
     notes:
-      en: "Brand capsules discontinued Jan 2024; oral solution and domestic generics available"
-      zh: "品牌胶囊2024年1月停产；口服溶液和国产仿制药可用"
-      ja: "ブランドカプセルは2024年1月に販売終了；経口液と国内ジェネリックが利用可能"
-
-  - region: "EU"
-    agency: "EMA"
+      en: Brand capsules discontinued Jan 2024; oral solution and domestic generics available
+      zh: 品牌胶囊2024年1月停产；口服溶液和国产仿制药可用
+      ja: ブランドカプセルは2024年1月に販売終了；経口液と国内ジェネリックが利用可能
+  - region: EU
+    agency: EMA
     year: 2004
     approvedAges:
-      en: "6 years and older"
-      zh: "6岁及以上"
-      ja: "6歳以上"
+      en: 6 years and older
+      zh: 6岁及以上
+      ja: 6歳以上
     indications:
-      en: ["ADHD"]
-      zh: ["注意缺陷多动障碍"]
-      ja: ["ADHD"]
+      en:
+        - ADHD
+      zh:
+        - 注意缺陷多动障碍
+      ja:
+        - ADHD
     available: true
     notes:
-      en: "Approved for children and adults"
-      zh: "适用于儿童和成人"
-      ja: "小児および成人に承認"
-
-  - region: "JP"
-    agency: "PMDA"
+      en: Approved for children and adults
+      zh: 适用于儿童和成人
+      ja: 小児および成人に承認
+  - region: JP
+    agency: PMDA
     year: 2009
     approvedAges:
-      en: "6 years and older"
-      zh: "6岁及以上"
-      ja: "6歳以上"
+      en: 6 years and older
+      zh: 6岁及以上
+      ja: 6歳以上
     indications:
-      en: ["ADHD"]
-      zh: ["注意缺陷多动障碍"]
-      ja: ["ADHD"]
+      en:
+        - ADHD
+      zh:
+        - 注意缺陷多动障碍
+      ja:
+        - ADHD
     available: true
     notes:
-      en: "No registration requirement (unlike stimulants)"
-      zh: "无需登记（与兴奋剂不同）"
-      ja: "登録要件なし（刺激薬とは異なる）"
-
-  - region: "UK"
-    agency: "MHRA"
+      en: No registration requirement (unlike stimulants)
+      zh: 无需登记（与兴奋剂不同）
+      ja: 登録要件なし（刺激薬とは異なる）
+  - region: UK
+    agency: MHRA
     year: 2004
     approvedAges:
-      en: "6 years and older"
-      zh: "6岁及以上"
-      ja: "6歳以上"
+      en: 6 years and older
+      zh: 6岁及以上
+      ja: 6歳以上
     indications:
-      en: ["ADHD"]
-      zh: ["注意缺陷多动障碍"]
-      ja: ["ADHD"]
+      en:
+        - ADHD
+      zh:
+        - 注意缺陷多动障碍
+      ja:
+        - ADHD
     available: true
     notes:
       en: ""
       zh: ""
       ja: ""
-
-  - region: "AU"
-    agency: "TGA"
+  - region: AU
+    agency: TGA
     year: 2007
     approvedAges:
-      en: "6 years and older"
-      zh: "6岁及以上"
-      ja: "6歳以上"
+      en: 6 years and older
+      zh: 6岁及以上
+      ja: 6歳以上
     indications:
-      en: ["ADHD"]
-      zh: ["注意缺陷多动障碍"]
-      ja: ["ADHD"]
+      en:
+        - ADHD
+      zh:
+        - 注意缺陷多动障碍
+      ja:
+        - ADHD
     available: true
     notes:
       en: ""
       zh: ""
       ja: ""
-
-  - region: "CA"
-    agency: "Health Canada"
+  - region: CA
+    agency: Health Canada
     year: 2004
     approvedAges:
-      en: "6 years and older"
-      zh: "6岁及以上"
-      ja: "6歳以上"
+      en: 6 years and older
+      zh: 6岁及以上
+      ja: 6歳以上
     indications:
-      en: ["ADHD"]
-      zh: ["注意缺陷多动障碍"]
-      ja: ["ADHD"]
+      en:
+        - ADHD
+      zh:
+        - 注意缺陷多动障碍
+      ja:
+        - ADHD
     available: true
     notes:
       en: ""
       zh: ""
       ja: ""
-
-# Special Considerations
 specialConsiderations:
   cardiacRisk:
-    en: "Can increase heart rate and blood pressure; use caution in cardiovascular disease"
-    zh: "可升高心率和血压；心血管疾病患者需谨慎使用"
-    ja: "心拍数と血圧を上昇させる可能性；心血管疾患には注意"
+    en: Can increase heart rate and blood pressure; use caution in cardiovascular disease
+    zh: 可升高心率和血压；心血管疾病患者需谨慎使用
+    ja: 心拍数と血圧を上昇させる可能性；心血管疾患には注意
   abuseRisk:
-    en: "No abuse potential; not a controlled substance"
-    zh: "无滥用风险；非管制药物"
-    ja: "乱用の可能性なし；規制物質ではない"
+    en: No abuse potential; not a controlled substance
+    zh: 无滥用风险；非管制药物
+    ja: 乱用の可能性なし；規制物質ではない
   withdrawalNotes:
-    en: "No withdrawal symptoms; can be stopped without tapering"
-    zh: "无戒断症状；可直接停药无需减量"
-    ja: "離脱症状なし；漸減なしで中止可能"
+    en: No withdrawal symptoms; can be stopped without tapering
+    zh: 无戒断症状；可直接停药无需减量
+    ja: 離脱症状なし；漸減なしで中止可能
   monitoringRequired:
-    en: "Blood pressure, heart rate, liver function if symptoms; mood/suicidality in youth"
-    zh: "血压、心率；如有症状监测肝功能；青少年需监测情绪/自杀倾向"
-    ja: "血圧、心拍数、症状があれば肝機能；若年者では気分/自殺傾向"
-
-# Travel Rules
+    en: Blood pressure, heart rate, liver function if symptoms; mood/suicidality in youth
+    zh: 血压、心率；如有症状监测肝功能；青少年需监测情绪/自杀倾向
+    ja: 血圧、心拍数、症状があれば肝機能；若年者では気分/自殺傾向
 travelRules:
   generalAdvice:
-    en: "Atomoxetine is NOT a controlled substance, making international travel significantly easier than with stimulants. However, carry prescription documentation for customs."
-    zh: "托莫西汀不是管制药物，国际旅行比兴奋剂容易得多。但仍建议携带处方文件以备海关检查。"
-    ja: "アトモキセチンは規制物質ではないため、刺激薬よりも国際旅行がかなり容易です。ただし、税関用に処方書類を携帯してください。"
-
+    en: Atomoxetine is NOT a controlled substance, making international travel significantly easier than with stimulants. However, carry prescription documentation for customs.
+    zh: 托莫西汀不是管制药物，国际旅行比兴奋剂容易得多。但仍建议携带处方文件以备海关检查。
+    ja: アトモキセチンは規制物質ではないため、刺激薬よりも国際旅行がかなり容易です。ただし、税関用に処方書類を携帯してください。
   requiredDocumentation:
-    - type: "prescription"
+    - type: prescription
       typeLabel:
-        en: "Valid prescription"
-        zh: "有效处方"
-        ja: "有効な処方箋"
+        en: Valid prescription
+        zh: 有效处方
+        ja: 有効な処方箋
       notes:
-        en: "Recommended but not strictly required in most countries"
-        zh: "建议携带但大多数国家不严格要求"
-        ja: "推奨されるが、ほとんどの国では厳密には必要ない"
-
+        en: Recommended but not strictly required in most countries
+        zh: 建议携带但大多数国家不严格要求
+        ja: 推奨されるが、ほとんどの国では厳密には必要ない
   maxPersonalSupply:
-    default: "90 days"
-
+    default: 90 days
   crossBorderRules:
-    - fromRegion: "US"
-      toRegion: "JP"
-      status: "allowed"
+    - fromRegion: US
+      toRegion: JP
+      status: allowed
       statusLabel:
-        en: "Allowed"
-        zh: "允许"
-        ja: "許可"
+        en: Allowed
+        zh: 允许
+        ja: 許可
       requirements:
         en:
-          - "Carry prescription copy"
-          - "Keep in original packaging"
+          - Carry prescription copy
+          - Keep in original packaging
         zh:
-          - "携带处方副本"
-          - "保持原包装"
+          - 携带处方副本
+          - 保持原包装
         ja:
-          - "処方箋のコピーを携帯"
-          - "元のパッケージを維持"
-      maxSupply: "90 days"
+          - 処方箋のコピーを携帯
+          - 元のパッケージを維持
+      maxSupply: 90 days
       notes:
-        en: "No special permit required. Atomoxetine is available in Japan and is not a controlled substance."
-        zh: "无需特别许可。托莫西汀在日本可用且不是管制药物。"
-        ja: "特別な許可は不要です。アトモキセチンは日本で入手可能で、規制物質ではありません。"
-
-    - fromRegion: "US"
-      toRegion: "CN"
-      status: "allowed"
+        en: No special permit required. Atomoxetine is available in Japan and is not a controlled substance.
+        zh: 无需特别许可。托莫西汀在日本可用且不是管制药物。
+        ja: 特別な許可は不要です。アトモキセチンは日本で入手可能で、規制物質ではありません。
+    - fromRegion: US
+      toRegion: CN
+      status: allowed
       statusLabel:
-        en: "Allowed"
-        zh: "允许"
-        ja: "許可"
+        en: Allowed
+        zh: 允许
+        ja: 許可
       requirements:
         en:
-          - "Carry prescription copy"
-          - "Keep in original packaging"
+          - Carry prescription copy
+          - Keep in original packaging
         zh:
-          - "携带处方副本"
-          - "保持原包装"
+          - 携带处方副本
+          - 保持原包装
         ja:
-          - "処方箋のコピーを携帯"
-          - "元のパッケージを維持"
-      maxSupply: "90 days"
+          - 処方箋のコピーを携帯
+          - 元のパッケージを維持
+      maxSupply: 90 days
       notes:
-        en: "Atomoxetine is approved in China. No special import requirements for personal use."
-        zh: "托莫西汀在中国已获批。个人使用无特殊进口要求。"
-        ja: "アトモキセチンは中国で承認されています。個人使用に特別な輸入要件はありません。"
-
-    - fromRegion: "US"
-      toRegion: "EU"
-      status: "allowed"
+        en: Atomoxetine is approved in China. No special import requirements for personal use.
+        zh: 托莫西汀在中国已获批。个人使用无特殊进口要求。
+        ja: アトモキセチンは中国で承認されています。個人使用に特別な輸入要件はありません。
+    - fromRegion: US
+      toRegion: EU
+      status: allowed
       statusLabel:
-        en: "Allowed"
-        zh: "允许"
-        ja: "許可"
+        en: Allowed
+        zh: 允许
+        ja: 許可
       requirements:
         en:
-          - "Carry prescription copy"
-          - "Keep in original packaging"
+          - Carry prescription copy
+          - Keep in original packaging
         zh:
-          - "携带处方副本"
-          - "保持原包装"
+          - 携带处方副本
+          - 保持原包装
         ja:
-          - "処方箋のコピーを携帯"
-          - "元のパッケージを維持"
-      maxSupply: "90 days"
+          - 処方箋のコピーを携帯
+          - 元のパッケージを維持
+      maxSupply: 90 days
       notes:
-        en: "No special requirements for non-controlled medications. Atomoxetine is widely available in EU."
-        zh: "非管制药物无特殊要求。托莫西汀在欧盟广泛可用。"
-        ja: "非規制薬物には特別な要件はありません。アトモキセチンはEUで広く入手可能です。"
-
-# RxNorm Data (from NLM RxNorm/RxNav)
-# Drug name normalization and relationship mapping
+        en: No special requirements for non-controlled medications. Atomoxetine is widely available in EU.
+        zh: 非管制药物无特殊要求。托莫西汀在欧盟广泛可用。
+        ja: 非規制薬物には特別な要件はありません。アトモキセチンはEUで広く入手可能です。
 rxnormData:
-  # Primary ingredient-level RxCUI
   ingredientRxcui: "38400"
-  ingredientName: "atomoxetine"
-
-  # RxCUI mappings at different term type levels
+  ingredientName: atomoxetine
   rxcuiMappings:
     - rxcui: "38400"
-      name: "atomoxetine"
-      tty: "IN"
-      description: "Base ingredient"
-    - rxcui: "38401"
-      name: "atomoxetine hydrochloride"
-      tty: "PIN"
-      description: "Precise ingredient (salt form)"
-    - rxcui: "884398"
-      name: "atomoxetine Oral Capsule"
-      tty: "SCDF"
-      description: "Ingredient + dose form"
-    - rxcui: "1996254"
-      name: "atomoxetine Oral Solution"
-      tty: "SCDF"
-      description: "Ingredient + dose form"
-
-  # Brand name to RxCUI mappings
+      name: atomoxetine
+      tty: IN
+      description: Base ingredient
+    - rxcui: "358330"
+      name: Strattera
+      tty: BN
+      description: Brand name
+    - rxcui: "353103"
+      name: atomoxetine hydrochloride
+      tty: PIN
+      description: Precise ingredient (includes salt form)
+    - rxcui: "352317"
+      name: atomoxetine 10 MG Oral Capsule [Strattera]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "352318"
+      name: atomoxetine 18 MG Oral Capsule [Strattera]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "352319"
+      name: atomoxetine 25 MG Oral Capsule [Strattera]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "352320"
+      name: atomoxetine 40 MG Oral Capsule [Strattera]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "352321"
+      name: atomoxetine 60 MG Oral Capsule [Strattera]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "617945"
+      name: atomoxetine 100 MG Oral Capsule [Strattera]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "617947"
+      name: atomoxetine 80 MG Oral Capsule [Strattera]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "366499"
+      name: atomoxetine Oral Capsule [Strattera]
+      tty: SBDF
+      description: Branded ingredient + dose form
+    - rxcui: "349591"
+      name: atomoxetine 10 MG Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "349592"
+      name: atomoxetine 18 MG Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "349593"
+      name: atomoxetine 25 MG Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "349594"
+      name: atomoxetine 40 MG Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "349595"
+      name: atomoxetine 60 MG Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "608139"
+      name: atomoxetine 100 MG Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "608143"
+      name: atomoxetine 80 MG Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "378308"
+      name: atomoxetine Oral Capsule
+      tty: SCDF
+      description: Ingredient + dose form
   brandMappings:
-    - brandName: "Strattera"
-      rxcui: "349591"
-      manufacturer: "Eli Lilly"
-      region: "US"
-
-  # Drug synonyms and alternative names
+    - brandName: Strattera
+      rxcui: "358330"
+      region: US
+    - brandName: Qelbree
+      rxcui: "2536549"
+      region: US
   synonyms:
-    - name: "atomoxetine"
-      type: "generic"
-      source: "RxNorm"
-    - name: "atomoxetine hydrochloride"
-      type: "chemical"
-      source: "RxNorm"
-    - name: "ATX"
-      type: "abbreviation"
-      source: "Clinical"
-    - name: "Strattera"
-      type: "brand"
-      source: "RxNorm"
-    - name: "托莫西汀"
-      type: "generic"
-      source: "Chinese"
-    - name: "择思达"
-      type: "brand"
-      source: "Chinese"
-    - name: "アトモキセチン"
-      type: "generic"
-      source: "Japanese"
-    - name: "ストラテラ"
-      type: "brand"
-      source: "Japanese"
-
-  # Related drugs
+    - name: atomoxetine hydrochloride
+      type: chemical
+      source: RxNorm
+    - name: Strattera
+      type: brand
+      source: RxNorm
+    - name: atomoxetine
+      type: generic
+      source: RxNorm
   relatedDrugs:
-    - rxcui: "884398"
-      name: "atomoxetine Oral Capsule"
-      tty: "SCDF"
-      relationship: "drug_form"
-    - rxcui: "1996254"
-      name: "atomoxetine Oral Solution"
-      tty: "SCDF"
-      relationship: "drug_form"
-
-  lastUpdated: "2025-12-04"
-
-# Metadata
+    - rxcui: "349591"
+      name: atomoxetine 10 MG Oral Capsule
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "349592"
+      name: atomoxetine 18 MG Oral Capsule
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "349593"
+      name: atomoxetine 25 MG Oral Capsule
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "349594"
+      name: atomoxetine 40 MG Oral Capsule
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "349595"
+      name: atomoxetine 60 MG Oral Capsule
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "608139"
+      name: atomoxetine 100 MG Oral Capsule
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "608143"
+      name: atomoxetine 80 MG Oral Capsule
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "352317"
+      name: atomoxetine 10 MG Oral Capsule [Strattera]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "352318"
+      name: atomoxetine 18 MG Oral Capsule [Strattera]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "352319"
+      name: atomoxetine 25 MG Oral Capsule [Strattera]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "352320"
+      name: atomoxetine 40 MG Oral Capsule [Strattera]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "352321"
+      name: atomoxetine 60 MG Oral Capsule [Strattera]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "617945"
+      name: atomoxetine 100 MG Oral Capsule [Strattera]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "617947"
+      name: atomoxetine 80 MG Oral Capsule [Strattera]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "378308"
+      name: atomoxetine Oral Capsule
+      tty: SCDF
+      relationship: drug_form
+  lastUpdated: 2025-12-04
 lastUpdated: 2025-12-04
-
 sources:
-  - "https://www.goodrx.com/conditions/adhd/non-stimulant-adhd-meds"
-  - "https://zhuanlan.zhihu.com/p/702636281"
-  - "https://www.gelonghui.com/p/713050"
-  - "https://h-navi.jp/column/article/35028853"
-
+  - https://www.goodrx.com/conditions/adhd/non-stimulant-adhd-meds
+  - https://zhuanlan.zhihu.com/p/702636281
+  - https://www.gelonghui.com/p/713050
+  - https://h-navi.jp/column/article/35028853
 notes:
-  en: "First non-stimulant ADHD medication. Good option for those who can't tolerate stimulants or have substance abuse history. Takes 4-6 weeks for full effect (not immediate like stimulants). Eli Lilly discontinued capsule supply to China in Jan 2024 but domestic generics available."
-  zh: "首个非兴奋剂ADHD药物。适合不能耐受兴奋剂或有药物滥用史的患者。完全起效需4-6周（不像兴奋剂那样立即起效）。礼来于2024年1月停止向中国供应胶囊剂型，但国产仿制药可用。"
-  ja: "最初の非刺激性ADHD薬。刺激薬に耐えられない人や薬物乱用歴のある人に適しています。完全な効果発現には4〜6週間かかります（刺激薬のような即効性はありません）。イーライリリーは2024年1月に中国へのカプセル供給を終了しましたが、国内ジェネリックは入手可能です。"
+  en: First non-stimulant ADHD medication. Good option for those who can't tolerate stimulants or have substance abuse history. Takes 4-6 weeks for full effect (not immediate like stimulants). Eli Lilly discontinued capsule supply to China in Jan 2024 but domestic generics available.
+  zh: 首个非兴奋剂ADHD药物。适合不能耐受兴奋剂或有药物滥用史的患者。完全起效需4-6周（不像兴奋剂那样立即起效）。礼来于2024年1月停止向中国供应胶囊剂型，但国产仿制药可用。
+  ja: 最初の非刺激性ADHD薬。刺激薬に耐えられない人や薬物乱用歴のある人に適しています。完全な効果発現には4〜6週間かかります（刺激薬のような即効性はありません）。イーライリリーは2024年1月に中国へのカプセル供給を終了しましたが、国内ジェネリックは入手可能です。

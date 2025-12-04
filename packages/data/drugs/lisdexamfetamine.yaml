@@ -1,378 +1,366 @@
-# Lisdexamfetamine - Prodrug of dextroamphetamine
-# Approved in US, EU, Japan (children only), UK, Australia, Canada
-
-id: "lisdexamfetamine"
-
+id: lisdexamfetamine
 brandNames:
-  US: ["Vyvanse"]
+  US:
+    - Vyvanse
   CN: []
-  EU: ["Elvanse"]
-  JP: ["ビバンセ (Vyvanse)"]
-  UK: ["Elvanse", "Elvanse Adult"]
-  AU: ["Vyvanse"]
-  CA: ["Vyvanse"]
-
+  EU:
+    - Elvanse
+  JP:
+    - ビバンセ (Vyvanse)
+  UK:
+    - Elvanse
+    - Elvanse Adult
+  AU:
+    - Vyvanse
+  CA:
+    - Vyvanse
 genericName:
-  en: "lisdexamfetamine dimesylate"
-  zh: "甲磺酸赖右苯丙胺"
-  ja: "リスデキサンフェタミンメシル酸塩"
-
+  en: lisdexamfetamine dimesylate
+  zh: 甲磺酸赖右苯丙胺
+  ja: リスデキサンフェタミンメシル酸塩
 manufacturers:
-  - name: "Takeda (formerly Shire)"
-    region: "US"
-    product: "Vyvanse"
-  - name: "Takeda"
-    region: "EU"
-    product: "Elvanse"
-  - name: "Shionogi"
-    region: "JP"
-    product: "ビバンセ"
-
-# Chemical Structure
+  - name: Takeda (formerly Shire)
+    region: US
+    product: Vyvanse
+  - name: Takeda
+    region: EU
+    product: Elvanse
+  - name: Shionogi
+    region: JP
+    product: ビバンセ
 chemicalStructure:
-  smiles: "C[C@@H](CC1=CC=CC=C1)NC(=O)[C@H](CCCCN)N"
+  smiles: C[C@@H](CC1=CC=CC=C1)NC(=O)[C@H](CCCCN)N
   pubchemCid: 11597698
-  molecularFormula: "C15H25N3O"
-  imageUrl: "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/11597698/PNG"
-  wikipediaUrl: "https://en.wikipedia.org/wiki/File:Lisdexamfetamine.svg"
-
-# Classification
-drugClass: "stimulant"
-
+  molecularFormula: C15H25N3O
+  imageUrl: https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/11597698/PNG
+  wikipediaUrl: https://en.wikipedia.org/wiki/File:Lisdexamfetamine.svg
+drugClass: stimulant
 drugClassLabel:
-  en: "Stimulant"
-  zh: "兴奋剂"
-  ja: "中枢刺激薬"
-
-category: "amphetamine"
-
+  en: Stimulant
+  zh: 兴奋剂
+  ja: 中枢刺激薬
+category: amphetamine
 categoryLabel:
-  en: "Amphetamine"
-  zh: "苯丙胺类"
-  ja: "アンフェタミン系"
+  en: Amphetamine
+  zh: 苯丙胺类
+  ja: アンフェタミン系
 controlledSubstance: true
 schedule:
-  US: "Schedule II"
-  CN: "Not approved"
-  EU: "Varies by country (typically Schedule II equivalent)"
-  JP: "第一種向精神薬"
-  UK: "Class B, Schedule 2"
-
-# Mechanism
+  US: Schedule II
+  CN: Not approved
+  EU: Varies by country (typically Schedule II equivalent)
+  JP: 第一種向精神薬
+  UK: Class B, Schedule 2
 activeIngredient:
-  en: "lisdexamfetamine dimesylate (prodrug of dextroamphetamine)"
-  zh: "甲磺酸赖右苯丙胺（右苯丙胺的前药）"
-  ja: "リスデキサンフェタミンメシル酸塩（デキストロアンフェタミンのプロドラッグ）"
-
+  en: lisdexamfetamine dimesylate (prodrug of dextroamphetamine)
+  zh: 甲磺酸赖右苯丙胺（右苯丙胺的前药）
+  ja: リスデキサンフェタミンメシル酸塩（デキストロアンフェタミンのプロドラッグ）
 mechanismOfAction:
-  en: "Prodrug that is converted to dextroamphetamine in the body. Increases release of dopamine and norepinephrine from nerve terminals and inhibits their reuptake. The prodrug design provides smoother onset and longer duration, with lower abuse potential than immediate-release amphetamines."
-  zh: "在体内转化为右苯丙胺的前药。增加神经末梢多巴胺和去甲肾上腺素的释放并抑制其再摄取。前药设计提供更平稳的起效和更长的持续时间，滥用风险低于速释苯丙胺类药物。"
-  ja: "体内でデキストロアンフェタミンに変換されるプロドラッグ。神経末端からのドーパミンとノルエピネフリンの放出を増加させ、再取り込みを阻害します。プロドラッグ設計により、即放性アンフェタミンよりも滑らかな効果発現と長い持続時間を提供し、乱用の可能性が低くなります。"
+  en: Prodrug that is converted to dextroamphetamine in the body. Increases release of dopamine and norepinephrine from nerve terminals and inhibits their reuptake. The prodrug design provides smoother onset and longer duration, with lower abuse potential than immediate-release amphetamines.
+  zh: 在体内转化为右苯丙胺的前药。增加神经末梢多巴胺和去甲肾上腺素的释放并抑制其再摄取。前药设计提供更平稳的起效和更长的持续时间，滥用风险低于速释苯丙胺类药物。
+  ja: 体内でデキストロアンフェタミンに変換されるプロドラッグ。神経末端からのドーパミンとノルエピネフリンの放出を増加させ、再取り込みを阻害します。プロドラッグ設計により、即放性アンフェタミンよりも滑らかな効果発現と長い持続時間を提供し、乱用の可能性が低くなります。
 neurotransmittersAffected:
   - dopamine
   - norepinephrine
-
-# Dosage & Forms
 forms:
-  - type: "capsule"
+  - type: capsule
     typeLabel:
-      en: "Capsule"
-      zh: "胶囊"
-      ja: "カプセル"
-    releaseType: "extended"
+      en: Capsule
+      zh: 胶囊
+      ja: カプセル
+    releaseType: extended
     releaseTypeLabel:
-      en: "Extended Release"
-      zh: "缓释"
-      ja: "徐放性"
-    brandName: "Vyvanse"
-    strengths: ["10mg", "20mg", "30mg", "40mg", "50mg", "60mg", "70mg"]
+      en: Extended Release
+      zh: 缓释
+      ja: 徐放性
+    brandName: Vyvanse
+    strengths:
+      - 10mg
+      - 20mg
+      - 30mg
+      - 40mg
+      - 50mg
+      - 60mg
+      - 70mg
     durationHours: 10-14
     notes:
-      en: "Can be opened and dissolved in water; prodrug provides smooth release"
-      zh: "可打开溶于水中；前药设计提供平稳释放"
-      ja: "開けて水に溶かすことができます；プロドラッグにより滑らかな放出を提供"
-
-  - type: "chewable"
+      en: Can be opened and dissolved in water; prodrug provides smooth release
+      zh: 可打开溶于水中；前药设计提供平稳释放
+      ja: 開けて水に溶かすことができます；プロドラッグにより滑らかな放出を提供
+  - type: chewable
     typeLabel:
-      en: "Chewable Tablet"
-      zh: "咀嚼片"
-      ja: "チュアブル錠"
-    releaseType: "extended"
+      en: Chewable Tablet
+      zh: 咀嚼片
+      ja: チュアブル錠
+    releaseType: extended
     releaseTypeLabel:
-      en: "Extended Release"
-      zh: "缓释"
-      ja: "徐放性"
-    brandName: "Vyvanse"
-    strengths: ["10mg", "20mg", "30mg", "40mg", "50mg", "60mg"]
+      en: Extended Release
+      zh: 缓释
+      ja: 徐放性
+    brandName: Vyvanse
+    strengths:
+      - 10mg
+      - 20mg
+      - 30mg
+      - 40mg
+      - 50mg
+      - 60mg
     durationHours: 10-14
     notes:
-      en: "Chewable tablet formulation"
-      zh: "咀嚼片剂型"
-      ja: "チュアブル錠剤形"
-
-# Efficacy
+      en: Chewable tablet formulation
+      zh: 咀嚼片剂型
+      ja: チュアブル錠剤形
 onsetMinutes: 60-90
 peakEffectHours: 3.5
 durationHours: 10-14
-
-# Side Effects
 sideEffects:
   common:
     - name:
-        en: "decreased appetite"
-        zh: "食欲下降"
-        ja: "食欲減退"
-      frequency: "30-40%"
+        en: decreased appetite
+        zh: 食欲下降
+        ja: 食欲減退
+      frequency: 30-40%
     - name:
-        en: "insomnia"
-        zh: "失眠"
-        ja: "不眠"
-      frequency: "20-30%"
+        en: insomnia
+        zh: 失眠
+        ja: 不眠
+      frequency: 20-30%
     - name:
-        en: "dry mouth"
-        zh: "口干"
-        ja: "口渇"
-      frequency: "15-25%"
+        en: dry mouth
+        zh: 口干
+        ja: 口渇
+      frequency: 15-25%
     - name:
-        en: "headache"
-        zh: "头痛"
-        ja: "頭痛"
-      frequency: "10-20%"
+        en: headache
+        zh: 头痛
+        ja: 頭痛
+      frequency: 10-20%
     - name:
-        en: "irritability"
-        zh: "易怒"
-        ja: "易刺激性"
-      frequency: "10-15%"
+        en: irritability
+        zh: 易怒
+        ja: 易刺激性
+      frequency: 10-15%
     - name:
-        en: "weight loss"
-        zh: "体重减轻"
-        ja: "体重減少"
-      frequency: "10-15%"
+        en: weight loss
+        zh: 体重减轻
+        ja: 体重減少
+      frequency: 10-15%
     - name:
-        en: "upper abdominal pain"
-        zh: "上腹痛"
-        ja: "上腹部痛"
-      frequency: "10-15%"
-
+        en: upper abdominal pain
+        zh: 上腹痛
+        ja: 上腹部痛
+      frequency: 10-15%
   uncommon:
     - name:
-        en: "increased heart rate"
-        zh: "心率加快"
-        ja: "心拍数増加"
-      frequency: "5-10%"
+        en: increased heart rate
+        zh: 心率加快
+        ja: 心拍数増加
+      frequency: 5-10%
     - name:
-        en: "anxiety"
-        zh: "焦虑"
-        ja: "不安"
-      frequency: "5-10%"
+        en: anxiety
+        zh: 焦虑
+        ja: 不安
+      frequency: 5-10%
     - name:
-        en: "dizziness"
-        zh: "头晕"
-        ja: "めまい"
-      frequency: "5%"
+        en: dizziness
+        zh: 头晕
+        ja: めまい
+      frequency: 5%
     - name:
-        en: "nausea"
-        zh: "恶心"
-        ja: "悪心"
-      frequency: "5%"
+        en: nausea
+        zh: 恶心
+        ja: 悪心
+      frequency: 5%
     - name:
-        en: "vomiting"
-        zh: "呕吐"
-        ja: "嘔吐"
-      frequency: "5%"
-
+        en: vomiting
+        zh: 呕吐
+        ja: 嘔吐
+      frequency: 5%
   serious:
     - name:
-        en: "cardiovascular events"
-        zh: "心血管事件"
-        ja: "心血管イベント"
+        en: cardiovascular events
+        zh: 心血管事件
+        ja: 心血管イベント
       notes:
-        en: "Rare; monitor in patients with heart conditions"
-        zh: "罕见；有心脏病患者需监测"
-        ja: "まれ；心臓疾患のある患者はモニタリングが必要"
+        en: Rare; monitor in patients with heart conditions
+        zh: 罕见；有心脏病患者需监测
+        ja: まれ；心臓疾患のある患者はモニタリングが必要
     - name:
-        en: "psychiatric symptoms"
-        zh: "精神症状"
-        ja: "精神症状"
+        en: psychiatric symptoms
+        zh: 精神症状
+        ja: 精神症状
       notes:
-        en: "May cause or worsen psychosis, mania, aggression"
-        zh: "可能引起或加重精神病、躁狂、攻击性"
-        ja: "精神病、躁病、攻撃性を引き起こしたり悪化させたりする可能性"
+        en: May cause or worsen psychosis, mania, aggression
+        zh: 可能引起或加重精神病、躁狂、攻击性
+        ja: 精神病、躁病、攻撃性を引き起こしたり悪化させたりする可能性
     - name:
-        en: "serotonin syndrome"
-        zh: "血清素综合征"
-        ja: "セロトニン症候群"
+        en: serotonin syndrome
+        zh: 血清素综合征
+        ja: セロトニン症候群
       notes:
-        en: "When combined with serotonergic drugs"
-        zh: "与血清素能药物联用时"
-        ja: "セロトニン作動薬との併用時"
+        en: When combined with serotonergic drugs
+        zh: 与血清素能药物联用时
+        ja: セロトニン作動薬との併用時
     - name:
-        en: "peripheral vasculopathy"
-        zh: "外周血管病变"
-        ja: "末梢血管障害"
+        en: peripheral vasculopathy
+        zh: 外周血管病变
+        ja: 末梢血管障害
       notes:
-        en: "Raynaud's phenomenon"
-        zh: "雷诺现象"
-        ja: "レイノー現象"
+        en: Raynaud's phenomenon
+        zh: 雷诺现象
+        ja: レイノー現象
     - name:
-        en: "growth suppression"
-        zh: "生长抑制"
-        ja: "成長抑制"
+        en: growth suppression
+        zh: 生长抑制
+        ja: 成長抑制
       notes:
-        en: "May affect height and weight in children"
-        zh: "可能影响儿童身高和体重"
-        ja: "小児の身長と体重に影響を与える可能性"
-
-# Safety
+        en: May affect height and weight in children
+        zh: 可能影响儿童身高和体重
+        ja: 小児の身長と体重に影響を与える可能性
 contraindications:
   en:
-    - "Hypersensitivity to amphetamines"
-    - "MAO inhibitor use within 14 days"
-    - "Advanced arteriosclerosis"
-    - "Symptomatic cardiovascular disease"
-    - "Moderate to severe hypertension"
-    - "Hyperthyroidism"
-    - "Glaucoma"
-    - "Agitated states"
-    - "History of drug abuse"
+    - Hypersensitivity to amphetamines
+    - MAO inhibitor use within 14 days
+    - Advanced arteriosclerosis
+    - Symptomatic cardiovascular disease
+    - Moderate to severe hypertension
+    - Hyperthyroidism
+    - Glaucoma
+    - Agitated states
+    - History of drug abuse
   zh:
-    - "对苯丙胺类过敏"
-    - "14天内使用过MAO抑制剂"
-    - "晚期动脉硬化"
-    - "有症状的心血管疾病"
-    - "中度至重度高血压"
-    - "甲状腺功能亢进"
-    - "青光眼"
-    - "激动状态"
-    - "药物滥用史"
+    - 对苯丙胺类过敏
+    - 14天内使用过MAO抑制剂
+    - 晚期动脉硬化
+    - 有症状的心血管疾病
+    - 中度至重度高血压
+    - 甲状腺功能亢进
+    - 青光眼
+    - 激动状态
+    - 药物滥用史
   ja:
-    - "アンフェタミン類に対する過敏症"
-    - "14日以内のMAO阻害剤使用"
-    - "進行性動脈硬化"
-    - "症候性心血管疾患"
-    - "中等度から重度の高血圧"
-    - "甲状腺機能亢進症"
-    - "緑内障"
-    - "興奮状態"
-    - "薬物乱用歴"
-
+    - アンフェタミン類に対する過敏症
+    - 14日以内のMAO阻害剤使用
+    - 進行性動脈硬化
+    - 症候性心血管疾患
+    - 中等度から重度の高血圧
+    - 甲状腺機能亢進症
+    - 緑内障
+    - 興奮状態
+    - 薬物乱用歴
 drugInteractions:
   - drug:
-      en: "MAO inhibitors"
-      zh: "MAO抑制剂"
-      ja: "MAO阻害剤"
-    severity: "major"
+      en: MAO inhibitors
+      zh: MAO抑制剂
+      ja: MAO阻害剤
+    severity: major
     effect:
-      en: "Hypertensive crisis risk"
-      zh: "高血压危象风险"
-      ja: "高血圧クリーゼのリスク"
+      en: Hypertensive crisis risk
+      zh: 高血压危象风险
+      ja: 高血圧クリーゼのリスク
   - drug:
-      en: "Serotonergic drugs"
-      zh: "血清素能药物"
-      ja: "セロトニン作動薬"
-    severity: "major"
+      en: Serotonergic drugs
+      zh: 血清素能药物
+      ja: セロトニン作動薬
+    severity: major
     effect:
-      en: "Serotonin syndrome risk"
-      zh: "血清素综合征风险"
-      ja: "セロトニン症候群のリスク"
+      en: Serotonin syndrome risk
+      zh: 血清素综合征风险
+      ja: セロトニン症候群のリスク
   - drug:
-      en: "Acidifying agents"
-      zh: "酸化剂"
-      ja: "酸性化剤"
-    severity: "moderate"
+      en: Acidifying agents
+      zh: 酸化剂
+      ja: 酸性化剤
+    severity: moderate
     effect:
-      en: "Decrease amphetamine absorption"
-      zh: "降低苯丙胺吸收"
-      ja: "アンフェタミン吸収を低下"
+      en: Decrease amphetamine absorption
+      zh: 降低苯丙胺吸收
+      ja: アンフェタミン吸収を低下
   - drug:
-      en: "Alkalinizing agents"
-      zh: "碱化剂"
-      ja: "アルカリ化剤"
-    severity: "moderate"
+      en: Alkalinizing agents
+      zh: 碱化剂
+      ja: アルカリ化剤
+    severity: moderate
     effect:
-      en: "Increase amphetamine absorption"
-      zh: "增加苯丙胺吸收"
-      ja: "アンフェタミン吸収を増加"
+      en: Increase amphetamine absorption
+      zh: 增加苯丙胺吸收
+      ja: アンフェタミン吸収を増加
   - drug:
-      en: "Antihypertensives"
-      zh: "降压药"
-      ja: "降圧薬"
-    severity: "moderate"
+      en: Antihypertensives
+      zh: 降压药
+      ja: 降圧薬
+    severity: moderate
     effect:
-      en: "May reduce effectiveness"
-      zh: "可能降低疗效"
-      ja: "効果を低下させる可能性"
-
+      en: May reduce effectiveness
+      zh: 可能降低疗效
+      ja: 効果を低下させる可能性
 blackBoxWarnings:
   en:
-    - "High potential for abuse and dependence"
-    - "CNS stimulants may cause sudden death and serious cardiovascular adverse events"
+    - High potential for abuse and dependence
+    - CNS stimulants may cause sudden death and serious cardiovascular adverse events
   zh:
-    - "高度滥用和依赖风险"
-    - "中枢神经兴奋剂可能导致猝死和严重心血管不良事件"
+    - 高度滥用和依赖风险
+    - 中枢神经兴奋剂可能导致猝死和严重心血管不良事件
   ja:
-    - "乱用および依存の可能性が高い"
-    - "CNS刺激薬は突然死および重篤な心血管有害事象を引き起こす可能性がある"
-
-pregnancyCategory: "C"
-
+    - 乱用および依存の可能性が高い
+    - CNS刺激薬は突然死および重篤な心血管有害事象を引き起こす可能性がある
+pregnancyCategory: C
 foodInteractions:
-  en: "Can be taken with or without food; avoid vitamin C and acidic foods/drinks close to dosing"
-  zh: "可随餐或空腹服用；服药前后避免维生素C和酸性食物/饮料"
-  ja: "食事の有無にかかわらず服用可能；服用前後はビタミンCや酸性の食品/飲料を避ける"
-
-# Practical Information
+  en: Can be taken with or without food; avoid vitamin C and acidic foods/drinks close to dosing
+  zh: 可随餐或空腹服用；服药前后避免维生素C和酸性食物/饮料
+  ja: 食事の有無にかかわらず服用可能；服用前後はビタミンCや酸性の食品/飲料を避ける
 typicalDosing:
   children:
-    startingDose: "30mg once daily in the morning"
-    maxDose: "70mg/day"
+    startingDose: 30mg once daily in the morning
+    maxDose: 70mg/day
     notes:
-      en: "Titrate in 10-20mg increments weekly"
-      zh: "每周按10-20mg递增调整"
-      ja: "毎週10〜20mg刻みで漸増"
+      en: Titrate in 10-20mg increments weekly
+      zh: 每周按10-20mg递增调整
+      ja: 毎週10〜20mg刻みで漸増
   adults:
-    startingDose: "30mg once daily in the morning"
-    maxDose: "70mg/day"
+    startingDose: 30mg once daily in the morning
+    maxDose: 70mg/day
     notes:
-      en: "Same dosing as children"
-      zh: "与儿童剂量相同"
-      ja: "小児と同じ用量"
-
+      en: Same dosing as children
+      zh: 与儿童剂量相同
+      ja: 小児と同じ用量
 costEstimate:
   US:
-    brand: "$350-450/month"
-    generic: "$30-100/month (available since 2023)"
+    brand: $350-450/month
+    generic: $30-100/month (available since 2023)
   CN:
-    brand: "Not available"
-    generic: "Not available"
-
+    brand: Not available
+    generic: Not available
 storageRequirements:
-  en: "Room temperature (20-25°C), protect from light"
-  zh: "室温保存（20-25°C），避光"
-  ja: "室温（20-25°C）で保存、光を避ける"
-
-# Approval & Availability
+  en: Room temperature (20-25°C), protect from light
+  zh: 室温保存（20-25°C），避光
+  ja: 室温（20-25°C）で保存、光を避ける
 approvals:
-  - region: "US"
-    agency: "FDA"
+  - region: US
+    agency: FDA
     year: 2007
     approvedAges:
-      en: "6 years and older"
-      zh: "6岁及以上"
-      ja: "6歳以上"
+      en: 6 years and older
+      zh: 6岁及以上
+      ja: 6歳以上
     indications:
-      en: ["ADHD", "Binge eating disorder"]
-      zh: ["注意缺陷多动障碍", "暴食症"]
-      ja: ["ADHD", "過食性障害"]
+      en:
+        - ADHD
+        - Binge eating disorder
+      zh:
+        - 注意缺陷多动障碍
+        - 暴食症
+      ja:
+        - ADHD
+        - 過食性障害
     available: true
     notes:
-      en: "Generic available since August 2023"
-      zh: "2023年8月起有仿制药"
-      ja: "2023年8月以降ジェネリックが利用可能"
-
-  - region: "CN"
-    agency: "NMPA"
-    year: null
+      en: Generic available since August 2023
+      zh: 2023年8月起有仿制药
+      ja: 2023年8月以降ジェネリックが利用可能
+  - region: CN
+    agency: NMPA
+    year:
     approvedAges:
       en: ""
       zh: ""
@@ -383,393 +371,600 @@ approvals:
       ja: []
     available: false
     notes:
-      en: "Not approved in China"
-      zh: "中国未批准"
-      ja: "中国では未承認"
-
-  - region: "EU"
-    agency: "EMA"
+      en: Not approved in China
+      zh: 中国未批准
+      ja: 中国では未承認
+  - region: EU
+    agency: EMA
     year: 2013
     approvedAges:
-      en: "6 years and older (children); adults in some countries"
-      zh: "6岁及以上（儿童）；部分国家适用于成人"
-      ja: "6歳以上（小児）；一部の国では成人も"
+      en: 6 years and older (children); adults in some countries
+      zh: 6岁及以上（儿童）；部分国家适用于成人
+      ja: 6歳以上（小児）；一部の国では成人も
     indications:
-      en: ["ADHD"]
-      zh: ["注意缺陷多动障碍"]
-      ja: ["ADHD"]
+      en:
+        - ADHD
+      zh:
+        - 注意缺陷多动障碍
+      ja:
+        - ADHD
     available: true
     notes:
-      en: "Adult approval varies by EU member state (UK, Denmark, Sweden approved for adults)"
-      zh: "成人适应症因欧盟成员国而异（英国、丹麦、瑞典已批准成人使用）"
-      ja: "成人への承認はEU加盟国によって異なる（英国、デンマーク、スウェーデンは成人に承認）"
-
-  - region: "JP"
-    agency: "PMDA"
+      en: Adult approval varies by EU member state (UK, Denmark, Sweden approved for adults)
+      zh: 成人适应症因欧盟成员国而异（英国、丹麦、瑞典已批准成人使用）
+      ja: 成人への承認はEU加盟国によって異なる（英国、デンマーク、スウェーデンは成人に承認）
+  - region: JP
+    agency: PMDA
     year: 2019
     approvedAges:
-      en: "6-17 years only"
-      zh: "仅限6-17岁"
-      ja: "6〜17歳のみ"
+      en: 6-17 years only
+      zh: 仅限6-17岁
+      ja: 6〜17歳のみ
     indications:
-      en: ["ADHD"]
-      zh: ["注意缺陷多动障碍"]
-      ja: ["ADHD"]
+      en:
+        - ADHD
+      zh:
+        - 注意缺陷多动障碍
+      ja:
+        - ADHD
     available: true
     notes:
-      en: "Children only; requires registration in ADHD Proper Distribution Management System; sales started December 2019"
-      zh: "仅限儿童；需在ADHD适当流通管理系统注册；2019年12月开始销售"
-      ja: "小児のみ；ADHD適正流通管理システムへの登録が必要；2019年12月より販売開始"
-
-  - region: "UK"
-    agency: "MHRA"
+      en: Children only; requires registration in ADHD Proper Distribution Management System; sales started December 2019
+      zh: 仅限儿童；需在ADHD适当流通管理系统注册；2019年12月开始销售
+      ja: 小児のみ；ADHD適正流通管理システムへの登録が必要；2019年12月より販売開始
+  - region: UK
+    agency: MHRA
     year: 2013
     approvedAges:
-      en: "6 years and older (children and adults)"
-      zh: "6岁及以上（儿童和成人）"
-      ja: "6歳以上（小児および成人）"
+      en: 6 years and older (children and adults)
+      zh: 6岁及以上（儿童和成人）
+      ja: 6歳以上（小児および成人）
     indications:
-      en: ["ADHD"]
-      zh: ["注意缺陷多动障碍"]
-      ja: ["ADHD"]
+      en:
+        - ADHD
+      zh:
+        - 注意缺陷多动障碍
+      ja:
+        - ADHD
     available: true
     notes:
-      en: "Elvanse Adult approved for adult ADHD"
-      zh: "Elvanse Adult已获批用于成人ADHD"
-      ja: "Elvanse Adultが成人ADHDに承認"
-
-  - region: "AU"
-    agency: "TGA"
+      en: Elvanse Adult approved for adult ADHD
+      zh: Elvanse Adult已获批用于成人ADHD
+      ja: Elvanse Adultが成人ADHDに承認
+  - region: AU
+    agency: TGA
     year: 2014
     approvedAges:
-      en: "6 years and older"
-      zh: "6岁及以上"
-      ja: "6歳以上"
+      en: 6 years and older
+      zh: 6岁及以上
+      ja: 6歳以上
     indications:
-      en: ["ADHD"]
-      zh: ["注意缺陷多动障碍"]
-      ja: ["ADHD"]
+      en:
+        - ADHD
+      zh:
+        - 注意缺陷多动障碍
+      ja:
+        - ADHD
     available: true
     notes:
       en: ""
       zh: ""
       ja: ""
-
-  - region: "CA"
-    agency: "Health Canada"
+  - region: CA
+    agency: Health Canada
     year: 2010
     approvedAges:
-      en: "6 years and older"
-      zh: "6岁及以上"
-      ja: "6歳以上"
+      en: 6 years and older
+      zh: 6岁及以上
+      ja: 6歳以上
     indications:
-      en: ["ADHD"]
-      zh: ["注意缺陷多动障碍"]
-      ja: ["ADHD"]
+      en:
+        - ADHD
+      zh:
+        - 注意缺陷多动障碍
+      ja:
+        - ADHD
     available: true
     notes:
       en: ""
       zh: ""
       ja: ""
-
-# Special Considerations
 specialConsiderations:
   cardiacRisk:
-    en: "Screen for cardiac disease before treatment; avoid in patients with structural cardiac abnormalities"
-    zh: "治疗前筛查心脏疾病；有心脏结构异常者禁用"
-    ja: "治療前に心臓疾患のスクリーニングを行う；心臓構造異常のある患者には避ける"
+    en: Screen for cardiac disease before treatment; avoid in patients with structural cardiac abnormalities
+    zh: 治疗前筛查心脏疾病；有心脏结构异常者禁用
+    ja: 治療前に心臓疾患のスクリーニングを行う；心臓構造異常のある患者には避ける
   abuseRisk:
-    en: "Prodrug design reduces abuse potential compared to immediate-release amphetamines, but still Schedule II"
-    zh: "前药设计相比速释苯丙胺降低了滥用风险，但仍为二类管制药物"
-    ja: "プロドラッグ設計により即放性アンフェタミンと比べて乱用の可能性は低いが、依然としてスケジュールII"
+    en: Prodrug design reduces abuse potential compared to immediate-release amphetamines, but still Schedule II
+    zh: 前药设计相比速释苯丙胺降低了滥用风险，但仍为二类管制药物
+    ja: プロドラッグ設計により即放性アンフェタミンと比べて乱用の可能性は低いが、依然としてスケジュールII
   withdrawalNotes:
-    en: "Fatigue and depression may occur upon discontinuation; no severe physical withdrawal"
-    zh: "停药时可能出现疲劳和抑郁；无严重身体戒断症状"
-    ja: "中止時に疲労やうつが生じる可能性；重度の身体的離脱症状はない"
+    en: Fatigue and depression may occur upon discontinuation; no severe physical withdrawal
+    zh: 停药时可能出现疲劳和抑郁；无严重身体戒断症状
+    ja: 中止時に疲労やうつが生じる可能性；重度の身体的離脱症状はない
   monitoringRequired:
-    en: "Height, weight, blood pressure, heart rate, psychiatric symptoms"
-    zh: "身高、体重、血压、心率、精神症状"
-    ja: "身長、体重、血圧、心拍数、精神症状"
-
-# Travel Rules
+    en: Height, weight, blood pressure, heart rate, psychiatric symptoms
+    zh: 身高、体重、血压、心率、精神症状
+    ja: 身長、体重、血圧、心拍数、精神症状
 travelRules:
   generalAdvice:
-    en: "As an amphetamine-class stimulant, lisdexamfetamine faces strict international restrictions. Always check destination country requirements before traveling."
-    zh: "作为苯丙胺类兴奋剂，赖右苯丙胺在国际旅行中面临严格限制。旅行前务必确认目的地国家的要求。"
-    ja: "アンフェタミン系刺激薬として、リスデキサンフェタミンは国際的に厳しい制限があります。旅行前に目的地の国の要件を必ず確認してください。"
-
+    en: As an amphetamine-class stimulant, lisdexamfetamine faces strict international restrictions. Always check destination country requirements before traveling.
+    zh: 作为苯丙胺类兴奋剂，赖右苯丙胺在国际旅行中面临严格限制。旅行前务必确认目的地国家的要求。
+    ja: アンフェタミン系刺激薬として、リスデキサンフェタミンは国際的に厳しい制限があります。旅行前に目的地の国の要件を必ず確認してください。
   requiredDocumentation:
-    - type: "prescription"
+    - type: prescription
       typeLabel:
-        en: "Valid prescription"
-        zh: "有效处方"
-        ja: "有効な処方箋"
+        en: Valid prescription
+        zh: 有效处方
+        ja: 有効な処方箋
       notes:
-        en: "Original prescription in original packaging"
-        zh: "原始处方和原包装"
-        ja: "元の処方箋と元のパッケージ"
-    - type: "medical_letter"
+        en: Original prescription in original packaging
+        zh: 原始处方和原包装
+        ja: 元の処方箋と元のパッケージ
+    - type: medical_letter
       typeLabel:
-        en: "Doctor's letter"
-        zh: "医生证明信"
-        ja: "医師の診断書"
+        en: Doctor's letter
+        zh: 医生证明信
+        ja: 医師の診断書
       notes:
-        en: "Stating medical necessity and dosage"
-        zh: "说明医疗必要性和剂量"
-        ja: "医学的必要性と用量を記載"
-
+        en: Stating medical necessity and dosage
+        zh: 说明医疗必要性和剂量
+        ja: 医学的必要性と用量を記載
   maxPersonalSupply:
-    default: "90 days"
+    default: 90 days
     byRegion:
-      JP: "30 days"
-      UK: "3 months"
-      AU: "3 months"
-
+      JP: 30 days
+      UK: 3 months
+      AU: 3 months
   crossBorderRules:
-    - fromRegion: "US"
-      toRegion: "JP"
-      status: "requires_permit"
+    - fromRegion: US
+      toRegion: JP
+      status: requires_permit
       statusLabel:
-        en: "Requires Import Permit"
-        zh: "需要进口许可"
-        ja: "輸入許可が必要"
+        en: Requires Import Permit
+        zh: 需要进口许可
+        ja: 輸入許可が必要
       requirements:
         en:
-          - "Apply to Japanese Narcotics Control Department 2+ weeks before travel"
-          - "Carry Yakkan Shoumei (import certificate)"
-          - "Maximum 30-day supply"
+          - Apply to Japanese Narcotics Control Department 2+ weeks before travel
+          - Carry Yakkan Shoumei (import certificate)
+          - Maximum 30-day supply
         zh:
-          - "旅行前2周以上向日本麻药取缔部门申请"
-          - "携带药监证明（Yakkan Shoumei）"
-          - "最多30天用量"
+          - 旅行前2周以上向日本麻药取缔部门申请
+          - 携带药监证明（Yakkan Shoumei）
+          - 最多30天用量
         ja:
-          - "旅行の2週間以上前に麻薬取締部への申請が必要"
-          - "薬監証明の携帯"
-          - "最大30日分"
-      maxSupply: "30 days"
+          - 旅行の2週間以上前に麻薬取締部への申請が必要
+          - 薬監証明の携帯
+          - 最大30日分
+      maxSupply: 30 days
       notes:
-        en: "Lisdexamfetamine requires a Yakkan Shoumei import permit for Japan. Apply through the Japanese embassy or directly to the Narcotics Control Department."
-        zh: "赖右苯丙胺进入日本需要药监证明。通过日本大使馆或直接向麻药取缔部门申请。"
-        ja: "リスデキサンフェタミンを日本に持ち込むには薬監証明が必要です。日本大使館または麻薬取締部に直接申請してください。"
+        en: Lisdexamfetamine requires a Yakkan Shoumei import permit for Japan. Apply through the Japanese embassy or directly to the Narcotics Control Department.
+        zh: 赖右苯丙胺进入日本需要药监证明。通过日本大使馆或直接向麻药取缔部门申请。
+        ja: リスデキサンフェタミンを日本に持ち込むには薬監証明が必要です。日本大使館または麻薬取締部に直接申請してください。
       sources:
-        - "https://www.ncd.mhlw.go.jp/en/application.html"
-
-    - fromRegion: "US"
-      toRegion: "CN"
-      status: "prohibited"
+        - https://www.ncd.mhlw.go.jp/en/application.html
+    - fromRegion: US
+      toRegion: CN
+      status: prohibited
       statusLabel:
-        en: "Prohibited"
-        zh: "禁止"
-        ja: "禁止"
+        en: Prohibited
+        zh: 禁止
+        ja: 禁止
       requirements:
         en: []
         zh: []
         ja: []
       notes:
-        en: "Amphetamines are strictly illegal in China. Do NOT attempt to bring this medication into China under any circumstances. Severe legal penalties apply."
-        zh: "苯丙胺类药物在中国属于严格违禁物品。任何情况下都不要试图将此药物带入中国。将面临严厉的法律处罚。"
-        ja: "アンフェタミン類は中国で厳格に違法です。いかなる状況下でもこの薬を中国に持ち込まないでください。厳しい法的処罰が科されます。"
+        en: Amphetamines are strictly illegal in China. Do NOT attempt to bring this medication into China under any circumstances. Severe legal penalties apply.
+        zh: 苯丙胺类药物在中国属于严格违禁物品。任何情况下都不要试图将此药物带入中国。将面临严厉的法律处罚。
+        ja: アンフェタミン類は中国で厳格に違法です。いかなる状況下でもこの薬を中国に持ち込まないでください。厳しい法的処罰が科されます。
       sources:
-        - "https://www.china-embassy.org/eng/"
-
-    - fromRegion: "US"
-      toRegion: "UK"
-      status: "allowed"
+        - https://www.china-embassy.org/eng/
+    - fromRegion: US
+      toRegion: UK
+      status: allowed
       statusLabel:
-        en: "Allowed with Documentation"
-        zh: "凭文件允许"
-        ja: "書類があれば許可"
+        en: Allowed with Documentation
+        zh: 凭文件允许
+        ja: 書類があれば許可
       requirements:
         en:
-          - "Carry prescription in original packaging"
-          - "Letter from prescribing doctor recommended"
+          - Carry prescription in original packaging
+          - Letter from prescribing doctor recommended
         zh:
-          - "携带原包装处方药"
-          - "建议携带开药医生的证明信"
+          - 携带原包装处方药
+          - 建议携带开药医生的证明信
         ja:
-          - "処方箋を元のパッケージで携帯"
-          - "処方医の手紙を推奨"
-      maxSupply: "3 months"
+          - 処方箋を元のパッケージで携帯
+          - 処方医の手紙を推奨
+      maxSupply: 3 months
       notes:
-        en: "UK allows personal import of controlled medicines with valid prescription."
-        zh: "英国允许携带个人使用的管制药物入境，需有效处方。"
-        ja: "英国は有効な処方箋があれば規制薬の個人輸入を許可しています。"
+        en: UK allows personal import of controlled medicines with valid prescription.
+        zh: 英国允许携带个人使用的管制药物入境，需有效处方。
+        ja: 英国は有効な処方箋があれば規制薬の個人輸入を許可しています。
       sources:
-        - "https://www.gov.uk/travelling-controlled-drugs"
-
-    - fromRegion: "US"
-      toRegion: "EU"
-      status: "restricted"
+        - https://www.gov.uk/travelling-controlled-drugs
+    - fromRegion: US
+      toRegion: EU
+      status: restricted
       statusLabel:
-        en: "Restricted - Varies by Country"
-        zh: "受限 - 因国家而异"
-        ja: "制限あり - 国によって異なる"
+        en: Restricted - Varies by Country
+        zh: 受限 - 因国家而异
+        ja: 制限あり - 国によって異なる
       requirements:
         en:
           - "Schengen countries: Carry Schengen certificate for controlled medicines"
           - "Non-Schengen: Check individual country requirements"
         zh:
-          - "申根国家：携带管制药品申根证明"
-          - "非申根国家：查询各国具体要求"
+          - 申根国家：携带管制药品申根证明
+          - 非申根国家：查询各国具体要求
         ja:
-          - "シェンゲン加盟国：規制薬のシェンゲン証明書を携帯"
-          - "非シェンゲン：各国の要件を確認"
-      maxSupply: "30 days"
+          - シェンゲン加盟国：規制薬のシェンゲン証明書を携帯
+          - 非シェンゲン：各国の要件を確認
+      maxSupply: 30 days
       notes:
-        en: "EU Schengen countries require a standardized certificate. Check with your destination country's embassy."
-        zh: "欧盟申根国家需要标准化证明。请向目的地国家大使馆查询。"
-        ja: "EUシェンゲン加盟国は標準化された証明書が必要です。目的地の大使館に確認してください。"
+        en: EU Schengen countries require a standardized certificate. Check with your destination country's embassy.
+        zh: 欧盟申根国家需要标准化证明。请向目的地国家大使馆查询。
+        ja: EUシェンゲン加盟国は標準化された証明書が必要です。目的地の大使館に確認してください。
       sources:
-        - "https://www.emcdda.europa.eu/"
-
-    - fromRegion: "US"
-      toRegion: "AU"
-      status: "restricted"
+        - https://www.emcdda.europa.eu/
+    - fromRegion: US
+      toRegion: AU
+      status: restricted
       statusLabel:
-        en: "Restricted - Declaration Required"
-        zh: "受限 - 需要申报"
-        ja: "制限あり - 申告が必要"
+        en: Restricted - Declaration Required
+        zh: 受限 - 需要申报
+        ja: 制限あり - 申告が必要
       requirements:
         en:
-          - "Declare medication at customs"
-          - "Carry prescription and doctor's letter"
-          - "Maximum 3 months supply"
+          - Declare medication at customs
+          - Carry prescription and doctor's letter
+          - Maximum 3 months supply
         zh:
-          - "在海关申报药物"
-          - "携带处方和医生证明信"
-          - "最多3个月用量"
+          - 在海关申报药物
+          - 携带处方和医生证明信
+          - 最多3个月用量
         ja:
-          - "税関で薬物を申告"
-          - "処方箋と医師の手紙を携帯"
-          - "最大3ヶ月分"
-      maxSupply: "3 months"
+          - 税関で薬物を申告
+          - 処方箋と医師の手紙を携帯
+          - 最大3ヶ月分
+      maxSupply: 3 months
       notes:
-        en: "Australia requires declaration of Schedule 8 medications. Bring supporting documentation."
-        zh: "澳大利亚要求申报Schedule 8药物。请携带证明文件。"
-        ja: "オーストラリアはSchedule 8の薬物の申告が必要です。証明書類を携帯してください。"
+        en: Australia requires declaration of Schedule 8 medications. Bring supporting documentation.
+        zh: 澳大利亚要求申报Schedule 8药物。请携带证明文件。
+        ja: オーストラリアはSchedule 8の薬物の申告が必要です。証明書類を携帯してください。
       sources:
-        - "https://www.tga.gov.au/entering-australia"
-
-    - fromRegion: "US"
-      toRegion: "CA"
-      status: "allowed"
+        - https://www.tga.gov.au/entering-australia
+    - fromRegion: US
+      toRegion: CA
+      status: allowed
       statusLabel:
-        en: "Allowed with Prescription"
-        zh: "凭处方允许"
-        ja: "処方箋があれば許可"
+        en: Allowed with Prescription
+        zh: 凭处方允许
+        ja: 処方箋があれば許可
       requirements:
         en:
-          - "Carry medication in original labeled container"
-          - "Bring copy of prescription"
+          - Carry medication in original labeled container
+          - Bring copy of prescription
         zh:
-          - "携带原标签容器中的药物"
-          - "携带处方副本"
+          - 携带原标签容器中的药物
+          - 携带处方副本
         ja:
-          - "元のラベル付き容器で薬を携帯"
-          - "処方箋のコピーを持参"
-      maxSupply: "90 days"
+          - 元のラベル付き容器で薬を携帯
+          - 処方箋のコピーを持参
+      maxSupply: 90 days
       notes:
-        en: "Canada-US border crossing is generally straightforward with proper documentation."
-        zh: "携带适当文件过加美边境通常较为简单。"
-        ja: "適切な書類があれば、カナダ-米国国境の通過は一般的に簡単です。"
+        en: Canada-US border crossing is generally straightforward with proper documentation.
+        zh: 携带适当文件过加美边境通常较为简单。
+        ja: 適切な書類があれば、カナダ-米国国境の通過は一般的に簡単です。
       sources:
-        - "https://www.cbsa-asfc.gc.ca/"
-
-# RxNorm Data (from NLM RxNorm/RxNav)
-# Drug name normalization and relationship mapping
+        - https://www.cbsa-asfc.gc.ca/
 rxnormData:
-  # Primary ingredient-level RxCUI
-  ingredientRxcui: "608139"
-  ingredientName: "lisdexamfetamine"
-
-  # RxCUI mappings at different term type levels
+  ingredientRxcui: "700810"
+  ingredientName: lisdexamfetamine
   rxcuiMappings:
-    - rxcui: "608139"
-      name: "lisdexamfetamine"
-      tty: "IN"
-      description: "Base ingredient"
-    - rxcui: "608134"
-      name: "lisdexamfetamine dimesylate"
-      tty: "PIN"
-      description: "Precise ingredient (salt form)"
-    - rxcui: "884527"
-      name: "lisdexamfetamine dimesylate Oral Capsule"
-      tty: "SCDF"
-      description: "Ingredient + dose form"
-    - rxcui: "1860485"
-      name: "lisdexamfetamine dimesylate Chewable Tablet"
-      tty: "SCDF"
-      description: "Ingredient + dose form"
-
-  # Brand name to RxCUI mappings
+    - rxcui: "700810"
+      name: lisdexamfetamine
+      tty: IN
+      description: Base ingredient
+    - rxcui: "2726049"
+      name: Arynta
+      tty: BN
+      description: Brand name
+    - rxcui: "711043"
+      name: Vyvanse
+      tty: BN
+      description: Brand name
+    - rxcui: "673579"
+      name: lisdexamfetamine dimesylate
+      tty: PIN
+      description: Precise ingredient (includes salt form)
+    - rxcui: "1593858"
+      name: lisdexamfetamine dimesylate 10 MG Oral Capsule [Vyvanse]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1871459"
+      name: lisdexamfetamine dimesylate 40 MG Chewable Tablet [Vyvanse]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1871461"
+      name: lisdexamfetamine dimesylate 30 MG Chewable Tablet [Vyvanse]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1871463"
+      name: lisdexamfetamine dimesylate 20 MG Chewable Tablet [Vyvanse]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1871465"
+      name: lisdexamfetamine dimesylate 10 MG Chewable Tablet [Vyvanse]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1871467"
+      name: lisdexamfetamine dimesylate 60 MG Chewable Tablet [Vyvanse]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1871469"
+      name: lisdexamfetamine dimesylate 50 MG Chewable Tablet [Vyvanse]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "2726055"
+      name: lisdexamfetamine dimesylate 10 MG/ML Oral Solution [Arynta]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "854832"
+      name: lisdexamfetamine dimesylate 20 MG Oral Capsule [Vyvanse]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "854836"
+      name: lisdexamfetamine dimesylate 30 MG Oral Capsule [Vyvanse]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "854840"
+      name: lisdexamfetamine dimesylate 40 MG Oral Capsule [Vyvanse]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "854844"
+      name: lisdexamfetamine dimesylate 70 MG Oral Capsule [Vyvanse]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "854848"
+      name: lisdexamfetamine dimesylate 60 MG Oral Capsule [Vyvanse]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "854852"
+      name: lisdexamfetamine dimesylate 50 MG Oral Capsule [Vyvanse]
+      tty: SBD
+      description: Branded drug (brand + strength + form)
+    - rxcui: "1871457"
+      name: lisdexamfetamine Chewable Tablet [Vyvanse]
+      tty: SBDF
+      description: Branded ingredient + dose form
+    - rxcui: "2726053"
+      name: lisdexamfetamine Oral Solution [Arynta]
+      tty: SBDF
+      description: Branded ingredient + dose form
+    - rxcui: "705294"
+      name: lisdexamfetamine Oral Capsule [Vyvanse]
+      tty: SBDF
+      description: Branded ingredient + dose form
+    - rxcui: "1593856"
+      name: lisdexamfetamine dimesylate 10 MG Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1871456"
+      name: lisdexamfetamine dimesylate 40 MG Chewable Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1871460"
+      name: lisdexamfetamine dimesylate 30 MG Chewable Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1871462"
+      name: lisdexamfetamine dimesylate 20 MG Chewable Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1871464"
+      name: lisdexamfetamine dimesylate 10 MG Chewable Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1871466"
+      name: lisdexamfetamine dimesylate 60 MG Chewable Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1871468"
+      name: lisdexamfetamine dimesylate 50 MG Chewable Tablet
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "2726048"
+      name: lisdexamfetamine dimesylate 10 MG/ML Oral Solution
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "854830"
+      name: lisdexamfetamine dimesylate 20 MG Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "854834"
+      name: lisdexamfetamine dimesylate 30 MG Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "854838"
+      name: lisdexamfetamine dimesylate 40 MG Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "854842"
+      name: lisdexamfetamine dimesylate 70 MG Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "854846"
+      name: lisdexamfetamine dimesylate 60 MG Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "854850"
+      name: lisdexamfetamine dimesylate 50 MG Oral Capsule
+      tty: SCD
+      description: Clinical drug (ingredient + strength + form)
+    - rxcui: "1871455"
+      name: lisdexamfetamine Chewable Tablet
+      tty: SCDF
+      description: Ingredient + dose form
+    - rxcui: "2726045"
+      name: lisdexamfetamine Oral Solution
+      tty: SCDF
+      description: Ingredient + dose form
+    - rxcui: "700812"
+      name: lisdexamfetamine Oral Capsule
+      tty: SCDF
+      description: Ingredient + dose form
   brandMappings:
-    - brandName: "Vyvanse"
-      rxcui: "608142"
-      manufacturer: "Shire/Takeda"
-      region: "US"
-    - brandName: "Elvanse"
-      rxcui: "608142"
-      manufacturer: "Shire/Takeda"
-      region: "EU"
-    - brandName: "ビバンセ"
-      rxcui: "608142"
-      manufacturer: "Shionogi/Takeda"
-      region: "JP"
-
-  # Drug synonyms and alternative names
+    - brandName: Arynta
+      rxcui: "2726049"
+      region: US
+    - brandName: Vyvanse
+      rxcui: "711043"
+      region: US
   synonyms:
-    - name: "lisdexamfetamine"
-      type: "generic"
-      source: "RxNorm"
-    - name: "lisdexamfetamine dimesylate"
-      type: "chemical"
-      source: "RxNorm"
-    - name: "LDX"
-      type: "abbreviation"
-      source: "Clinical"
-    - name: "Vyvanse"
-      type: "brand"
-      source: "RxNorm"
-    - name: "Elvanse"
-      type: "brand"
-      source: "EU"
-    - name: "赖右苯丙胺"
-      type: "generic"
-      source: "Chinese"
-    - name: "リスデキサンフェタミン"
-      type: "generic"
-      source: "Japanese"
-    - name: "ビバンセ"
-      type: "brand"
-      source: "Japanese"
-
-  # Related drugs (same ingredient family)
+    - name: lisdexamfetamine dimesylate
+      type: chemical
+      source: RxNorm
+    - name: Arynta
+      type: brand
+      source: RxNorm
+    - name: Vyvanse
+      type: brand
+      source: RxNorm
+    - name: lisdexamfetamine
+      type: generic
+      source: RxNorm
   relatedDrugs:
-    - rxcui: "884527"
-      name: "lisdexamfetamine dimesylate Oral Capsule"
-      tty: "SCDF"
-      relationship: "drug_form"
-    - rxcui: "1860485"
-      name: "lisdexamfetamine dimesylate Chewable Tablet"
-      tty: "SCDF"
-      relationship: "drug_form"
-    - rxcui: "725"
-      name: "dextroamphetamine"
-      tty: "IN"
-      relationship: "active_metabolite"
-
-  lastUpdated: "2025-12-04"
-
-# Metadata
+    - rxcui: "1593856"
+      name: lisdexamfetamine dimesylate 10 MG Oral Capsule
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1871456"
+      name: lisdexamfetamine dimesylate 40 MG Chewable Tablet
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1871460"
+      name: lisdexamfetamine dimesylate 30 MG Chewable Tablet
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1871462"
+      name: lisdexamfetamine dimesylate 20 MG Chewable Tablet
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1871464"
+      name: lisdexamfetamine dimesylate 10 MG Chewable Tablet
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1871466"
+      name: lisdexamfetamine dimesylate 60 MG Chewable Tablet
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1871468"
+      name: lisdexamfetamine dimesylate 50 MG Chewable Tablet
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "2726048"
+      name: lisdexamfetamine dimesylate 10 MG/ML Oral Solution
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "854830"
+      name: lisdexamfetamine dimesylate 20 MG Oral Capsule
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "854834"
+      name: lisdexamfetamine dimesylate 30 MG Oral Capsule
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "854838"
+      name: lisdexamfetamine dimesylate 40 MG Oral Capsule
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "854842"
+      name: lisdexamfetamine dimesylate 70 MG Oral Capsule
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "854846"
+      name: lisdexamfetamine dimesylate 60 MG Oral Capsule
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "854850"
+      name: lisdexamfetamine dimesylate 50 MG Oral Capsule
+      tty: SCD
+      relationship: clinical_drug
+    - rxcui: "1593858"
+      name: lisdexamfetamine dimesylate 10 MG Oral Capsule [Vyvanse]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "1871459"
+      name: lisdexamfetamine dimesylate 40 MG Chewable Tablet [Vyvanse]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "1871461"
+      name: lisdexamfetamine dimesylate 30 MG Chewable Tablet [Vyvanse]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "1871463"
+      name: lisdexamfetamine dimesylate 20 MG Chewable Tablet [Vyvanse]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "1871465"
+      name: lisdexamfetamine dimesylate 10 MG Chewable Tablet [Vyvanse]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "1871467"
+      name: lisdexamfetamine dimesylate 60 MG Chewable Tablet [Vyvanse]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "1871469"
+      name: lisdexamfetamine dimesylate 50 MG Chewable Tablet [Vyvanse]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "2726055"
+      name: lisdexamfetamine dimesylate 10 MG/ML Oral Solution [Arynta]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "854832"
+      name: lisdexamfetamine dimesylate 20 MG Oral Capsule [Vyvanse]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "854836"
+      name: lisdexamfetamine dimesylate 30 MG Oral Capsule [Vyvanse]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "854840"
+      name: lisdexamfetamine dimesylate 40 MG Oral Capsule [Vyvanse]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "854844"
+      name: lisdexamfetamine dimesylate 70 MG Oral Capsule [Vyvanse]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "854848"
+      name: lisdexamfetamine dimesylate 60 MG Oral Capsule [Vyvanse]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "854852"
+      name: lisdexamfetamine dimesylate 50 MG Oral Capsule [Vyvanse]
+      tty: SBD
+      relationship: branded_drug
+    - rxcui: "1871455"
+      name: lisdexamfetamine Chewable Tablet
+      tty: SCDF
+      relationship: drug_form
+    - rxcui: "2726045"
+      name: lisdexamfetamine Oral Solution
+      tty: SCDF
+      relationship: drug_form
+  lastUpdated: 2025-12-04
 lastUpdated: 2025-12-04
-
 sources:
-  - "https://pharmacyportal.eu/elvanse-europe/"
-  - "https://en.wikipedia.org/wiki/Lisdexamfetamine"
-  - "https://h-navi.jp/column/article/35027521"
-  - "https://www.additudemag.com/adhd-medications-list-chart-stimulants-nonstimulants/"
-
+  - https://pharmacyportal.eu/elvanse-europe/
+  - https://en.wikipedia.org/wiki/Lisdexamfetamine
+  - https://h-navi.jp/column/article/35027521
+  - https://www.additudemag.com/adhd-medications-list-chart-stimulants-nonstimulants/
 notes:
-  en: "Prodrug design provides smoother, longer-lasting effect with lower abuse potential than traditional amphetamines. Not available in China. Japan only approves for children (6-17). Generic became available in US in 2023."
-  zh: "前药设计比传统苯丙胺类药物提供更平稳、更持久的效果，滥用风险更低。中国不可用。日本仅批准用于儿童（6-17岁）。2023年美国开始有仿制药。"
-  ja: "プロドラッグ設計により、従来のアンフェタミンよりも滑らかで長時間持続する効果を提供し、乱用の可能性が低い。中国では利用不可。日本では小児（6〜17歳）のみ承認。2023年に米国でジェネリックが利用可能に。"
+  en: Prodrug design provides smoother, longer-lasting effect with lower abuse potential than traditional amphetamines. Not available in China. Japan only approves for children (6-17). Generic became available in US in 2023.
+  zh: 前药设计比传统苯丙胺类药物提供更平稳、更持久的效果，滥用风险更低。中国不可用。日本仅批准用于儿童（6-17岁）。2023年美国开始有仿制药。
+  ja: プロドラッグ設計により、従来のアンフェタミンよりも滑らかで長時間持続する効果を提供し、乱用の可能性が低い。中国では利用不可。日本では小児（6〜17歳）のみ承認。2023年に米国でジェネリックが利用可能に。

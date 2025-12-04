@@ -1,1 +1,4002 @@
-{}
+{
+  "methylphenidate": {
+    "ingredientRxcui": "6901",
+    "ingredientName": "methylphenidate",
+    "rxcuiMappings": [
+      {
+        "rxcui": "6901",
+        "name": "methylphenidate",
+        "tty": "IN",
+        "description": "Base ingredient"
+      },
+      {
+        "rxcui": "1312584",
+        "name": "Quillivant",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "1648175",
+        "name": "Aptensio",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "1727444",
+        "name": "QuilliChew",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "1926841",
+        "name": "Cotempla",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "2052821",
+        "name": "Relexxii",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "2119550",
+        "name": "Adhansia",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "2168839",
+        "name": "Jornay",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "224917",
+        "name": "Ritalin",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "261572",
+        "name": "Methylin",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "284704",
+        "name": "Concerta",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "594111",
+        "name": "Metadate",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "631252",
+        "name": "Daytrana",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "203188",
+        "name": "methylphenidate hydrochloride",
+        "tty": "PIN",
+        "description": "Precise ingredient (includes salt form)"
+      },
+      {
+        "rxcui": "1091135",
+        "name": "methylphenidate hydrochloride 2 MG/ML Oral Solution [Methylin]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1091139",
+        "name": "30/70 Release 24 HR methylphenidate hydrochloride 10 MG Extended Release Oral Capsule [Metadate]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1091143",
+        "name": "50/50 Release 24 HR methylphenidate hydrochloride 10 MG Extended Release Oral Capsule [Ritalin]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1091153",
+        "name": "methylphenidate hydrochloride 10 MG Chewable Tablet [Methylin]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1091157",
+        "name": "24 HR methylphenidate hydrochloride 18 MG Extended Release Oral Tablet [Concerta]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1091163",
+        "name": "30/70 Release 24 HR methylphenidate hydrochloride 20 MG Extended Release Oral Capsule [Metadate]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1091167",
+        "name": "50/50 Release 24 HR methylphenidate hydrochloride 20 MG Extended Release Oral Capsule [Ritalin]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1091172",
+        "name": "24 HR methylphenidate hydrochloride 27 MG Extended Release Oral Tablet [Concerta]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1091178",
+        "name": "30/70 Release 24 HR methylphenidate hydrochloride 30 MG Extended Release Oral Capsule [Metadate]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1091182",
+        "name": "50/50 Release 24 HR methylphenidate hydrochloride 30 MG Extended Release Oral Capsule [Ritalin]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1091187",
+        "name": "24 HR methylphenidate hydrochloride 36 MG Extended Release Oral Tablet [Concerta]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1091193",
+        "name": "30/70 Release 24 HR methylphenidate hydrochloride 40 MG Extended Release Oral Capsule [Metadate]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1091197",
+        "name": "50/50 Release 24 HR methylphenidate hydrochloride 40 MG Extended Release Oral Capsule [Ritalin]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1091204",
+        "name": "30/70 Release 24 HR methylphenidate hydrochloride 50 MG Extended Release Oral Capsule [Metadate]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1091212",
+        "name": "24 HR methylphenidate hydrochloride 54 MG Extended Release Oral Tablet [Concerta]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1091220",
+        "name": "30/70 Release 24 HR methylphenidate hydrochloride 60 MG Extended Release Oral Capsule [Metadate]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1091324",
+        "name": "methylphenidate hydrochloride 5 MG Chewable Tablet [Methylin]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1091343",
+        "name": "methylphenidate hydrochloride 1 MG/ML Oral Solution [Methylin]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1091379",
+        "name": "methylphenidate hydrochloride 10 MG Oral Tablet [Ritalin]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1091391",
+        "name": "methylphenidate hydrochloride 2.5 MG Chewable Tablet [Methylin]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1091395",
+        "name": "methylphenidate hydrochloride 20 MG Oral Tablet [Ritalin]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1091488",
+        "name": "8 HR methylphenidate hydrochloride 20 MG Extended Release Oral Tablet [Metadate]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1091500",
+        "name": "methylphenidate hydrochloride 5 MG Oral Tablet [Ritalin]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1312589",
+        "name": "24 HR methylphenidate hydrochloride 5 MG/ML Extended Release Suspension [Quillivant]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1648180",
+        "name": "40/60 Release 24 HR methylphenidate hydrochloride 10 MG Extended Release Oral Capsule [Aptensio]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1648185",
+        "name": "40/60 Release 24 HR methylphenidate hydrochloride 15 MG Extended Release Oral Capsule [Aptensio]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1648189",
+        "name": "40/60 Release 24 HR methylphenidate hydrochloride 20 MG Extended Release Oral Capsule [Aptensio]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1648192",
+        "name": "40/60 Release 24 HR methylphenidate hydrochloride 30 MG Extended Release Oral Capsule [Aptensio]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1648195",
+        "name": "40/60 Release 24 HR methylphenidate hydrochloride 40 MG Extended Release Oral Capsule [Aptensio]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1648198",
+        "name": "40/60 Release 24 HR methylphenidate hydrochloride 50 MG Extended Release Oral Capsule [Aptensio]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1648201",
+        "name": "40/60 Release 24 HR methylphenidate hydrochloride 60 MG Extended Release Oral Capsule [Aptensio]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1727450",
+        "name": "24 HR methylphenidate hydrochloride 20 MG Chewable Extended Release Oral Tablet [QuilliChew]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1734930",
+        "name": "24 HR methylphenidate hydrochloride 30 MG Chewable Extended Release Oral Tablet [QuilliChew]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1734953",
+        "name": "24 HR methylphenidate hydrochloride 40 MG Chewable Extended Release Oral Tablet [QuilliChew]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1926847",
+        "name": "methylphenidate 17.3 MG Disintegrating Oral Tablet [Cotempla]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1926851",
+        "name": "methylphenidate 25.9 MG Disintegrating Oral Tablet [Cotempla]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1926855",
+        "name": "methylphenidate 8.6 MG Disintegrating Oral Tablet [Cotempla]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2052826",
+        "name": "24 HR methylphenidate hydrochloride 72 MG Extended Release Oral Tablet [Relexxii]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2119565",
+        "name": "20/80 Release 24 HR methylphenidate hydrochloride 35 MG Extended Release Oral Capsule [Adhansia]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2168859",
+        "name": "Evening Dosing 24 HR methylphenidate hydrochloride 60 MG Extended Release Oral Capsule [Jornay]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2168863",
+        "name": "Evening Dosing 24 HR methylphenidate hydrochloride 80 MG Extended Release Oral Capsule [Jornay]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2168865",
+        "name": "Evening Dosing 24 HR methylphenidate hydrochloride 100 MG Extended Release Oral Capsule [Jornay]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2168867",
+        "name": "Evening Dosing 24 HR methylphenidate hydrochloride 20 MG Extended Release Oral Capsule [Jornay]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2168869",
+        "name": "Evening Dosing 24 HR methylphenidate hydrochloride 40 MG Extended Release Oral Capsule [Jornay]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2605943",
+        "name": "24 HR methylphenidate hydrochloride 45 MG Extended Release Oral Tablet [Relexxii]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2605946",
+        "name": "24 HR methylphenidate hydrochloride 63 MG Extended Release Oral Tablet [Relexxii]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2668496",
+        "name": "24 HR methylphenidate hydrochloride 18 MG Extended Release Oral Tablet [Relexxii]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2668499",
+        "name": "24 HR methylphenidate hydrochloride 27 MG Extended Release Oral Tablet [Relexxii]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2668502",
+        "name": "24 HR methylphenidate hydrochloride 36 MG Extended Release Oral Tablet [Relexxii]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2668505",
+        "name": "24 HR methylphenidate hydrochloride 54 MG Extended Release Oral Tablet [Relexxii]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "753437",
+        "name": "9 HR methylphenidate 1.11 MG/HR Transdermal System [Daytrana]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "753439",
+        "name": "9 HR methylphenidate 1.67 MG/HR Transdermal System [Daytrana]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "753442",
+        "name": "9 HR methylphenidate 2.22 MG/HR Transdermal System [Daytrana]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "753443",
+        "name": "9 HR methylphenidate 3.33 MG/HR Transdermal System [Daytrana]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1312586",
+        "name": "methylphenidate Extended Release Suspension [Quillivant]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "1648177",
+        "name": "methylphenidate Extended Release Oral Capsule [Aptensio]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "1805914",
+        "name": "methylphenidate Transdermal System [Daytrana]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "1926843",
+        "name": "methylphenidate Disintegrating Oral Tablet [Cotempla]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "2052823",
+        "name": "methylphenidate Extended Release Oral Tablet [Relexxii]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "2119552",
+        "name": "methylphenidate Extended Release Oral Capsule [Adhansia]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "2168841",
+        "name": "methylphenidate Extended Release Oral Capsule [Jornay]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "2270758",
+        "name": "methylphenidate Chewable Extended Release Oral Tablet [QuilliChew]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "368776",
+        "name": "methylphenidate Oral Tablet [Ritalin]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "370331",
+        "name": "methylphenidate Extended Release Oral Tablet [Concerta]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "542367",
+        "name": "methylphenidate Chewable Tablet [Methylin]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "543272",
+        "name": "methylphenidate Oral Solution [Methylin]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "608682",
+        "name": "methylphenidate Extended Release Oral Capsule [Ritalin]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "630810",
+        "name": "methylphenidate Extended Release Oral Capsule [Metadate]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "885414",
+        "name": "methylphenidate Extended Release Oral Tablet [Metadate]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "1091133",
+        "name": "methylphenidate hydrochloride 2 MG/ML Oral Solution",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1091145",
+        "name": "8 HR methylphenidate hydrochloride 10 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1091150",
+        "name": "methylphenidate hydrochloride 10 MG Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1091152",
+        "name": "methylphenidate hydrochloride 10 MG Chewable Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1091155",
+        "name": "24 HR methylphenidate hydrochloride 18 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1091170",
+        "name": "24 HR methylphenidate hydrochloride 27 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1091185",
+        "name": "24 HR methylphenidate hydrochloride 36 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1091210",
+        "name": "24 HR methylphenidate hydrochloride 54 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1091225",
+        "name": "8 HR methylphenidate hydrochloride 20 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1091322",
+        "name": "methylphenidate hydrochloride 5 MG Chewable Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1091341",
+        "name": "methylphenidate hydrochloride 1 MG/ML Oral Solution",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1091389",
+        "name": "methylphenidate hydrochloride 2.5 MG Chewable Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1091392",
+        "name": "methylphenidate hydrochloride 20 MG Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1091497",
+        "name": "methylphenidate hydrochloride 5 MG Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1091501",
+        "name": "methylphenidate hydrochloride 2.5 MG Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1312583",
+        "name": "24 HR methylphenidate hydrochloride 5 MG/ML Extended Release Suspension",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1648183",
+        "name": "40/60 Release 24 HR methylphenidate hydrochloride 15 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1727443",
+        "name": "24 HR methylphenidate hydrochloride 20 MG Chewable Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1734928",
+        "name": "24 HR methylphenidate hydrochloride 30 MG Chewable Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1734951",
+        "name": "24 HR methylphenidate hydrochloride 40 MG Chewable Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1806177",
+        "name": "50/50 Release 24 HR methylphenidate hydrochloride 20 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1806179",
+        "name": "50/50 Release 24 HR methylphenidate hydrochloride 30 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1806181",
+        "name": "30/70 Release 24 HR methylphenidate hydrochloride 10 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1806183",
+        "name": "50/50 Release 24 HR methylphenidate hydrochloride 40 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1806185",
+        "name": "50/50 Release 24 HR methylphenidate hydrochloride 60 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1806187",
+        "name": "30/70 Release 24 HR methylphenidate hydrochloride 20 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1806189",
+        "name": "30/70 Release 24 HR methylphenidate hydrochloride 30 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1806191",
+        "name": "30/70 Release 24 HR methylphenidate hydrochloride 40 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1806193",
+        "name": "30/70 Release 24 HR methylphenidate hydrochloride 50 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1806195",
+        "name": "50/50 Release 24 HR methylphenidate hydrochloride 10 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1806197",
+        "name": "30/70 Release 24 HR methylphenidate hydrochloride 60 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1806200",
+        "name": "40/60 Release 24 HR methylphenidate hydrochloride 10 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1806202",
+        "name": "40/60 Release 24 HR methylphenidate hydrochloride 20 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1806204",
+        "name": "40/60 Release 24 HR methylphenidate hydrochloride 50 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1806206",
+        "name": "40/60 Release 24 HR methylphenidate hydrochloride 30 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1806208",
+        "name": "40/60 Release 24 HR methylphenidate hydrochloride 60 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1806210",
+        "name": "40/60 Release 24 HR methylphenidate hydrochloride 40 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1926840",
+        "name": "methylphenidate 17.3 MG Disintegrating Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1926849",
+        "name": "methylphenidate 25.9 MG Disintegrating Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1926853",
+        "name": "methylphenidate 8.6 MG Disintegrating Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1995461",
+        "name": "24 HR methylphenidate hydrochloride 72 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2001564",
+        "name": "BX Rating 24 HR methylphenidate hydrochloride 18 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2001565",
+        "name": "BX Rating 24 HR methylphenidate hydrochloride 27 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2001566",
+        "name": "BX Rating 24 HR methylphenidate hydrochloride 36 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2001568",
+        "name": "BX Rating 24 HR methylphenidate hydrochloride 54 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2119563",
+        "name": "20/80 Release 24 HR methylphenidate hydrochloride 35 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2168857",
+        "name": "Evening Dosing 24 HR methylphenidate hydrochloride 60 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2168861",
+        "name": "Evening Dosing 24 HR methylphenidate hydrochloride 80 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2168864",
+        "name": "Evening Dosing 24 HR methylphenidate hydrochloride 100 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2168866",
+        "name": "Evening Dosing 24 HR methylphenidate hydrochloride 20 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2168868",
+        "name": "Evening Dosing 24 HR methylphenidate hydrochloride 40 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2605796",
+        "name": "24 HR methylphenidate hydrochloride 63 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2605798",
+        "name": "24 HR methylphenidate hydrochloride 45 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "753436",
+        "name": "9 HR methylphenidate 1.11 MG/HR Transdermal System",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "753438",
+        "name": "9 HR methylphenidate 1.67 MG/HR Transdermal System",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "753440",
+        "name": "9 HR methylphenidate 2.22 MG/HR Transdermal System",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "753441",
+        "name": "9 HR methylphenidate 3.33 MG/HR Transdermal System",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1312582",
+        "name": "methylphenidate Extended Release Suspension",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      },
+      {
+        "rxcui": "1805912",
+        "name": "methylphenidate Transdermal System",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      },
+      {
+        "rxcui": "1926839",
+        "name": "methylphenidate Disintegrating Oral Tablet",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      },
+      {
+        "rxcui": "2270756",
+        "name": "methylphenidate Chewable Extended Release Oral Tablet",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      },
+      {
+        "rxcui": "372861",
+        "name": "methylphenidate Oral Tablet",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      },
+      {
+        "rxcui": "372862",
+        "name": "methylphenidate Extended Release Oral Tablet",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      },
+      {
+        "rxcui": "374655",
+        "name": "methylphenidate Extended Release Oral Capsule",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      },
+      {
+        "rxcui": "476365",
+        "name": "methylphenidate Chewable Tablet",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      },
+      {
+        "rxcui": "476368",
+        "name": "methylphenidate Oral Solution",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      }
+    ],
+    "brandMappings": [
+      {
+        "brandName": "Quillivant",
+        "rxcui": "1312584",
+        "region": "US"
+      },
+      {
+        "brandName": "Aptensio",
+        "rxcui": "1648175",
+        "region": "US"
+      },
+      {
+        "brandName": "QuilliChew",
+        "rxcui": "1727444",
+        "region": "US"
+      },
+      {
+        "brandName": "Cotempla",
+        "rxcui": "1926841",
+        "region": "US"
+      },
+      {
+        "brandName": "Relexxii",
+        "rxcui": "2052821",
+        "region": "US"
+      },
+      {
+        "brandName": "Adhansia",
+        "rxcui": "2119550",
+        "region": "US"
+      },
+      {
+        "brandName": "Jornay",
+        "rxcui": "2168839",
+        "region": "US"
+      },
+      {
+        "brandName": "Ritalin",
+        "rxcui": "224917",
+        "region": "US"
+      },
+      {
+        "brandName": "Methylin",
+        "rxcui": "261572",
+        "region": "US"
+      },
+      {
+        "brandName": "Concerta",
+        "rxcui": "284704",
+        "region": "US"
+      },
+      {
+        "brandName": "Metadate",
+        "rxcui": "594111",
+        "region": "US"
+      },
+      {
+        "brandName": "Daytrana",
+        "rxcui": "631252",
+        "region": "US"
+      },
+      {
+        "brandName": "Ritalin LA",
+        "rxcui": "",
+        "region": "US"
+      },
+      {
+        "brandName": "Metadate CD",
+        "rxcui": "",
+        "region": "US"
+      },
+      {
+        "brandName": "Metadate ER",
+        "rxcui": "",
+        "region": "US"
+      },
+      {
+        "brandName": "Quillivant XR",
+        "rxcui": "1312584",
+        "region": "US"
+      },
+      {
+        "brandName": "Quillichew ER",
+        "rxcui": "",
+        "region": "US"
+      },
+      {
+        "brandName": "Jornay PM",
+        "rxcui": "",
+        "region": "US"
+      },
+      {
+        "brandName": "Aptensio XR",
+        "rxcui": "",
+        "region": "US"
+      },
+      {
+        "brandName": "Cotempla XR-ODT",
+        "rxcui": "",
+        "region": "US"
+      }
+    ],
+    "synonyms": [
+      {
+        "name": "methylphenidate hydrochloride",
+        "type": "chemical",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Quillivant",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Aptensio",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "QuilliChew",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Cotempla",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Relexxii",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Adhansia",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Jornay",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Ritalin",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Methylin",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Concerta",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Metadate",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Daytrana",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "methylphenidate",
+        "type": "generic",
+        "source": "RxNorm"
+      }
+    ],
+    "relatedDrugs": [
+      {
+        "rxcui": "1091133",
+        "name": "methylphenidate hydrochloride 2 MG/ML Oral Solution",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1091145",
+        "name": "8 HR methylphenidate hydrochloride 10 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1091150",
+        "name": "methylphenidate hydrochloride 10 MG Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1091152",
+        "name": "methylphenidate hydrochloride 10 MG Chewable Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1091155",
+        "name": "24 HR methylphenidate hydrochloride 18 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1091170",
+        "name": "24 HR methylphenidate hydrochloride 27 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1091185",
+        "name": "24 HR methylphenidate hydrochloride 36 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1091210",
+        "name": "24 HR methylphenidate hydrochloride 54 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1091225",
+        "name": "8 HR methylphenidate hydrochloride 20 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1091322",
+        "name": "methylphenidate hydrochloride 5 MG Chewable Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1091341",
+        "name": "methylphenidate hydrochloride 1 MG/ML Oral Solution",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1091389",
+        "name": "methylphenidate hydrochloride 2.5 MG Chewable Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1091392",
+        "name": "methylphenidate hydrochloride 20 MG Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1091497",
+        "name": "methylphenidate hydrochloride 5 MG Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1091501",
+        "name": "methylphenidate hydrochloride 2.5 MG Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1312583",
+        "name": "24 HR methylphenidate hydrochloride 5 MG/ML Extended Release Suspension",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1648183",
+        "name": "40/60 Release 24 HR methylphenidate hydrochloride 15 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1727443",
+        "name": "24 HR methylphenidate hydrochloride 20 MG Chewable Extended Release Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1734928",
+        "name": "24 HR methylphenidate hydrochloride 30 MG Chewable Extended Release Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1734951",
+        "name": "24 HR methylphenidate hydrochloride 40 MG Chewable Extended Release Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1091135",
+        "name": "methylphenidate hydrochloride 2 MG/ML Oral Solution [Methylin]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1091139",
+        "name": "30/70 Release 24 HR methylphenidate hydrochloride 10 MG Extended Release Oral Capsule [Metadate]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1091143",
+        "name": "50/50 Release 24 HR methylphenidate hydrochloride 10 MG Extended Release Oral Capsule [Ritalin]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1091153",
+        "name": "methylphenidate hydrochloride 10 MG Chewable Tablet [Methylin]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1091157",
+        "name": "24 HR methylphenidate hydrochloride 18 MG Extended Release Oral Tablet [Concerta]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1091163",
+        "name": "30/70 Release 24 HR methylphenidate hydrochloride 20 MG Extended Release Oral Capsule [Metadate]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1091167",
+        "name": "50/50 Release 24 HR methylphenidate hydrochloride 20 MG Extended Release Oral Capsule [Ritalin]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1091172",
+        "name": "24 HR methylphenidate hydrochloride 27 MG Extended Release Oral Tablet [Concerta]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1091178",
+        "name": "30/70 Release 24 HR methylphenidate hydrochloride 30 MG Extended Release Oral Capsule [Metadate]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1091182",
+        "name": "50/50 Release 24 HR methylphenidate hydrochloride 30 MG Extended Release Oral Capsule [Ritalin]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1091187",
+        "name": "24 HR methylphenidate hydrochloride 36 MG Extended Release Oral Tablet [Concerta]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1091193",
+        "name": "30/70 Release 24 HR methylphenidate hydrochloride 40 MG Extended Release Oral Capsule [Metadate]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1091197",
+        "name": "50/50 Release 24 HR methylphenidate hydrochloride 40 MG Extended Release Oral Capsule [Ritalin]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1091204",
+        "name": "30/70 Release 24 HR methylphenidate hydrochloride 50 MG Extended Release Oral Capsule [Metadate]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1091212",
+        "name": "24 HR methylphenidate hydrochloride 54 MG Extended Release Oral Tablet [Concerta]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1091220",
+        "name": "30/70 Release 24 HR methylphenidate hydrochloride 60 MG Extended Release Oral Capsule [Metadate]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1091324",
+        "name": "methylphenidate hydrochloride 5 MG Chewable Tablet [Methylin]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1091343",
+        "name": "methylphenidate hydrochloride 1 MG/ML Oral Solution [Methylin]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1091379",
+        "name": "methylphenidate hydrochloride 10 MG Oral Tablet [Ritalin]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1091391",
+        "name": "methylphenidate hydrochloride 2.5 MG Chewable Tablet [Methylin]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1312582",
+        "name": "methylphenidate Extended Release Suspension",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      },
+      {
+        "rxcui": "1805912",
+        "name": "methylphenidate Transdermal System",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      },
+      {
+        "rxcui": "1926839",
+        "name": "methylphenidate Disintegrating Oral Tablet",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      },
+      {
+        "rxcui": "2270756",
+        "name": "methylphenidate Chewable Extended Release Oral Tablet",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      },
+      {
+        "rxcui": "372861",
+        "name": "methylphenidate Oral Tablet",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      },
+      {
+        "rxcui": "372862",
+        "name": "methylphenidate Extended Release Oral Tablet",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      },
+      {
+        "rxcui": "374655",
+        "name": "methylphenidate Extended Release Oral Capsule",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      },
+      {
+        "rxcui": "476365",
+        "name": "methylphenidate Chewable Tablet",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      },
+      {
+        "rxcui": "476368",
+        "name": "methylphenidate Oral Solution",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      }
+    ],
+    "lastUpdated": "2025-12-04"
+  },
+  "amphetamine-mixed-salts": {
+    "ingredientRxcui": "725",
+    "ingredientName": "amphetamine",
+    "rxcuiMappings": [
+      {
+        "rxcui": "725",
+        "name": "amphetamine",
+        "tty": "IN",
+        "description": "Base ingredient"
+      },
+      {
+        "rxcui": "1600688",
+        "name": "Evekeo",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "1720587",
+        "name": "Dyanavel",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "1739804",
+        "name": "Adzenys",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "1927611",
+        "name": "Mydayis",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "84815",
+        "name": "Adderall",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "221057",
+        "name": "amphetamine aspartate",
+        "tty": "PIN",
+        "description": "Precise ingredient (includes salt form)"
+      },
+      {
+        "rxcui": "405812",
+        "name": "amphetamine aspartate monohydrate",
+        "tty": "PIN",
+        "description": "Precise ingredient (includes salt form)"
+      },
+      {
+        "rxcui": "540810",
+        "name": "amphetamine saccharate",
+        "tty": "PIN",
+        "description": "Precise ingredient (includes salt form)"
+      },
+      {
+        "rxcui": "81952",
+        "name": "amphetamine sulfate",
+        "tty": "PIN",
+        "description": "Precise ingredient (includes salt form)"
+      },
+      {
+        "rxcui": "1009147",
+        "name": "amphetamine aspartate 1.875 MG / amphetamine sulfate 1.875 MG / dextroamphetamine saccharate 1.875 MG / dextroamphetamine sulfate 1.875 MG Oral Tablet [Adderall]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1600698",
+        "name": "amphetamine sulfate 10 MG Oral Tablet [Evekeo]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1600700",
+        "name": "amphetamine sulfate 5 MG Oral Tablet [Evekeo]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1720592",
+        "name": "24 HR amphetamine 2.5 MG/ML Extended Release Suspension [Dyanavel]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1739809",
+        "name": "24 HR amphetamine 12.5 MG Extended Release Oral Tablet [Adzenys]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1739815",
+        "name": "24 HR amphetamine 15.7 MG Extended Release Oral Tablet [Adzenys]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1739821",
+        "name": "24 HR amphetamine 18.8 MG Extended Release Oral Tablet [Adzenys]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1739827",
+        "name": "24 HR amphetamine 3.1 MG Extended Release Oral Tablet [Adzenys]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1739833",
+        "name": "24 HR amphetamine 6.3 MG Extended Release Oral Tablet [Adzenys]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1739839",
+        "name": "24 HR amphetamine 9.4 MG Extended Release Oral Tablet [Adzenys]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1927616",
+        "name": "3-Bead 24 HR amphetamine aspartate 12.5 MG / amphetamine sulfate 12.5 MG / dextroamphetamine saccharate 12.5 MG / dextroamphetamine sulfate 12.5 MG Extended Release Oral Capsule [Mydayis]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1927619",
+        "name": "3-Bead 24 HR amphetamine aspartate 6.25 MG / amphetamine sulfate 6.25 MG / dextroamphetamine saccharate 6.25 MG / dextroamphetamine sulfate 6.25 MG Extended Release Oral Capsule [Mydayis]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1927632",
+        "name": "3-Bead 24 HR amphetamine aspartate 3.125 MG / amphetamine sulfate 3.125 MG / dextroamphetamine saccharate 3.125 MG / dextroamphetamine sulfate 3.125 MG Extended Release Oral Capsule [Mydayis]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1927639",
+        "name": "3-Bead 24 HR amphetamine aspartate 9.375 MG / amphetamine sulfate 9.375 MG / dextroamphetamine saccharate 9.375 MG / dextroamphetamine sulfate 9.375 MG Extended Release Oral Capsule [Mydayis]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2175796",
+        "name": "amphetamine sulfate 10 MG Disintegrating Oral Tablet [Evekeo]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2175891",
+        "name": "amphetamine sulfate 15 MG Disintegrating Oral Tablet [Evekeo]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2175893",
+        "name": "amphetamine sulfate 20 MG Disintegrating Oral Tablet [Evekeo]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2175894",
+        "name": "amphetamine sulfate 5 MG Disintegrating Oral Tablet [Evekeo]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2585461",
+        "name": "24 HR amphetamine 10 MG Extended Release Oral Tablet [Dyanavel]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2585465",
+        "name": "24 HR amphetamine 15 MG Extended Release Oral Tablet [Dyanavel]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2585471",
+        "name": "24 HR amphetamine 20 MG Extended Release Oral Tablet [Dyanavel]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2585476",
+        "name": "24 HR amphetamine 5 MG Extended Release Oral Tablet [Dyanavel]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "541365",
+        "name": "amphetamine aspartate 7.5 MG / amphetamine sulfate 7.5 MG / dextroamphetamine saccharate 7.5 MG / dextroamphetamine sulfate 7.5 MG Oral Tablet [Adderall]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "541879",
+        "name": "amphetamine aspartate 1.25 MG / amphetamine sulfate 1.25 MG / dextroamphetamine saccharate 1.25 MG / dextroamphetamine sulfate 1.25 MG Oral Tablet [Adderall]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "541894",
+        "name": "amphetamine aspartate 2.5 MG / amphetamine sulfate 2.5 MG / dextroamphetamine saccharate 2.5 MG / dextroamphetamine sulfate 2.5 MG Oral Tablet [Adderall]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "577960",
+        "name": "amphetamine aspartate 3.75 MG / amphetamine sulfate 3.75 MG / dextroamphetamine saccharate 3.75 MG / dextroamphetamine sulfate 3.75 MG Oral Tablet [Adderall]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "577962",
+        "name": "amphetamine aspartate 5 MG / amphetamine sulfate 5 MG / dextroamphetamine saccharate 5 MG / dextroamphetamine sulfate 5 MG Oral Tablet [Adderall]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "687045",
+        "name": "amphetamine aspartate 3.125 MG / amphetamine sulfate 3.125 MG / dextroamphetamine saccharate 3.125 MG / dextroamphetamine sulfate 3.125 MG Oral Tablet [Adderall]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "861222",
+        "name": "24 HR amphetamine aspartate 2.5 MG / amphetamine sulfate 2.5 MG / dextroamphetamine saccharate 2.5 MG / dextroamphetamine sulfate 2.5 MG Extended Release Oral Capsule [Adderall]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "861224",
+        "name": "24 HR amphetamine aspartate 3.75 MG / amphetamine sulfate 3.75 MG / dextroamphetamine saccharate 3.75 MG / dextroamphetamine sulfate 3.75 MG Extended Release Oral Capsule [Adderall]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "861226",
+        "name": "24 HR amphetamine aspartate 5 MG / amphetamine sulfate 5 MG / dextroamphetamine saccharate 5 MG / dextroamphetamine sulfate 5 MG Extended Release Oral Capsule [Adderall]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "861228",
+        "name": "24 HR amphetamine aspartate 6.25 MG / amphetamine sulfate 6.25 MG / dextroamphetamine saccharate 6.25 MG / dextroamphetamine sulfate 6.25 MG Extended Release Oral Capsule [Adderall]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "861233",
+        "name": "24 HR amphetamine aspartate 7.5 MG / amphetamine sulfate 7.5 MG / dextroamphetamine saccharate 7.5 MG / dextroamphetamine sulfate 7.5 MG Extended Release Oral Capsule [Adderall]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "861238",
+        "name": "24 HR amphetamine aspartate 1.25 MG / amphetamine sulfate 1.25 MG / dextroamphetamine saccharate 1.25 MG / dextroamphetamine sulfate 1.25 MG Extended Release Oral Capsule [Adderall]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1600697",
+        "name": "amphetamine Oral Tablet [Evekeo]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "1720589",
+        "name": "amphetamine Extended Release Suspension [Dyanavel]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "1739806",
+        "name": "amphetamine Extended Release Oral Tablet [Adzenys]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "1927613",
+        "name": "amphetamine / dextroamphetamine Extended Release Oral Capsule [Mydayis]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "2175794",
+        "name": "amphetamine Disintegrating Oral Tablet [Evekeo]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "2585458",
+        "name": "amphetamine Extended Release Oral Tablet [Dyanavel]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "540479",
+        "name": "amphetamine / dextroamphetamine Extended Release Oral Capsule [Adderall]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "577959",
+        "name": "amphetamine / dextroamphetamine Oral Tablet [Adderall]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "1009145",
+        "name": "amphetamine aspartate 1.875 MG / amphetamine sulfate 1.875 MG / dextroamphetamine saccharate 1.875 MG / dextroamphetamine sulfate 1.875 MG Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1600695",
+        "name": "amphetamine sulfate 10 MG Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1720586",
+        "name": "24 HR amphetamine 2.5 MG/ML Extended Release Suspension",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1739803",
+        "name": "24 HR amphetamine 12.5 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1739813",
+        "name": "24 HR amphetamine 15.7 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1739819",
+        "name": "24 HR amphetamine 18.8 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1739825",
+        "name": "24 HR amphetamine 3.1 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1739831",
+        "name": "24 HR amphetamine 6.3 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1739837",
+        "name": "24 HR amphetamine 9.4 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1927610",
+        "name": "3-Bead 24 HR amphetamine aspartate 12.5 MG / amphetamine sulfate 12.5 MG / dextroamphetamine saccharate 12.5 MG / dextroamphetamine sulfate 12.5 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1927617",
+        "name": "3-Bead 24 HR amphetamine aspartate 6.25 MG / amphetamine sulfate 6.25 MG / dextroamphetamine saccharate 6.25 MG / dextroamphetamine sulfate 6.25 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1927630",
+        "name": "3-Bead 24 HR amphetamine aspartate 3.125 MG / amphetamine sulfate 3.125 MG / dextroamphetamine saccharate 3.125 MG / dextroamphetamine sulfate 3.125 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1927637",
+        "name": "3-Bead 24 HR amphetamine aspartate 9.375 MG / amphetamine sulfate 9.375 MG / dextroamphetamine saccharate 9.375 MG / dextroamphetamine sulfate 9.375 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1945840",
+        "name": "amphetamine 1.25 MG/ML Extended Release Suspension",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2118895",
+        "name": "amphetamine sulfate 5 MG Disintegrating Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2118896",
+        "name": "amphetamine sulfate 10 MG Disintegrating Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2118898",
+        "name": "amphetamine sulfate 15 MG Disintegrating Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2118900",
+        "name": "amphetamine sulfate 20 MG Disintegrating Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2585460",
+        "name": "24 HR amphetamine 10 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2585462",
+        "name": "24 HR amphetamine 15 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2585468",
+        "name": "24 HR amphetamine 20 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2585473",
+        "name": "24 HR amphetamine 5 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "541363",
+        "name": "amphetamine aspartate 7.5 MG / amphetamine sulfate 7.5 MG / dextroamphetamine saccharate 7.5 MG / dextroamphetamine sulfate 7.5 MG Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "541878",
+        "name": "amphetamine aspartate 1.25 MG / amphetamine sulfate 1.25 MG / dextroamphetamine saccharate 1.25 MG / dextroamphetamine sulfate 1.25 MG Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "541892",
+        "name": "amphetamine aspartate 2.5 MG / amphetamine sulfate 2.5 MG / dextroamphetamine saccharate 2.5 MG / dextroamphetamine sulfate 2.5 MG Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "577957",
+        "name": "amphetamine aspartate 3.75 MG / amphetamine sulfate 3.75 MG / dextroamphetamine saccharate 3.75 MG / dextroamphetamine sulfate 3.75 MG Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "577961",
+        "name": "amphetamine aspartate 5 MG / amphetamine sulfate 5 MG / dextroamphetamine saccharate 5 MG / dextroamphetamine sulfate 5 MG Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "687043",
+        "name": "amphetamine aspartate 3.125 MG / amphetamine sulfate 3.125 MG / dextroamphetamine saccharate 3.125 MG / dextroamphetamine sulfate 3.125 MG Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "861221",
+        "name": "24 HR amphetamine aspartate 2.5 MG / amphetamine sulfate 2.5 MG / dextroamphetamine saccharate 2.5 MG / dextroamphetamine sulfate 2.5 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "861223",
+        "name": "24 HR amphetamine aspartate 3.75 MG / amphetamine sulfate 3.75 MG / dextroamphetamine saccharate 3.75 MG / dextroamphetamine sulfate 3.75 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "861225",
+        "name": "24 HR amphetamine aspartate 5 MG / amphetamine sulfate 5 MG / dextroamphetamine saccharate 5 MG / dextroamphetamine sulfate 5 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "861227",
+        "name": "24 HR amphetamine aspartate 6.25 MG / amphetamine sulfate 6.25 MG / dextroamphetamine saccharate 6.25 MG / dextroamphetamine sulfate 6.25 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "861232",
+        "name": "24 HR amphetamine aspartate 7.5 MG / amphetamine sulfate 7.5 MG / dextroamphetamine saccharate 7.5 MG / dextroamphetamine sulfate 7.5 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "861237",
+        "name": "24 HR amphetamine aspartate 1.25 MG / amphetamine sulfate 1.25 MG / dextroamphetamine saccharate 1.25 MG / dextroamphetamine sulfate 1.25 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "884655",
+        "name": "amphetamine sulfate 5 MG Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1720585",
+        "name": "amphetamine Extended Release Suspension",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      },
+      {
+        "rxcui": "1739802",
+        "name": "amphetamine Extended Release Oral Tablet",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      },
+      {
+        "rxcui": "2118894",
+        "name": "amphetamine Disintegrating Oral Tablet",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      },
+      {
+        "rxcui": "370893",
+        "name": "amphetamine Oral Tablet",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      },
+      {
+        "rxcui": "376410",
+        "name": "amphetamine / dextroamphetamine Oral Tablet",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      },
+      {
+        "rxcui": "378856",
+        "name": "amphetamine / dextroamphetamine Extended Release Oral Capsule",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      }
+    ],
+    "brandMappings": [
+      {
+        "brandName": "Evekeo",
+        "rxcui": "1600688",
+        "region": "US"
+      },
+      {
+        "brandName": "Dyanavel",
+        "rxcui": "1720587",
+        "region": "US"
+      },
+      {
+        "brandName": "Adzenys",
+        "rxcui": "1739804",
+        "region": "US"
+      },
+      {
+        "brandName": "Mydayis",
+        "rxcui": "1927611",
+        "region": "US"
+      },
+      {
+        "brandName": "Adderall",
+        "rxcui": "84815",
+        "region": "US"
+      },
+      {
+        "brandName": "Adderall XR",
+        "rxcui": "",
+        "region": "US"
+      }
+    ],
+    "synonyms": [
+      {
+        "name": "amphetamine aspartate",
+        "type": "chemical",
+        "source": "RxNorm"
+      },
+      {
+        "name": "amphetamine aspartate monohydrate",
+        "type": "chemical",
+        "source": "RxNorm"
+      },
+      {
+        "name": "amphetamine saccharate",
+        "type": "chemical",
+        "source": "RxNorm"
+      },
+      {
+        "name": "amphetamine sulfate",
+        "type": "chemical",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Evekeo",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Dyanavel",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Adzenys",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Mydayis",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Adderall",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "amphetamine",
+        "type": "generic",
+        "source": "RxNorm"
+      }
+    ],
+    "relatedDrugs": [
+      {
+        "rxcui": "1009145",
+        "name": "amphetamine aspartate 1.875 MG / amphetamine sulfate 1.875 MG / dextroamphetamine saccharate 1.875 MG / dextroamphetamine sulfate 1.875 MG Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1600695",
+        "name": "amphetamine sulfate 10 MG Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1720586",
+        "name": "24 HR amphetamine 2.5 MG/ML Extended Release Suspension",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1739803",
+        "name": "24 HR amphetamine 12.5 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1739813",
+        "name": "24 HR amphetamine 15.7 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1739819",
+        "name": "24 HR amphetamine 18.8 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1739825",
+        "name": "24 HR amphetamine 3.1 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1739831",
+        "name": "24 HR amphetamine 6.3 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1739837",
+        "name": "24 HR amphetamine 9.4 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1927610",
+        "name": "3-Bead 24 HR amphetamine aspartate 12.5 MG / amphetamine sulfate 12.5 MG / dextroamphetamine saccharate 12.5 MG / dextroamphetamine sulfate 12.5 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1927617",
+        "name": "3-Bead 24 HR amphetamine aspartate 6.25 MG / amphetamine sulfate 6.25 MG / dextroamphetamine saccharate 6.25 MG / dextroamphetamine sulfate 6.25 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1927630",
+        "name": "3-Bead 24 HR amphetamine aspartate 3.125 MG / amphetamine sulfate 3.125 MG / dextroamphetamine saccharate 3.125 MG / dextroamphetamine sulfate 3.125 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1927637",
+        "name": "3-Bead 24 HR amphetamine aspartate 9.375 MG / amphetamine sulfate 9.375 MG / dextroamphetamine saccharate 9.375 MG / dextroamphetamine sulfate 9.375 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1945840",
+        "name": "amphetamine 1.25 MG/ML Extended Release Suspension",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "2118895",
+        "name": "amphetamine sulfate 5 MG Disintegrating Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "2118896",
+        "name": "amphetamine sulfate 10 MG Disintegrating Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "2118898",
+        "name": "amphetamine sulfate 15 MG Disintegrating Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "2118900",
+        "name": "amphetamine sulfate 20 MG Disintegrating Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "2585460",
+        "name": "24 HR amphetamine 10 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "2585462",
+        "name": "24 HR amphetamine 15 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1009147",
+        "name": "amphetamine aspartate 1.875 MG / amphetamine sulfate 1.875 MG / dextroamphetamine saccharate 1.875 MG / dextroamphetamine sulfate 1.875 MG Oral Tablet [Adderall]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1600698",
+        "name": "amphetamine sulfate 10 MG Oral Tablet [Evekeo]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1600700",
+        "name": "amphetamine sulfate 5 MG Oral Tablet [Evekeo]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1720592",
+        "name": "24 HR amphetamine 2.5 MG/ML Extended Release Suspension [Dyanavel]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1739809",
+        "name": "24 HR amphetamine 12.5 MG Extended Release Oral Tablet [Adzenys]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1739815",
+        "name": "24 HR amphetamine 15.7 MG Extended Release Oral Tablet [Adzenys]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1739821",
+        "name": "24 HR amphetamine 18.8 MG Extended Release Oral Tablet [Adzenys]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1739827",
+        "name": "24 HR amphetamine 3.1 MG Extended Release Oral Tablet [Adzenys]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1739833",
+        "name": "24 HR amphetamine 6.3 MG Extended Release Oral Tablet [Adzenys]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1739839",
+        "name": "24 HR amphetamine 9.4 MG Extended Release Oral Tablet [Adzenys]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1927616",
+        "name": "3-Bead 24 HR amphetamine aspartate 12.5 MG / amphetamine sulfate 12.5 MG / dextroamphetamine saccharate 12.5 MG / dextroamphetamine sulfate 12.5 MG Extended Release Oral Capsule [Mydayis]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1927619",
+        "name": "3-Bead 24 HR amphetamine aspartate 6.25 MG / amphetamine sulfate 6.25 MG / dextroamphetamine saccharate 6.25 MG / dextroamphetamine sulfate 6.25 MG Extended Release Oral Capsule [Mydayis]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1927632",
+        "name": "3-Bead 24 HR amphetamine aspartate 3.125 MG / amphetamine sulfate 3.125 MG / dextroamphetamine saccharate 3.125 MG / dextroamphetamine sulfate 3.125 MG Extended Release Oral Capsule [Mydayis]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1927639",
+        "name": "3-Bead 24 HR amphetamine aspartate 9.375 MG / amphetamine sulfate 9.375 MG / dextroamphetamine saccharate 9.375 MG / dextroamphetamine sulfate 9.375 MG Extended Release Oral Capsule [Mydayis]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "2175796",
+        "name": "amphetamine sulfate 10 MG Disintegrating Oral Tablet [Evekeo]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "2175891",
+        "name": "amphetamine sulfate 15 MG Disintegrating Oral Tablet [Evekeo]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "2175893",
+        "name": "amphetamine sulfate 20 MG Disintegrating Oral Tablet [Evekeo]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "2175894",
+        "name": "amphetamine sulfate 5 MG Disintegrating Oral Tablet [Evekeo]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "2585461",
+        "name": "24 HR amphetamine 10 MG Extended Release Oral Tablet [Dyanavel]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "2585465",
+        "name": "24 HR amphetamine 15 MG Extended Release Oral Tablet [Dyanavel]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1720585",
+        "name": "amphetamine Extended Release Suspension",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      },
+      {
+        "rxcui": "1739802",
+        "name": "amphetamine Extended Release Oral Tablet",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      },
+      {
+        "rxcui": "2118894",
+        "name": "amphetamine Disintegrating Oral Tablet",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      },
+      {
+        "rxcui": "370893",
+        "name": "amphetamine Oral Tablet",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      },
+      {
+        "rxcui": "376410",
+        "name": "amphetamine / dextroamphetamine Oral Tablet",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      },
+      {
+        "rxcui": "378856",
+        "name": "amphetamine / dextroamphetamine Extended Release Oral Capsule",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      }
+    ],
+    "lastUpdated": "2025-12-04"
+  },
+  "lisdexamfetamine": {
+    "ingredientRxcui": "700810",
+    "ingredientName": "lisdexamfetamine",
+    "rxcuiMappings": [
+      {
+        "rxcui": "700810",
+        "name": "lisdexamfetamine",
+        "tty": "IN",
+        "description": "Base ingredient"
+      },
+      {
+        "rxcui": "2726049",
+        "name": "Arynta",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "711043",
+        "name": "Vyvanse",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "673579",
+        "name": "lisdexamfetamine dimesylate",
+        "tty": "PIN",
+        "description": "Precise ingredient (includes salt form)"
+      },
+      {
+        "rxcui": "1593858",
+        "name": "lisdexamfetamine dimesylate 10 MG Oral Capsule [Vyvanse]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1871459",
+        "name": "lisdexamfetamine dimesylate 40 MG Chewable Tablet [Vyvanse]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1871461",
+        "name": "lisdexamfetamine dimesylate 30 MG Chewable Tablet [Vyvanse]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1871463",
+        "name": "lisdexamfetamine dimesylate 20 MG Chewable Tablet [Vyvanse]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1871465",
+        "name": "lisdexamfetamine dimesylate 10 MG Chewable Tablet [Vyvanse]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1871467",
+        "name": "lisdexamfetamine dimesylate 60 MG Chewable Tablet [Vyvanse]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1871469",
+        "name": "lisdexamfetamine dimesylate 50 MG Chewable Tablet [Vyvanse]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2726055",
+        "name": "lisdexamfetamine dimesylate 10 MG/ML Oral Solution [Arynta]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "854832",
+        "name": "lisdexamfetamine dimesylate 20 MG Oral Capsule [Vyvanse]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "854836",
+        "name": "lisdexamfetamine dimesylate 30 MG Oral Capsule [Vyvanse]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "854840",
+        "name": "lisdexamfetamine dimesylate 40 MG Oral Capsule [Vyvanse]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "854844",
+        "name": "lisdexamfetamine dimesylate 70 MG Oral Capsule [Vyvanse]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "854848",
+        "name": "lisdexamfetamine dimesylate 60 MG Oral Capsule [Vyvanse]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "854852",
+        "name": "lisdexamfetamine dimesylate 50 MG Oral Capsule [Vyvanse]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1871457",
+        "name": "lisdexamfetamine Chewable Tablet [Vyvanse]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "2726053",
+        "name": "lisdexamfetamine Oral Solution [Arynta]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "705294",
+        "name": "lisdexamfetamine Oral Capsule [Vyvanse]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "1593856",
+        "name": "lisdexamfetamine dimesylate 10 MG Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1871456",
+        "name": "lisdexamfetamine dimesylate 40 MG Chewable Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1871460",
+        "name": "lisdexamfetamine dimesylate 30 MG Chewable Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1871462",
+        "name": "lisdexamfetamine dimesylate 20 MG Chewable Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1871464",
+        "name": "lisdexamfetamine dimesylate 10 MG Chewable Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1871466",
+        "name": "lisdexamfetamine dimesylate 60 MG Chewable Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1871468",
+        "name": "lisdexamfetamine dimesylate 50 MG Chewable Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2726048",
+        "name": "lisdexamfetamine dimesylate 10 MG/ML Oral Solution",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "854830",
+        "name": "lisdexamfetamine dimesylate 20 MG Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "854834",
+        "name": "lisdexamfetamine dimesylate 30 MG Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "854838",
+        "name": "lisdexamfetamine dimesylate 40 MG Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "854842",
+        "name": "lisdexamfetamine dimesylate 70 MG Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "854846",
+        "name": "lisdexamfetamine dimesylate 60 MG Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "854850",
+        "name": "lisdexamfetamine dimesylate 50 MG Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1871455",
+        "name": "lisdexamfetamine Chewable Tablet",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      },
+      {
+        "rxcui": "2726045",
+        "name": "lisdexamfetamine Oral Solution",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      },
+      {
+        "rxcui": "700812",
+        "name": "lisdexamfetamine Oral Capsule",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      }
+    ],
+    "brandMappings": [
+      {
+        "brandName": "Arynta",
+        "rxcui": "2726049",
+        "region": "US"
+      },
+      {
+        "brandName": "Vyvanse",
+        "rxcui": "711043",
+        "region": "US"
+      }
+    ],
+    "synonyms": [
+      {
+        "name": "lisdexamfetamine dimesylate",
+        "type": "chemical",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Arynta",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Vyvanse",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "lisdexamfetamine",
+        "type": "generic",
+        "source": "RxNorm"
+      }
+    ],
+    "relatedDrugs": [
+      {
+        "rxcui": "1593856",
+        "name": "lisdexamfetamine dimesylate 10 MG Oral Capsule",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1871456",
+        "name": "lisdexamfetamine dimesylate 40 MG Chewable Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1871460",
+        "name": "lisdexamfetamine dimesylate 30 MG Chewable Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1871462",
+        "name": "lisdexamfetamine dimesylate 20 MG Chewable Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1871464",
+        "name": "lisdexamfetamine dimesylate 10 MG Chewable Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1871466",
+        "name": "lisdexamfetamine dimesylate 60 MG Chewable Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1871468",
+        "name": "lisdexamfetamine dimesylate 50 MG Chewable Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "2726048",
+        "name": "lisdexamfetamine dimesylate 10 MG/ML Oral Solution",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "854830",
+        "name": "lisdexamfetamine dimesylate 20 MG Oral Capsule",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "854834",
+        "name": "lisdexamfetamine dimesylate 30 MG Oral Capsule",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "854838",
+        "name": "lisdexamfetamine dimesylate 40 MG Oral Capsule",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "854842",
+        "name": "lisdexamfetamine dimesylate 70 MG Oral Capsule",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "854846",
+        "name": "lisdexamfetamine dimesylate 60 MG Oral Capsule",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "854850",
+        "name": "lisdexamfetamine dimesylate 50 MG Oral Capsule",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1593858",
+        "name": "lisdexamfetamine dimesylate 10 MG Oral Capsule [Vyvanse]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1871459",
+        "name": "lisdexamfetamine dimesylate 40 MG Chewable Tablet [Vyvanse]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1871461",
+        "name": "lisdexamfetamine dimesylate 30 MG Chewable Tablet [Vyvanse]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1871463",
+        "name": "lisdexamfetamine dimesylate 20 MG Chewable Tablet [Vyvanse]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1871465",
+        "name": "lisdexamfetamine dimesylate 10 MG Chewable Tablet [Vyvanse]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1871467",
+        "name": "lisdexamfetamine dimesylate 60 MG Chewable Tablet [Vyvanse]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1871469",
+        "name": "lisdexamfetamine dimesylate 50 MG Chewable Tablet [Vyvanse]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "2726055",
+        "name": "lisdexamfetamine dimesylate 10 MG/ML Oral Solution [Arynta]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "854832",
+        "name": "lisdexamfetamine dimesylate 20 MG Oral Capsule [Vyvanse]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "854836",
+        "name": "lisdexamfetamine dimesylate 30 MG Oral Capsule [Vyvanse]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "854840",
+        "name": "lisdexamfetamine dimesylate 40 MG Oral Capsule [Vyvanse]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "854844",
+        "name": "lisdexamfetamine dimesylate 70 MG Oral Capsule [Vyvanse]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "854848",
+        "name": "lisdexamfetamine dimesylate 60 MG Oral Capsule [Vyvanse]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "854852",
+        "name": "lisdexamfetamine dimesylate 50 MG Oral Capsule [Vyvanse]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1871455",
+        "name": "lisdexamfetamine Chewable Tablet",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      },
+      {
+        "rxcui": "2726045",
+        "name": "lisdexamfetamine Oral Solution",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      },
+      {
+        "rxcui": "700812",
+        "name": "lisdexamfetamine Oral Capsule",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      }
+    ],
+    "lastUpdated": "2025-12-04"
+  },
+  "atomoxetine": {
+    "ingredientRxcui": "38400",
+    "ingredientName": "atomoxetine",
+    "rxcuiMappings": [
+      {
+        "rxcui": "38400",
+        "name": "atomoxetine",
+        "tty": "IN",
+        "description": "Base ingredient"
+      },
+      {
+        "rxcui": "358330",
+        "name": "Strattera",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "353103",
+        "name": "atomoxetine hydrochloride",
+        "tty": "PIN",
+        "description": "Precise ingredient (includes salt form)"
+      },
+      {
+        "rxcui": "352317",
+        "name": "atomoxetine 10 MG Oral Capsule [Strattera]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "352318",
+        "name": "atomoxetine 18 MG Oral Capsule [Strattera]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "352319",
+        "name": "atomoxetine 25 MG Oral Capsule [Strattera]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "352320",
+        "name": "atomoxetine 40 MG Oral Capsule [Strattera]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "352321",
+        "name": "atomoxetine 60 MG Oral Capsule [Strattera]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "617945",
+        "name": "atomoxetine 100 MG Oral Capsule [Strattera]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "617947",
+        "name": "atomoxetine 80 MG Oral Capsule [Strattera]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "366499",
+        "name": "atomoxetine Oral Capsule [Strattera]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "349591",
+        "name": "atomoxetine 10 MG Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "349592",
+        "name": "atomoxetine 18 MG Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "349593",
+        "name": "atomoxetine 25 MG Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "349594",
+        "name": "atomoxetine 40 MG Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "349595",
+        "name": "atomoxetine 60 MG Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "608139",
+        "name": "atomoxetine 100 MG Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "608143",
+        "name": "atomoxetine 80 MG Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "378308",
+        "name": "atomoxetine Oral Capsule",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      }
+    ],
+    "brandMappings": [
+      {
+        "brandName": "Strattera",
+        "rxcui": "358330",
+        "region": "US"
+      },
+      {
+        "brandName": "Qelbree",
+        "rxcui": "2536549",
+        "region": "US"
+      }
+    ],
+    "synonyms": [
+      {
+        "name": "atomoxetine hydrochloride",
+        "type": "chemical",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Strattera",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "atomoxetine",
+        "type": "generic",
+        "source": "RxNorm"
+      }
+    ],
+    "relatedDrugs": [
+      {
+        "rxcui": "349591",
+        "name": "atomoxetine 10 MG Oral Capsule",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "349592",
+        "name": "atomoxetine 18 MG Oral Capsule",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "349593",
+        "name": "atomoxetine 25 MG Oral Capsule",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "349594",
+        "name": "atomoxetine 40 MG Oral Capsule",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "349595",
+        "name": "atomoxetine 60 MG Oral Capsule",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "608139",
+        "name": "atomoxetine 100 MG Oral Capsule",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "608143",
+        "name": "atomoxetine 80 MG Oral Capsule",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "352317",
+        "name": "atomoxetine 10 MG Oral Capsule [Strattera]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "352318",
+        "name": "atomoxetine 18 MG Oral Capsule [Strattera]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "352319",
+        "name": "atomoxetine 25 MG Oral Capsule [Strattera]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "352320",
+        "name": "atomoxetine 40 MG Oral Capsule [Strattera]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "352321",
+        "name": "atomoxetine 60 MG Oral Capsule [Strattera]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "617945",
+        "name": "atomoxetine 100 MG Oral Capsule [Strattera]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "617947",
+        "name": "atomoxetine 80 MG Oral Capsule [Strattera]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "378308",
+        "name": "atomoxetine Oral Capsule",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      }
+    ],
+    "lastUpdated": "2025-12-04"
+  },
+  "guanfacine": {
+    "ingredientRxcui": "40114",
+    "ingredientName": "guanfacine",
+    "rxcuiMappings": [
+      {
+        "rxcui": "40114",
+        "name": "guanfacine",
+        "tty": "IN",
+        "description": "Base ingredient"
+      },
+      {
+        "rxcui": "862007",
+        "name": "Intuniv",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "203142",
+        "name": "guanfacine hydrochloride",
+        "tty": "PIN",
+        "description": "Precise ingredient (includes salt form)"
+      },
+      {
+        "rxcui": "862004",
+        "name": "guafacine hydrochloride",
+        "tty": "PIN",
+        "description": "Precise ingredient (includes salt form)"
+      },
+      {
+        "rxcui": "862010",
+        "name": "24 HR guanfacine 1 MG Extended Release Oral Tablet [Intuniv]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "862015",
+        "name": "24 HR guanfacine 2 MG Extended Release Oral Tablet [Intuniv]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "862021",
+        "name": "24 HR guanfacine 3 MG Extended Release Oral Tablet [Intuniv]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "862027",
+        "name": "24 HR guanfacine 4 MG Extended Release Oral Tablet [Intuniv]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "862009",
+        "name": "guanfacine Extended Release Oral Tablet [Intuniv]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "197745",
+        "name": "guanfacine 1 MG Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "197746",
+        "name": "guanfacine 2 MG Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "862006",
+        "name": "24 HR guanfacine 1 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "862013",
+        "name": "24 HR guanfacine 2 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "862019",
+        "name": "24 HR guanfacine 3 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "862025",
+        "name": "24 HR guanfacine 4 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "372368",
+        "name": "guanfacine Oral Tablet",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      },
+      {
+        "rxcui": "862005",
+        "name": "guanfacine Extended Release Oral Tablet",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      }
+    ],
+    "brandMappings": [
+      {
+        "brandName": "Intuniv",
+        "rxcui": "862007",
+        "region": "US"
+      },
+      {
+        "brandName": "Tenex",
+        "rxcui": "",
+        "region": "US"
+      }
+    ],
+    "synonyms": [
+      {
+        "name": "guanfacine hydrochloride",
+        "type": "chemical",
+        "source": "RxNorm"
+      },
+      {
+        "name": "guafacine hydrochloride",
+        "type": "chemical",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Intuniv",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "guanfacine",
+        "type": "generic",
+        "source": "RxNorm"
+      }
+    ],
+    "relatedDrugs": [
+      {
+        "rxcui": "197745",
+        "name": "guanfacine 1 MG Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "197746",
+        "name": "guanfacine 2 MG Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "862006",
+        "name": "24 HR guanfacine 1 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "862013",
+        "name": "24 HR guanfacine 2 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "862019",
+        "name": "24 HR guanfacine 3 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "862025",
+        "name": "24 HR guanfacine 4 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "862010",
+        "name": "24 HR guanfacine 1 MG Extended Release Oral Tablet [Intuniv]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "862015",
+        "name": "24 HR guanfacine 2 MG Extended Release Oral Tablet [Intuniv]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "862021",
+        "name": "24 HR guanfacine 3 MG Extended Release Oral Tablet [Intuniv]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "862027",
+        "name": "24 HR guanfacine 4 MG Extended Release Oral Tablet [Intuniv]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "372368",
+        "name": "guanfacine Oral Tablet",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      },
+      {
+        "rxcui": "862005",
+        "name": "guanfacine Extended Release Oral Tablet",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      }
+    ],
+    "lastUpdated": "2025-12-04"
+  },
+  "clonidine": {
+    "ingredientRxcui": "2599",
+    "ingredientName": "clonidine",
+    "rxcuiMappings": [
+      {
+        "rxcui": "2599",
+        "name": "clonidine",
+        "tty": "IN",
+        "description": "Base ingredient"
+      },
+      {
+        "rxcui": "1013931",
+        "name": "Kapvay",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "1050312",
+        "name": "Nexiclon",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "202941",
+        "name": "Catapres",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "216099",
+        "name": "Clorpres",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "216778",
+        "name": "Duraclon",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "2690729",
+        "name": "Onyda",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "2725555",
+        "name": "Javadin",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "142432",
+        "name": "clonidine hydrochloride",
+        "tty": "PIN",
+        "description": "Precise ingredient (includes salt form)"
+      },
+      {
+        "rxcui": "1013934",
+        "name": "12 HR clonidine hydrochloride 0.1 MG Extended Release Oral Tablet [Kapvay]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1050338",
+        "name": "24 HR clonidine 0.17 MG Extended Release Oral Tablet [Nexiclon]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2690735",
+        "name": "24 HR clonidine hydrochloride 0.1 MG/ML Extended Release Suspension [Onyda]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2725561",
+        "name": "clonidine hydrochloride 0.02 MG/ML Oral Solution [Javadin]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "884196",
+        "name": "chlorthalidone 15 MG / clonidine hydrochloride 0.1 MG Oral Tablet [Clorpres]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "884202",
+        "name": "chlorthalidone 15 MG / clonidine hydrochloride 0.2 MG Oral Tablet [Clorpres]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "884207",
+        "name": "chlorthalidone 15 MG / clonidine hydrochloride 0.3 MG Oral Tablet [Clorpres]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "884223",
+        "name": "10 ML clonidine hydrochloride 0.1 MG/ML Injection [Duraclon]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "998673",
+        "name": "168 HR clonidine 0.00417 MG/HR Transdermal System [Catapres]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "998677",
+        "name": "168 HR clonidine 0.00833 MG/HR Transdermal System [Catapres]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "998681",
+        "name": "168 HR clonidine 0.0125 MG/HR Transdermal System [Catapres]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "1013933",
+        "name": "clonidine Extended Release Oral Tablet [Kapvay]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "1050333",
+        "name": "clonidine Extended Release Oral Tablet [Nexiclon]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "1732372",
+        "name": "clonidine Injection [Duraclon]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "2268636",
+        "name": "clonidine Transdermal System [Catapres]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "2690733",
+        "name": "clonidine Extended Release Suspension [Onyda]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "2725559",
+        "name": "clonidine Oral Solution [Javadin]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "884195",
+        "name": "chlorthalidone / clonidine Oral Tablet [Clorpres]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "1013930",
+        "name": "12 HR clonidine hydrochloride 0.1 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2690727",
+        "name": "24 HR clonidine hydrochloride 0.1 MG/ML Extended Release Suspension",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2725554",
+        "name": "clonidine hydrochloride 0.02 MG/ML Oral Solution",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "884173",
+        "name": "clonidine hydrochloride 0.1 MG Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "884185",
+        "name": "clonidine hydrochloride 0.2 MG Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "884189",
+        "name": "clonidine hydrochloride 0.3 MG Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "884192",
+        "name": "chlorthalidone 15 MG / clonidine hydrochloride 0.1 MG Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "884198",
+        "name": "chlorthalidone 15 MG / clonidine hydrochloride 0.2 MG Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "884203",
+        "name": "chlorthalidone 15 MG / clonidine hydrochloride 0.3 MG Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "884221",
+        "name": "10 ML clonidine hydrochloride 0.1 MG/ML Injection",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "884225",
+        "name": "10 ML clonidine hydrochloride 0.5 MG/ML Injection",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "885880",
+        "name": "24 HR clonidine 0.17 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "892791",
+        "name": "clonidine hydrochloride 0.025 MG Oral Tablet",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "892793",
+        "name": "clonidine hydrochloride 0.15 MG/ML Injectable Solution",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "892795",
+        "name": "clonidine hydrochloride 0.25 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "998671",
+        "name": "168 HR clonidine 0.00417 MG/HR Transdermal System",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "998675",
+        "name": "168 HR clonidine 0.00833 MG/HR Transdermal System",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "998679",
+        "name": "168 HR clonidine 0.0125 MG/HR Transdermal System",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "1732370",
+        "name": "clonidine Injection",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      },
+      {
+        "rxcui": "1806253",
+        "name": "clonidine Transdermal System",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      },
+      {
+        "rxcui": "2725552",
+        "name": "clonidine Oral Solution",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      },
+      {
+        "rxcui": "371580",
+        "name": "chlorthalidone / clonidine Oral Tablet",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      },
+      {
+        "rxcui": "371581",
+        "name": "clonidine Extended Release Oral Capsule",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      },
+      {
+        "rxcui": "371582",
+        "name": "clonidine Injectable Solution",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      },
+      {
+        "rxcui": "371583",
+        "name": "clonidine Oral Tablet",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      },
+      {
+        "rxcui": "885790",
+        "name": "clonidine Extended Release Suspension",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      },
+      {
+        "rxcui": "885794",
+        "name": "clonidine Extended Release Oral Tablet",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      }
+    ],
+    "brandMappings": [
+      {
+        "brandName": "Kapvay",
+        "rxcui": "1013931",
+        "region": "US"
+      },
+      {
+        "brandName": "Nexiclon",
+        "rxcui": "1050312",
+        "region": "US"
+      },
+      {
+        "brandName": "Catapres",
+        "rxcui": "202941",
+        "region": "US"
+      },
+      {
+        "brandName": "Clorpres",
+        "rxcui": "216099",
+        "region": "US"
+      },
+      {
+        "brandName": "Duraclon",
+        "rxcui": "216778",
+        "region": "US"
+      },
+      {
+        "brandName": "Onyda",
+        "rxcui": "2690729",
+        "region": "US"
+      },
+      {
+        "brandName": "Javadin",
+        "rxcui": "2725555",
+        "region": "US"
+      }
+    ],
+    "synonyms": [
+      {
+        "name": "clonidine hydrochloride",
+        "type": "chemical",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Kapvay",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Nexiclon",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Catapres",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Clorpres",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Duraclon",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Onyda",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Javadin",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "clonidine",
+        "type": "generic",
+        "source": "RxNorm"
+      }
+    ],
+    "relatedDrugs": [
+      {
+        "rxcui": "1013930",
+        "name": "12 HR clonidine hydrochloride 0.1 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "2690727",
+        "name": "24 HR clonidine hydrochloride 0.1 MG/ML Extended Release Suspension",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "2725554",
+        "name": "clonidine hydrochloride 0.02 MG/ML Oral Solution",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "884173",
+        "name": "clonidine hydrochloride 0.1 MG Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "884185",
+        "name": "clonidine hydrochloride 0.2 MG Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "884189",
+        "name": "clonidine hydrochloride 0.3 MG Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "884192",
+        "name": "chlorthalidone 15 MG / clonidine hydrochloride 0.1 MG Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "884198",
+        "name": "chlorthalidone 15 MG / clonidine hydrochloride 0.2 MG Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "884203",
+        "name": "chlorthalidone 15 MG / clonidine hydrochloride 0.3 MG Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "884221",
+        "name": "10 ML clonidine hydrochloride 0.1 MG/ML Injection",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "884225",
+        "name": "10 ML clonidine hydrochloride 0.5 MG/ML Injection",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "885880",
+        "name": "24 HR clonidine 0.17 MG Extended Release Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "892791",
+        "name": "clonidine hydrochloride 0.025 MG Oral Tablet",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "892793",
+        "name": "clonidine hydrochloride 0.15 MG/ML Injectable Solution",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "892795",
+        "name": "clonidine hydrochloride 0.25 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "998671",
+        "name": "168 HR clonidine 0.00417 MG/HR Transdermal System",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "998675",
+        "name": "168 HR clonidine 0.00833 MG/HR Transdermal System",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "998679",
+        "name": "168 HR clonidine 0.0125 MG/HR Transdermal System",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "1013934",
+        "name": "12 HR clonidine hydrochloride 0.1 MG Extended Release Oral Tablet [Kapvay]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1050338",
+        "name": "24 HR clonidine 0.17 MG Extended Release Oral Tablet [Nexiclon]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "2690735",
+        "name": "24 HR clonidine hydrochloride 0.1 MG/ML Extended Release Suspension [Onyda]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "2725561",
+        "name": "clonidine hydrochloride 0.02 MG/ML Oral Solution [Javadin]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "884196",
+        "name": "chlorthalidone 15 MG / clonidine hydrochloride 0.1 MG Oral Tablet [Clorpres]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "884202",
+        "name": "chlorthalidone 15 MG / clonidine hydrochloride 0.2 MG Oral Tablet [Clorpres]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "884207",
+        "name": "chlorthalidone 15 MG / clonidine hydrochloride 0.3 MG Oral Tablet [Clorpres]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "884223",
+        "name": "10 ML clonidine hydrochloride 0.1 MG/ML Injection [Duraclon]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "998673",
+        "name": "168 HR clonidine 0.00417 MG/HR Transdermal System [Catapres]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "998677",
+        "name": "168 HR clonidine 0.00833 MG/HR Transdermal System [Catapres]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "998681",
+        "name": "168 HR clonidine 0.0125 MG/HR Transdermal System [Catapres]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "1732370",
+        "name": "clonidine Injection",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      },
+      {
+        "rxcui": "1806253",
+        "name": "clonidine Transdermal System",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      },
+      {
+        "rxcui": "2725552",
+        "name": "clonidine Oral Solution",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      },
+      {
+        "rxcui": "371580",
+        "name": "chlorthalidone / clonidine Oral Tablet",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      },
+      {
+        "rxcui": "371581",
+        "name": "clonidine Extended Release Oral Capsule",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      },
+      {
+        "rxcui": "371582",
+        "name": "clonidine Injectable Solution",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      },
+      {
+        "rxcui": "371583",
+        "name": "clonidine Oral Tablet",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      },
+      {
+        "rxcui": "885790",
+        "name": "clonidine Extended Release Suspension",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      },
+      {
+        "rxcui": "885794",
+        "name": "clonidine Extended Release Oral Tablet",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      }
+    ],
+    "lastUpdated": "2025-12-04"
+  },
+  "viloxazine": {
+    "ingredientRxcui": "11196",
+    "ingredientName": "viloxazine",
+    "rxcuiMappings": [
+      {
+        "rxcui": "11196",
+        "name": "viloxazine",
+        "tty": "IN",
+        "description": "Base ingredient"
+      },
+      {
+        "rxcui": "2536549",
+        "name": "Qelbree",
+        "tty": "BN",
+        "description": "Brand name"
+      },
+      {
+        "rxcui": "142143",
+        "name": "viloxazine hydrochloride",
+        "tty": "PIN",
+        "description": "Precise ingredient (includes salt form)"
+      },
+      {
+        "rxcui": "2536554",
+        "name": "24 HR viloxazine 100 MG Extended Release Oral Capsule [Qelbree]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2536752",
+        "name": "24 HR viloxazine 150 MG Extended Release Oral Capsule [Qelbree]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2536758",
+        "name": "24 HR viloxazine 200 MG Extended Release Oral Capsule [Qelbree]",
+        "tty": "SBD",
+        "description": "Branded drug (brand + strength + form)"
+      },
+      {
+        "rxcui": "2536551",
+        "name": "viloxazine Extended Release Oral Capsule [Qelbree]",
+        "tty": "SBDF",
+        "description": "Branded ingredient + dose form"
+      },
+      {
+        "rxcui": "2536548",
+        "name": "24 HR viloxazine 100 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2536750",
+        "name": "24 HR viloxazine 150 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2536756",
+        "name": "24 HR viloxazine 200 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "description": "Clinical drug (ingredient + strength + form)"
+      },
+      {
+        "rxcui": "2536547",
+        "name": "viloxazine Extended Release Oral Capsule",
+        "tty": "SCDF",
+        "description": "Ingredient + dose form"
+      }
+    ],
+    "brandMappings": [
+      {
+        "brandName": "Qelbree",
+        "rxcui": "2536549",
+        "region": "US"
+      }
+    ],
+    "synonyms": [
+      {
+        "name": "viloxazine hydrochloride",
+        "type": "chemical",
+        "source": "RxNorm"
+      },
+      {
+        "name": "Qelbree",
+        "type": "brand",
+        "source": "RxNorm"
+      },
+      {
+        "name": "viloxazine",
+        "type": "generic",
+        "source": "RxNorm"
+      }
+    ],
+    "relatedDrugs": [
+      {
+        "rxcui": "2536548",
+        "name": "24 HR viloxazine 100 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "2536750",
+        "name": "24 HR viloxazine 150 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "2536756",
+        "name": "24 HR viloxazine 200 MG Extended Release Oral Capsule",
+        "tty": "SCD",
+        "relationship": "clinical_drug"
+      },
+      {
+        "rxcui": "2536554",
+        "name": "24 HR viloxazine 100 MG Extended Release Oral Capsule [Qelbree]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "2536752",
+        "name": "24 HR viloxazine 150 MG Extended Release Oral Capsule [Qelbree]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "2536758",
+        "name": "24 HR viloxazine 200 MG Extended Release Oral Capsule [Qelbree]",
+        "tty": "SBD",
+        "relationship": "branded_drug"
+      },
+      {
+        "rxcui": "2536547",
+        "name": "viloxazine Extended Release Oral Capsule",
+        "tty": "SCDF",
+        "relationship": "drug_form"
+      }
+    ],
+    "lastUpdated": "2025-12-04"
+  }
+}
