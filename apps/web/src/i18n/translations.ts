@@ -236,6 +236,26 @@ export const translations = {
     'drugs.nonStimulant': 'Non-Stimulant',
     'nav.database': 'Database',
     'home.databaseDescription': 'Browse all medications with detailed information',
+
+    // Drug Instructions
+    'drugs.instructions': 'Prescribing Information',
+    'drugs.instructions.indicationsAndUsage': 'Indications and Usage',
+    'drugs.instructions.dosageAndAdministration': 'Dosage and Administration',
+    'drugs.instructions.dosageForms': 'Dosage Forms and Strengths',
+    'drugs.instructions.contraindications': 'Contraindications',
+    'drugs.instructions.warningsAndPrecautions': 'Warnings and Precautions',
+    'drugs.instructions.adverseReactions': 'Adverse Reactions',
+    'drugs.instructions.drugInteractions': 'Drug Interactions',
+    'drugs.instructions.useInSpecificPopulations': 'Use in Specific Populations',
+    'drugs.instructions.overdosage': 'Overdosage',
+    'drugs.instructions.clinicalPharmacology': 'Clinical Pharmacology',
+    'drugs.instructions.howSupplied': 'How Supplied/Storage',
+    'drugs.instructions.patientCounselingInfo': 'Patient Counseling Information',
+
+    // Bionic Reading
+    'bionicReading.label': 'READING',
+    'bionicReading.toggle': 'Bionic',
+    'bionicReading.tooltip': 'Enable bionic reading mode',
   },
 
   zh: {
@@ -464,6 +484,26 @@ export const translations = {
     'drugs.nonStimulant': '非兴奋剂',
     'nav.database': '数据库',
     'home.databaseDescription': '浏览所有药物的详细信息',
+
+    // Drug Instructions
+    'drugs.instructions': '处方信息',
+    'drugs.instructions.indicationsAndUsage': '适应症和用法',
+    'drugs.instructions.dosageAndAdministration': '剂量和给药方法',
+    'drugs.instructions.dosageForms': '剂型和规格',
+    'drugs.instructions.contraindications': '禁忌症',
+    'drugs.instructions.warningsAndPrecautions': '警告和注意事项',
+    'drugs.instructions.adverseReactions': '不良反应',
+    'drugs.instructions.drugInteractions': '药物相互作用',
+    'drugs.instructions.useInSpecificPopulations': '特殊人群用药',
+    'drugs.instructions.overdosage': '过量用药',
+    'drugs.instructions.clinicalPharmacology': '临床药理学',
+    'drugs.instructions.howSupplied': '供应/储存方式',
+    'drugs.instructions.patientCounselingInfo': '患者用药指导',
+
+    // Bionic Reading
+    'bionicReading.label': '阅读',
+    'bionicReading.toggle': '仿生',
+    'bionicReading.tooltip': '启用仿生阅读模式',
   },
 
   'zh-TW': {
@@ -692,6 +732,26 @@ export const translations = {
     'drugs.nonStimulant': '非興奮劑',
     'nav.database': '資料庫',
     'home.databaseDescription': '瀏覽所有藥物的詳細資訊',
+
+    // Drug Instructions
+    'drugs.instructions': '處方資訊',
+    'drugs.instructions.indicationsAndUsage': '適應症和用法',
+    'drugs.instructions.dosageAndAdministration': '劑量和給藥方法',
+    'drugs.instructions.dosageForms': '劑型和規格',
+    'drugs.instructions.contraindications': '禁忌症',
+    'drugs.instructions.warningsAndPrecautions': '警告和注意事項',
+    'drugs.instructions.adverseReactions': '不良反應',
+    'drugs.instructions.drugInteractions': '藥物交互作用',
+    'drugs.instructions.useInSpecificPopulations': '特殊人群用藥',
+    'drugs.instructions.overdosage': '過量用藥',
+    'drugs.instructions.clinicalPharmacology': '臨床藥理學',
+    'drugs.instructions.howSupplied': '供應/儲存方式',
+    'drugs.instructions.patientCounselingInfo': '患者用藥指導',
+
+    // Bionic Reading
+    'bionicReading.label': '閱讀',
+    'bionicReading.toggle': '仿生',
+    'bionicReading.tooltip': '啟用仿生閱讀模式',
   },
 
   ja: {
@@ -920,5 +980,25 @@ export const translations = {
     'drugs.nonStimulant': '非刺激薬',
     'nav.database': 'データベース',
     'home.databaseDescription': 'すべての薬の詳細情報を閲覧',
+
+    // Drug Instructions
+    'drugs.instructions': '処方情報',
+    'drugs.instructions.indicationsAndUsage': '効能・効果',
+    'drugs.instructions.dosageAndAdministration': '用法・用量',
+    'drugs.instructions.dosageForms': '剤形・含量',
+    'drugs.instructions.contraindications': '禁忌',
+    'drugs.instructions.warningsAndPrecautions': '警告・注意事項',
+    'drugs.instructions.adverseReactions': '副作用',
+    'drugs.instructions.drugInteractions': '相互作用',
+    'drugs.instructions.useInSpecificPopulations': '特定の背景を有する患者',
+    'drugs.instructions.overdosage': '過量投与',
+    'drugs.instructions.clinicalPharmacology': '臨床薬理',
+    'drugs.instructions.howSupplied': '包装・貯法',
+    'drugs.instructions.patientCounselingInfo': '患者への指導情報',
+
+    // Bionic Reading
+    'bionicReading.label': '読書',
+    'bionicReading.toggle': 'バイオニック',
+    'bionicReading.tooltip': 'バイオニック読書モードを有効にする',
   },
 } as const;

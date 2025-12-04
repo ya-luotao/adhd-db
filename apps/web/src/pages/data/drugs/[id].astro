@@ -517,6 +517,224 @@ const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().get
       </div>
     </section>
 
+    <!-- ============================================
+         PRESCRIBING INFORMATION / INSTRUCTIONS
+         ============================================ -->
+    {drug.instructions && (
+      <section class="instructions-section">
+        <h2 class="section-title">
+          <span class="title-marker"></span>
+          {t('drugs.instructions')}
+        </h2>
+
+        <div class="instructions-content">
+          {drug.instructions.indicationsAndUsage && l(drug.instructions.indicationsAndUsage) && (
+            <details class="instruction-item">
+              <summary class="instruction-header">
+                <span class="instruction-number">1</span>
+                <span class="instruction-title">{t('drugs.instructions.indicationsAndUsage')}</span>
+                <span class="instruction-toggle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+              </summary>
+              <div class="instruction-body bionic-content">
+                <p>{l(drug.instructions.indicationsAndUsage)}</p>
+              </div>
+            </details>
+          )}
+
+          {drug.instructions.dosageAndAdministration && l(drug.instructions.dosageAndAdministration) && (
+            <details class="instruction-item">
+              <summary class="instruction-header">
+                <span class="instruction-number">2</span>
+                <span class="instruction-title">{t('drugs.instructions.dosageAndAdministration')}</span>
+                <span class="instruction-toggle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+              </summary>
+              <div class="instruction-body bionic-content">
+                <p>{l(drug.instructions.dosageAndAdministration)}</p>
+              </div>
+            </details>
+          )}
+
+          {drug.instructions.dosageForms && l(drug.instructions.dosageForms) && (
+            <details class="instruction-item">
+              <summary class="instruction-header">
+                <span class="instruction-number">3</span>
+                <span class="instruction-title">{t('drugs.instructions.dosageForms')}</span>
+                <span class="instruction-toggle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+              </summary>
+              <div class="instruction-body bionic-content">
+                <p>{l(drug.instructions.dosageForms)}</p>
+              </div>
+            </details>
+          )}
+
+          {drug.instructions.contraindications && l(drug.instructions.contraindications) && (
+            <details class="instruction-item instruction-item-warning">
+              <summary class="instruction-header">
+                <span class="instruction-number">4</span>
+                <span class="instruction-title">{t('drugs.instructions.contraindications')}</span>
+                <span class="instruction-toggle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+              </summary>
+              <div class="instruction-body bionic-content">
+                <p>{l(drug.instructions.contraindications)}</p>
+              </div>
+            </details>
+          )}
+
+          {drug.instructions.warningsAndPrecautions && l(drug.instructions.warningsAndPrecautions) && (
+            <details class="instruction-item instruction-item-warning">
+              <summary class="instruction-header">
+                <span class="instruction-number">5</span>
+                <span class="instruction-title">{t('drugs.instructions.warningsAndPrecautions')}</span>
+                <span class="instruction-toggle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+              </summary>
+              <div class="instruction-body bionic-content">
+                <p>{l(drug.instructions.warningsAndPrecautions)}</p>
+              </div>
+            </details>
+          )}
+
+          {drug.instructions.adverseReactions && l(drug.instructions.adverseReactions) && (
+            <details class="instruction-item">
+              <summary class="instruction-header">
+                <span class="instruction-number">6</span>
+                <span class="instruction-title">{t('drugs.instructions.adverseReactions')}</span>
+                <span class="instruction-toggle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+              </summary>
+              <div class="instruction-body bionic-content">
+                <p>{l(drug.instructions.adverseReactions)}</p>
+              </div>
+            </details>
+          )}
+
+          {drug.instructions.drugInteractions && l(drug.instructions.drugInteractions) && (
+            <details class="instruction-item">
+              <summary class="instruction-header">
+                <span class="instruction-number">7</span>
+                <span class="instruction-title">{t('drugs.instructions.drugInteractions')}</span>
+                <span class="instruction-toggle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+              </summary>
+              <div class="instruction-body bionic-content">
+                <p>{l(drug.instructions.drugInteractions)}</p>
+              </div>
+            </details>
+          )}
+
+          {drug.instructions.useInSpecificPopulations && l(drug.instructions.useInSpecificPopulations) && (
+            <details class="instruction-item">
+              <summary class="instruction-header">
+                <span class="instruction-number">8</span>
+                <span class="instruction-title">{t('drugs.instructions.useInSpecificPopulations')}</span>
+                <span class="instruction-toggle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+              </summary>
+              <div class="instruction-body bionic-content">
+                <p>{l(drug.instructions.useInSpecificPopulations)}</p>
+              </div>
+            </details>
+          )}
+
+          {drug.instructions.overdosage && l(drug.instructions.overdosage) && (
+            <details class="instruction-item instruction-item-warning">
+              <summary class="instruction-header">
+                <span class="instruction-number">9</span>
+                <span class="instruction-title">{t('drugs.instructions.overdosage')}</span>
+                <span class="instruction-toggle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+              </summary>
+              <div class="instruction-body bionic-content">
+                <p>{l(drug.instructions.overdosage)}</p>
+              </div>
+            </details>
+          )}
+
+          {drug.instructions.clinicalPharmacology && l(drug.instructions.clinicalPharmacology) && (
+            <details class="instruction-item">
+              <summary class="instruction-header">
+                <span class="instruction-number">10</span>
+                <span class="instruction-title">{t('drugs.instructions.clinicalPharmacology')}</span>
+                <span class="instruction-toggle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+              </summary>
+              <div class="instruction-body bionic-content">
+                <p>{l(drug.instructions.clinicalPharmacology)}</p>
+              </div>
+            </details>
+          )}
+
+          {drug.instructions.howSupplied && l(drug.instructions.howSupplied) && (
+            <details class="instruction-item">
+              <summary class="instruction-header">
+                <span class="instruction-number">11</span>
+                <span class="instruction-title">{t('drugs.instructions.howSupplied')}</span>
+                <span class="instruction-toggle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+              </summary>
+              <div class="instruction-body bionic-content">
+                <p>{l(drug.instructions.howSupplied)}</p>
+              </div>
+            </details>
+          )}
+
+          {drug.instructions.patientCounselingInfo && l(drug.instructions.patientCounselingInfo) && (
+            <details class="instruction-item">
+              <summary class="instruction-header">
+                <span class="instruction-number">12</span>
+                <span class="instruction-title">{t('drugs.instructions.patientCounselingInfo')}</span>
+                <span class="instruction-toggle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+              </summary>
+              <div class="instruction-body bionic-content">
+                <p>{l(drug.instructions.patientCounselingInfo)}</p>
+              </div>
+            </details>
+          )}
+        </div>
+      </section>
+    )}
+
     <!-- TRAVEL RULES - MODAL -->
     {drug.travelRules && (
       <>
@@ -2917,6 +3135,154 @@ const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().get
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--dossier-red);
+  }
+
+  /* ============================================
+     PRESCRIBING INFORMATION / INSTRUCTIONS SECTION
+     ============================================ */
+
+  .instructions-section {
+    margin-bottom: var(--space-8);
+  }
+
+  .instructions-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background: var(--dossier-cream);
+    border: 1px solid var(--dossier-border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .instruction-item {
+    background: var(--dossier-paper);
+    border-bottom: 1px solid var(--dossier-border);
+  }
+
+  .instruction-item:last-child {
+    border-bottom: none;
+  }
+
+  .instruction-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+
+  .instruction-header:hover {
+    background: var(--dossier-cream);
+  }
+
+  .instruction-number {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--dossier-cream);
+    border: 1px solid var(--dossier-border);
+    border-radius: 50%;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--dossier-muted);
+    flex-shrink: 0;
+  }
+
+  .instruction-item[open] .instruction-number {
+    background: var(--dossier-gold);
+    border-color: var(--dossier-gold);
+    color: #fff;
+  }
+
+  .instruction-title {
+    flex: 1;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--dossier-accent);
+  }
+
+  .instruction-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dossier-muted);
+    transition: transform 0.2s;
+  }
+
+  .instruction-item[open] .instruction-toggle {
+    transform: rotate(180deg);
+  }
+
+  .instruction-body {
+    padding: 0 var(--space-4) var(--space-4);
+    padding-left: calc(24px + var(--space-3) + var(--space-4));
+  }
+
+  .instruction-body p {
+    font-size: 0.8rem;
+    line-height: 1.7;
+    color: var(--dossier-ink);
+    margin: 0;
+    white-space: pre-wrap;
+  }
+
+  /* Warning items styling */
+  .instruction-item-warning .instruction-header {
+    border-left: 3px solid var(--dossier-red);
+  }
+
+  .instruction-item-warning .instruction-number {
+    background: rgba(197, 48, 48, 0.1);
+    border-color: rgba(197, 48, 48, 0.3);
+    color: var(--dossier-red);
+  }
+
+  .instruction-item-warning[open] .instruction-number {
+    background: var(--dossier-red);
+    border-color: var(--dossier-red);
+    color: #fff;
+  }
+
+  /* Bionic reading mode styles */
+  :global(body.bionic-reading) .bionic-content p {
+    word-spacing: 0.05em;
+  }
+
+  :global(body.bionic-reading) .bionic-content p::first-letter {
+    font-weight: 700;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .instruction-header {
+      padding: var(--space-2) var(--space-3);
+    }
+
+    .instruction-number {
+      width: 20px;
+      height: 20px;
+      font-size: 0.6rem;
+    }
+
+    .instruction-title {
+      font-size: 0.8rem;
+    }
+
+    .instruction-body {
+      padding-left: calc(20px + var(--space-2) + var(--space-3));
+      padding-right: var(--space-3);
+    }
+
+    .instruction-body p {
+      font-size: 0.75rem;
+    }
   }
 
   /* ============================================
