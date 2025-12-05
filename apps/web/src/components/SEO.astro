@@ -1,0 +1,66 @@
+---
+import type { Lang } from '../i18n/translations';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: Lang;
+  canonicalUrl: string;
+  alternates: Array<{ lang: string; path: string }>;
+  ogType?: 'website' | 'article';
+  ogImage?: string;
+  noindex?: boolean;
+  structuredData?: object | object[];
+}
+
+const {
+  title,
+  description,
+  lang,
+  canonicalUrl,
+  alternates,
+  ogType = 'website',
+  ogImage = '/og-image.png',
+  noindex = false,
+  structuredData,
+} = Astro.props;
+
+const siteUrl = 'https://adhd-db.com';
+const fullCanonicalUrl = canonicalUrl.startsWith('http') ? canonicalUrl : `${siteUrl}${canonicalUrl}`;
+const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+
+// Build structured data JSON
+const structuredDataJson = structuredData ? JSON.stringify(structuredData) : null;
+---
+
+<!-- Primary Meta Tags -->
+<meta name="description" content={description} />
+<link rel="canonical" href={fullCanonicalUrl} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={fullCanonicalUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={fullOgImage} />
+<meta property="og:locale" content={lang === 'zh' ? 'zh_CN' : lang === 'zh-TW' ? 'zh_TW' : lang === 'ja' ? 'ja_JP' : 'en_US'} />
+<meta property="og:site_name" content="ADHD-DB" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={fullCanonicalUrl} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={fullOgImage} />
+
+<!-- Hreflang Tags -->
+{alternates.map(({ lang: l, path }) => (
+  <link rel="alternate" hreflang={l} href={`${siteUrl}${path}`} />
+))}
+<link rel="alternate" hreflang="x-default" href={`${siteUrl}${alternates.find(a => a.lang === 'en')?.path || '/'}`} />
+
+<!-- Structured Data -->
+{structuredDataJson && (
+  <script type="application/ld+json" set:html={structuredDataJson} />
+)}

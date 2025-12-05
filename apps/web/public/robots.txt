@@ -1,0 +1,16 @@
+# ADHD-DB Robots.txt
+# https://adhd-db.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://adhd-db.com/sitemap-index.xml
+
+# Disallow API endpoints from being indexed
+Disallow: /api/
+
+# Allow all language versions
+Allow: /zh/
+Allow: /zh-TW/
+Allow: /ja/

@@ -50,9 +50,66 @@ const classColor = classColors[drug.drugClass as keyof typeof classColors] || '#
 
 // Generate case file number
 const caseNumber = `CF-${drug.id.substring(0, 3).toUpperCase()}-${new Date().getFullYear()}`;
+
+// SEO: Generate dynamic description
+const drugName = l(drug.genericName);
+const drugClass = drug.drugClass === 'stimulant' ? t('drugs.stimulant') : t('drugs.nonStimulant');
+const availableRegions = drug.approvals?.filter((a: any) => a.available).map((a: any) => a.region).join(', ') || '';
+const pageDescription = `${drugName} - ${drugClass} ADHD medication. ${t('drugs.description')} Available in: ${availableRegions || 'See details'}.`;
+
+// SEO: Drug structured data (Schema.org Drug/Medicine)
+// brandNames is an object with region keys (US, CN, etc.) and arrays of brand names
+const allBrandNames = drug.brandNames ? Object.values(drug.brandNames).flat().filter(Boolean) : [];
+const drugStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Drug',
+  name: drugName,
+  alternateName: allBrandNames,
+  description: l(drug.mechanism?.description) || pageDescription,
+  drugClass: {
+    '@type': 'DrugClass',
+    name: drug.drugClass === 'stimulant' ? 'Stimulant' : 'Non-Stimulant',
+  },
+  mechanismOfAction: l(drug.mechanism?.description),
+  isAvailableGenerically: true,
+  prescriptionStatus: drug.controlledSubstance ? 'PrescriptionOnly' : 'PrescriptionOnly',
+  warning: drug.sideEffects?.serious?.map((s: any) => l(s)).join('; ') || undefined,
+};
+
+// SEO: BreadcrumbList structured data
+const breadcrumbStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://adhd-db.com',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: t('drugs.title'),
+      item: `https://adhd-db.com${getLocalizedPath('/data/drugs', lang)}`,
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: drugName,
+      item: `https://adhd-db.com${getLocalizedPath(`/data/drugs/${drug.id}`, lang)}`,
+    },
+  ],
+};
 ---
 
-<DatabaseLayout title={l(drug.genericName)} activeDrugId={drug.id}>
+<DatabaseLayout
+  title={l(drug.genericName)}
+  description={pageDescription}
+  activeDrugId={drug.id}
+  ogType="article"
+  structuredData={[drugStructuredData, breadcrumbStructuredData]}
+>
   <article class="dossier">
     <!-- BREADCRUMB -->
     <nav class="breadcrumb">
