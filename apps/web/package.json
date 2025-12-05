@@ -19,6 +19,7 @@
     "yaml": "^2.6.0"
   },
   "devDependencies": {
+    "@astrojs/sitemap": "^3.6.0",
     "wrangler": "^4.51.0"
   }
 }

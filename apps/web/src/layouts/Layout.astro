@@ -1,16 +1,56 @@
 ---
 import { languages, type Lang } from '../i18n/translations';
 import { getLangFromUrl, useTranslations, getLocalizedPath, getAlternateLinks } from '../i18n/utils';
+import SEO from '../components/SEO.astro';
 import '../styles/tokens.css';
 
 interface Props {
   title: string;
+  description?: string;
+  ogType?: 'website' | 'article';
+  structuredData?: object | object[];
 }
 
-const { title } = Astro.props;
+const { title, description, ogType = 'website', structuredData } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const alternates = getAlternateLinks(Astro.url.pathname, lang);
+
+// Default description from translations
+const defaultDescription = t('home.description');
+const pageDescription = description || defaultDescription;
+
+// Build canonical URL
+const canonicalPath = alternates.find(a => a.lang === lang)?.path || Astro.url.pathname;
+
+// Organization structured data (for all pages)
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'ADHD-DB',
+  url: 'https://adhd-db.com',
+  logo: 'https://adhd-db.com/favicon.svg',
+  description: 'A comprehensive database of ADHD-related information with multi-region regulatory data.',
+};
+
+// WebSite structured data
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'ADHD-DB',
+  url: 'https://adhd-db.com',
+  inLanguage: ['en', 'zh-Hans', 'zh-Hant', 'ja'],
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: 'https://adhd-db.com/data/drugs?q={search_term_string}',
+    'query-input': 'required name=search_term_string',
+  },
+};
+
+// Combine structured data
+const allStructuredData = structuredData
+  ? [organizationSchema, websiteSchema, ...(Array.isArray(structuredData) ? structuredData : [structuredData])]
+  : [organizationSchema, websiteSchema];
 ---
 
 <!doctype html>
@@ -32,9 +72,15 @@ const alternates = getAlternateLinks(Astro.url.pathname, lang);
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <meta name="generator" content={Astro.generator} />
     <title>{title} | ADHD Database</title>
-    {alternates.map(({ lang: l, path }) => (
-      <link rel="alternate" hreflang={l} href={path} />
-    ))}
+    <SEO
+      title={`${title} | ADHD Database`}
+      description={pageDescription}
+      lang={lang}
+      canonicalUrl={canonicalPath}
+      alternates={alternates}
+      ogType={ogType}
+      structuredData={allStructuredData}
+    />
   </head>
   <body>
     <aside class="disclaimer">

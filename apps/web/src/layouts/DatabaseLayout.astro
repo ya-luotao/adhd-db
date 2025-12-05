@@ -1,15 +1,19 @@
 ---
 import { getLangFromUrl, useTranslations, getLocalizedPath } from '../i18n/utils';
 import { getDrugs, getLocalizedValue, getCategoryList } from '../lib/data';
+import SEO from '../components/SEO.astro';
 import '../styles/tokens.css';
 
 interface Props {
   title: string;
+  description?: string;
   activeTable?: 'drugs' | 'categories' | 'meta' | 'schema' | 'api';
   activeDrugId?: string;
+  ogType?: 'website' | 'article';
+  structuredData?: object | object[];
 }
 
-const { title, activeTable = 'drugs', activeDrugId } = Astro.props;
+const { title, description, activeTable = 'drugs', activeDrugId, ogType = 'website', structuredData } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const drugs = getDrugs();
@@ -36,6 +40,46 @@ const alternates = [
   { lang: 'ja', path: `/ja${Astro.url.pathname.replace(/^\/(zh-TW|zh|ja)/, '')}` },
   { lang: 'zh-TW', path: `/zh-TW${Astro.url.pathname.replace(/^\/(zh-TW|zh|ja)/, '')}` },
 ];
+
+// Default description from translations
+const defaultDescription = t('data.description');
+const pageDescription = description || defaultDescription;
+
+// Build canonical URL
+const canonicalPath = alternates.find(a => a.lang === lang)?.path || Astro.url.pathname;
+
+// Organization structured data
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'ADHD-DB',
+  url: 'https://adhd-db.com',
+  logo: 'https://adhd-db.com/favicon.svg',
+  description: 'A comprehensive database of ADHD-related information with multi-region regulatory data.',
+};
+
+// MedicalWebPage structured data for database pages
+const medicalWebPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalWebPage',
+  name: title,
+  description: pageDescription,
+  url: `https://adhd-db.com${canonicalPath}`,
+  inLanguage: lang === 'zh' ? 'zh-Hans' : lang === 'zh-TW' ? 'zh-Hant' : lang,
+  audience: {
+    '@type': 'MedicalAudience',
+    audienceType: 'Patient',
+  },
+  specialty: {
+    '@type': 'MedicalSpecialty',
+    name: 'Psychiatry',
+  },
+};
+
+// Combine structured data
+const allStructuredData = structuredData
+  ? [organizationSchema, medicalWebPageSchema, ...(Array.isArray(structuredData) ? structuredData : [structuredData])]
+  : [organizationSchema, medicalWebPageSchema];
 ---
 
 <!doctype html>
@@ -44,14 +88,28 @@ const alternates = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SJNPNV5QVR"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SJNPNV5QVR');
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <meta name="generator" content={Astro.generator} />
     <title>{title} | ADHD-DB</title>
-    {alternates.map(({ lang: l, path }) => (
-      <link rel="alternate" hreflang={l} href={path} />
-    ))}
+    <SEO
+      title={`${title} | ADHD-DB`}
+      description={pageDescription}
+      lang={lang}
+      canonicalUrl={canonicalPath}
+      alternates={alternates}
+      ogType={ogType}
+      structuredData={allStructuredData}
+    />
   </head>
   <body>
     <div class="db-layout">
