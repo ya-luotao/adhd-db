@@ -1,0 +1,1214 @@
+---
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../../i18n/utils';
+
+export const prerender = true;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const alternates = [
+  { lang: 'en', path: '/tools/concentration' },
+  { lang: 'zh', path: '/zh/tools/concentration' },
+  { lang: 'ja', path: '/ja/tools/concentration' },
+  { lang: 'zh-TW', path: '/zh-TW/tools/concentration' },
+];
+
+// Drug profiles for simulation
+const drugProfiles = {
+  concerta: {
+    name: t('tools.concentration.concerta.name'),
+    description: t('tools.concentration.concerta.description'),
+    doses: [18, 27, 36, 54],
+    // OROS release profile parameters
+    immediateReleaseFraction: 0.22,
+    sustainedReleaseFraction: 0.78,
+    tMaxImmediate: 1.5, // hours
+    tMaxSustained: 6.5, // hours
+    halfLife: 3.5, // hours
+    duration: 12, // hours
+  }
+};
+
+const drugProfilesJson = JSON.stringify(drugProfiles);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{t('tools.concentration.title')} | ADHD-DB</title>
+    <meta name="description" content={t('tools.concentration.description')} />
+    {alternates.map(({ lang: l, path }) => (
+      <link rel="alternate" hreflang={l} href={path} />
+    ))}
+  </head>
+  <body>
+    <div class="page">
+      <!-- Navigation -->
+      <nav class="nav">
+        <a href={getLocalizedPath('/', lang)} class="nav-logo">
+          <span class="logo-mark">◆</span>
+          <span class="logo-text">ADHD-DB</span>
+        </a>
+        <div class="nav-links">
+          <a href={getLocalizedPath('/data/drugs', lang)}>Database</a>
+          <a href={getLocalizedPath('/tools/concentration', lang)} class="active">Tools</a>
+          <a href={getLocalizedPath('/travel', lang)}>Travel</a>
+          <a href="https://github.com/ya-luotao/adhd-db" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <div class="nav-lang">
+          {alternates.map(({ lang: code, path }) => (
+            <a href={path} class:list={['lang-link', { active: lang === code }]}>
+              {code === 'en' ? 'EN' : code === 'zh' ? '中文' : code === 'zh-TW' ? '繁體' : '日本語'}
+            </a>
+          ))}
+        </div>
+      </nav>
+
+      <!-- Case File Header -->
+      <header class="case-header">
+        <div class="case-header-inner">
+          <div class="case-label">
+            <span class="label-text">TOOL</span>
+            <span class="label-divider">/</span>
+            <span class="label-code">CONCENTRATION</span>
+          </div>
+          <div class="case-title-row">
+            <h1 class="case-title">{t('tools.concentration.title')}</h1>
+            <div class="case-stamp">
+              <span class="stamp-text">PHARMA</span>
+            </div>
+          </div>
+          <p class="case-desc">{t('tools.concentration.description')}</p>
+        </div>
+        <div class="case-stripe"></div>
+      </header>
+
+      <!-- Tool Section -->
+      <main class="tool-section">
+        <div class="tool-container">
+          <!-- Form -->
+          <div class="tool-form">
+            <div class="form-section">
+              <div class="form-header">
+                <span class="form-step">1</span>
+                <h2>{t('tools.concentration.selectDrug')}</h2>
+              </div>
+              <div class="form-group">
+                <div class="select-wrapper">
+                  <select id="drug-select">
+                    <option value="concerta">{drugProfiles.concerta.name}</option>
+                  </select>
+                  <span class="select-arrow">▼</span>
+                </div>
+                <p class="drug-description" id="drug-description">{drugProfiles.concerta.description}</p>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <div class="form-header">
+                <span class="form-step">2</span>
+                <h2>{t('tools.concentration.selectDose')}</h2>
+              </div>
+              <div class="dose-buttons" id="dose-buttons">
+                {drugProfiles.concerta.doses.map((dose, index) => (
+                  <button
+                    class:list={['dose-btn', { active: index === 1 }]}
+                    data-dose={dose}
+                  >
+                    {dose}mg
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div class="form-section">
+              <div class="form-header">
+                <span class="form-step">3</span>
+                <h2>{t('tools.concentration.selectTime')}</h2>
+              </div>
+              <div class="form-group">
+                <div class="time-input-wrapper">
+                  <input type="time" id="dose-time" value="08:00" />
+                  <span class="time-icon">⏱</span>
+                </div>
+              </div>
+            </div>
+
+            <button id="simulate-btn" class="simulate-button">
+              <span>{t('tools.concentration.simulate')}</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+
+          <!-- Chart Section -->
+          <div class="chart-section" id="chart-section">
+            <div class="chart-header">
+              <h3>{t('tools.concentration.chartTitle')}</h3>
+              <div class="chart-info">
+                <span id="dose-info" class="dose-info"></span>
+              </div>
+            </div>
+            <div class="chart-container">
+              <canvas id="concentration-chart"></canvas>
+            </div>
+            <div class="chart-legend">
+              <div class="legend-item">
+                <span class="legend-color concentration-line"></span>
+                <span>{t('tools.concentration.concentration')}</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-color therapeutic-range"></span>
+                <span>{t('tools.concentration.therapeuticRange')}</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-color now-marker"></span>
+                <span>{t('tools.concentration.nowMarker')}</span>
+              </div>
+            </div>
+            <div class="chart-stats" id="chart-stats">
+              <div class="stat-card">
+                <span class="stat-label">{t('tools.concentration.peakTime')}</span>
+                <span class="stat-value" id="peak-time">–</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">{t('tools.concentration.duration')}</span>
+                <span class="stat-value" id="duration">–</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">{t('tools.concentration.currentTime')}</span>
+                <span class="stat-value" id="current-time">–</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer">
+          <div class="disclaimer-badge">
+            <span class="disclaimer-icon">!</span>
+          </div>
+          <div class="disclaimer-content">
+            <strong>{t('tools.concentration.disclaimer.title')}</strong>
+            <p>{t('tools.concentration.disclaimer.text')}</p>
+          </div>
+        </div>
+      </main>
+
+      <!-- Quick Links -->
+      <section class="quick-links">
+        <h3 class="quick-links-title">Related Tools</h3>
+        <div class="quick-links-grid">
+          <a href={getLocalizedPath('/tools/region-checker', lang)} class="quick-link">
+            <span class="quick-icon">✈</span>
+            <div class="quick-content">
+              <h4>Region Checker</h4>
+              <p>Check medication travel rules between countries</p>
+            </div>
+            <span class="quick-arrow">→</span>
+          </a>
+          <a href={getLocalizedPath('/tools/interactions', lang)} class="quick-link">
+            <span class="quick-icon">⚡</span>
+            <div class="quick-content">
+              <h4>Interaction Checker</h4>
+              <p>Check drug interactions</p>
+            </div>
+            <span class="quick-arrow">→</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-content">
+          <p class="footer-disclaimer">
+            This tool is for educational purposes only. Do not adjust medication based on this simulation.
+          </p>
+          <div class="footer-links">
+            <a href="https://github.com/ya-luotao/adhd-db" target="_blank">GitHub</a>
+            <span class="footer-sep">·</span>
+            <a href={getLocalizedPath('/', lang)}>Home</a>
+            <span class="footer-sep">·</span>
+            <a href={getLocalizedPath('/data/drugs', lang)}>Database</a>
+          </div>
+        </div>
+      </footer>
+
+      <!-- Paper texture overlay -->
+      <div class="paper-texture"></div>
+    </div>
+  </body>
+</html>
+
+<script define:vars={{ drugProfilesJson, lang }}>
+  const drugProfiles = JSON.parse(drugProfilesJson);
+
+  const labels = {
+    en: { hours: 'hours', doseAt: 'Dose taken at', nowMarker: 'NOW' },
+    zh: { hours: '小时', doseAt: '服药时间', nowMarker: '现在' },
+    'zh-TW': { hours: '小時', doseAt: '服藥時間', nowMarker: '現在' },
+    ja: { hours: '時間', doseAt: '服用時刻', nowMarker: '現在' },
+  };
+  const currentLabels = labels[lang] || labels.en;
+
+  let selectedDose = 27;
+  let doseTime = '08:00';
+  let simulationRunning = false;
+  let animationFrame = null;
+
+  const drugSelect = document.getElementById('drug-select');
+  const doseButtons = document.getElementById('dose-buttons');
+  const doseTimeInput = document.getElementById('dose-time');
+  const simulateBtn = document.getElementById('simulate-btn');
+  const chartSection = document.getElementById('chart-section');
+  const canvas = document.getElementById('concentration-chart');
+  const ctx = canvas.getContext('2d');
+
+  // Set up dose button handlers
+  doseButtons.querySelectorAll('.dose-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      doseButtons.querySelectorAll('.dose-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedDose = parseInt(btn.dataset.dose);
+    });
+  });
+
+  doseTimeInput.addEventListener('change', (e) => {
+    doseTime = e.target.value;
+  });
+
+  // Calculate Concerta concentration using a bi-exponential model
+  function calculateConcentration(t, profile, dose) {
+    if (t < 0) return 0;
+
+    const { immediateReleaseFraction, sustainedReleaseFraction, tMaxImmediate, tMaxSustained, halfLife, duration } = profile;
+    const k = Math.log(2) / halfLife; // elimination rate constant
+
+    // Normalized dose factor (relative to 18mg baseline)
+    const doseFactor = dose / 18;
+
+    // Immediate release component (22% of dose)
+    // Rises quickly, peaks at tMaxImmediate
+    let immediateComponent = 0;
+    if (t <= tMaxImmediate) {
+      immediateComponent = immediateReleaseFraction * (t / tMaxImmediate) * doseFactor;
+    } else {
+      const timeSincePeak = t - tMaxImmediate;
+      immediateComponent = immediateReleaseFraction * Math.exp(-k * timeSincePeak) * doseFactor;
+    }
+
+    // Sustained release component (78% of dose)
+    // Uses OROS zero-order release kinetics
+    let sustainedComponent = 0;
+    const releaseStart = 1; // hours after dose
+    const releaseDuration = 10; // hours of sustained release
+
+    if (t > releaseStart) {
+      const releaseTime = t - releaseStart;
+      if (releaseTime <= releaseDuration) {
+        // Zero-order release phase - builds up
+        const releaseRate = sustainedReleaseFraction / releaseDuration;
+        // Integrate release with elimination
+        sustainedComponent = (releaseRate / k) * (1 - Math.exp(-k * releaseTime)) * doseFactor;
+      } else {
+        // After release complete - only elimination
+        const peakSustained = (sustainedReleaseFraction / releaseDuration / k) * (1 - Math.exp(-k * releaseDuration)) * doseFactor;
+        const timeSinceReleaseEnd = releaseTime - releaseDuration;
+        sustainedComponent = peakSustained * Math.exp(-k * timeSinceReleaseEnd);
+      }
+    }
+
+    // Combine components
+    const total = immediateComponent + sustainedComponent;
+
+    // Normalize to percentage (peak around 100% for reference dose)
+    return Math.max(0, total * 100 / 0.35); // Adjust scaling factor
+  }
+
+  function drawChart(profile, dose, doseTimeStr) {
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    ctx.scale(dpr, dpr);
+
+    const width = rect.width;
+    const height = rect.height;
+    const padding = { top: 30, right: 30, bottom: 50, left: 60 };
+    const chartWidth = width - padding.left - padding.right;
+    const chartHeight = height - padding.top - padding.bottom;
+
+    // Clear canvas
+    ctx.clearRect(0, 0, width, height);
+
+    // Parse dose time
+    const [doseHour, doseMinute] = doseTimeStr.split(':').map(Number);
+    const doseTimeHours = doseHour + doseMinute / 60;
+
+    // Calculate current time relative to dose
+    const now = new Date();
+    const currentHour = now.getHours() + now.getMinutes() / 60;
+    let hoursAfterDose = currentHour - doseTimeHours;
+    if (hoursAfterDose < -12) hoursAfterDose += 24; // Handle day wrap
+
+    // Time range: -1 hour before dose to 16 hours after
+    const timeStart = -1;
+    const timeEnd = 16;
+    const timeRange = timeEnd - timeStart;
+
+    // Draw background
+    ctx.fillStyle = '#fdfcfa';
+    ctx.fillRect(0, 0, width, height);
+
+    // Draw grid
+    ctx.strokeStyle = '#e8e4dc';
+    ctx.lineWidth = 1;
+
+    // Vertical grid lines (every 2 hours)
+    for (let t = 0; t <= 16; t += 2) {
+      const x = padding.left + ((t - timeStart) / timeRange) * chartWidth;
+      ctx.beginPath();
+      ctx.moveTo(x, padding.top);
+      ctx.lineTo(x, height - padding.bottom);
+      ctx.stroke();
+    }
+
+    // Horizontal grid lines
+    for (let c = 0; c <= 100; c += 25) {
+      const y = height - padding.bottom - (c / 100) * chartHeight;
+      ctx.beginPath();
+      ctx.moveTo(padding.left, y);
+      ctx.lineTo(width - padding.right, y);
+      ctx.stroke();
+    }
+
+    // Draw therapeutic range (30-70% as example)
+    ctx.fillStyle = 'rgba(196, 160, 82, 0.1)';
+    const therapeuticTop = height - padding.bottom - (70 / 100) * chartHeight;
+    const therapeuticBottom = height - padding.bottom - (30 / 100) * chartHeight;
+    ctx.fillRect(padding.left, therapeuticTop, chartWidth, therapeuticBottom - therapeuticTop);
+
+    // Draw concentration curve
+    ctx.beginPath();
+    ctx.strokeStyle = '#c4a052';
+    ctx.lineWidth = 3;
+
+    const points = [];
+    for (let t = timeStart; t <= timeEnd; t += 0.1) {
+      const concentration = calculateConcentration(t, profile, dose);
+      const x = padding.left + ((t - timeStart) / timeRange) * chartWidth;
+      const y = height - padding.bottom - (Math.min(concentration, 120) / 120) * chartHeight;
+      points.push({ t, x, y, concentration });
+
+      if (t === timeStart) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    }
+    ctx.stroke();
+
+    // Fill under curve
+    ctx.lineTo(padding.left + chartWidth, height - padding.bottom);
+    ctx.lineTo(padding.left, height - padding.bottom);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(196, 160, 82, 0.15)';
+    ctx.fill();
+
+    // Draw current time marker if within visible range
+    if (hoursAfterDose >= timeStart && hoursAfterDose <= timeEnd) {
+      const nowX = padding.left + ((hoursAfterDose - timeStart) / timeRange) * chartWidth;
+      const currentConcentration = calculateConcentration(hoursAfterDose, profile, dose);
+      const nowY = height - padding.bottom - (Math.min(currentConcentration, 120) / 120) * chartHeight;
+
+      // Vertical line
+      ctx.beginPath();
+      ctx.strokeStyle = '#ef4444';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([5, 5]);
+      ctx.moveTo(nowX, padding.top);
+      ctx.lineTo(nowX, height - padding.bottom);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Marker dot
+      ctx.beginPath();
+      ctx.fillStyle = '#ef4444';
+      ctx.arc(nowX, nowY, 6, 0, Math.PI * 2);
+      ctx.fill();
+
+      // "NOW" label
+      ctx.fillStyle = '#ef4444';
+      ctx.font = 'bold 11px "DM Mono", monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(currentLabels.nowMarker, nowX, padding.top - 10);
+    }
+
+    // Draw dose time marker (t=0)
+    const doseX = padding.left + ((0 - timeStart) / timeRange) * chartWidth;
+    ctx.beginPath();
+    ctx.strokeStyle = '#3b82f6';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([3, 3]);
+    ctx.moveTo(doseX, padding.top);
+    ctx.lineTo(doseX, height - padding.bottom);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Draw axes
+    ctx.strokeStyle = '#1a1a2e';
+    ctx.lineWidth = 2;
+
+    // Y-axis
+    ctx.beginPath();
+    ctx.moveTo(padding.left, padding.top);
+    ctx.lineTo(padding.left, height - padding.bottom);
+    ctx.stroke();
+
+    // X-axis
+    ctx.beginPath();
+    ctx.moveTo(padding.left, height - padding.bottom);
+    ctx.lineTo(width - padding.right, height - padding.bottom);
+    ctx.stroke();
+
+    // X-axis labels
+    ctx.fillStyle = '#525252';
+    ctx.font = '12px "DM Sans", sans-serif';
+    ctx.textAlign = 'center';
+    for (let t = 0; t <= 16; t += 2) {
+      const x = padding.left + ((t - timeStart) / timeRange) * chartWidth;
+      ctx.fillText(`${t}h`, x, height - padding.bottom + 20);
+    }
+
+    // Y-axis labels
+    ctx.textAlign = 'right';
+    for (let c = 0; c <= 100; c += 25) {
+      const y = height - padding.bottom - (c / 100) * chartHeight;
+      ctx.fillText(`${c}%`, padding.left - 10, y + 4);
+    }
+
+    // Axis titles
+    ctx.fillStyle = '#8b8680';
+    ctx.font = '11px "DM Mono", monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(lang === 'zh' || lang === 'zh-TW' ? '服药后小时数' : lang === 'ja' ? '服用後の時間' : 'Hours After Dose',
+      padding.left + chartWidth / 2, height - 10);
+
+    ctx.save();
+    ctx.translate(15, padding.top + chartHeight / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText(lang === 'zh' || lang === 'zh-TW' ? '相对浓度 (%)' : lang === 'ja' ? '相対濃度 (%)' : 'Relative Concentration (%)', 0, 0);
+    ctx.restore();
+
+    // Update stats
+    // Find peak
+    let peakConcentration = 0;
+    let peakTime = 0;
+    for (const p of points) {
+      if (p.concentration > peakConcentration) {
+        peakConcentration = p.concentration;
+        peakTime = p.t;
+      }
+    }
+
+    const peakTimeHour = Math.floor(doseTimeHours + peakTime);
+    const peakTimeMinute = Math.round(((doseTimeHours + peakTime) % 1) * 60);
+    document.getElementById('peak-time').textContent =
+      `${String(peakTimeHour % 24).padStart(2, '0')}:${String(peakTimeMinute).padStart(2, '0')} (~${peakTime.toFixed(1)}h)`;
+
+    document.getElementById('duration').textContent = `~${profile.duration} ${currentLabels.hours}`;
+
+    const currentHourStr = String(now.getHours()).padStart(2, '0');
+    const currentMinStr = String(now.getMinutes()).padStart(2, '0');
+    document.getElementById('current-time').textContent = `${currentHourStr}:${currentMinStr}`;
+
+    document.getElementById('dose-info').textContent =
+      `${currentLabels.doseAt} ${doseTimeStr} · ${dose}mg`;
+  }
+
+  simulateBtn.addEventListener('click', () => {
+    const profile = drugProfiles[drugSelect.value];
+    chartSection.classList.add('visible');
+    drawChart(profile, selectedDose, doseTime);
+
+    // Start auto-update
+    if (animationFrame) cancelAnimationFrame(animationFrame);
+    simulationRunning = true;
+
+    function updateLoop() {
+      if (simulationRunning) {
+        drawChart(profile, selectedDose, doseTime);
+        animationFrame = requestAnimationFrame(() => {
+          setTimeout(updateLoop, 60000); // Update every minute
+        });
+      }
+    }
+    updateLoop();
+
+    chartSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  // Handle resize
+  window.addEventListener('resize', () => {
+    if (chartSection.classList.contains('visible')) {
+      const profile = drugProfiles[drugSelect.value];
+      drawChart(profile, selectedDose, doseTime);
+    }
+  });
+</script>
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--dossier-bg);
+    color: #1a1a1a;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    --dossier-bg: #fdfcfa;
+    --dossier-paper: #fffef9;
+    --dossier-cream: #f5f2eb;
+    --dossier-border: #e8e4dc;
+    --dossier-accent: #1a1a2e;
+    --dossier-muted: #8b8680;
+    --dossier-gold: #c4a052;
+    --dossier-gold-light: rgba(196, 160, 82, 0.1);
+    --stimulant: #ef4444;
+    --non-stimulant: #3b82f6;
+    --text-primary: #1a1a1a;
+    --text-secondary: #525252;
+    --text-muted: #8b8680;
+    --border: #e8e4dc;
+    --surface: #fffef9;
+    --surface-alt: #f5f2eb;
+    position: relative;
+    min-height: 100vh;
+    background: var(--dossier-bg);
+  }
+
+  .paper-texture {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.02;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* Navigation */
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 4rem;
+    position: sticky;
+    top: 0;
+    background: rgba(253, 252, 250, 0.95);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .logo-mark { color: var(--dossier-gold); font-size: 1.25rem; }
+  .logo-text { font-family: 'DM Mono', monospace; font-weight: 500; font-size: 1rem; }
+
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--dossier-gold); }
+
+  .nav-lang { display: flex; gap: 0.25rem; }
+  .lang-link {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--text-muted);
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  .lang-link:hover { color: var(--dossier-gold); background: var(--dossier-gold-light); }
+  .lang-link.active { color: white; background: var(--dossier-gold); }
+
+  /* Case File Header */
+  .case-header {
+    background: var(--dossier-accent);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .case-header-inner { padding: 2.5rem 4rem 2rem; }
+
+  .case-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+    margin-bottom: 1rem;
+  }
+
+  .label-divider { opacity: 0.4; }
+
+  .case-title-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .case-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .case-stamp {
+    width: 70px;
+    height: 70px;
+    border: 2px dashed rgba(196, 160, 82, 0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-12deg);
+    flex-shrink: 0;
+  }
+
+  .stamp-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.5rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--dossier-gold);
+  }
+
+  .case-desc {
+    font-size: 1rem;
+    opacity: 0.8;
+    max-width: 500px;
+  }
+
+  .case-stripe {
+    height: 4px;
+    background: linear-gradient(90deg, var(--dossier-gold) 0%, var(--dossier-gold) 30%, transparent 30%);
+  }
+
+  /* Tool Section */
+  .tool-section {
+    padding: 3rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .tool-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  /* Form */
+  .tool-form {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .form-section {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .form-section:last-of-type { border-bottom: none; }
+
+  .form-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .form-step {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--dossier-gold);
+    color: white;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 50%;
+  }
+
+  .form-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .form-group { margin-bottom: 1rem; }
+  .form-group:last-child { margin-bottom: 0; }
+
+  .select-wrapper {
+    position: relative;
+  }
+
+  .select-wrapper select {
+    width: 100%;
+    appearance: none;
+    padding: 0.875rem 2.5rem 0.875rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .select-wrapper select:hover { border-color: var(--dossier-gold); }
+  .select-wrapper select:focus {
+    outline: none;
+    border-color: var(--dossier-gold);
+    box-shadow: 0 0 0 3px var(--dossier-gold-light);
+  }
+
+  .select-wrapper .select-arrow {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+
+  .drug-description {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  /* Dose buttons */
+  .dose-buttons {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .dose-btn {
+    padding: 0.75rem 1.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: var(--surface-alt);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .dose-btn:hover {
+    border-color: var(--dossier-gold);
+    color: var(--dossier-gold);
+  }
+
+  .dose-btn.active {
+    background: var(--dossier-gold);
+    border-color: var(--dossier-gold);
+    color: white;
+  }
+
+  /* Time input */
+  .time-input-wrapper {
+    position: relative;
+    max-width: 200px;
+  }
+
+  .time-input-wrapper input[type="time"] {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    padding-right: 2.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .time-input-wrapper input[type="time"]:hover { border-color: var(--dossier-gold); }
+  .time-input-wrapper input[type="time"]:focus {
+    outline: none;
+    border-color: var(--dossier-gold);
+    box-shadow: 0 0 0 3px var(--dossier-gold-light);
+  }
+
+  .time-icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+
+  /* Simulate button */
+  .simulate-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: calc(100% - 4rem);
+    margin: 1.5rem 2rem 2rem;
+    padding: 1rem;
+    background: var(--dossier-gold);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .simulate-button:hover {
+    background: #b08f42;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(196, 160, 82, 0.3);
+  }
+
+  .simulate-button .btn-arrow { transition: transform 0.2s; }
+  .simulate-button:hover .btn-arrow { transform: translateX(4px); }
+
+  /* Chart Section */
+  .chart-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    display: none;
+  }
+
+  .chart-section.visible {
+    display: block;
+    animation: slideUp 0.3s ease;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .chart-header h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .dose-info {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    background: var(--surface-alt);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+  }
+
+  .chart-container {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    margin-bottom: 1.5rem;
+  }
+
+  #concentration-chart {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+  }
+
+  .chart-legend {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: var(--surface-alt);
+    border-radius: 8px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  .legend-color {
+    width: 20px;
+    height: 4px;
+    border-radius: 2px;
+  }
+
+  .legend-color.concentration-line { background: var(--dossier-gold); }
+  .legend-color.therapeutic-range {
+    background: rgba(196, 160, 82, 0.3);
+    height: 12px;
+  }
+  .legend-color.now-marker {
+    background: #ef4444;
+    width: 4px;
+    height: 16px;
+  }
+
+  .chart-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .stat-card {
+    background: var(--surface-alt);
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .stat-label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  /* Disclaimer */
+  .disclaimer {
+    display: flex;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    margin-top: 2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    border-left: 4px solid var(--dossier-gold);
+  }
+
+  .disclaimer-badge {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--dossier-gold);
+    color: white;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .disclaimer-icon { font-size: 0.9rem; font-weight: 700; }
+
+  .disclaimer-content strong {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+
+  .disclaimer-content p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  /* Quick Links */
+  .quick-links {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 4rem 4rem;
+  }
+
+  .quick-links-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
+  }
+
+  .quick-links-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .quick-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+  }
+
+  .quick-link:hover {
+    border-color: var(--dossier-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  }
+
+  .quick-icon { font-size: 1.25rem; color: var(--dossier-gold); }
+
+  .quick-content h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+
+  .quick-content p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .quick-arrow {
+    margin-left: auto;
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    transition: all 0.2s;
+  }
+
+  .quick-link:hover .quick-arrow {
+    color: var(--dossier-gold);
+    transform: translateX(4px);
+  }
+
+  /* Footer */
+  .footer {
+    padding: 2rem 4rem;
+    background: var(--dossier-cream);
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-content {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .footer-disclaimer {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--dossier-gold); }
+  .footer-sep { color: var(--text-muted); }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .nav { padding: 1rem 1.5rem; flex-wrap: wrap; gap: 1rem; }
+    .nav-links { display: none; }
+
+    .case-header-inner { padding: 2rem 1.5rem 1.5rem; }
+    .case-title { font-size: 1.75rem; }
+    .case-stamp { width: 50px; height: 50px; }
+    .stamp-text { font-size: 0.4rem; }
+
+    .tool-section { padding: 2rem 1.5rem; }
+    .form-section { padding: 1.25rem 1.5rem; }
+    .simulate-button { width: calc(100% - 3rem); margin: 1.25rem 1.5rem 1.5rem; }
+
+    .chart-section { padding: 1.5rem; }
+    .chart-container { height: 280px; }
+    .chart-stats { grid-template-columns: 1fr; }
+    .chart-legend { flex-wrap: wrap; gap: 1rem; }
+
+    .quick-links { padding: 0 1.5rem 3rem; }
+    .quick-links-grid { grid-template-columns: 1fr; }
+
+    .footer { padding: 1.5rem; }
+  }
+</style>
