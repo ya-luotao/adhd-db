@@ -1,0 +1,552 @@
+---
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../../i18n/utils';
+
+export const prerender = true;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const alternates = [
+  { lang: 'en', path: '/tools' },
+  { lang: 'zh', path: '/zh/tools' },
+  { lang: 'ja', path: '/ja/tools' },
+  { lang: 'zh-TW', path: '/zh-TW/tools' },
+];
+
+// Define available tools
+const tools = [
+  {
+    id: 'concentration',
+    icon: '📊',
+    path: '/tools/concentration',
+    title: {
+      en: 'Drug Concentration Simulator',
+      zh: '药物浓度模拟器',
+      'zh-TW': '藥物濃度模擬器',
+      ja: '薬物濃度シミュレーター',
+    },
+    description: {
+      en: 'Visualize how medication concentration changes in your body over time',
+      zh: '可视化药物在体内浓度随时间的变化',
+      'zh-TW': '視覺化藥物在體內濃度隨時間的變化',
+      ja: '体内の薬物濃度の時間経過を視覚化',
+    },
+    drugs: {
+      en: ['Concerta (Methylphenidate ER)'],
+      zh: ['专注达 (哌甲酯缓释片)'],
+      'zh-TW': ['專思達 (哌甲酯緩釋片)'],
+      ja: ['コンサータ (メチルフェニデート徐放錠)'],
+    },
+    badge: 'PHARMA',
+  },
+  {
+    id: 'region-checker',
+    icon: '✈️',
+    path: '/tools/region-checker',
+    title: {
+      en: 'Region-to-Region Legality Checker',
+      zh: '地区间合法性检查',
+      'zh-TW': '地區間合法性檢查',
+      ja: '地域間合法性チェッカー',
+    },
+    description: {
+      en: 'Check medication travel rules between different countries/regions',
+      zh: '检查不同国家/地区之间的药物旅行规则',
+      'zh-TW': '檢查不同國家/地區之間的藥物旅行規則',
+      ja: '異なる国/地域間の薬物旅行ルールを確認',
+    },
+    drugs: {
+      en: ['All ADHD medications'],
+      zh: ['所有ADHD药物'],
+      'zh-TW': ['所有ADHD藥物'],
+      ja: ['すべてのADHD薬'],
+    },
+    badge: 'TRAVEL',
+  },
+  {
+    id: 'interactions',
+    icon: '⚡',
+    path: '/tools/interactions',
+    title: {
+      en: 'Drug Interaction Checker',
+      zh: '药物相互作用检查器',
+      'zh-TW': '藥物交互作用檢查器',
+      ja: '薬物相互作用チェッカー',
+    },
+    description: {
+      en: 'Check for potential interactions between ADHD medications and other drugs',
+      zh: '检查ADHD药物与其他药物之间的潜在相互作用',
+      'zh-TW': '檢查ADHD藥物與其他藥物之間的潛在交互作用',
+      ja: 'ADHD薬と他の薬物との潜在的な相互作用を確認',
+    },
+    drugs: {
+      en: ['All ADHD medications'],
+      zh: ['所有ADHD药物'],
+      'zh-TW': ['所有ADHD藥物'],
+      ja: ['すべてのADHD薬'],
+    },
+    badge: 'SAFETY',
+  },
+];
+
+const pageLabels = {
+  en: {
+    title: 'Tools',
+    description: 'Interactive tools for ADHD medication information and planning.',
+    supportedDrugs: 'Supported',
+    useNow: 'Use Tool',
+  },
+  zh: {
+    title: '工具',
+    description: 'ADHD药物信息和规划的互动工具。',
+    supportedDrugs: '支持药物',
+    useNow: '使用工具',
+  },
+  'zh-TW': {
+    title: '工具',
+    description: 'ADHD藥物資訊和規劃的互動工具。',
+    supportedDrugs: '支援藥物',
+    useNow: '使用工具',
+  },
+  ja: {
+    title: 'ツール',
+    description: 'ADHD薬の情報と計画のためのインタラクティブツール。',
+    supportedDrugs: '対応薬物',
+    useNow: 'ツールを使用',
+  },
+};
+
+const labels = pageLabels[lang] || pageLabels.en;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{labels.title} | ADHD-DB</title>
+    <meta name="description" content={labels.description} />
+    {alternates.map(({ lang: l, path }) => (
+      <link rel="alternate" hreflang={l} href={path} />
+    ))}
+  </head>
+  <body>
+    <div class="page">
+      <!-- Navigation -->
+      <nav class="nav">
+        <a href={getLocalizedPath('/', lang)} class="nav-logo">
+          <span class="logo-mark">◆</span>
+          <span class="logo-text">ADHD-DB</span>
+        </a>
+        <div class="nav-links">
+          <a href={getLocalizedPath('/data/drugs', lang)}>Database</a>
+          <a href={getLocalizedPath('/tools', lang)} class="active">Tools</a>
+          <a href={getLocalizedPath('/travel', lang)}>Travel</a>
+          <a href="https://github.com/ya-luotao/adhd-db" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <div class="nav-lang">
+          {alternates.map(({ lang: code, path }) => (
+            <a href={path} class:list={['lang-link', { active: lang === code }]}>
+              {code === 'en' ? 'EN' : code === 'zh' ? '中文' : code === 'zh-TW' ? '繁體' : '日本語'}
+            </a>
+          ))}
+        </div>
+      </nav>
+
+      <!-- Case File Header -->
+      <header class="case-header">
+        <div class="case-header-inner">
+          <div class="case-label">
+            <span class="label-text">ADHD-DB</span>
+            <span class="label-divider">/</span>
+            <span class="label-code">TOOLS</span>
+          </div>
+          <div class="case-title-row">
+            <h1 class="case-title">{labels.title}</h1>
+            <div class="case-stamp">
+              <span class="stamp-text">INTER<br/>ACTIVE</span>
+            </div>
+          </div>
+          <p class="case-desc">{labels.description}</p>
+        </div>
+        <div class="case-stripe"></div>
+      </header>
+
+      <!-- Tools Grid -->
+      <main class="tools-section">
+        <div class="tools-grid">
+          {tools.map(tool => (
+            <a href={getLocalizedPath(tool.path, lang)} class="tool-card">
+              <div class="tool-header">
+                <span class="tool-icon">{tool.icon}</span>
+                <span class="tool-badge">{tool.badge}</span>
+              </div>
+              <h2 class="tool-title">{tool.title[lang] || tool.title.en}</h2>
+              <p class="tool-description">{tool.description[lang] || tool.description.en}</p>
+              <div class="tool-drugs">
+                <span class="drugs-label">{labels.supportedDrugs}:</span>
+                <span class="drugs-list">{(tool.drugs[lang] || tool.drugs.en).join(', ')}</span>
+              </div>
+              <div class="tool-action">
+                <span>{labels.useNow}</span>
+                <span class="action-arrow">→</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-content">
+          <p class="footer-disclaimer">
+            {lang === 'zh' ? '这些工具仅供参考和教育目的。' :
+             lang === 'zh-TW' ? '這些工具僅供參考和教育目的。' :
+             lang === 'ja' ? 'これらのツールは参考および教育目的のみです。' :
+             'These tools are for informational and educational purposes only.'}
+          </p>
+          <div class="footer-links">
+            <a href="https://github.com/ya-luotao/adhd-db" target="_blank">GitHub</a>
+            <span class="footer-sep">·</span>
+            <a href={getLocalizedPath('/', lang)}>Home</a>
+            <span class="footer-sep">·</span>
+            <a href={getLocalizedPath('/data/drugs', lang)}>Database</a>
+          </div>
+        </div>
+      </footer>
+
+      <!-- Paper texture overlay -->
+      <div class="paper-texture"></div>
+    </div>
+  </body>
+</html>
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--dossier-bg);
+    color: #1a1a1a;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    --dossier-bg: #fdfcfa;
+    --dossier-paper: #fffef9;
+    --dossier-cream: #f5f2eb;
+    --dossier-border: #e8e4dc;
+    --dossier-accent: #1a1a2e;
+    --dossier-muted: #8b8680;
+    --dossier-gold: #c4a052;
+    --dossier-gold-light: rgba(196, 160, 82, 0.1);
+    --text-primary: #1a1a1a;
+    --text-secondary: #525252;
+    --text-muted: #8b8680;
+    --border: #e8e4dc;
+    --surface: #fffef9;
+    --surface-alt: #f5f2eb;
+    position: relative;
+    min-height: 100vh;
+    background: var(--dossier-bg);
+  }
+
+  .paper-texture {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.02;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* Navigation */
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 4rem;
+    position: sticky;
+    top: 0;
+    background: rgba(253, 252, 250, 0.95);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .logo-mark { color: var(--dossier-gold); font-size: 1.25rem; }
+  .logo-text { font-family: 'DM Mono', monospace; font-weight: 500; font-size: 1rem; }
+
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--dossier-gold); }
+
+  .nav-lang { display: flex; gap: 0.25rem; }
+  .lang-link {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--text-muted);
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  .lang-link:hover { color: var(--dossier-gold); background: var(--dossier-gold-light); }
+  .lang-link.active { color: white; background: var(--dossier-gold); }
+
+  /* Case File Header */
+  .case-header {
+    background: var(--dossier-accent);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .case-header-inner { padding: 2.5rem 4rem 2rem; }
+
+  .case-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+    margin-bottom: 1rem;
+  }
+
+  .label-divider { opacity: 0.4; }
+
+  .case-title-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .case-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .case-stamp {
+    width: 70px;
+    height: 70px;
+    border: 2px dashed rgba(196, 160, 82, 0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-12deg);
+    flex-shrink: 0;
+  }
+
+  .stamp-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.45rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--dossier-gold);
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .case-desc {
+    font-size: 1rem;
+    opacity: 0.8;
+    max-width: 500px;
+  }
+
+  .case-stripe {
+    height: 4px;
+    background: linear-gradient(90deg, var(--dossier-gold) 0%, var(--dossier-gold) 30%, transparent 30%);
+  }
+
+  /* Tools Section */
+  .tools-section {
+    padding: 3rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .tool-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+  }
+
+  .tool-card:hover {
+    border-color: var(--dossier-gold);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  }
+
+  .tool-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+
+  .tool-icon {
+    font-size: 2rem;
+  }
+
+  .tool-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 0.35rem 0.75rem;
+    background: var(--dossier-gold-light);
+    color: var(--dossier-gold);
+    border-radius: 4px;
+  }
+
+  .tool-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .tool-description {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    flex-grow: 1;
+  }
+
+  .tool-drugs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: baseline;
+    margin-bottom: 1.25rem;
+    padding: 0.75rem;
+    background: var(--surface-alt);
+    border-radius: 8px;
+  }
+
+  .drugs-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+
+  .drugs-list {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  .tool-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--dossier-gold);
+  }
+
+  .action-arrow {
+    font-size: 1.25rem;
+    transition: transform 0.2s;
+  }
+
+  .tool-card:hover .action-arrow {
+    transform: translateX(4px);
+  }
+
+  /* Footer */
+  .footer {
+    padding: 2rem 4rem;
+    background: var(--dossier-cream);
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-content {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .footer-disclaimer {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--dossier-gold); }
+  .footer-sep { color: var(--text-muted); }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .nav { padding: 1rem 1.5rem; flex-wrap: wrap; gap: 1rem; }
+    .nav-links { display: none; }
+
+    .case-header-inner { padding: 2rem 1.5rem 1.5rem; }
+    .case-title { font-size: 1.75rem; }
+    .case-stamp { width: 50px; height: 50px; }
+    .stamp-text { font-size: 0.35rem; }
+
+    .tools-section { padding: 2rem 1.5rem; }
+    .tools-grid { grid-template-columns: 1fr; }
+
+    .footer { padding: 1.5rem; }
+  }
+</style>

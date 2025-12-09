@@ -186,6 +186,12 @@ const drugProfilesJson = JSON.stringify(drugProfiles);
                 <span class="stat-value" id="current-time">–</span>
               </div>
             </div>
+
+            <!-- Bar Chart (Timeline) -->
+            <div class="bar-chart-section">
+              <h4 class="bar-chart-title">{lang === 'zh' ? '浓度时间表' : lang === 'zh-TW' ? '濃度時間表' : lang === 'ja' ? '濃度タイムライン' : 'Concentration Timeline'}</h4>
+              <div class="bar-chart-container" id="bar-chart-container"></div>
+            </div>
           </div>
         </div>
 
@@ -283,24 +289,20 @@ const drugProfilesJson = JSON.stringify(drugProfiles);
     doseTime = e.target.value;
   });
 
-  // Calculate Concerta concentration using a bi-exponential model
-  function calculateConcentration(t, profile, dose) {
+  // Calculate raw Concerta concentration using a bi-exponential model
+  function calculateRawConcentration(t, profile) {
     if (t < 0) return 0;
 
-    const { immediateReleaseFraction, sustainedReleaseFraction, tMaxImmediate, tMaxSustained, halfLife, duration } = profile;
+    const { immediateReleaseFraction, sustainedReleaseFraction, tMaxImmediate, halfLife } = profile;
     const k = Math.log(2) / halfLife; // elimination rate constant
 
-    // Normalized dose factor (relative to 18mg baseline)
-    const doseFactor = dose / 18;
-
     // Immediate release component (22% of dose)
-    // Rises quickly, peaks at tMaxImmediate
     let immediateComponent = 0;
     if (t <= tMaxImmediate) {
-      immediateComponent = immediateReleaseFraction * (t / tMaxImmediate) * doseFactor;
+      immediateComponent = immediateReleaseFraction * (t / tMaxImmediate);
     } else {
       const timeSincePeak = t - tMaxImmediate;
-      immediateComponent = immediateReleaseFraction * Math.exp(-k * timeSincePeak) * doseFactor;
+      immediateComponent = immediateReleaseFraction * Math.exp(-k * timeSincePeak);
     }
 
     // Sustained release component (78% of dose)
@@ -314,21 +316,34 @@ const drugProfilesJson = JSON.stringify(drugProfiles);
       if (releaseTime <= releaseDuration) {
         // Zero-order release phase - builds up
         const releaseRate = sustainedReleaseFraction / releaseDuration;
-        // Integrate release with elimination
-        sustainedComponent = (releaseRate / k) * (1 - Math.exp(-k * releaseTime)) * doseFactor;
+        sustainedComponent = (releaseRate / k) * (1 - Math.exp(-k * releaseTime));
       } else {
         // After release complete - only elimination
-        const peakSustained = (sustainedReleaseFraction / releaseDuration / k) * (1 - Math.exp(-k * releaseDuration)) * doseFactor;
+        const peakSustained = (sustainedReleaseFraction / releaseDuration / k) * (1 - Math.exp(-k * releaseDuration));
         const timeSinceReleaseEnd = releaseTime - releaseDuration;
         sustainedComponent = peakSustained * Math.exp(-k * timeSinceReleaseEnd);
       }
     }
 
-    // Combine components
-    const total = immediateComponent + sustainedComponent;
+    return immediateComponent + sustainedComponent;
+  }
 
-    // Normalize to percentage (peak around 100% for reference dose)
-    return Math.max(0, total * 100 / 0.35); // Adjust scaling factor
+  // Find peak concentration for normalization
+  function findPeakConcentration(profile) {
+    let maxConc = 0;
+    for (let t = 0; t <= 16; t += 0.1) {
+      const conc = calculateRawConcentration(t, profile);
+      if (conc > maxConc) maxConc = conc;
+    }
+    return maxConc;
+  }
+
+  // Calculate normalized concentration (0-100%)
+  function calculateConcentration(t, profile, dose) {
+    const raw = calculateRawConcentration(t, profile);
+    const peak = findPeakConcentration(profile);
+    // Normalize so peak = 100%, dose affects the "effective" level display
+    return (raw / peak) * 100;
   }
 
   function drawChart(profile, dose, doseTimeStr) {
@@ -403,7 +418,7 @@ const drugProfilesJson = JSON.stringify(drugProfiles);
     for (let t = timeStart; t <= timeEnd; t += 0.1) {
       const concentration = calculateConcentration(t, profile, dose);
       const x = padding.left + ((t - timeStart) / timeRange) * chartWidth;
-      const y = height - padding.bottom - (Math.min(concentration, 120) / 120) * chartHeight;
+      const y = height - padding.bottom - (Math.min(concentration, 100) / 100) * chartHeight;
       points.push({ t, x, y, concentration });
 
       if (t === timeStart) {
@@ -425,7 +440,7 @@ const drugProfilesJson = JSON.stringify(drugProfiles);
     if (hoursAfterDose >= timeStart && hoursAfterDose <= timeEnd) {
       const nowX = padding.left + ((hoursAfterDose - timeStart) / timeRange) * chartWidth;
       const currentConcentration = calculateConcentration(hoursAfterDose, profile, dose);
-      const nowY = height - padding.bottom - (Math.min(currentConcentration, 120) / 120) * chartHeight;
+      const nowY = height - padding.bottom - (Math.min(currentConcentration, 100) / 100) * chartHeight;
 
       // Vertical line
       ctx.beginPath();
@@ -532,10 +547,73 @@ const drugProfilesJson = JSON.stringify(drugProfiles);
       `${currentLabels.doseAt} ${doseTimeStr} · ${dose}mg`;
   }
 
+  // Draw vertical bar chart (time top-to-bottom, bars left-to-right)
+  function drawBarChart(profile, dose, doseTimeStr) {
+    const container = document.getElementById('bar-chart-container');
+    container.innerHTML = '';
+
+    const [doseHour, doseMinute] = doseTimeStr.split(':').map(Number);
+    const doseTimeHours = doseHour + doseMinute / 60;
+
+    // Current time
+    const now = new Date();
+    const currentHour = now.getHours() + now.getMinutes() / 60;
+    let hoursAfterDose = currentHour - doseTimeHours;
+    if (hoursAfterDose < -12) hoursAfterDose += 24;
+
+    // Generate bars for every 15 minutes (0.25 hours) from 0 to 14 hours
+    const interval = 0.25; // 15 minutes
+    const maxTime = 14;
+
+    for (let t = 0; t <= maxTime; t += interval) {
+      const concentration = calculateConcentration(t, profile, dose);
+      const timeHours = Math.floor(doseTimeHours + t) % 24;
+      const timeMinutes = Math.round(((doseTimeHours + t) % 1) * 60) % 60;
+      const timeStr = `${String(timeHours).padStart(2, '0')}:${String(timeMinutes).padStart(2, '0')}`;
+
+      const isNow = Math.abs(t - hoursAfterDose) < interval / 2;
+      const isPast = t < hoursAfterDose;
+
+      const row = document.createElement('div');
+      row.className = 'bar-row' + (isNow ? ' now' : '') + (isPast ? ' past' : '');
+
+      const timeLabel = document.createElement('div');
+      timeLabel.className = 'bar-time';
+      timeLabel.textContent = timeStr;
+
+      const barContainer = document.createElement('div');
+      barContainer.className = 'bar-container';
+
+      const bar = document.createElement('div');
+      bar.className = 'bar';
+      bar.style.width = `${Math.min(concentration, 100)}%`;
+
+      // Color based on concentration level
+      if (concentration >= 70) {
+        bar.classList.add('high');
+      } else if (concentration >= 30) {
+        bar.classList.add('medium');
+      } else {
+        bar.classList.add('low');
+      }
+
+      const valueLabel = document.createElement('div');
+      valueLabel.className = 'bar-value';
+      valueLabel.textContent = `${Math.round(concentration)}%`;
+
+      barContainer.appendChild(bar);
+      row.appendChild(timeLabel);
+      row.appendChild(barContainer);
+      row.appendChild(valueLabel);
+      container.appendChild(row);
+    }
+  }
+
   simulateBtn.addEventListener('click', () => {
     const profile = drugProfiles[drugSelect.value];
     chartSection.classList.add('visible');
     drawChart(profile, selectedDose, doseTime);
+    drawBarChart(profile, selectedDose, doseTime);
 
     // Start auto-update
     if (animationFrame) cancelAnimationFrame(animationFrame);
@@ -544,6 +622,7 @@ const drugProfilesJson = JSON.stringify(drugProfiles);
     function updateLoop() {
       if (simulationRunning) {
         drawChart(profile, selectedDose, doseTime);
+        drawBarChart(profile, selectedDose, doseTime);
         animationFrame = requestAnimationFrame(() => {
           setTimeout(updateLoop, 60000); // Update every minute
         });
@@ -559,6 +638,7 @@ const drugProfilesJson = JSON.stringify(drugProfiles);
     if (chartSection.classList.contains('visible')) {
       const profile = drugProfiles[drugSelect.value];
       drawChart(profile, selectedDose, doseTime);
+      drawBarChart(profile, selectedDose, doseTime);
     }
   });
 </script>
@@ -1039,6 +1119,100 @@ const drugProfilesJson = JSON.stringify(drugProfiles);
     font-size: 1.1rem;
     font-weight: 500;
     color: var(--text-primary);
+  }
+
+  /* Bar Chart Section */
+  .bar-chart-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .bar-chart-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .bar-chart-container {
+    max-height: 500px;
+    overflow-y: auto;
+    background: var(--surface-alt);
+    border-radius: 8px;
+    padding: 0.5rem;
+  }
+
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: background 0.15s;
+  }
+
+  .bar-row:hover {
+    background: rgba(196, 160, 82, 0.08);
+  }
+
+  .bar-row.now {
+    background: rgba(239, 68, 68, 0.1);
+    border-left: 3px solid #ef4444;
+  }
+
+  .bar-row.past {
+    opacity: 0.6;
+  }
+
+  .bar-time {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    width: 50px;
+    flex-shrink: 0;
+  }
+
+  .bar-container {
+    flex: 1;
+    height: 16px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .bar {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+  }
+
+  .bar.high {
+    background: linear-gradient(90deg, var(--dossier-gold), #d4b062);
+  }
+
+  .bar.medium {
+    background: linear-gradient(90deg, #a8c46a, #c4d494);
+  }
+
+  .bar.low {
+    background: linear-gradient(90deg, #9ca3af, #d1d5db);
+  }
+
+  .bar-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    width: 40px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .bar-row.now .bar-time,
+  .bar-row.now .bar-value {
+    color: #ef4444;
+    font-weight: 600;
   }
 
   /* Disclaimer */
