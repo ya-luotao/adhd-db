@@ -14,3 +14,57 @@ Disallow: /api/
 Allow: /zh/
 Allow: /zh-TW/
 Allow: /ja/
+
+# LLM-friendly content
+# See https://llmstxt.org/ for the llms.txt standard
+# llms.txt - Site overview optimized for LLMs
+# llms-full.txt - Complete database export
+
+# AI Crawlers - explicitly allowed
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /api/
+
+User-agent: ChatGPT-User
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /api/
+
+User-agent: Claude-Web
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /api/
+
+User-agent: Anthropic-AI
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /api/
+
+User-agent: Google-Extended
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /api/
+
+User-agent: Googlebot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /api/
+
+User-agent: Bingbot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /api/
